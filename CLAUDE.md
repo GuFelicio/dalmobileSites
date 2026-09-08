@@ -257,6 +257,8 @@ Mantém: o runtime Cloudflare. O site é 90% imagem, e toda foto de conteúdo pa
 - [ ] `:focus-visible` visível em todo elemento focável
 - [ ] Menu mobile funcionando — nada de botão hambúrguer sem handler
 - [ ] `alt` descritivo em toda imagem
+- [ ] **Nenhum andaime de protótipo no build:** seletor de layout, barra de debug,
+      título de estudo, rota de teste
 - [ ] Nenhum link âncora apontando para a própria seção
 - [ ] Nenhum CTA sem destino real
 - [ ] Testado nas seis larguras da matriz, sem rolagem horizontal em nenhuma

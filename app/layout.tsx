@@ -14,9 +14,13 @@ import "./globals.css";
 
 // Título e descrição saem do config da unidade. Escritos à mão, o site de uma
 // cidade vai ao ar descrito com o nome da outra — foi o que aconteceu no site
-// anterior. A Fase 8 completa o SEO; aqui fica só o que impede o erro.
+// anterior, e o título aqui chegou a ser "Dalmóbile SJC — Estudos de Layout"
+// nos dois deploys.
+//
+// PROVISÓRIO: o metadata definitivo, com OpenGraph e schema por página, é a
+// Fase 8. Aqui fica só o que impede o erro de cidade.
 export const metadata: Metadata = {
-  title: `Dalmóbile ${unidade.cidade} — Móveis Planejados`,
+  title: `Móveis Planejados em ${unidade.cidade} | Dalmóbile`,
   description: `Móveis planejados projetados e fabricados pela Dalmóbile em ${unidade.cidade}. Quase cinco décadas de fábrica própria.`,
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };

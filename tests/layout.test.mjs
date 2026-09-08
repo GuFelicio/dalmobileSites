@@ -126,3 +126,25 @@ test("todo componente tem cabeçalho de comentário", async () => {
   }
   assert.deepEqual(infratores, [], infratores.join("\n"));
 });
+
+test("nenhum andaime de protótipo no build", async () => {
+  // O seletor "ESTUDOS DE HOME" sobreviveu à limpeza da Fase 1 e foi ao ar nos
+  // DOIS deploys. Este teste existe para que não volte por descuido.
+  // Ver o checklist "Obrigatório antes de qualquer deploy" do CLAUDE.md.
+  const { html } = await renderizar("/");
+  for (const marca of [
+    /ESTUDOS DE HOME/i,
+    /study-switcher/,
+    /Estudos de Layout/i,
+    /Alternar proposta de layout/i,
+  ]) {
+    assert.doesNotMatch(html, marca, `andaime de protótipo no build: ${marca}`);
+  }
+});
+
+test("a home é server component: nada de estado de protótipo no cliente", async () => {
+  const { html } = await renderizar("/");
+  // O <title> provisório vem do config, com a cidade da unidade.
+  assert.match(html, /<title>Móveis Planejados em [^<]+ \| Dalmóbile<\/title>/);
+});
+

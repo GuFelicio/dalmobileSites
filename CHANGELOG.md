@@ -8,6 +8,68 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.4.1] — 2026-09-08
+
+### Corretiva — o andaime de protótipo saiu do ar
+
+O seletor **"ESTUDOS DE HOME"** estava publicado nos dois deploys: uma barra
+fixa de protótipo no site de um cliente. Sobreviveu à limpeza da Fase 1 porque
+a página que ele controlava ainda estava em revisão, e a decisão não foi
+revista quando a revisão terminou.
+
+**Removido**
+
+- `StudySwitcher` e todo o CSS `.study-*`, incluindo a compensação
+  `.site { padding-top: 58px }` da barra fixa.
+- `EditorialLayout`, `ImmersiveLayout` e todo o CSS `.editorial-*` e
+  `.immersive-*`. Fica só o Síntese, promovido a conteúdo direto do `page.tsx`.
+- O `useState` que restava e, com ele, o `"use client"`: **a home voltou a ser
+  server component**.
+- Mais duas compensações da barra fixa embutidas em outras regras
+  (`.header { top: 58px }` e `calc(100svh - 58px)` no hero).
+- Sete classes órfãs sem prefixo, restos dos mesmos estudos: `.hero-support`,
+  `.manifesto-copy`, `.menu-button`, `.process-photo-wrap`, `.process-stats`,
+  `.section-heading-row`, `.text-link`.
+
+`app/page.tsx`: 302 → 125 linhas. `app/globals.css`: 758 → 429 linhas. Toda
+classe restante do `globals.css` está em uso.
+
+**Corrigido de quebra**
+
+- O link do cabeçalho dizia **"Showroom SJC"**, escrito à mão. No site de
+  Caraguá saía "Showroom SJC", e o teste de cidade cruzada **não pegava** —
+  a sigla não é o nome da cidade. Agora lê do config.
+- `<title>` provisório passou a `Móveis Planejados em <cidade> | Dalmóbile`,
+  com a cidade do config. O definitivo é a Fase 8.
+
+**Para não voltar**
+
+- `CLAUDE.md`, no checklist de deploy: *"Nenhum andaime de protótipo no build:
+  seletor de layout, barra de debug, título de estudo, rota de teste"*.
+- Dois testes novos: um falha se qualquer marca do seletor reaparecer no HTML,
+  outro confere o formato do título. A suíte foi de 30 para 32.
+
+**Imagens órfãs — nenhuma foi apagada, conforme pedido**
+
+Com a saída dos dois estudos, quatro arquivos de `public/assets/` deixaram de
+ser referenciados:
+
+| Arquivo | Onde era usado |
+|---|---|
+| `casa-sabin.webp` | estudo Editorial |
+| `loft-sem-pressa.webp` | estudo Editorial |
+| `quarto-autoral.webp` | estudo Imersiva |
+| `fabrica.webp` | estudo Imersiva |
+
+Seguem no repositório, conforme pedido, até a definição de quais fotos entram
+no site. As demais de `public/assets/` continuam em uso pelo Síntese.
+
+> Atenção ao apagá-las: os arquivos de `public/fotos/` que os projetos de
+> exemplo usam são **cópias** destas, com outro nome. Apagar as originais não
+> quebra os projetos.
+
+---
+
 ## [0.4.0] — 2026-09-08
 
 ### Estrutura de fotos por unidade e ambiente

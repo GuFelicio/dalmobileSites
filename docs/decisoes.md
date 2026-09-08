@@ -8,6 +8,45 @@ Formato: **data · o que · por quê · o que foi descartado**.
 
 ---
 
+## 2026-09-08 · O estudo escolhido é o 03 Síntese; os outros dois ficam no histórico
+
+**Decisão.** Dos três estudos de layout, vale o **03 Síntese**. O Editorial e o
+Imersiva foram removidos do código, junto com o seletor "ESTUDOS DE HOME" que
+alternava entre eles.
+
+**Onde eles estão, se alguém quiser revê-los.** No **commit inicial**
+(`b25c42f`, "Fase 1: limpeza do template e design system em tokens"), em
+`app/page.tsx` e nas regras `.editorial-*` e `.immersive-*` do `app/globals.css`.
+Foi por isso que o `docs/prompts-construcao.md` mandava que o primeiro commit
+fosse a base intacta: é o arquivo morto dos três estudos.
+
+```bash
+git show b25c42f:app/page.tsx
+git show b25c42f:app/globals.css
+```
+
+**Por quê remover.** O seletor era andaime de protótipo e **foi ao ar nos dois
+deploys** — uma barra fixa dizendo "ESTUDOS DE HOME" no site de um cliente.
+Sobreviveu à limpeza da Fase 1 porque a página que ele controlava ainda estava
+em revisão, e ninguém reviu a decisão quando a revisão terminou.
+
+**O que ficou no lugar.** A Síntese virou conteúdo direto do `app/page.tsx`, sem
+`"use client"` e sem `useState`: a home voltou a ser server component. Continua
+**provisória** — a home de verdade é a Fase 6, que a remonta sobre `Header`,
+`Footer` e `Section`.
+
+**O que isso mudou no processo.** O `CLAUDE.md` ganhou um item no checklist de
+deploy: *"Nenhum andaime de protótipo no build: seletor de layout, barra de
+debug, título de estudo, rota de teste"*. E um teste passou a falhar se qualquer
+marca do seletor voltar ao HTML — checklist que só existe em documento não
+sobrevive ao terceiro mês.
+
+**Descartado.** Manter os três estudos atrás de uma variável de ambiente (mesmo
+código morto, com mais uma chave para esquecer ligada) e apagá-los sem registro
+(quem quiser rever o Editorial não saberia que ele existiu).
+
+---
+
 ## 2026-09-08 · As fotos são organizadas por unidade e por ambiente, e a pasta é dado
 
 **Decisão.** `public/fotos/` tem três raízes — `sjc/`, `caragua/` e `comum/` —,
