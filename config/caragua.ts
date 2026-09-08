@@ -49,12 +49,9 @@ export const unidade: Unidade = {
   // 08/09/2026. Ver a nota em docs/unidades.md sobre a origem do lead.
   whatsapp: "5512996049888",
 
-  // PENDENTE: o sábado não veio. Se a loja não abre no sábado, REMOVER a
-  // linha — horário ausente e horário errado não são a mesma coisa para o
-  // schema LocalBusiness nem para quem viaja até lá.
   horarios: [
     { dias: "Segunda a sexta", abre: "09h00", fecha: "18h00", confirmado: true },
-    { dias: "Sábado", abre: PENDENTE, fecha: PENDENTE, confirmado: false },
+    { dias: "Sábado", abre: "09h00", fecha: "14h00", confirmado: true },
   ],
 
   // PENDENTE: o embed do iframe sai do próprio Google Maps, em
