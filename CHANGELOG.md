@@ -8,6 +8,44 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.2.1] — 2026-09-08
+
+Dados das duas lojas confirmados pelo cliente. As pendências caíram de 15 para 4.
+
+**Confirmado**
+
+- **SJC** — WhatsApp `5512996049888`; sábado 08h00 às 14h00 (o horário anterior,
+  não confirmado, dizia 09h00); ficha do Google Business.
+- **Caraguá** — WhatsApp `5512996049888`; segunda a sexta 09h00 às 18h00; ficha
+  do Google Business.
+
+**As duas unidades usam o MESMO número de WhatsApp**
+
+Isso colide com o `docs/direcao-site.md`, que exige que o lead carregue de qual
+unidade veio. `linkWhatsApp()` passou a montar o `wa.me` com mensagem
+pré-preenchida citando a cidade daquele site — é o **único** sinal de origem que
+existe. Um teste novo falha se algum link de WhatsApp sair sem ela.
+
+**Corrigido**
+
+- O rodapé renderizava "Dalmóbile Nossa outra loja". O prefixo saiu e o rótulo
+  virou "Ver a outra loja".
+- O teste "ação sem destino aparece desabilitada" travava o **estado** (a loja
+  sem WhatsApp) em vez da **regra**, e passou a falhar no dia em que o número
+  chegou — ou seja, por estar certo. Reescrito para testar a regra.
+
+**Pendente**
+
+- Mapa (`embed` e `link`) das duas unidades — o link `share.google` não serve,
+  só resolve com JavaScript. Precisa do iframe de "Compartilhar > Incorporar um
+  mapa" do Google Maps.
+- Horário de sábado de Caraguá. Se a loja não abre, **remover** a linha.
+- GA e pixel das duas — o cliente envia depois.
+- A ficha do Google Business de Caraguá ainda mostra o telefone antigo; o
+  cliente vai atualizar. Endereço, telefone e horário têm que bater exatamente.
+
+---
+
 ## [0.2.0] — 2026-09-08
 
 ### Fase 3 — Camada de config por unidade

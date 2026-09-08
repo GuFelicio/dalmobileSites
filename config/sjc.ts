@@ -37,28 +37,24 @@ export const unidade: Unidade = {
 
   telefone: "(12) 3341-8777",
 
-  // PENDENTE: a loja está trocando de CRM e ainda não tem número de WhatsApp.
-  // Enquanto for null, a ação aparece DESABILITADA, com "em breve" — o
-  // CLAUDE.md proíbe CTA sem destino real, então não vira link. Assim que o
-  // número existir, basta preencher aqui: o "em breve" some e o link nasce.
-  whatsapp: null,
+  // ATENÇÃO: é o MESMO número do WhatsApp de Caraguá. Confirmado pelo cliente
+  // em 08/09/2026. Ver a nota em docs/unidades.md sobre a origem do lead.
+  whatsapp: "5512996049888",
 
-  // PENDENTE: o sábado veio como "acho que até as 14h" — não confirmado.
-  // Antes da Fase 8 os dois horários têm que bater EXATAMENTE com o Google
-  // Business Profile, porque alimentam o schema LocalBusiness, e endereço,
-  // telefone e horário divergentes derrubam a busca local.
   horarios: [
-    { dias: "Segunda a sexta", abre: "09h00", fecha: "19h00" },
-    { dias: "Sábado", abre: "09h00", fecha: "14h00", confirmado: false },
+    { dias: "Segunda a sexta", abre: "09h00", fecha: "19h00", confirmado: true },
+    { dias: "Sábado", abre: "08h00", fecha: "14h00", confirmado: true },
   ],
 
-  // PENDENTE: as duas URLs saem da ficha do Google Business, não de endereço
-  // digitado à mão. A página /a-loja é a que sustenta a busca local.
+  // PENDENTE: o embed do iframe sai do próprio Google Maps, em
+  // "Compartilhar > Incorporar um mapa". O link de share.google abaixo não
+  // serve: ele só resolve com JavaScript.
   mapa: {
     embed: PENDENTE,
     link: PENDENTE,
   },
-  googleBusiness: PENDENTE,
+
+  googleBusiness: "https://share.google/YlOCrgmB7IEKe4bPc",
 
   // PENDENTE: cada unidade tem a sua medição. Melhor sem medição do que com o
   // identificador da outra loja, que contamina os dois relatórios.
@@ -70,7 +66,7 @@ export const unidade: Unidade = {
   // O rótulo NÃO cita a cidade da outra unidade — só a URL a contém, e isso é
   // inevitável, porque a cidade está no domínio. Ver docs/decisoes.md.
   outraUnidade: {
-    nome: "Nossa outra loja",
+    nome: "Ver a outra loja",
     url: "https://dalmobilecaraguatatuba.com.br",
   },
 

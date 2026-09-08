@@ -61,13 +61,33 @@ test("nenhum CTA sem destino real", async () => {
 
 test("ação sem destino aparece desabilitada, nunca como link", async () => {
   const { html } = await renderizar("/teste-layout");
-  // Enquanto a loja não tem WhatsApp, a ação existe no layout mas não é <a>.
-  assert.match(html, /aria-disabled="true"/, "a ação pendente não está marcada como desabilitada");
+
+  // A REGRA, não o estado: uma ação marcada "em breve" nunca pode estar dentro
+  // de um <a>. A primeira versão deste teste exigia que a ação DESABILITADA
+  // existisse — travava o momento em que a loja ainda não tinha WhatsApp, e
+  // passou a falhar no dia em que o número chegou, ou seja, por estar certo.
   assert.doesNotMatch(
     html,
-    /<a\b[^>]*>(?:(?!<\/a>)[\s\S])*em breve/,
+    /<a\b[^>]*>(?:(?!<\/a>)[\s\S])*em breve/i,
     "há um link envolvendo uma ação marcada como 'em breve'",
   );
+
+  // E se houver ação desabilitada, ela precisa estar anunciada como tal.
+  if (/em breve/i.test(html)) {
+    assert.match(html, /aria-disabled="true"/, "ação 'em breve' sem aria-disabled");
+  }
+});
+
+test("o link de WhatsApp identifica de qual unidade veio o lead", async () => {
+  const { html } = await renderizar("/teste-layout");
+  if (!html.includes("wa.me")) return; // sem número ainda, nada a conferir
+
+  // As duas unidades dividem o mesmo número. Sem a mensagem pré-preenchida,
+  // quem atende não sabe de qual cidade a pessoa chegou, e a direção exige
+  // que o lead carregue a origem. Ver config/derivados.ts.
+  for (const [, link] of html.matchAll(/href="(https:\/\/wa\.me\/[^"]+)"/g)) {
+    assert.ok(link.includes("?text="), `link de WhatsApp sem origem: ${link}`);
+  }
 });
 
 test("o sábado está registrado", async () => {

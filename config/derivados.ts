@@ -23,9 +23,20 @@ export function enderecoEmLinha(u: Unidade = unidade): string {
   return `${logradouro} — ${bairro}, ${u.cidade} — ${u.estado}, ${cep}`;
 }
 
-/** Link wa.me, ou null enquanto o número não existir. */
+/**
+ * Link wa.me com mensagem pré-preenchida, ou null enquanto o número não existir.
+ *
+ * A mensagem NÃO é enfeite: as duas unidades compartilham o mesmo número de
+ * WhatsApp, e o `docs/direcao-site.md` exige que o lead carregue de qual
+ * unidade veio. Sem ela, quem atende não tem como saber se a pessoa está no
+ * site de uma cidade ou no da outra. É o único sinal de origem que existe.
+ *
+ * O texto segue a microcópia do CLAUDE.md: direto, sem linguagem de funil.
+ */
 export function linkWhatsApp(u: Unidade = unidade): string | null {
-  return u.whatsapp ? `https://wa.me/${u.whatsapp}` : null;
+  if (!u.whatsapp) return null;
+  const mensagem = `Olá! Falo com a Dalmóbile ${u.cidade}?`;
+  return `https://wa.me/${u.whatsapp}?text=${encodeURIComponent(mensagem)}`;
 }
 
 /** Link tel:, com os dígitos limpos. */

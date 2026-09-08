@@ -72,6 +72,19 @@ isso não se renderiza o nome da unidade ao lado: seria duplicata. As duas
 versões (escura e clara) existem de verdade — nada de clarear a preta com
 filtro.
 
+### `whatsapp` — as duas unidades usam o MESMO número
+
+Confirmado pelo cliente em 08/09/2026: `5512996049888` atende os dois sites.
+
+Isso cria um problema que o `docs/direcao-site.md` levanta explicitamente — *"o
+lead precisa carregar de qual unidade veio"*. Com um número só, quem atende não
+tem como saber de qual cidade a pessoa chegou.
+
+A solução está em `linkWhatsApp()`, em `config/derivados.ts`: o link `wa.me`
+leva uma mensagem pré-preenchida com a cidade daquele site. **É o único sinal de
+origem que existe.** Se alguém "simplificar" o link tirando o `?text=`, a
+origem do lead se perde em silêncio.
+
 ### `whatsapp: null` — a ação fica desabilitada, nunca link morto
 
 O `CLAUDE.md` proíbe CTA sem destino real. Enquanto o número não existe, o

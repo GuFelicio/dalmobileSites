@@ -45,23 +45,30 @@ export const unidade: Unidade = {
   // WhatsApp — enquanto não for, o campo whatsapp abaixo segue null.
   telefone: "(12) 98270-3186",
 
-  // PENDENTE: só dígitos, com código do país — ex.: "5512900000000".
-  // Enquanto for null, a ação aparece DESABILITADA, nunca como link morto.
-  whatsapp: null,
+  // ATENÇÃO: é o MESMO número do WhatsApp de SJC. Confirmado pelo cliente em
+  // 08/09/2026. Ver a nota em docs/unidades.md sobre a origem do lead.
+  whatsapp: "5512996049888",
 
-  // PENDENTE: horários exatamente como no Google Business Profile desta loja.
-  // Não copiar os de SJC: loja de litoral costuma ter sábado diferente.
+  // PENDENTE: o sábado não veio. Se a loja não abre no sábado, REMOVER a
+  // linha — horário ausente e horário errado não são a mesma coisa para o
+  // schema LocalBusiness nem para quem viaja até lá.
   horarios: [
-    { dias: "Segunda a sexta", abre: PENDENTE, fecha: PENDENTE, confirmado: false },
+    { dias: "Segunda a sexta", abre: "09h00", fecha: "18h00", confirmado: true },
     { dias: "Sábado", abre: PENDENTE, fecha: PENDENTE, confirmado: false },
   ],
 
-  // PENDENTE: as duas URLs saem da ficha do Google Business desta unidade.
+  // PENDENTE: o embed do iframe sai do próprio Google Maps, em
+  // "Compartilhar > Incorporar um mapa". O link de share.google abaixo não
+  // serve: ele só resolve com JavaScript.
   mapa: {
     embed: PENDENTE,
     link: PENDENTE,
   },
-  googleBusiness: PENDENTE,
+
+  // DIVERGÊNCIA CONHECIDA: a ficha ainda mostra o telefone antigo. O cliente
+  // vai atualizar. Endereço, telefone e horário têm que bater EXATAMENTE com
+  // o Google Business — divergência derruba a busca local.
+  googleBusiness: "https://share.google/w7Pq6YmLPUP1T8imm",
 
   // PENDENTE: medição própria desta unidade. Reaproveitar a de SJC
   // contaminaria os dois relatórios.
@@ -73,7 +80,7 @@ export const unidade: Unidade = {
   // O rótulo NÃO cita a cidade da outra unidade — só a URL a contém, e isso é
   // inevitável, porque a cidade está no domínio. Ver docs/decisoes.md.
   outraUnidade: {
-    nome: "Nossa outra loja",
+    nome: "Ver a outra loja",
     url: "https://dalmobilesjc.com.br",
   },
 

@@ -88,7 +88,7 @@ export function Footer() {
           <h2 className={estilos.titulo}>A outra loja</h2>
           <ul className={estilos.lista}>
             <li>
-              <a href={unidade.outraUnidade.url}>Dalmóbile {unidade.outraUnidade.nome}</a>
+              <a href={unidade.outraUnidade.url}>{unidade.outraUnidade.nome}</a>
             </li>
           </ul>
           <ul className={estilos.lista}>
