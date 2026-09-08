@@ -19,12 +19,16 @@ import path from "node:path";
 
 import matter from "gray-matter";
 
+import { NOMES_DE_AMBIENTE, ambientePorNome } from "./ambientes.ts";
+
 const PASTA = path.join(process.cwd(), "conteudo/projetos");
 
 export type Acabamento = { nome: string; codigo: string };
 
 export type FotoDoProjeto = {
   src: string;
+  /** Qual ambiente esta foto mostra. Alimenta a galeria de /ambientes/[slug]. */
+  ambiente: string;
   /** Legenda curta sob a foto: ambiente e acabamento principal. */
   legenda: string;
   /** Texto alternativo descritivo. Não repete a legenda. */
@@ -78,12 +82,63 @@ function lerArquivo(arquivo: string): Projeto {
     }
   }
 
+  const ambientes = exigir(data.ambientes, "ambientes", arquivo) as string[];
+  // Lista fechada: em trinta projetos, "Cozinha" e "cozinha" viram dois
+  // filtros para a mesma coisa. Ver lib/ambientes.ts.
+  for (const a of ambientes) {
+    if (!NOMES_DE_AMBIENTE.includes(a)) {
+      throw new Error(
+        `conteudo/projetos/${arquivo}: o ambiente "${a}" não existe.\n` +
+          `Os ambientes são: ${NOMES_DE_AMBIENTE.join(", ")}.\n` +
+          `Para criar um novo, ver docs/adicionar-ambiente.md.`,
+      );
+    }
+  }
+
   const fotos = exigir(data.fotos, "fotos", arquivo) as FotoDoProjeto[];
   fotos.forEach((f, i) => {
     exigir(f.src, `fotos[${i}].src`, arquivo);
     exigir(f.legenda, `fotos[${i}].legenda`, arquivo);
     // alt descritivo é exigência de acessibilidade do CLAUDE.md, não enfeite.
     exigir(f.alt, `fotos[${i}].alt`, arquivo);
+    exigir(f.ambiente, `fotos[${i}].ambiente`, arquivo);
+
+    if (!ambientes.includes(f.ambiente)) {
+      throw new Error(
+        `conteudo/projetos/${arquivo}: a foto ${f.src} diz ser de "${f.ambiente}", ` +
+          `que não está na lista "ambientes" do projeto (${ambientes.join(", ")}).\n` +
+          `Ou corrija a foto, ou acrescente o ambiente ao projeto.`,
+      );
+    }
+
+    // A PASTA TAMBÉM É DADO. public/fotos/<raiz>/<ambiente>/arquivo.webp:
+    // a raiz diz em que site o projeto aparece, e a pasta seguinte o ambiente.
+    // Conferir os dois contra o frontmatter é o que impede foto arquivada no
+    // lugar errado de virar galeria errada — e é barato, porque o caminho já
+    // está aqui. Ver public/fotos/LEIA-ME.md.
+    const partes = f.src.split("/").filter(Boolean); // ["fotos", raiz, ambiente, arquivo]
+    const raiz = partes[1];
+    const pastaAmbiente = partes[2];
+
+    const esperada =
+      unidades.length === 2 ? "comum" : unidades[0];
+    if (raiz !== esperada) {
+      throw new Error(
+        `conteudo/projetos/${arquivo}: a foto está em public/fotos/${raiz}/, mas o ` +
+          `projeto declara unidades: [${unidades.join(", ")}].\n` +
+          `Ela deveria estar em public/fotos/${esperada}/. ` +
+          `Ver public/fotos/LEIA-ME.md.`,
+      );
+    }
+
+    const slugEsperado = ambientePorNome(f.ambiente)?.slug;
+    if (pastaAmbiente !== slugEsperado) {
+      throw new Error(
+        `conteudo/projetos/${arquivo}: a foto está na pasta "${pastaAmbiente}", mas ` +
+          `diz ser de "${f.ambiente}" (pasta ${slugEsperado}).\n` +
+          `Mova o arquivo, ou corrija o campo "ambiente".`,
+      );
+    }
   });
 
   const texto = content.trim();
@@ -100,7 +155,7 @@ function lerArquivo(arquivo: string): Projeto {
     edificio: exigir(data.edificio, "edificio", arquivo),
     bairro: exigir(data.bairro, "bairro", arquivo),
     ano: exigir(data.ano, "ano", arquivo),
-    ambientes: exigir(data.ambientes, "ambientes", arquivo),
+    ambientes,
     acabamentos: exigir(data.acabamentos, "acabamentos", arquivo),
     arquiteto: data.arquiteto ?? null,
     abertura: exigir(data.abertura, "abertura", arquivo),

@@ -16,12 +16,14 @@ acabamentos:
     codigo: MDF-CMR-042
   - nome: Laca fosco off-white
     codigo: LC-OW-110
-abertura: /fotos/projetos/refugio-do-poeta/01-estar.webp
+abertura: /fotos/caragua/sala-de-estar/refugio-do-poeta-01.webp
 fotos:
-  - src: /fotos/projetos/refugio-do-poeta/01-estar.webp
+  - src: /fotos/caragua/sala-de-estar/refugio-do-poeta-01.webp
+    ambiente: Sala de estar
     legenda: Estar com painel em cumaru natural, voltado para o mar
     alt: Sala de estar com painel de madeira escura, sofá claro e janela ampla
-  - src: /fotos/projetos/refugio-do-poeta/02-banho.webp
+  - src: /fotos/caragua/banheiro/refugio-do-poeta-02.webp
+    ambiente: Banheiro
     legenda: Banheiro em laca fosco off-white e cumaru
     alt: Banheiro com gabinete suspenso em madeira e revestimento claro
 ---

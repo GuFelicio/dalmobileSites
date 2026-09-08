@@ -20,22 +20,27 @@ Esta é a tarefa que mais se repete no site. Dá para fazer sem saber programar.
 
 ## Passo 1 — Colocar as fotos
 
-Crie uma pasta com o **slug** do projeto (o nome que vai aparecer na URL) em:
+As fotos ficam organizadas **por site e por ambiente**:
 
 ```
-public/fotos/projetos/<slug>/
+public/fotos/
+  sjc/        projetos que aparecem SÓ no site de São José dos Campos
+  caragua/    projetos que aparecem SÓ no site de Caraguatatuba
+  comum/      projetos que aparecem NOS DOIS sites
+    cozinha-compacta/  closet/  lavanderia/  casa-integrada/
+    home-office/  sala-de-estar/  cozinha-gourmet/  banheiro/
 ```
 
-O slug é minúsculo, sem acento e com hífen no lugar do espaço:
-`rizzuti-dr-marcos`, `loft-sem-pressa`.
+**A pasta não é só arrumação: é dado, e o build confere.** Se o projeto for
+`unidades: [sjc]` e a foto estiver em `comum/`, o build para e diz.
 
-Dentro, nomeie as fotos **na ordem em que devem aparecer**, com dois dígitos:
+Como a pasta é do ambiente, **o nome do arquivo diz de que projeto é**, seguido
+da ordem em que a foto aparece no case:
 
 ```
-public/fotos/projetos/rizzuti-dr-marcos/
-  01-cozinha.webp
-  02-suite.webp
-  03-home-office.webp
+public/fotos/sjc/cozinha-compacta/rizzuti-dr-marcos-01.webp
+public/fotos/sjc/closet/rizzuti-dr-marcos-02.webp
+public/fotos/sjc/home-office/rizzuti-dr-marcos-03.webp
 ```
 
 > **A primeira foto é a de abertura** — a que sangra no topo do case e a que
@@ -68,7 +73,7 @@ arquiteto:
   nome: Marina Toledo
   autorizado: true    # só true com autorização POR ESCRITO
 
-ambientes: [Cozinha, Suíte, Home office]
+ambientes: [Cozinha compacta, Closet, Home office]
 
 acabamentos:
   - nome: Freijó natural
@@ -76,10 +81,11 @@ acabamentos:
   - nome: Laca fosco areia
     codigo: LC-AR-204
 
-abertura: /fotos/projetos/rizzuti-dr-marcos/01-cozinha.webp
+abertura: /fotos/sjc/cozinha-compacta/rizzuti-dr-marcos-01.webp
 
 fotos:
-  - src: /fotos/projetos/rizzuti-dr-marcos/01-cozinha.webp
+  - src: /fotos/sjc/cozinha-compacta/rizzuti-dr-marcos-01.webp
+    ambiente: Cozinha compacta
     legenda: Cozinha em freijó natural, com bancada em quartzo branco absoluto
     alt: Cozinha planejada em madeira freijó, bancada clara e iluminação embutida sob os armários
 ---
@@ -97,10 +103,10 @@ foi tratar os dois como um problema só.
 | `bairro` | sim | aparece na ficha técnica |
 | `ano` | sim | ano da entrega. Ordena o índice, mais recentes primeiro |
 | `unidades` | sim | **em qual site aparece** — leia a seção abaixo |
-| `ambientes` | sim | alimenta o filtro por ambiente. Use os nomes já existentes |
+| `ambientes` | sim | alimenta o filtro. **Só os nomes de `lib/ambientes.ts`** |
 | `acabamentos` | sim | `nome` e `codigo` de cada um |
 | `abertura` | sim | a foto do topo e do preview de link |
-| `fotos` | sim | a galeria, na ordem em que aparecem |
+| `fotos` | sim | a galeria, na ordem em que aparecem. Cada uma com `ambiente` |
 | `arquiteto` | não | só se houver, e só com `autorizado: true` |
 | corpo do texto | sim | um parágrafo do que o projeto **resolveu** |
 
@@ -153,6 +159,7 @@ npm run dev:caragua   # o de Caraguatatuba
 - [ ] O projeto aparece em `/projetos` **do site certo**, e não do outro
 - [ ] A foto de abertura é a melhor foto do conjunto
 - [ ] Todas as fotos carregam, na ordem certa
+- [ ] Cada foto está na pasta do ambiente que ela mostra de verdade
 - [ ] Os códigos de acabamento conferem com a proposta
 - [ ] O nome do arquiteto só aparece se a autorização estiver em mãos
 - [ ] O filtro por ambiente e por edifício encontra o projeto
@@ -174,6 +181,10 @@ O build **para** e diz o quê. Os erros mais comuns:
 | `a foto ... não está no manifesto` | o caminho está errado, ou faltou `npm run fotos` |
 | `falta o parágrafo do corpo` | escreva o texto **abaixo** do segundo `---` |
 | `alt igual à legenda` | o `alt` descreve a imagem; a legenda a nomeia |
+| `o ambiente "X" não existe` | use um nome de `lib/ambientes.ts`, com maiúscula |
+| `a foto está em public/fotos/X/, mas o projeto declara unidades` | mova a foto para a raiz certa: `sjc/`, `caragua/` ou `comum/` |
+| `a foto está na pasta "X", mas diz ser de "Y"` | mova o arquivo, ou corrija o campo `ambiente` |
+| `não está na lista "ambientes" do projeto` | acrescente o ambiente ao projeto, ou corrija a foto |
 
 Se o erro citar um arquivo em `config/`, não é problema do projeto: é dado da
 loja pendente. Rode `npm run pendencias`.

@@ -8,6 +8,47 @@ Formato: **data · o que · por quê · o que foi descartado**.
 
 ---
 
+## 2026-09-08 · As fotos são organizadas por unidade e por ambiente, e a pasta é dado
+
+**Decisão.** `public/fotos/` tem três raízes — `sjc/`, `caragua/` e `comum/` —,
+cada uma com uma pasta por ambiente. O nome do arquivo carrega o slug do
+projeto. A validação de conteúdo confere a pasta contra o frontmatter.
+
+**Por quê.** O cliente vai carregar as fotos, e pediu a separação por site —
+é como ele pensa o acervo. Em vez de tratar isso como arrumação e deixar o
+caminho ser texto livre, a estrutura virou **invariante checada**: a raiz tem
+que bater com `unidades`, e a pasta do ambiente com o campo `ambiente` da foto.
+Assim a organização que ele já ia fazer passa a pegar erro de arquivamento,
+que num acervo de trinta projetos é o erro mais provável de todos.
+
+**A terceira raiz.** `comum/` existe porque um projeto pode ser
+`unidades: [sjc, caragua]`. Sem ela, a mesma foto teria duas cópias — o dobro
+de arquivo, e duas versões que um dia divergem sem ninguém notar.
+
+**Descartado.** Pasta por projeto (`projetos/<slug>/`, que era a estrutura da
+Fase 4 — some agora, para não conviverem duas convenções), duas raízes sem a
+`comum/` (obriga a duplicar arquivo) e derivar o ambiente do caminho em vez de
+declará-lo (renomear pasta passaria a mudar dado em silêncio).
+
+---
+
+## 2026-09-08 · A lista de ambientes é fechada, em `lib/ambientes.ts`
+
+**Decisão.** Um projeto só pode declarar ambientes que estejam na lista. Nome
+fora dela quebra o build.
+
+**Por quê.** O filtro do índice agrupa por texto. Com trinta projetos carregados
+por pessoas diferentes ao longo de meses, "Cozinha", "cozinha" e "Cozinha
+compacta" viram três filtros para a mesma coisa — e ninguém percebe até o
+cliente perguntar por que há duas cozinhas no menu. Fechar a lista é o que
+mantém o filtro utilizável.
+
+**Descartado.** Aceitar texto livre e normalizar depois (normalização adivinha,
+e adivinha errado em "Sala de estar" vs "Estar") e uma lista só de sugestão
+(sugestão que não bloqueia não sobrevive ao terceiro mês).
+
+---
+
 ## 2026-09-08 · As fotos não usam `next/image`; o componente é nosso
 
 **Decisão.** Toda foto de conteúdo passa por `components/midia/Foto.tsx`, que

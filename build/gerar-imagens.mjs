@@ -17,7 +17,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 
@@ -129,5 +129,10 @@ export async function gerar({ silencioso = false } = {}) {
   return { geradas, reaproveitadas, manifesto };
 }
 
-// Executado direto pelo script de build.
-if (import.meta.url === `file://${process.argv[1]}`) await gerar();
+// Executado direto pelo script de build (`npm run fotos`).
+//
+// pathToFileURL, e não `file://${process.argv[1]}`: o caminho deste projeto tem
+// espaço ("Site Dalmobile"), que a URL codifica como %20 e o argv não. A
+// comparação ingênua nunca casava, e o passo de imagem passou a NÃO RODAR em
+// silêncio — build verde, nenhuma variação gerada, foto de desktop no celular.
+if (import.meta.url === pathToFileURL(process.argv[1]).href) await gerar();

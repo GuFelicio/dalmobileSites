@@ -8,6 +8,40 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.4.0] — 2026-09-08
+
+### Estrutura de fotos por unidade e ambiente
+
+Preparação para o cliente carregar o acervo real.
+
+**Entrou**
+
+- `public/fotos/{sjc,caragua,comum}/<ambiente>/` — 27 pastas, com
+  `public/fotos/LEIA-ME.md` explicando a escolha entre as três raízes.
+- `lib/ambientes.ts` — a lista canônica dos oito ambientes dos catálogos.
+- Campo `ambiente` por foto no frontmatter, necessário para a galeria de
+  `/ambientes/[slug]` da Fase 5.
+- Quatro validações novas, todas com mensagem que diz o que fazer: ambiente
+  fora da lista, foto na raiz errada, pasta de ambiente que não bate com o
+  campo, e foto sem ambiente.
+- 4 testes novos. A suíte foi de 26 para 30.
+
+**Migrado**
+
+- Os três projetos de exemplo saíram de `public/fotos/projetos/<slug>/` para a
+  estrutura nova. A convenção antiga foi removida, para não conviverem duas.
+
+**Bug sério corrigido: `npm run fotos` não fazia nada**
+
+O guard de execução direta comparava `import.meta.url` com
+`file://${process.argv[1]}`. O caminho deste projeto contém espaço, que a URL
+codifica como `%20` e o argv não — a comparação nunca casava. O passo de imagem
+**não rodava**, em silêncio, com o build verde. Na Cloudflare isso significaria
+publicar sem nenhuma variação gerada, ou seja, foto de desktop no celular. Agora
+usa `pathToFileURL`.
+
+---
+
 ## [0.3.0] — 2026-09-08
 
 ### Fase 4 — Case e índice de projetos

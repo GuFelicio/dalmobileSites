@@ -6,6 +6,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import { NOMES_DE_AMBIENTE, ambientePorNome } from "../lib/ambientes.ts";
 import { eixosDeFiltro, filtrarPorUnidade, outrosNoEdificio, todosOsProjetos } from "../lib/projetos.ts";
 
 const raiz = fileURLToPath(new URL("..", import.meta.url));
@@ -104,6 +105,55 @@ test("todo projeto de exemplo está marcado como exemplo", () => {
       p.exemplo,
       true,
       `${p.slug}: se este projeto já é real, remova "exemplo: true" do frontmatter`,
+    );
+  }
+});
+
+test("toda foto declara o ambiente, e ele está na lista do projeto", () => {
+  for (const p of projetos) {
+    for (const f of p.fotos) {
+      assert.ok(f.ambiente, `${p.slug}: foto ${f.src} sem ambiente`);
+      assert.ok(
+        p.ambientes.includes(f.ambiente),
+        `${p.slug}: foto de "${f.ambiente}" fora da lista do projeto`,
+      );
+    }
+  }
+});
+
+test("todo ambiente declarado existe na lista canônica", () => {
+  for (const p of projetos) {
+    for (const a of p.ambientes) {
+      assert.ok(
+        NOMES_DE_AMBIENTE.includes(a),
+        `${p.slug}: ambiente "${a}" fora de lib/ambientes.ts — em trinta projetos, ` +
+          `"Cozinha" e "cozinha" viram dois filtros para a mesma coisa`,
+      );
+    }
+  }
+});
+
+test("a pasta da foto bate com a unidade e com o ambiente declarados", () => {
+  // A pasta é dado, não organização. Ver public/fotos/LEIA-ME.md.
+  for (const p of projetos) {
+    const raizEsperada = p.unidades.length === 2 ? "comum" : p.unidades[0];
+    for (const f of p.fotos) {
+      const [, raiz, pastaAmbiente] = f.src.split("/").filter(Boolean);
+      assert.equal(raiz, raizEsperada, `${p.slug}: ${f.src} na raiz errada`);
+      assert.equal(
+        pastaAmbiente,
+        ambientePorNome(f.ambiente)?.slug,
+        `${p.slug}: ${f.src} na pasta de ambiente errada`,
+      );
+    }
+  }
+});
+
+test("a foto de abertura é uma das fotos do projeto", () => {
+  for (const p of projetos) {
+    assert.ok(
+      p.fotos.some((f) => f.src === p.abertura),
+      `${p.slug}: a abertura aponta para uma foto que não está na galeria`,
     );
   }
 });
