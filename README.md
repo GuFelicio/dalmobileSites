@@ -60,7 +60,17 @@ docs/           documentação
 
 ## Estado
 
-**Fase 1 de 9 concluída.** O que existe hoje é a página de estudos de layout
-(Editorial, Imersiva, Síntese), que é temporária e sai na Fase 2, e o design
-system extraído dela. Ainda não existem rotas, componentes nem a camada de
-config por unidade.
+**Fases 1 e 2 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
+layout base — cabeçalho, rodapé, menu mobile e as três superfícies, em
+`components/layout/`. O `npm test` roda 12 testes que policiam as regras do
+`CLAUDE.md`.
+
+Ainda **não** existem rotas de conteúdo nem a camada de config por unidade. Os
+dados da loja vivem provisoriamente em `app/dados-unidade.ts` até a Fase 3.
+
+Duas páginas são andaime temporário e saem na Fase 3: `app/page.tsx` (os três
+estudos de layout) e `app/teste-layout/` (a revisão dos componentes nas três
+superfícies).
+
+**Próxima: Fase 3 — camada de config por unidade.** Ver
+[`docs/prompts-construcao.md`](docs/prompts-construcao.md).

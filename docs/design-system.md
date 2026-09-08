@@ -171,6 +171,8 @@ Escala base 8. Sem valor fora dela em componente novo.
 
 - `--e-secao` — respiro entre seções: **128px** no desktop, **72px** no mobile (troca sozinho).
 - `--e-margem` — margem lateral do texto no mobile: **20px**. A foto sangra até a borda; o texto mantém a margem.
+- `--pad-lateral` — margem lateral da **página**: `clamp(20px, 5vw, 80px)`. Cresce com a tela e nunca desce abaixo dos 20px do mobile. É o que `Section`, `Header`, `Footer` e `MobileMenu` usam para alinhar tudo na mesma calha vertical. Não invente outro recuo lateral: use este.
+- `--alt-cabecalho` — altura do cabeçalho: **88px**. Vale como offset de âncora e como altura da barra do `MobileMenu`, para o painel abrir alinhado ao cabeçalho que o cobre.
 
 ---
 

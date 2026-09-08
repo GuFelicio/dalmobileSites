@@ -42,8 +42,15 @@ test("nenhuma cor literal fora de app/tokens.css", async () => {
     if (arquivo === ARQUIVO_DE_TOKENS) continue;
     const conteudo = semComentarios(await readFile(path.join(root, arquivo), "utf8"));
     conteudo.split("\n").forEach((linha, indice) => {
-      // hex de cor, e rgb()/rgba() com valores numéricos
-      if (/#[0-9a-fA-F]{3,8}\b/.test(linha) || /\brgba?\(\s*[\d.]/.test(linha)) {
+      // Toda notação de cor do CSS, não só hex: rgb()/hsl() e as modernas
+      // oklch()/lab()/color-mix() entrariam pela porta dos fundos se o teste
+      // olhasse só o "#". `transparent`, `inherit` e `currentColor` são
+      // palavras-chave, não cor literal, e continuam liberados.
+      const notacaoDeCor =
+        /#[0-9a-fA-F]{3,8}\b/.test(linha) ||
+        /\b(rgba?|hsla?|hwb|lab|lch|oklab|oklch)\(\s*[\d.]/.test(linha) ||
+        /\bcolor-mix\(/.test(linha);
+      if (notacaoDeCor) {
         infratores.push(`${arquivo}:${indice + 1}  ${linha.trim()}`);
       }
     });
