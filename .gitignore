@@ -22,3 +22,6 @@ npm-debug.log*
 # Não é código deste projeto e não entra no build. Se precisar versionar,
 # basta remover esta linha.
 Dir Base/
+
+# Cache incremental do TypeScript — gerado.
+*.tsbuildinfo

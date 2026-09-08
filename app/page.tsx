@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 
+// A cidade vem do config, nunca escrita à mão: esta página é andaime, mas
+// andaime também entra no bundle, e o teste de cidade cruzada vasculha tudo.
+import { unidade } from "../config/derivados";
+
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
 function Brand({ light = false }: { light?: boolean }) {
@@ -47,7 +51,7 @@ function EditorialLayout() {
           <a href="#editorial-dalmobile">A Dalmóbile</a>
           <a href="#editorial-processo">Processo</a>
         </nav>
-        <a className="header-link" href="#editorial-contato">São José dos Campos <Arrow /></a>
+        <a className="header-link" href="#editorial-contato">{unidade.cidade} <Arrow /></a>
       </header>
 
       <main>
@@ -113,7 +117,7 @@ function EditorialLayout() {
         </section>
 
         <section className="editorial-contact" id="editorial-contato">
-          <p className="eyebrow">SHOWROOM SÃO JOSÉ DOS CAMPOS</p>
+          <p className="eyebrow">SHOWROOM {unidade.cidade.toUpperCase()}</p>
           <h2>Seu mundo começa com uma conversa.</h2>
           <a href="#editorial-contato">Agendar atendimento <Arrow /></a>
         </section>
@@ -140,7 +144,7 @@ function ImmersiveLayout() {
           <img src="/assets/le-tt.webp" alt="Ambiente envolvente em madeira e tons profundos" />
           <div className="immersive-shade" />
           <div className="immersive-hero-copy">
-            <p>SÃO JOSÉ DOS CAMPOS · SP</p>
+            <p>{unidade.cidade.toUpperCase()} · {unidade.estado}</p>
             <h1>Espaços que contam a sua história.</h1>
             <a href="#imersiva-projetos">Explorar projetos <Arrow /></a>
           </div>

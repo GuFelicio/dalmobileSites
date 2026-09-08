@@ -8,7 +8,7 @@
  *
  * Onde é usado: em TODA página, sempre na superfície cinza.
  *
- * Props: nenhuma. Tudo vem de app/dados-unidade.ts — na Fase 3, do config
+ * Props: nenhuma. Tudo vem do config da unidade, via config/derivados.ts
  * da unidade. Nenhum dado de loja escrito direto aqui.
  */
 import Link from "next/link";
@@ -18,7 +18,7 @@ import {
   linkWhatsApp,
   navegacao,
   unidade,
-} from "../../app/dados-unidade";
+} from "../../config/derivados";
 import { WhatsApp } from "../icons";
 import { Brand } from "./Brand";
 import estilos from "./Footer.module.css";

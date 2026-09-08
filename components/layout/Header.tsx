@@ -17,7 +17,7 @@
  */
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { navegacao, linkWhatsApp, unidade } from "../../app/dados-unidade";
+import { navegacao, linkWhatsApp, unidade } from "../../config/derivados";
 import { Menu, WhatsApp } from "../icons";
 import { Brand } from "./Brand";
 import { MobileMenu } from "./MobileMenu";

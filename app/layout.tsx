@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { unidade } from "../config/derivados";
+
 // Krub self-hosted, do bundle. Nada de Google Fonts por CDN.
 // Só os três pesos da escala do CLAUDE.md: 300, 400 e 600.
 // O itálico de 300 entra porque o display do estudo 03 usa <em> — se a
@@ -10,9 +12,12 @@ import "@fontsource/krub/400.css";
 import "@fontsource/krub/600.css";
 import "./globals.css";
 
+// Título e descrição saem do config da unidade. Escritos à mão, o site de uma
+// cidade vai ao ar descrito com o nome da outra — foi o que aconteceu no site
+// anterior. A Fase 8 completa o SEO; aqui fica só o que impede o erro.
 export const metadata: Metadata = {
-  title: "Dalmóbile SJC — Estudos de Layout",
-  description: "Três direções visuais para a nova experiência digital da Dalmóbile São José dos Campos.",
+  title: `Dalmóbile ${unidade.cidade} — Móveis Planejados`,
+  description: `Móveis planejados projetados e fabricados pela Dalmóbile em ${unidade.cidade}. Quase cinco décadas de fábrica própria.`,
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 

@@ -9,6 +9,9 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
+    // O config é importado tanto pelo Vite quanto pelo node --test, e o node
+    // exige a extensão explícita ao executar .ts direto. Ver config/.
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
@@ -30,5 +33,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  // "Dir Base" é o material de referência do site antigo — código de outro
+  // projeto, com dependências que este não tem. Não é para ser checado.
+  "exclude": ["node_modules", "Dir Base", "dist"]
 }

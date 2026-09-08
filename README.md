@@ -27,8 +27,10 @@ Em caso de conflito entre os documentos, **o `CLAUDE.md` vence**.
 ```bash
 npm install     # instala as dependências
 npm run dev     # servidor de desenvolvimento (Vite + Cloudflare)
-npm run build   # build de produção
-npm run deploy  # build + publica na Cloudflare
+npm run build:sjc      # build de São José dos Campos
+npm run build:caragua  # build de Caraguatatuba
+npm run pendencias     # o que falta a loja confirmar
+npm run deploy:sjc     # publica (trava se houver pendência)
 npm test        # build + testes
 npm run lint    # ESLint
 ```
@@ -60,17 +62,21 @@ docs/           documentação
 
 ## Estado
 
-**Fases 1 e 2 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
+**Fases 1, 2 e 3 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
 layout base — cabeçalho, rodapé, menu mobile e as três superfícies, em
 `components/layout/`. O `npm test` roda 12 testes que policiam as regras do
 `CLAUDE.md`.
 
-Ainda **não** existem rotas de conteúdo nem a camada de config por unidade. Os
-dados da loja vivem provisoriamente em `app/dados-unidade.ts` até a Fase 3.
+A camada de config por unidade existe: `UNIDADE=sjc` e `UNIDADE=caragua`
+geram os dois sites do mesmo código, e um teste constrói as duas unidades e
+falha se o nome de uma cidade aparecer no build da outra. Ver
+[`docs/unidades.md`](docs/unidades.md).
+
+Ainda **não** existem rotas de conteúdo — projetos, ambientes, institucional.
 
 Duas páginas são andaime temporário e saem na Fase 3: `app/page.tsx` (os três
 estudos de layout) e `app/teste-layout/` (a revisão dos componentes nas três
 superfícies).
 
-**Próxima: Fase 3 — camada de config por unidade.** Ver
+**Próxima: Fase 4 — case e índice de projetos.** Ver
 [`docs/prompts-construcao.md`](docs/prompts-construcao.md).

@@ -8,6 +8,78 @@ Formato: **data · o que · por quê · o que foi descartado**.
 
 ---
 
+## 2026-09-08 · A unidade é escolhida por alias no build, nunca por `if` em runtime
+
+**Decisão.** `vite.config.ts` lê `process.env.UNIDADE` e aponta o alias
+`@unidade` para `config/sjc.ts` ou `config/caragua.ts`. Todo componente importa
+de `config/derivados`, que reexporta o alias.
+
+**Por quê.** Com um `if` em runtime os **dois** configs entram no bundle, e o
+texto de uma cidade viaja dentro do site da outra. Seria o mesmo erro do site
+anterior, só que escondido no JavaScript em vez de na `<meta>`. Com alias, só um
+arquivo de config é compilado — e é isso que permite ao teste de cidade cruzada
+ser absoluto: "esta string não pode existir em `dist/`", sem exceção.
+
+**A armadilha que custou caro.** A primeira versão declarava também
+`"@unidade"` em `compilerOptions.paths` do `tsconfig.json`, para o editor não
+reclamar. **O `paths` vence o alias do Vite**, e o resultado foi que os dois
+builds saíam com o config de SJC dentro — inclusive o de Caraguá. Não dava erro
+nenhum; o build passava. Só o teste de cidade cruzada pegou. O tipo do módulo
+agora vive em `config/unidade.d.ts`, que resolve o editor sem tocar na
+resolução do build. **Não reintroduza aquela linha.**
+
+**Descartado.** Seleção por `if` em runtime (leva os dois no bundle), variável
+`import.meta.env` inlinada (mesmo problema: o código dos dois continua lá) e
+dois repositórios (é exatamente o que o `CLAUDE.md` proíbe).
+
+---
+
+## 2026-09-08 · O link para a outra loja não cita a cidade dela
+
+**Decisão.** `outraUnidade.nome` é "Nossa outra loja" nos dois configs, e não o
+nome da cidade. Só a URL contém a outra cidade.
+
+**Por quê.** Duas regras do projeto se chocam de verdade aqui: o `CLAUDE.md`
+manda "nunca mencionar São José dos Campos no site de Caraguá, nem o contrário",
+e o `docs/direcao-site.md` pede "link para a outra unidade" no rodapé. Um link
+rotulado com o nome da outra cidade cumpre a segunda e viola a primeira ao pé da
+letra — e foi assim que o teste de cidade cruzada travou na primeira execução.
+
+Aplicou-se a leitura estrita, porque a regra existe por um motivo mensurável: o
+site anterior foi indexado com a cidade errada. A URL é a única ocorrência
+inevitável, porque a cidade está no domínio.
+
+**Reversível.** Se a loja preferir o rótulo com o nome da cidade — é mais claro
+para quem lê —, muda-se uma linha em cada config e abre-se a exceção
+correspondente no teste. Mas é decisão de quem responde pelo SEO, não de quem
+escreve o componente.
+
+**Descartado.** Rotular com a cidade (viola a regra que existe por causa de um
+erro real e caro) e remover o link cruzado (a direção o pede, e ele é útil para
+quem está na cidade errada).
+
+---
+
+## 2026-09-08 · A checagem de dado pendente é trava de deploy, não teste
+
+**Decisão.** `config/verificar-pendencias.mjs` roda em `npm run deploy:*` e
+recusa a publicação enquanto houver campo `PENDENTE` ou horário não confirmado.
+Não é um teste da suíte.
+
+**Por quê.** Como teste, ele ficaria vermelho por semanas — enquanto as lojas
+não respondem — e **suíte que sempre falha deixa de ser sinal**, que é o mesmo
+motivo pelo qual o teste do `codex-preview` foi substituído em vez de remendado.
+Como trava de deploy, ele aparece exatamente na hora que importa: a de publicar.
+
+Existe escotilha (`DEPLOY_COM_PENDENCIAS=1`) porque pode haver motivo legítimo
+para publicar com o WhatsApp ainda desabilitado — mas ela é explícita e deixa
+rastro, em vez de ser o comportamento padrão.
+
+**Descartado.** Deixar como teste vermelho (deixa de ser sinal) e não checar
+nada (o `CLAUDE.md` manda que nenhum número vá ao ar sem confirmação da loja).
+
+---
+
 ## 2026-09-08 · Hospedagem em Cloudflare Workers, na conta da agência
 
 **Decisão.** Os dois sites rodam em **Cloudflare Workers**, numa conta própria

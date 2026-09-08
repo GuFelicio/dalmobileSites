@@ -19,7 +19,7 @@
  * DÍVIDA CONHECIDA: o lockup ainda é PNG. Em SVG ele escalaria sem peso e
  * dispensaria as duas versões — bastaria currentColor. Está pedido.
  */
-import { unidade } from "../../app/dados-unidade";
+import { unidade } from "../../config/derivados";
 import estilos from "./Brand.module.css";
 
 type BrandProps = {

@@ -7,11 +7,16 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:caragua": "UNIDADE=caragua vite",
     "build": "vinext build",
+    "build:sjc": "UNIDADE=sjc vinext build",
+    "build:caragua": "UNIDADE=caragua vinext build",
     "start": "vinext start",
-    "deploy": "npm run build && wrangler deploy -c dist/server/wrangler.json",
+    "deploy:sjc": "npm run pendencias && npm run build:sjc && wrangler deploy -c dist/server/wrangler.json --name dalmobile-sjc",
+    "deploy:caragua": "npm run pendencias && npm run build:caragua && wrangler deploy -c dist/server/wrangler.json --name dalmobile-caragua",
     "test": "npm run build && node --test tests/*.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "pendencias": "node config/verificar-pendencias.mjs"
   },
   "dependencies": {
     "@fontsource/krub": "5.3.0",
@@ -21,6 +26,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",
+    "@cloudflare/workers-types": "^4.20260702.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",

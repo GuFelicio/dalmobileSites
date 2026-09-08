@@ -19,7 +19,7 @@
  */
 import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
-import { navegacao, linkTelefone, linkWhatsApp, unidade } from "../../app/dados-unidade";
+import { navegacao, linkTelefone, linkWhatsApp, unidade } from "../../config/derivados";
 import { Fechar, WhatsApp } from "../icons";
 import { Brand } from "./Brand";
 import type { Superficie } from "./Section";
