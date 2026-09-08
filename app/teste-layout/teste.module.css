@@ -1,0 +1,67 @@
+/* Estilos do andaime de revisão. Saem com a página, na Fase 3. */
+
+.rotulo {
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+.displayXl {
+  margin-top: var(--e-3);
+  max-width: 20ch; /* largura máxima do título de abertura, seção 3.1 da direção */
+  font-size: var(--fs-display-xl);
+  letter-spacing: var(--tr-display-xl);
+  line-height: var(--lh-display-xl);
+  font-weight: var(--peso-leve);
+}
+
+.displayL {
+  margin-top: var(--e-3);
+  font-size: var(--fs-display-l);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  font-weight: var(--peso-leve);
+}
+
+.subtitulo {
+  margin-top: var(--e-3);
+  font-size: var(--fs-subtitulo);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  font-weight: var(--peso-normal);
+}
+
+.texto {
+  margin-top: var(--e-3);
+  max-width: var(--medida);
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  margin-top: var(--e-4);
+}
+
+.controles a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  padding-inline: var(--e-2);
+  border: var(--fio) solid currentColor;
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+.controles a[aria-current="page"] {
+  /* Invertido, não colorido: o destaque vem de troca de superfície.
+     O texto assume o fundo da superfície, senão sumiria sobre si mesmo. */
+  background: currentColor;
+  color: var(--sup-bg);
+}

@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Dalmóbile — design tokens
+   ÚNICO arquivo do repositório autorizado a conter valor de cor literal.
+   Qualquer hex fora daqui é bug. Ver docs/design-system.md.
+
+   Extraído do estudo "03 Síntese" na Fase 1.
+   Escala tipográfica e de espaço seguem a tabela do CLAUDE.md.
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------
+     1. COR — CAMADA BRUTA
+     PROVISÓRIA: são os valores medidos do estudo 03 Síntese, neutros
+     quentes. A paleta acromática definitiva do CLAUDE.md (#171614 /
+     #8B8884 / #C9C6C1 / #F2F1EE) entra aqui quando a loja fechar as
+     cores. Trocar SÓ estas onze linhas troca o site inteiro.
+     ------------------------------------------------------------------ */
+  --c-branco:       #ffffff;  /* superfície elevada, reverso do wordmark   */
+  --c-papel-alto:   #f9f8f5;  /* papel um degrau acima do fundo            */
+  --c-papel:        #f5f4f0;  /* fundo das páginas de leitura              */
+  --c-papel-fundo:  #efede7;  /* papel rebaixado, faixa de apoio           */
+  --c-papel-baixo:  #e8e6e0;  /* papel mais rebaixado, faixa de projetos   */
+  --c-linha:        #d3d0c9;  /* fio sobre claro, estado desativado        */
+  --c-cinza:        #9e9b95;  /* cinza da marca: costura, faixas           */
+  --c-cinza-painel: #97958f;  /* painel sólido do hero da Síntese          */
+  --c-cinza-texto:  #5d5d58;  /* texto de apoio sobre papel                */
+  --c-oliva:        #484b45;  /* superfície escura de processo             */
+  --c-tinta:        #20211f;  /* texto principal, tarja                    */
+  --c-preto:        #111211;  /* fundo do documento, superfície de imagem  */
+
+  /* ------------------------------------------------------------------
+     2. COR — CAMADA SEMÂNTICA
+     Nomes fixos do CLAUDE.md. É por aqui que o componente pede cor.
+     Nunca renomear: a troca da paleta acontece na camada 1.
+     ------------------------------------------------------------------ */
+  --preto:      var(--c-tinta);
+  --cinza:      var(--c-cinza);
+  --cinza-clr:  var(--c-linha);
+  --papel:      var(--c-papel);
+  --branco:     var(--c-branco);
+
+  /* Não existe cor de acento. Se faltar destaque, a resposta é escala
+     ou troca de superfície. Único desvio previsto: verde e vermelho de
+     sistema em erro e sucesso de formulário (Fase 7).                  */
+
+  /* ------------------------------------------------------------------
+     3. COR SOBRE SUPERFÍCIE ESCURA
+     Escada de alfa sobre branco. Substitui as quinze opacidades ad hoc
+     que o estudo espalhava (.16 .17 .2 .23 .25 .45 .48 .55 .58 .62 …).
+     ------------------------------------------------------------------ */
+  --sobre-escuro:        rgb(255 255 255 / 1);    /* texto principal      */
+  --sobre-escuro-70:     rgb(255 255 255 / .70);  /* texto de apoio       */
+  --sobre-escuro-55:     rgb(255 255 255 / .55);  /* rótulo secundário    */
+  --sobre-escuro-45:     rgb(255 255 255 / .45);  /* numeração, inativo   */
+  --sobre-escuro-fio:    rgb(255 255 255 / .24);  /* fio de 1px           */
+  --sobre-escuro-fio-fr: rgb(255 255 255 / .16);  /* fio quase apagado    */
+
+  /* ------------------------------------------------------------------
+     4. VÉU SOBRE FOTO — TEMPORÁRIO, MORRE NA FASE 2
+     O CLAUDE.md e a seção 13 da direção proíbem escurecer foto. Estes
+     tokens existem só para a página de estudos, que é descartada na
+     Fase 2. NÃO usar em componente novo.
+     ------------------------------------------------------------------ */
+  --veu-62: rgb(0 0 0 / .62);
+  --veu-46: rgb(0 0 0 / .46);
+  --veu-40: rgb(0 0 0 / .40);
+  --veu-32: rgb(0 0 0 / .32);
+  --veu-20: rgb(0 0 0 / .20);
+  --veu-12: rgb(0 0 0 / .12);
+
+  /* ------------------------------------------------------------------
+     5. TIPOGRAFIA
+     Krub e só Krub, self-hosted via @fontsource. Decisão travada:
+     nunca somar uma segunda família. Pesos carregados: 300, 400, 600.
+     ------------------------------------------------------------------ */
+  --fonte: "Krub", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --peso-leve:   300;  /* display e títulos — hierarquia por escala      */
+  --peso-normal: 400;  /* texto corrido e subtítulo                     */
+  --peso-forte:  600;  /* rótulo em caixa alta, e só ele                */
+
+  /* Escala do CLAUDE.md. Os valores mobile são trocados no fim do
+     arquivo, na faixa até 600px. Hierarquia por escala e tracking,
+     nunca por engordar peso.                                           */
+  --fs-display-xl: 64px;    --tr-display-xl: -0.065em;  --lh-display-xl: 0.92;
+  --fs-display-l:  48px;    --tr-display-l:  -0.055em;  --lh-display-l:  0.96;
+  --fs-secao:      34px;    --tr-secao:      -0.04em;   --lh-secao:      1.06;
+  --fs-subtitulo:  22px;    --tr-subtitulo:  -0.01em;   --lh-subtitulo:  1.35;
+  --fs-texto:      17px;    --tr-texto:      0;         --lh-texto:      1.62;
+  --fs-rotulo:     10.5px;  --tr-rotulo:     0.24em;    --lh-rotulo:     1.4;
+
+  /* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em
+     largura total.                                                     */
+  --medida: 64ch;
+
+  /* ------------------------------------------------------------------
+     6. ESPAÇO — base 8
+     ------------------------------------------------------------------ */
+  --e-1:   8px;
+  --e-2:  16px;
+  --e-3:  24px;
+  --e-4:  40px;
+  --e-5:  64px;
+  --e-6:  96px;
+  --e-7: 128px;
+
+  --e-secao:  var(--e-7);  /* respiro entre seções: 128 desktop, 72 mobile */
+  --e-margem: 20px;        /* margem lateral do texto no mobile            */
+
+  /* Margem lateral da página. Cresce com a tela, mas nunca abaixo dos 20px
+     do mobile, porque a foto sangra e o texto não.                        */
+  --pad-lateral: clamp(20px, 5vw, 80px);
+
+  /* Altura do cabeçalho. Vira offset de âncora e de menu.                 */
+  --alt-cabecalho: 88px;
+
+  /* ------------------------------------------------------------------
+     7. FORMA
+     border-radius 0 em tudo. Separação por fio de 1px e por espaço.
+     Zero sombra. Alinhamento à esquerda.
+     ------------------------------------------------------------------ */
+  --fio: 1px;
+
+  /* ------------------------------------------------------------------
+     8. MOVIMENTO — mínimo e lento
+     Proibido: parallax, scroll sequestrado, carrossel automático,
+     contador animado.
+     ------------------------------------------------------------------ */
+  --mov-fade:  400ms;  /* fade partindo de visível                       */
+  --mov-hover: 600ms;  /* hover em card: scale(1.02)                     */
+  --mov-fio:   200ms;  /* fio de 1px sob o item de navegação             */
+  --mov-ease:  cubic-bezier(.2, .8, .2, 1);
+
+  /* Alvo de toque mínimo, para não repetir o botão de 30px do estudo. */
+  --toque: 44px;
+}
+
+/* ====================================================================
+   Coluna mobile da tabela de escala do CLAUDE.md.
+   Faixa "Mobile — até 600px". Só a tipografia e o respiro mudam;
+   cor e forma são iguais em toda largura.
+   ==================================================================== */
+@media (max-width: 600px) {
+  :root {
+    --fs-display-xl: 40px;
+    --fs-display-l:  32px;
+    --fs-secao:      26px;
+    --fs-subtitulo:  20px;
+    --fs-texto:      16.5px;
+    /* --fs-rotulo não muda: 10.5px em toda largura. */
+
+    --e-secao: 72px;
+  }
+}

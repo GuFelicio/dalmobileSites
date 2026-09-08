@@ -1,0 +1,124 @@
+/* Painel de tela cheia. Mobile e tablet — a partir de 1025px o menu é
+   horizontal e este painel nunca abre. */
+
+.painel {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  padding: var(--e-3) var(--pad-lateral) var(--e-4);
+  /* 100svh e não 100vh: a barra do navegador móvel quebra vh e cortaria o
+     último item do menu. */
+  height: 100svh;
+  overflow-y: auto;
+  animation: entrada var(--mov-fade) var(--mov-ease) both;
+}
+
+/* Fundo sólido, herdado da superfície do cabeçalho que abriu o painel.
+   Nunca translúcido: o texto atrás competiria com o menu. */
+.preto { background: var(--c-preto); color: var(--sobre-escuro); }
+.cinza { background: var(--cinza); color: var(--preto); }
+.papel { background: var(--papel); color: var(--preto); }
+
+.topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--e-2);
+  min-height: var(--alt-cabecalho);
+}
+
+.fechar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-1);
+  /* Alvo de toque de 44px, com a área maior que o desenho. */
+  min-width: var(--toque);
+  min-height: var(--toque);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+  justify-content: flex-end;
+}
+
+.rotuloFechar {
+  /* O rótulo some no telefone, onde o X já é entendido, mas continua no
+     leitor de tela pelo texto do botão. */
+  display: none;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-block: var(--e-5);
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+  width: 100%;
+}
+
+.nav a {
+  display: block;
+  /* Escala de seção: o menu é a página inteira, o item tem peso de título. */
+  font-size: var(--fs-secao);
+  letter-spacing: var(--tr-secao);
+  line-height: var(--lh-secao);
+  font-weight: var(--peso-leve);
+  /* Garante o alvo de toque mesmo quando a linha do título é mais baixa. */
+  min-height: var(--toque);
+  padding-block: var(--e-1);
+}
+
+.contato {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+  padding-top: var(--e-3);
+  border-top: var(--fio) solid currentColor;
+}
+
+.acao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-1);
+  min-height: var(--toque);
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+.endereco {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida);
+}
+
+@keyframes entrada {
+  /* Fade partindo de visível: o painel nunca aparece do nada, mas também
+     nunca começa invisível a ponto de piscar. */
+  from { opacity: .4; }
+  to   { opacity: 1; }
+}
+
+@media (min-width: 1025px) {
+  /* Acima do tablet o menu é horizontal; o painel não existe. */
+  .painel { display: none; }
+}
+
+/* Ação sem destino ainda. Ver o cabeçalho de Header.module.css. */
+.pendente {
+  opacity: .55;
+  cursor: not-allowed;
+}

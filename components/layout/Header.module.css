@@ -1,0 +1,132 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+  min-height: var(--alt-cabecalho);
+  padding-inline: var(--pad-lateral);
+  background: transparent;
+  /* Fundo e fio entram junto ao fixar. Transição só na cor, nunca na
+     posição: cabeçalho que se mexe é interface chamando atenção para si. */
+  transition: background-color var(--mov-fade) ease, border-color var(--mov-fade) ease;
+  border-bottom: var(--fio) solid transparent;
+}
+
+/* Cor do texto pela superfície em que o cabeçalho está pousado. */
+.preto { color: var(--sobre-escuro); }
+.cinza { color: var(--preto); }
+.papel { color: var(--preto); }
+
+/* Depois de 80px de rolagem: fundo SÓLIDO da superfície em que está.
+   Sólido e não translúcido — nada de backdrop-filter deixando a foto
+   vazar por trás do menu. */
+.fixado.preto { background: var(--c-preto); border-bottom-color: var(--sobre-escuro-fio); }
+.fixado.cinza { background: var(--cinza); border-bottom-color: var(--preto); }
+.fixado.papel { background: var(--papel); border-bottom-color: var(--cinza-clr); }
+
+.marca {
+  display: inline-flex;
+  /* O lockup é o alvo de toque; garante os 44px mesmo com o wordmark baixo. */
+  min-height: var(--toque);
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Navegação horizontal — só a partir de 1025px.
+   Mobile E TABLET usam o painel de tela cheia: a faixa de 601 a 1024px é
+   onde cinco itens mais o lockup mais a ação não cabem sem espremer.
+   -------------------------------------------------------------------------- */
+.nav { display: none; }
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+  /* O fio de 1px sob o item é o único hover da navegação. */
+  border-bottom: var(--fio) solid transparent;
+  transition: border-color var(--mov-fio) ease;
+}
+
+.nav a:hover { border-bottom-color: currentColor; }
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+}
+
+.contato {
+  display: none;
+  align-items: center;
+  gap: var(--e-1);
+  min-height: var(--toque);
+  padding-inline: var(--e-2);
+  border: var(--fio) solid currentColor;
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+.hamburguer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--e-1);
+  min-width: var(--toque);
+  min-height: var(--toque);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+.rotuloMenu { display: none; }
+
+/* Tablet: o rótulo "Menu" cabe ao lado do ícone e some a ambiguidade do
+   hambúrguer sozinho. */
+@media (min-width: 601px) {
+  .contato { display: inline-flex; }
+  .rotuloMenu { display: inline; }
+}
+
+/* Desktop: navegação horizontal, hambúrguer sai. */
+@media (min-width: 1025px) {
+  .nav { display: block; }
+  .hamburguer { display: none; }
+}
+
+/* Ação presente no layout, mas sem destino ainda. É <span>, não <a>: fica
+   visível para o desenho ser avaliado, sem virar link morto.
+   NÃO PODE IR AO AR ASSIM — ver o checklist da Fase 8. */
+.pendente {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.emBreve {
+  font-weight: var(--peso-normal);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--fs-rotulo);
+  opacity: .8;
+}

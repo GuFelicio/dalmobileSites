@@ -1,0 +1,116 @@
+/* Superfície cinza — o rodapé é costura. */
+.footer {
+  background: var(--cinza);
+  color: var(--preto);
+  padding: var(--e-secao) var(--pad-lateral) var(--e-4);
+}
+
+/* Mobile: colunas empilhadas, uma sempre. */
+.colunas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e-4);
+}
+
+.coluna {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+  /* Impede que uma coluna estoure a grade e crie rolagem horizontal. */
+  min-width: 0;
+}
+
+.titulo {
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+.endereco {
+  font-style: normal; /* <address> vem em itálico por padrão */
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+}
+
+.lista a {
+  display: inline-flex;
+  align-items: center;
+  /* Alvo de toque com espaço entre alvos vizinhos: no rodapé os links ficam
+     empilhados e colados, que é onde o dedo erra. */
+  min-height: var(--toque);
+  border-bottom: var(--fio) solid transparent;
+  transition: border-color var(--mov-fio) ease;
+}
+
+.lista a:hover { border-bottom-color: currentColor; }
+
+.comIcone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-1);
+  min-height: var(--toque);
+}
+
+/* Ação sem destino ainda. Ver o cabeçalho de Header.module.css. */
+.pendente {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.horarios {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+}
+
+.horarios li {
+  display: flex;
+  flex-direction: column;
+}
+
+.dias {
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+.assinatura {
+  margin-top: var(--e-5);
+  padding-top: var(--e-3);
+  border-top: var(--fio) solid var(--preto);
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  font-weight: var(--peso-forte);
+  text-transform: uppercase;
+}
+
+/* Tablet: duas colunas. Quatro nesta faixa espremeriam o endereço em três
+   linhas quebradas. */
+@media (min-width: 601px) {
+  .colunas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--e-5) var(--e-4);
+  }
+}
+
+/* Desktop: as quatro colunas. A primeira é mais larga porque carrega o
+   lockup e o endereço inteiro. */
+@media (min-width: 1025px) {
+  .colunas {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  }
+}

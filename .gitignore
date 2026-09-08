@@ -1,0 +1,24 @@
+# Dependências e build — gerados, descartáveis.
+# No ambiente local são links simbólicos para ~/.cache/dalmobile-build/,
+# porque o Google Drive não dá conta de sincronizá-los. Ver docs/decisoes.md.
+node_modules
+dist
+.next/
+.wrangler/
+
+# Sistema operacional
+.DS_Store
+
+# Segredos e ambiente local
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Material de referência do site antigo (zip do código-fonte e builds antigos).
+# Não é código deste projeto e não entra no build. Se precisar versionar,
+# basta remover esta linha.
+Dir Base/

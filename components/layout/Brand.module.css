@@ -1,0 +1,7 @@
+/* O lockup traz a cidade numa linha fina abaixo do wordmark. Abaixo de uns
+   180px essa linha fica ilegível, então a largura mínima não é estética: é
+   requisito de leitura. */
+.marca {
+  width: clamp(168px, 44vw, 200px);
+  height: auto;
+}

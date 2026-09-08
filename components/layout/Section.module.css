@@ -1,0 +1,46 @@
+/* As três superfícies. Uma por função, nunca por gosto.
+
+   Cada uma expõe --sup-bg e --sup-fg, para o componente que precisa se
+   inverter dentro dela (um chip ativo, por exemplo) sem saber em qual está. */
+
+.section {
+  /* O respiro entre seções vem da escala: 128px desktop, 72px mobile. */
+  padding-block: var(--e-secao);
+  padding-inline: var(--pad-lateral);
+}
+
+/* Preto — abertura, faixa de projetos, índice, cases, galerias. A imagem manda. */
+.preto {
+  --sup-bg: var(--c-preto);
+  --sup-fg: var(--sobre-escuro);
+  background: var(--sup-bg);
+  color: var(--sup-fg);
+}
+
+/* Cinza — faixas de transição, números, rodapé, tiras de chamada. Costura. */
+.cinza {
+  --sup-bg: var(--cinza);
+  --sup-fg: var(--preto);
+  background: var(--sup-bg);
+  color: var(--sup-fg);
+}
+
+/* Papel — institucional, arquitetos, a loja, ambientes, FAQ, 404. O texto manda. */
+.papel {
+  --sup-bg: var(--papel);
+  --sup-fg: var(--preto);
+  background: var(--sup-bg);
+  color: var(--sup-fg);
+}
+
+/* Sem respiro vertical: para faixas finas, como a tira de arquitetos da home,
+   que é pontuação entre duas superfícies e não seção. */
+.semRespiro {
+  padding-block: 0;
+}
+
+/* Sangra até a borda: a foto vai de ponta a ponta, o texto mantém a margem.
+   Regra de mobile do CLAUDE.md, aplicada em qualquer largura quando pedida. */
+.sangra {
+  padding-inline: 0;
+}
