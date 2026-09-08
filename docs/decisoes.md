@@ -8,6 +8,58 @@ Formato: **data · o que · por quê · o que foi descartado**.
 
 ---
 
+## 2026-09-08 · As fotos não usam `next/image`; o componente é nosso
+
+**Decisão.** Toda foto de conteúdo passa por `components/midia/Foto.tsx`, que
+emite `<img>` com `srcSet` e `sizes` reais apontando para variações geradas no
+build por `build/gerar-imagens.mjs` com `sharp`. O `next/image` não é usado.
+
+**Por quê — e agora com a verificação feita.** A Fase 1 já havia constatado que
+o binding `env.IMAGES` não existe na conta e é pago. Faltava a outra metade, que
+só apareceu ao ler o código do vinext: **o shim de `next/image` do vinext
+desliga o `srcSet` quando recebe um `loader` próprio** (`skipOpt = ... || !!loader`)
+e passa a servir um arquivo só. E com `unoptimized: true` ele gera um `srcSet`
+em que todas as larguras apontam para o **mesmo** arquivo.
+
+Ou seja: nenhum caminho com `next/image` neste runtime entrega a imagem certa
+para cada tela. E servir imagem de desktop no celular é, nas palavras do próprio
+`CLAUDE.md`, "o erro mais caro do projeto" — num site que é 90% foto e que o
+cliente abre por 4G, vindo de link de WhatsApp.
+
+**O que isso custou.** Uma linha do `CLAUDE.md` ("usar `next/image` em todas as
+fotos") deixou de valer, e foi reescrita. A regra por trás dela — foto sempre com
+`sizes` correto — continua valendo e ficou mais forte: no `<Foto>`, `sizes` é
+prop obrigatória, e foto sem variação gerada quebra o build em vez de virar
+`<img>` quebrado em produção.
+
+**Descartado.** `next/image` com `unoptimized` (cumpre a letra da regra e viola o
+motivo dela), `loader` próprio no `next/image` (o vinext desliga o `srcSet`) e
+contratar o Cloudflare Images (custo recorrente para um acervo que muda poucas
+vezes por mês).
+
+---
+
+## 2026-09-08 · O estado do filtro do índice vive na URL, não no cliente
+
+**Decisão.** `/projetos` lê `?ambiente=`, `?edificio=` e `?ate=` de
+`searchParams`. Os chips são links, e "Carregar mais" também. A página inteira
+segue server component, sem `"use client"`.
+
+**Por quê.** A direção pede o filtro compartilhável e indexável — o vendedor
+manda "olha os projetos no Rizzuti" pelo WhatsApp, e esse link precisa abrir
+já filtrado. Estado de cliente não sobrevive a um link colado. De quebra, o
+filtro funciona sem JavaScript e não custa bundle num site que precisa chegar
+rápido no 4G.
+
+**Detalhe que custou um bug.** Trocar de filtro **zera** o `?ate=`. Sem isso,
+quem tinha carregado 12 projetos e filtrava para um edifício com 2 continuava
+vendo "Carregar mais" sem ter o que carregar.
+
+**Descartado.** Estado em React com `useState` (quebra o link compartilhável e
+torna a página cliente) e paginação numerada (a direção pede "Carregar mais").
+
+---
+
 ## 2026-09-08 · A unidade é escolhida por alias no build, nunca por `if` em runtime
 
 **Decisão.** `vite.config.ts` lê `process.env.UNIDADE` e aponta o alias

@@ -13,6 +13,8 @@ Dois sites (São José dos Campos e Caraguatatuba) gerados de **um repositório 
 | [`docs/direcao-site.md`](docs/direcao-site.md) | o que cada página tem, em que ordem, e por quê |
 | [`docs/design-system.md`](docs/design-system.md) | os tokens e como usá-los |
 | [`docs/decisoes.md`](docs/decisoes.md) | log de decisões: o que, por quê, o que foi descartado |
+| [`docs/adicionar-projeto.md`](docs/adicionar-projeto.md) | como publicar um projeto novo |
+| [`docs/unidades.md`](docs/unidades.md) | o que cada campo do config faz |
 | [`docs/prompts-construcao.md`](docs/prompts-construcao.md) | o plano de nove fases |
 | [`CHANGELOG.md`](CHANGELOG.md) | o que mudou em cada entrega |
 
@@ -62,7 +64,7 @@ docs/           documentação
 
 ## Estado
 
-**Fases 1, 2 e 3 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
+**Fases 1 a 4 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
 layout base — cabeçalho, rodapé, menu mobile e as três superfícies, em
 `components/layout/`. O `npm test` roda 12 testes que policiam as regras do
 `CLAUDE.md`.
@@ -72,11 +74,12 @@ geram os dois sites do mesmo código, e um teste constrói as duas unidades e
 falha se o nome de uma cidade aparecer no build da outra. Ver
 [`docs/unidades.md`](docs/unidades.md).
 
-Ainda **não** existem rotas de conteúdo — projetos, ambientes, institucional.
+Existem `/projetos` e `/projetos/[slug]`, com três projetos de **exemplo**.
+Ainda não existem ambientes, institucional, arquitetos, a loja, 404 nem home real.
 
 Duas páginas são andaime temporário e saem na Fase 3: `app/page.tsx` (os três
 estudos de layout) e `app/teste-layout/` (a revisão dos componentes nas três
 superfícies).
 
-**Próxima: Fase 4 — case e índice de projetos.** Ver
+**Próxima: Fase 5 — ambientes.** Ver
 [`docs/prompts-construcao.md`](docs/prompts-construcao.md).

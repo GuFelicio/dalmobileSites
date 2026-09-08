@@ -226,9 +226,11 @@ Sem isso, daqui a seis meses alguém "melhora" o site desfazendo tudo — de boa
 
 Base: template `site-creator-vinext-starter` — **vinext + Vite + Cloudflare Workers**.
 
-Mantém: o runtime Cloudflare e o endpoint `/_vinext/image` do `worker/index.ts`. O site é 90% imagem; usar `next/image` em **todas** as fotos, com `sizes` e `priority` só no hero.
+Mantém: o runtime Cloudflare. O site é 90% imagem, e toda foto de conteúdo passa pelo componente **`components/midia/Foto.tsx`**, com `sizes` obrigatório e `prioridade` só na foto de abertura.
 
-> Verificar se o binding `env.IMAGES` existe de fato no ambiente. Se não existir ou for pago, gerar as variações no build com `sharp` e servir estático.
+> **`next/image` não é usado, e a verificação está feita.** O binding `env.IMAGES` não existe na conta e é pago; além disso, o shim de `next/image` do vinext **desliga o `srcSet` quando recebe um loader próprio**, servindo um arquivo só. As variações são geradas no build por `build/gerar-imagens.mjs` com `sharp`, e o `<Foto>` monta `srcSet` e `sizes` de verdade. Ver `docs/decisoes.md`.
+
+> O endpoint `/_vinext/image` continua em `worker/index.ts` mas **não é exercitado** — nenhuma foto o chama.
 
 ### Não adicionar, e remover o que já está
 - `components/ui/` — 60 componentes shadcn, nenhum usado

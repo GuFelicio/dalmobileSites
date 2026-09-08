@@ -8,6 +8,64 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.3.0] — 2026-09-08
+
+### Fase 4 — Case e índice de projetos
+
+O gabarito que o site repete trinta vezes.
+
+**Entrou**
+
+- `conteudo/projetos/*.md` — projeto em Markdown com frontmatter validado.
+  Campo faltando quebra o build com mensagem que diz o que fazer.
+- `lib/projetos.ts` — núcleo puro de leitura e validação, sem `@unidade`, para
+  a suíte conseguir exercitá-lo sem subir um build.
+- `lib/projetos-da-unidade.ts` — a ligação com o config. As páginas chamam daqui.
+- `build/gerar-imagens.mjs` — gera 440/880/1240/1920 com `sharp`, incremental,
+  sem ampliar acima do original. Escreve um manifesto com proporção e larguras.
+- `components/midia/Foto.tsx` — `<img>` com `srcSet` e `sizes` reais. `sizes` é
+  prop obrigatória; foto sem variação gerada quebra o build.
+- `lib/fotos.ts` — a conta de URL, compartilhada entre o componente e a metadata.
+- `/projetos` — índice em preto, filtro por ambiente e por edifício com estado
+  na URL, "Carregar mais" como link. Server component, sem JavaScript.
+- `/projetos/[slug]` — o case, com os nove blocos da seção 5 da direção e
+  OpenGraph por página com a foto de abertura.
+- `docs/adicionar-projeto.md` — o passo a passo, escrito para quem não programa.
+- 10 testes novos de conteúdo, filtro e imagem.
+- `sharp` e `gray-matter` (aprovados antes de instalar).
+
+**next/image saiu, e a verificação está registrada**
+
+Além do binding `env.IMAGES` não existir, descobriu-se lendo o vinext que o shim
+de `next/image` **desliga o `srcSet` ao receber um loader próprio**, e com
+`unoptimized` gera um `srcSet` apontando todas as larguras para o mesmo arquivo.
+Nenhum caminho entregava a imagem certa por tela. A linha do `CLAUDE.md` que
+mandava usar `next/image` foi reescrita; a regra por trás dela ficou mais forte.
+
+**Verificado**
+
+- No build de Caraguá, `/projetos/rizzuti-dr-marcos` (só de SJC) responde **404**.
+- Filtro correto nos dois eixos; combinação sem resultado mostra saída; valor
+  inventado na URL devolve a lista inteira, não página em branco.
+
+**Corrigido**
+
+- `docs/prompts-construcao.md` mandava ler a "seção 8" da direção para a Fase 4;
+  a seção 8 é Arquitetos. O gabarito é a 5 e o índice a 4.
+- `@next/next/no-img-element` desligado com justificativa: com a decisão tomada,
+  o aviso viraria ruído constante que treina o time a ignorar o lint.
+
+**Pendente**
+
+- Os três projetos são **exemplo**, com dados inventados, e a trava de deploy
+  recusa publicar enquanto estiverem marcados assim.
+- O bloco 7 do case (depoimento) não foi implementado: entra com o primeiro
+  depoimento autorizado.
+- **Falta a conferência visual nas seis larguras da matriz.** As regras estão
+  escritas e comentadas, mas ninguém olhou as páginas ainda.
+
+---
+
 ## [0.2.1] — 2026-09-08
 
 Dados das duas lojas confirmados pelo cliente. As pendências caíram de 15 para 4.

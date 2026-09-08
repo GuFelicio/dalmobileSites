@@ -6,20 +6,22 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vite",
-    "dev:caragua": "UNIDADE=caragua vite",
-    "build": "vinext build",
-    "build:sjc": "UNIDADE=sjc vinext build",
-    "build:caragua": "UNIDADE=caragua vinext build",
+    "dev": "npm run fotos && vite",
+    "dev:caragua": "npm run fotos && UNIDADE=caragua vite",
+    "build": "npm run fotos && vinext build",
+    "build:sjc": "npm run fotos && UNIDADE=sjc vinext build",
+    "build:caragua": "npm run fotos && UNIDADE=caragua vinext build",
     "start": "vinext start",
     "deploy:sjc": "npm run pendencias && npm run build:sjc && wrangler deploy -c dist/server/wrangler.json --name dalmobile-sjc",
     "deploy:caragua": "npm run pendencias && npm run build:caragua && wrangler deploy -c dist/server/wrangler.json --name dalmobile-caragua",
     "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "pendencias": "node config/verificar-pendencias.mjs"
+    "pendencias": "node config/verificar-pendencias.mjs",
+    "fotos": "node build/gerar-imagens.mjs"
   },
   "dependencies": {
     "@fontsource/krub": "5.3.0",
+    "gray-matter": "4.0.3",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"
@@ -35,6 +37,7 @@
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
     "react-server-dom-webpack": "19.2.6",
+    "sharp": "0.35.4",
     "typescript": "5.9.3",
     "vinext": "0.0.50",
     "vite": "8.0.13",

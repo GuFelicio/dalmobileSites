@@ -25,3 +25,7 @@ Dir Base/
 
 # Cache incremental do TypeScript — gerado.
 *.tsbuildinfo
+
+# Variações de imagem geradas no build por build/gerar-imagens.mjs.
+# O original fica em public/fotos/ e ESSE sim é versionado.
+public/fotos-geradas/

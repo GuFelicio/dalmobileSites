@@ -1,0 +1,270 @@
+/* Case — o gabarito mais usado do site.
+   Ver app/projetos/[slug]/page.tsx e a seção 5 do docs/direcao-site.md. */
+
+/* ---- 1. Caminho de navegação ---------------------------------------- */
+
+.caminho ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e-1);
+  list-style: none;
+  margin: 0 0 var(--e-3);
+  padding: 0;
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--sobre-escuro-55);
+}
+
+.caminho li + li::before {
+  content: "/";
+  margin-right: var(--e-1);
+  color: var(--sobre-escuro-45);
+}
+
+.caminho a:hover {
+  color: var(--sobre-escuro);
+}
+
+/* ---- 2. Cabeçalho ---------------------------------------------------- */
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: 0;
+}
+
+.rotulo {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--sobre-escuro-55);
+  margin: var(--e-2) 0 0;
+}
+
+/* ---- 3. Foto de abertura -------------------------------------------- */
+
+/* Sangra até a borda, 16:9, sem véu. A imagem é o produto. */
+.abertura {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* No telefone o 16:9 corta demais um ambiente fotografado na vertical.
+   4:3 devolve altura sem estourar a dobra. */
+@media (max-width: 600px) {
+  .abertura {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ---- 4 e 5. Texto e ficha técnica ------------------------------------ */
+
+.corpo {
+  display: grid;
+  gap: var(--e-4);
+}
+
+/* A ficha só vira coluna lateral no desktop. No tablet ela fica ABAIXO da
+   foto e do texto — regra explícita do CLAUDE.md, e o motivo é medido: a
+   ficha tem "Acabamentos" com nome e código, que a 768px espremidos em
+   coluna lateral quebram em três linhas cada e viram ilegíveis. */
+@media (min-width: 1025px) {
+  .corpo {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: var(--e-5);
+    align-items: start;
+  }
+}
+
+.texto p {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  /* Medida de leitura de 62 a 66 caracteres. */
+  max-width: var(--medida);
+  margin: 0;
+}
+
+.ficha {
+  border-top: var(--fio) solid var(--cinza-clr);
+  padding-top: var(--e-3);
+}
+
+.fichaTitulo {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza);
+  margin: 0 0 var(--e-2);
+}
+
+.ficha dl {
+  margin: 0;
+  display: grid;
+  gap: var(--e-2);
+}
+
+.ficha dt {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+
+.ficha dd {
+  margin: 0;
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+}
+
+.ficha dd a {
+  border-bottom: var(--fio) solid var(--cinza-clr);
+}
+
+.acabamentos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* O código do acabamento é o que sustenta a comparação de proposta. Fica
+   visível, em apoio — não escondido. */
+.codigo {
+  color: var(--cinza);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- 6. Galeria ------------------------------------------------------ */
+
+.galeria {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e-5);
+}
+
+.galeriaItem figure {
+  margin: 0;
+}
+
+/* Uma foto por bloco, grande. Nunca mosaico, nunca miniatura. */
+.galeriaFoto {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.galeriaItem figcaption {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  color: var(--sobre-escuro-70);
+  margin-top: var(--e-2);
+  /* A legenda mantém a margem lateral mesmo com a foto sangrando. */
+  padding-inline: var(--pad-lateral);
+  max-width: var(--medida);
+}
+
+/* ---- 8. Outros projetos neste edifício ------------------------------- */
+
+.outrosTitulo {
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  margin: 0 0 var(--e-3);
+}
+
+.outros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e-3);
+}
+
+/* Três cards lado a lado só no desktop. No tablet dois, no telefone um. */
+@media (min-width: 601px) {
+  .outros {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1025px) {
+  .outros {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.outrosFoto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform var(--mov-hover) var(--mov-ease);
+}
+
+.outros a:hover .outrosFoto {
+  transform: scale(1.02);
+}
+
+.outrosNome {
+  display: block;
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin-top: var(--e-2);
+}
+
+/* ---- 9. Chamada final ------------------------------------------------ */
+
+.chamada {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+  padding-block: var(--e-4);
+}
+
+.chamadaTexto {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: 0;
+  max-width: var(--medida);
+}
+
+.chamadaAcao {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  padding: 0 var(--e-3);
+  border: var(--fio) solid var(--preto);
+  font-size: var(--fs-texto);
+  color: var(--preto);
+  transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
+}
+
+.chamadaAcao:hover {
+  background: var(--preto);
+  color: var(--branco);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outrosFoto,
+  .chamadaAcao {
+    transition: none;
+  }
+  .outros a:hover .outrosFoto {
+    transform: none;
+  }
+}

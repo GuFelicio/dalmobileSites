@@ -11,6 +11,7 @@
  * vermelho, e suíte que sempre falha deixa de ser sinal — ver docs/decisoes.md.
  * Como trava de deploy ele só aparece na hora que importa: a de publicar.
  */
+import { todosOsProjetos } from "../lib/projetos.ts";
 import { camposPendentes } from "./pendente.ts";
 import { unidade as sjc } from "./sjc.ts";
 import { unidade as caragua } from "./caragua.ts";
@@ -26,6 +27,20 @@ for (const u of [sjc, caragua]) {
   }
   if (u.whatsapp === null) {
     problemas.push(`${u.id}: sem número de WhatsApp (a ação fica desabilitada)`);
+  }
+}
+
+// Projeto com dados inventados não vai ao ar. O CLAUDE.md é explícito: só
+// foto de projeto executado pela Dalmóbile, nunca render, nunca banco de
+// imagem. Ver docs/adicionar-projeto.md.
+for (const projeto of todosOsProjetos()) {
+  if (projeto.exemplo) {
+    problemas.push(`projeto "${projeto.slug}" ainda está marcado como exemplo`);
+  }
+  if (projeto.arquiteto && !projeto.arquiteto.autorizado) {
+    problemas.push(
+      `projeto "${projeto.slug}": arquiteto ${projeto.arquiteto.nome} sem autorização por escrito`,
+    );
   }
 }
 

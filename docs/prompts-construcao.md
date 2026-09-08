@@ -161,7 +161,7 @@ PRONTO QUANDO
 ## Fase 4 — Case e índice de projetos
 
 ```
-Fase 4 de 9. O gabarito mais usado do site. Leia a seção 8 do
+Fase 4 de 9. O gabarito mais usado do site. Leia as seções 4 e 5 do
 docs/direcao-site.md antes de começar.
 
 FAÇA
@@ -173,7 +173,7 @@ FAÇA
    edifício, estado do filtro na URL para o link ser compartilhável.
    Grade de 2 colunas no desktop, 1 no mobile e até 820px.
 
-3. /projetos/[slug] — os nove blocos da seção 8 da direção, incluindo
+3. /projetos/[slug] — os nove blocos da seção 5 da direção, incluindo
    ficha técnica, galeria de fotos grandes empilhadas e
    "outros projetos neste edifício".
 
