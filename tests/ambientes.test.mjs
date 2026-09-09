@@ -101,3 +101,22 @@ test("crédito de prédio e de arquiteto só aparece quando existe", () => {
     }
   }
 });
+
+test("nenhum sentinela PENDENTE vaza para o HTML", async () => {
+  // Os textos institucionais têm prazo, garantia e números por confirmar.
+  // A página OMITE cada campo pendente; se um vazar, o site publica a palavra
+  // "PENDENTE" na cara do cliente. Ver conteudo/institucional/.
+  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  const { default: worker } = await import(workerUrl.href);
+
+  for (const rota of ["/a-dalmobile", "/arquitetos", "/a-loja", "/", "/ambientes"]) {
+    const resposta = await worker.fetch(
+      new Request(`http://localhost${rota}`, { headers: { accept: "text/html" } }),
+      { ASSETS: { fetch: async () => new Response("nf", { status: 404 }) } },
+      { waitUntil() {}, passThroughOnException() {} },
+    );
+    const html = await resposta.text();
+    assert.doesNotMatch(html, /PENDENTE/, `"PENDENTE" apareceu no HTML de ${rota}`);
+  }
+});

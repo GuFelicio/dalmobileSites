@@ -16,11 +16,23 @@
 export const PENDENTE = "PENDENTE-CONFIRMAR-COM-A-LOJA";
 
 /**
+ * Em arquivo de conteúdo (Markdown) não dá para importar a constante, e
+ * escrever a string inteira em vinte campos seria ruído. Lá se escreve só
+ * `PENDENTE`, e as duas formas contam como pendência.
+ */
+const FORMAS = new Set([PENDENTE, "PENDENTE"]);
+
+/** Um valor ainda não confirmado pela loja. Não renderizar campo assim. */
+export function ehPendente(valor: unknown): boolean {
+  return typeof valor === "string" && FORMAS.has(valor);
+}
+
+/**
  * Percorre o config e devolve o caminho de cada campo ainda pendente.
  * Vazio é o que precisa acontecer antes da Fase 8.
  */
 export function camposPendentes(valor: unknown, caminho = ""): string[] {
-  if (valor === PENDENTE) return [caminho];
+  if (typeof valor === "string" && FORMAS.has(valor)) return [caminho];
   if (Array.isArray(valor)) {
     return valor.flatMap((item, i) => camposPendentes(item, `${caminho}[${i}]`));
   }

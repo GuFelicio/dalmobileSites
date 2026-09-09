@@ -8,6 +8,47 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.7.0] — 2026-09-09
+
+### Fase 7 — o mapa de rotas está completo
+
+**Os mapas entraram.** `mapa.embed` e `mapa.link` das duas lojas, da ficha do
+Google Business. O `link` usa o CID extraído do próprio embed, e os dois foram
+verificados: respondem 302 para o Maps. **Zero pendências de dado de loja** —
+os dois configs estão completos pela primeira vez.
+
+**`/a-dalmobile` e `/arquitetos`**, seguindo as seções 7 e 8 da direção:
+abertura, a fábrica, o processo em cinco etapas numeradas, materiais, garantia,
+faixa de números e FAQ aberto (indexável, não acordeão de venda); e, para
+arquitetos, os quatro blocos da parceria.
+
+**Estes textos são RASCUNHO, e travam o deploy**
+
+Foram escritos **sem entrevista com a loja**, a partir só do que o `CLAUDE.md`
+afirma: móveis planejados, fábrica própria com quase cinco décadas, marca do
+grupo Orizon. `conteudo/institucional/*.md` traz `confirmado: false`, e a trava
+de deploy recusa publicar enquanto for assim.
+
+**Nada que a loja não confirmou é renderizado.** 16 campos estão com o sentinela
+`PENDENTE` — os cinco prazos de etapa, os anos de garantia, os quatro números da
+faixa, três respostas do FAQ, a foto de fábrica e o prazo de resposta a
+escritório. Cada um é **omitido** da página, não renderizado como buraco: a
+faixa de números não aparece, os prazos não aparecem, e o FAQ mostra 3 das 6
+perguntas. Um teste falha se a palavra "PENDENTE" chegar ao HTML.
+
+**A lista de arquitetos parceiros está vazia**, de propósito: publicar nome de
+terceiro exige autorização por escrito de cada um, e ela vale por projeto.
+
+**Entrou também**
+
+- `lib/institucional.ts`, com o frontmatter tipado — sem `any`.
+- `ehPendente()` em `config/pendente.ts`, e o sentinela passou a aceitar a forma
+  curta `PENDENTE` usada nos arquivos de conteúdo.
+- "A Dalmóbile" e "Arquitetos" voltaram ao menu.
+- Um teste novo: nenhum sentinela vaza para o HTML. A suíte foi para **44**.
+
+---
+
 ## [0.6.0] — 2026-09-09
 
 ### `/a-loja`, `/privacidade` e a 404

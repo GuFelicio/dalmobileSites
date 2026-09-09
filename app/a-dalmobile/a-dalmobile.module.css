@@ -1,0 +1,218 @@
+/* Institucional. Texto longo, medida curta, muito respiro.
+   Ver app/a-dalmobile/page.tsx e a seção 7 do docs/direcao-site.md. */
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: 0;
+}
+
+.chamada {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  max-width: var(--medida);
+  margin: var(--e-2) 0 0;
+}
+
+.secao {
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  margin: 0 0 var(--e-2);
+}
+
+/* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em largura
+   total — nesta página, que é a mais longa do site, isso é o que decide se
+   ela é lida. */
+.texto {
+  max-width: var(--medida);
+}
+
+.texto p {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  margin: var(--e-2) 0 0;
+}
+
+.foto {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: var(--e-4);
+}
+
+/* ---- Processo -------------------------------------------------------- */
+
+.processo {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e-4);
+  counter-reset: etapa;
+}
+
+.etapa {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--e-2);
+  align-items: start;
+  border-top: var(--fio) solid var(--sobre-escuro-fio);
+  padding-top: var(--e-2);
+}
+
+.numero {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  color: var(--sobre-escuro-55);
+  font-variant-numeric: tabular-nums;
+  /* Alinha o número com a primeira linha do título, não com o topo da caixa. */
+  padding-top: 4px;
+}
+
+.etapaTitulo {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: 0;
+}
+
+.etapaTexto {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida);
+  margin: var(--e-1) 0 0;
+  color: var(--sobre-escuro-70);
+}
+
+.prazo {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--sobre-escuro-55);
+  margin: var(--e-1) 0 0;
+}
+
+/* ---- Garantia e números ---------------------------------------------- */
+
+.garantiaAnos {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  margin: var(--e-2) 0 0;
+}
+
+.numeros {
+  list-style: none;
+  margin: 0;
+  padding: var(--e-4) 0;
+  display: grid;
+  gap: var(--e-3);
+}
+
+/* Um por linha no telefone, dois no tablet, tudo em linha no desktop —
+   regra da tabela de responsividade do CLAUDE.md. */
+@media (min-width: 601px) {
+  .numeros {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1025px) {
+  .numeros {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+  }
+}
+
+.numeroValor {
+  display: block;
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  font-variant-numeric: tabular-nums;
+}
+
+.numeroRotulo {
+  display: block;
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--sobre-escuro-55);
+  margin-top: var(--e-1);
+}
+
+/* ---- FAQ ------------------------------------------------------------- */
+
+/* Aberta, não em acordeão: é seção indexável, e quem procura resposta não
+   deve precisar clicar para achá-la. */
+.faq {
+  margin: 0;
+  display: grid;
+  gap: var(--e-3);
+}
+
+.item {
+  border-top: var(--fio) solid var(--cinza-clr);
+  padding-top: var(--e-2);
+}
+
+.pergunta {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+}
+
+.resposta {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida);
+  margin: var(--e-1) 0 0;
+  color: var(--cinza-texto);
+}
+
+/* ---- Chamada final --------------------------------------------------- */
+
+.chamadaFinal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+  padding-block: var(--e-4);
+}
+
+.chamadaTexto {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: 0;
+  max-width: var(--medida);
+}
+
+.chamadaAcao {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  padding: 0 var(--e-3);
+  border: var(--fio) solid var(--preto);
+  font-size: var(--fs-texto);
+  color: var(--preto);
+  transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
+}
+
+.chamadaAcao:hover {
+  background: var(--preto);
+  color: var(--branco);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chamadaAcao { transition: none; }
+}

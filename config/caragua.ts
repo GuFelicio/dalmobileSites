@@ -16,7 +16,6 @@
  * o bundle do servidor preserva comentários, e o teste vasculha o bundle.
  * Ver tests/unidade-cruzada.test.mjs.
  */
-import { PENDENTE } from "./pendente.ts";
 import type { Unidade } from "./tipos.ts";
 
 export const unidade: Unidade = {
@@ -54,12 +53,13 @@ export const unidade: Unidade = {
     { dias: "Sábado", abre: "09h00", fecha: "14h00", confirmado: true },
   ],
 
-  // PENDENTE: o embed do iframe sai do próprio Google Maps, em
-  // "Compartilhar > Incorporar um mapa". O link de share.google abaixo não
-  // serve: ele só resolve com JavaScript.
+  // Vêm da ficha do Google Business desta loja, não de endereço digitado
+  // à mão: é a ficha que o Google reconhece e que alimenta a busca local.
+  // O `link` usa o CID da própria ficha, extraído do embed.
   mapa: {
-    embed: PENDENTE,
-    link: PENDENTE,
+    embed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7948.553951724388!2d-45.42037385719336!3d-23.626454861256708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cd6318a8e6cb1f%3A0x856a2f54f9f7f902!2sDalm%C3%B3bile%20Caraguatatuba%2C%20M%C3%B3veis%20Planejados%2C%20Arm%C3%A1rios%20Planejados%2C!5e1!3m2!1spt-BR!2sbr!4v1788959063496!5m2!1spt-BR!2sbr",
+    link: "https://maps.google.com/?cid=9613548396593281282",
   },
 
   // DIVERGÊNCIA CONHECIDA: a ficha ainda mostra o telefone antigo. O cliente
@@ -89,11 +89,8 @@ export const unidade: Unidade = {
     // informação de prédio e de arquiteto. A rota e a camada continuam no
     // código, prontas. Ver docs/decisoes.md.
     { rotulo: "Ambientes", href: "/ambientes" },
+    { rotulo: "A Dalmóbile", href: "/a-dalmobile" },
+    { rotulo: "Arquitetos", href: "/arquitetos" },
     { rotulo: "A loja", href: "/a-loja" },
-    // "A Dalmóbile" e "Arquitetos" entram quando as páginas existirem — são
-    // a Fase 7 e dependem de texto institucional que ainda não temos. Até lá
-    // não são linkadas: o CLAUDE.md proíbe CTA sem destino real, e elas
-    // estavam dando 404 no menu e no rodapé de toda página.
-    // Ver docs/pendencias.md.
   ],
 };

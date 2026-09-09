@@ -11,6 +11,7 @@
  * vermelho, e suíte que sempre falha deixa de ser sinal — ver docs/decisoes.md.
  * Como trava de deploy ele só aparece na hora que importa: a de publicar.
  */
+import { todasInstitucionais } from "../lib/institucional.ts";
 import { todosOsProjetos } from "../lib/projetos.ts";
 import { camposPendentes } from "./pendente.ts";
 import { unidade as sjc } from "./sjc.ts";
@@ -41,6 +42,22 @@ for (const projeto of todosOsProjetos()) {
     problemas.push(
       `projeto "${projeto.slug}": arquiteto ${projeto.arquiteto.nome} sem autorização por escrito`,
     );
+  }
+}
+
+// Os textos institucionais foram escritos SEM entrevista com a loja, a partir
+// só do que o CLAUDE.md afirma. São rascunho até alguém da loja ler cada
+// parágrafo. E nenhum número — anos de fábrica, garantia, prazo — vai ao ar
+// sem confirmação. Ver conteudo/institucional/.
+for (const pagina of todasInstitucionais()) {
+  if (!pagina.confirmado) {
+    problemas.push(
+      `texto institucional "${pagina.slug}" ainda não foi revisado pela loja ` +
+        `(confirmado: false)`,
+    );
+  }
+  for (const campo of pagina.pendentes) {
+    problemas.push(`${pagina.slug}.${campo} — não confirmado com a loja`);
   }
 }
 

@@ -1,0 +1,159 @@
+/* Página de parceria com arquitetos. Superfície papel.
+   Ver app/arquitetos/page.tsx e a seção 8 do docs/direcao-site.md. */
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: 0;
+}
+
+.chamada {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  max-width: var(--medida);
+  margin: var(--e-2) 0 0;
+}
+
+.secao {
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  margin: 0 0 var(--e-3);
+}
+
+.texto {
+  max-width: var(--medida); /* 62 a 66 caracteres */
+}
+
+.texto p {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  margin: var(--e-2) 0 0;
+}
+
+/* ---- Blocos da parceria ---------------------------------------------- */
+
+.blocos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e-4);
+}
+
+/* Dois por linha a partir do tablet: são blocos curtos, e uma coluna só
+   deixaria a página comprida demais para o pouco texto que cada um tem. */
+@media (min-width: 601px) {
+  .blocos {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--e-4) var(--e-3);
+  }
+}
+
+.bloco {
+  border-top: var(--fio) solid var(--cinza-clr);
+  padding-top: var(--e-2);
+}
+
+.blocoTitulo {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: 0;
+}
+
+.blocoTexto {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida);
+  margin: var(--e-1) 0 0;
+  color: var(--cinza-texto);
+}
+
+.prazo {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+  margin: var(--e-1) 0 0;
+}
+
+/* ---- Arquitetos parceiros -------------------------------------------- */
+
+.parceiros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e-3);
+}
+
+.parceiro {
+  border-top: var(--fio) solid var(--cinza-clr);
+  padding-top: var(--e-2);
+}
+
+.parceiroNome {
+  display: block;
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+}
+
+.parceiroProjetos {
+  list-style: none;
+  margin: var(--e-1) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-1);
+  font-size: var(--fs-texto);
+}
+
+.parceiroProjetos a {
+  border-bottom: var(--fio) solid var(--cinza-clr);
+}
+
+/* ---- Chamada final --------------------------------------------------- */
+
+.chamadaFinal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+  padding-block: var(--e-4);
+}
+
+.chamadaTexto {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: 0;
+  max-width: var(--medida);
+}
+
+.chamadaAcao {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque); /* alvo de toque de 44px */
+  padding: 0 var(--e-3);
+  border: var(--fio) solid var(--preto);
+  font-size: var(--fs-texto);
+  color: var(--preto);
+  transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
+}
+
+.chamadaAcao:hover {
+  background: var(--preto);
+  color: var(--branco);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chamadaAcao { transition: none; }
+}

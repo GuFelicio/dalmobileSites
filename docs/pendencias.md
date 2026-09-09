@@ -6,22 +6,44 @@ Quem resolver um item, apaga daqui e registra no `CHANGELOG.md`.
 
 ---
 
-## 1. Duas páginas institucionais ainda não existem
+## 1. Os textos institucionais são RASCUNHO e travam o deploy
 
-`/a-loja`, `/privacidade` e a 404 foram construídas. **Nenhum link do site
-aponta hoje para rota inexistente** — e um teste varre cinco páginas e falha se
-voltar a apontar.
+Todas as rotas do mapa existem: `/`, `/ambientes`, `/ambientes/[slug]`,
+`/a-loja`, `/a-dalmobile`, `/arquitetos`, `/privacidade` e a 404. **Nenhum link
+do site aponta para rota inexistente**, e um teste varre cinco páginas e falha
+se voltar a apontar.
 
-Faltam duas, ambas da Fase 7, e ambas **dependem de texto que não temos**:
+Mas `/a-dalmobile` e `/arquitetos` foram escritas **sem entrevista com a loja**,
+a partir só do que o `CLAUDE.md` afirma. São rascunho, e
+`conteudo/institucional/*.md` traz `confirmado: false` — a trava de deploy
+recusa publicar enquanto for assim.
 
-| Rota | O que precisa | Fase |
-|---|---|---|
-| `/a-dalmobile` | institucional, processo, números da fábrica, FAQ | 7 |
-| `/arquitetos` | proposta de parceria e a lista de arquitetos parceiros | 7 |
+### O que alguém da loja precisa fazer
 
-Enquanto não existirem, **não são linkadas** — o menu tem só "Ambientes" e
-"A loja". O `CLAUDE.md` proíbe CTA sem destino real, e elas estavam dando 404
-no menu e no rodapé de toda página.
+1. **Ler cada parágrafo** de `conteudo/institucional/a-dalmobile.md` e
+   `arquitetos.md` e corrigir o que não for verdade.
+2. **Preencher os 16 campos `PENDENTE`.** Cada um é uma promessa ao cliente:
+
+| Campo | O que é |
+|---|---|
+| `processo[].prazo` (5) | prazo de cada etapa, em dias. Ninguém no Vale publica isso |
+| `garantia.anos` e `.certificado` | prazo de garantia e link do certificado |
+| `numeros[].valor` (4) | a faixa de números: anos, projetos, cidades, equipe |
+| `faq[].resposta` (3) | quanto tempo leva, o que a garantia cobre, se atende fora da cidade |
+| `fabrica.foto` | foto da fábrica — nenhum concorrente do Vale mostra a sua |
+| `parceria[1].prazo` | prazo de resposta a orçamento de escritório |
+
+3. **Mudar `confirmado` para `true`** nos dois arquivos.
+
+> **Campo pendente não vira buraco na página: ele é OMITIDO.** A faixa de
+> números não aparece, os prazos não aparecem, e três das seis perguntas do FAQ
+> ficam de fora. Um teste falha se a palavra "PENDENTE" chegar ao HTML.
+
+### A lista de arquitetos parceiros está vazia, de propósito
+
+`parceiros: []` em `arquitetos.md`. Publicar nome de terceiro exige
+**autorização por escrito de cada um**, e ela vale por projeto, não uma vez só.
+Depende também de os cases existirem.
 
 > **Nenhum número da fábrica vai ao ar sem confirmação da loja** — anos, prazo,
 > garantia, quantidade de projetos. Sem confirmação, usar formulação verdadeira
