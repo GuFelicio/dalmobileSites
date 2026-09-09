@@ -60,6 +60,14 @@
      dá 6,02:1. Use --cinza para faixa e superfície, este para texto. */
   --cinza-texto: var(--c-cinza-texto);
 
+  /* Fio que separa uma faixa da superfície vizinha.
+     TRANSPARENTE na paleta neutra, de propósito: ali o cinza (#9e9b95) já
+     separa do papel em 2,52 e o fio seria ruído. Na paleta palha a faixa é
+     quase branca e separa em 1,02 — o fio é o que a torna uma faixa.
+     É a separação que o CLAUDE.md prescreve: "por fio de 1px e por espaço,
+     zero sombra". */
+  --fio-sup: transparent;
+
   /* Não existe cor de acento. Se faltar destaque, a resposta é escala
      ou troca de superfície. Único desvio previsto: verde e vermelho de
      sistema em erro e sucesso de formulário (Fase 7).                  */
@@ -166,18 +174,19 @@
    Trocar estes quatro valores troca o site do litoral inteiro.
    ------------------------------------------------------------------ */
 :root[data-paleta="palha"] {
-  /* O painel do hero pousa SOBRE A FOTO, então pode ser quase branco: o que
-     o separa é a imagem atrás, não o fundo da página.                      */
-  --c-cinza-painel: #fff4eb;  /* painel sólido do hero — 14,93:1 com a tinta */
-
-  /* Faixa, rodapé e tiras de chamada encostam no papel (#f5f4f0). Em
-     #fff4eb elas separariam do papel em 1,02 — ou seja, sumiriam dentro da
-     página. Este tom é a MESMA família, dois passos mais fundo, e separa em
-     1,28. Para efeito de comparação, o cinza da paleta neutra separa em 2,52. */
-  --c-cinza:        #eed5c1;  /* faixas, rodapé, tiras de chamada           */
+  /* Uma cor só para toda a família: painel do hero, faixas, rodapé e tiras
+     de chamada. 14,93:1 com a tinta por cima.                              */
+  --c-cinza:        #fff4eb;
+  --c-cinza-painel: #fff4eb;
 
   --c-cinza-texto:  #5f5847;  /* texto de apoio sobre papel — 6,42:1        */
   --c-linha:        #e7d8c9;  /* fio sobre claro, estado desativado         */
+
+  /* A faixa é quase branca e separa do papel em apenas 1,02 — sozinha, ela
+     sumiria dentro da página. É ESTE FIO que a torna uma faixa. O peso foi
+     calibrado no fio da paleta neutra, que tem 1,80 contra a sua superfície;
+     este tem 1,83 contra #fff4eb.                                          */
+  --fio-sup:        #cdb49a;
 }
 
 /* ====================================================================

@@ -23,6 +23,10 @@
   --sup-fg: var(--preto);
   background: var(--sup-bg);
   color: var(--sup-fg);
+  /* Fio de separação. Transparente na paleta neutra, onde o próprio cinza já
+     separa do papel; visível na paleta palha, onde a faixa é quase branca e
+     sem ele sumiria dentro da página. Ver --fio-sup em app/tokens.css. */
+  border-block: var(--fio) solid var(--fio-sup);
 }
 
 /* Papel — institucional, arquitetos, a loja, ambientes, FAQ, 404. O texto manda. */

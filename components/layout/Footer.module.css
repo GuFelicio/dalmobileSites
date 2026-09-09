@@ -3,6 +3,10 @@
   background: var(--cinza);
   color: var(--preto);
   padding: var(--e-secao) var(--pad-lateral) var(--e-4);
+  /* Fio de separação — ver .cinza em Section.module.css e --fio-sup em
+     app/tokens.css. Sem ele, o rodapé da paleta palha encosta no papel sem
+     nenhuma borda visível. */
+  border-top: var(--fio) solid var(--fio-sup);
 }
 
 /* Mobile: colunas empilhadas, uma sempre. */

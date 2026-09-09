@@ -19,11 +19,16 @@ componente foi tocado**: os nomes semânticos não mudaram.
 - `app/tokens.css` ganhou `:root[data-paleta="palha"]` com quatro valores.
   Continua sendo o único arquivo do projeto com cor literal.
 
-  O painel do hero usa **`#fff4eb`**, a cor escolhida pelo cliente. A faixa e o
-  rodapé usam **`#eed5c1`**, a mesma família dois passos mais funda: eles
-  encostam no papel (`#f5f4f0`), e em `#fff4eb` separariam em **1,02** — ou
-  seja, sumiriam dentro da página. O painel pode ser quase branco porque pousa
-  **sobre a foto**, e o que o separa é a imagem atrás.
+  A família inteira usa **`#fff4eb`**: painel do hero, faixas, rodapé e tiras
+  de chamada. 14,93:1 com a tinta por cima.
+
+  **A separação passou a ser por fio, não por contraste de fundo** — que é o
+  que o `CLAUDE.md` prescreve: *"separação por fio de 1px e por espaço, zero
+  sombra"*. A faixa quase branca separa do papel em apenas **1,02** e sozinha
+  sumiria dentro da página; é o fio que a torna uma faixa. Token novo,
+  `--fio-sup`: **transparente** na paleta neutra, onde o cinza já separa em
+  2,52 e o fio seria ruído; **`#cdb49a`** na palha, com peso calibrado no fio
+  da paleta neutra (1,80 contra a sua superfície; este tem 1,83).
 - `config/tipos.ts` ganhou `paleta: "neutra" | "palha"`. O config escolhe
   **pelo nome** — o hex nunca sai de `tokens.css`.
 - O `<html>` carrega `data-paleta`, vindo do config da unidade.
