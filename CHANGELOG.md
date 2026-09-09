@@ -8,6 +8,35 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [1.0.0-rc] — 2026-09-09
+
+### Fase 9 — verificação cruzada e documentação completa
+
+**As nove fases estão construídas.** O que falta para publicar não é código.
+
+**Verificação cruzada, nos dois builds**
+
+| | SJC | Caraguá |
+|---|---|---|
+| Cidade da outra unidade em `dist/` | **0** | **0** |
+| Paleta | neutra | palha |
+| URLs no sitemap | 13 | 10 |
+| Fotos no sitemap | 36 | 9 |
+
+**`docs/decisoes.md` completo** — 33 entradas. Entraram as seis de fundação que
+a Fase 9 exigia e que existiam só no `CLAUDE.md`, nunca como decisão registrada:
+um repositório para dois sites, sem CMS, sem blog na v1, Krub e só Krub, sem
+cor de acento, e a foto que nunca é escurecida. Cada uma com o porquê e o que
+foi descartado — o log existe para ninguém as desfazer de boa-fé.
+
+**`README.md` completo** — como rodar cada unidade, como o conteúdo funciona,
+a tabela de comando por projeto do Workers Builds, e a seção de verificação em
+`workerd` com o laço de `curl` pronto.
+
+**Responsividade** confirmada pelo cliente nas seis larguras, nos dois sites.
+
+---
+
 ## [0.9.0] — 2026-09-09
 
 ### Fase 8 — o site existe para o Google

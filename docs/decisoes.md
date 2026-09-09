@@ -6,6 +6,150 @@ boa-fé, por não saber que era decisão.
 
 Formato: **data · o que · por quê · o que foi descartado**.
 
+> **As seis entradas abaixo registram decisões tomadas antes do código, no
+> `CLAUDE.md` e no briefing.** Estão aqui porque o log serve para que ninguém as
+> desfaça de boa-fé daqui a seis meses, por não saber que eram decisão.
+
+---
+
+## Fundação · Um repositório gera os dois sites
+
+**Decisão.** Um código, dois builds, dois domínios. Não são dois projetos, nem
+um projeto com dois temas em runtime.
+
+**Por quê.** O site anterior eram dois repositórios, e foi assim que Caraguá foi
+ao ar indexado com *"Móveis Planejados em São José dos Campos"*: alguém copiou
+o de SJC e esqueceu de trocar. Com um repositório, uma correção de layout ou de
+acessibilidade chega aos dois sites no mesmo commit, e a diferença entre eles
+fica confinada a `config/` — onde é visível, tipada e testada.
+
+**O que isso obriga.** Nunca duplicar componente, estilo ou texto por unidade.
+Se algo precisa ser diferente, vira campo no config. A paleta "palha" de Caraguá
+segue essa regra: um campo, não um segundo CSS.
+
+**Descartado.** Dois repositórios (é o erro original) e um site só servindo as
+duas cidades (cada unidade tem endereço, telefone e acervo próprios, e o Google
+precisa de um domínio por praça para a busca local funcionar).
+
+---
+
+## Fundação · Sem CMS: o conteúdo é Markdown no repositório
+
+**Decisão.** Fotos em `public/fotos/`, textos em `conteudo/**/*.md`. Nenhum
+painel de administração, nenhum banco.
+
+**Por quê.** O acervo muda poucas vezes por mês — alguns projetos novos por
+trimestre. Um CMS cobraria por isso o ano inteiro: mensalidade, um serviço a
+mais para cair, uma conta a mais para alguém perder a senha, e latência por
+requisição num site cuja prioridade é foto chegando rápido no 4G.
+
+Com Markdown no repositório, o conteúdo é **versionado junto com o código**:
+dá para ver quem mudou o quê e voltar atrás. E a validação roda no build —
+campo faltando quebra a publicação com uma mensagem que diz o que fazer, em
+vez de ir ao ar torto.
+
+**O custo, que é real.** Publicar um projeto exige mexer em arquivo e rodar
+comandos. Por isso `docs/adicionar-ambiente.md` e `docs/adicionar-projeto.md`
+são escritos para quem não programa, e são os documentos mais importantes do
+repositório.
+
+**Descartado.** CMS hospedado (custo recorrente e dependência externa para um
+acervo que quase não muda) e CMS próprio (seria o produto, não o site).
+
+---
+
+## Fundação · Sem blog na versão 1
+
+**Decisão.** O site não tem blog nem seção de novidades.
+
+**Por quê.** Blog só funciona com cadência — sem publicação regular, ele
+envelhece à vista, e um "último post: há 14 meses" no rodapé diz sobre a
+empresa exatamente o contrário do que se queria dizer. A loja não tem hoje
+quem escreva com regularidade.
+
+E o tráfego orgânico que um blog buscaria já tem lugar melhor: as **páginas de
+ambiente**, que ranqueiam para "cozinha planejada em São José dos Campos" com
+foto de projeto executado — que é o ativo que a concorrência não tem.
+
+**Quando reabrir.** Se a loja passar a ter quem escreva toda semana. Aí o blog
+entra como pasta nova em `conteudo/`, sem tocar em arquitetura.
+
+**Descartado.** Blog com dois ou três posts de lançamento (é o cenário que
+envelhece) e blog terceirizado com texto genérico de SEO (contradiz a regra de
+que o ativo é projeto executado e fotografado de verdade).
+
+---
+
+## Fundação · Krub, e só Krub
+
+**Decisão.** Uma família tipográfica em todo o site, self-hosted via
+`@fontsource/krub`, nos pesos 300, 400 e 600.
+
+**Por quê.** A hierarquia do site vem de **escala e tracking**, não de misturar
+fontes nem de engordar peso — é o que sustenta um desenho quieto, em que a foto
+é o que chama atenção. Uma segunda família resolveria por contraste tipográfico
+o que aqui se resolve por tamanho e espaço, e roubaria a atenção da imagem.
+
+Self-hosted, e não Google Fonts por CDN: a fonte vem do bundle, sem requisição
+a terceiro, sem salto de layout e sem depender de um domínio externo estar no ar.
+Só três pesos, porque cada peso é um arquivo a baixar num site que abre por 4G.
+
+**A regra que fica.** Se algo parecer precisar de outra fonte, o problema é de
+escala, peso ou tracking. Nem para ícone, nem para número: os ícones são SVG
+inline escritos à mão, justamente por isso.
+
+**Descartado.** Uma segunda família para títulos (contraste que a escala já
+resolve), Google Fonts por CDN (requisição a terceiro e ponto de falha) e
+carregar os sete pesos da família (peso morto no 4G).
+
+---
+
+## Fundação · Não existe cor de acento
+
+**Decisão.** A paleta é acromática. Não há uma cor de destaque para botão, link
+ou chamada. Único desvio previsto: verde e vermelho de sistema em erro e
+sucesso de formulário, no menor tamanho possível.
+
+**Por quê.** O site é 90% foto de marcenaria, e marcenaria é cor: madeira,
+laca, pedra. Uma cor de acento entra em competição com o produto em toda tela —
+e perde, ou pior, ganha. Sem acento, a única coisa colorida na página é a foto.
+
+**O que substitui o acento.** Quando faltar destaque, a resposta é **escala ou
+troca de superfície**, nunca cor nova. É por isso que existem três superfícies
+(preto, cinza, papel) em vez de uma paleta de destaques.
+
+**A tensão registrada.** A paleta "palha" de Caraguá é cromática. Ela passa
+porque é **superfície**, não acento — não há elemento colorido chamando
+atenção, e sim um fundo que mudou de temperatura. Ver a entrada de 09/09.
+
+**Descartado.** Um acento tirado da marca (competiria com a foto) e usar cor
+para hierarquia de botão (é o que escala e superfície fazem aqui).
+
+---
+
+## Fundação · A foto nunca é escurecida
+
+**Decisão.** Nenhum filtro, nenhum overlay, nenhuma sombra sobre foto. Quando
+precisar de texto sobre imagem, usa-se **painel sólido ancorado** — como o do
+hero da home —, não véu na foto inteira.
+
+**Por quê.** O ativo do cliente é projeto executado, fotografado por
+profissional, com o arquiteto que assinou. Escurecer a foto para caber um
+título joga fora exatamente aquilo pelo qual se pagou, e que a concorrência
+não tem. O arquiteto que abre o site reconhece na hora uma foto tratada.
+
+**O que isso obriga no desenho.** O título vive numa faixa **abaixo** da foto,
+ou num painel sólido ao lado dela. É mais difícil de compor do que jogar um
+gradiente por cima — e é a razão de o desenho ter as três superfícies.
+
+**A dívida que resta.** `.synthesis-project-featured::after` ainda põe um
+gradiente sobre a foto grande da vitrine da home. Veio do estudo, sobreviveu
+porque a home é provisória, e **precisa sair quando a home definitiva for
+construída**.
+
+**Descartado.** Gradiente sob o texto (é o véu com outro nome) e caixa
+translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
+
 ---
 
 ## 2026-09-09 · Caraguatatuba usa a paleta "palha"; SJC segue na neutra

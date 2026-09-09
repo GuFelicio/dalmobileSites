@@ -2,8 +2,8 @@
 
 Dois sites (São José dos Campos e Caraguatatuba) gerados de **um repositório só**.
 
-> Este README está no mínimo necessário. A Fase 9 o completa com publicação e
-> operação. Enquanto isso, a fonte da verdade é o [`CLAUDE.md`](CLAUDE.md).
+A fonte da verdade das regras é o [`CLAUDE.md`](CLAUDE.md). Em caso de conflito
+entre documentos, ele vence.
 
 ## Documentos
 
@@ -29,23 +29,82 @@ Em caso de conflito entre os documentos, **o `CLAUDE.md` vence**.
 ## Como rodar
 
 ```bash
-npm install     # instala as dependências
-npm run dev     # servidor de desenvolvimento (Vite + Cloudflare)
+npm install            # instala as dependências
+
+npm run dev            # desenvolvimento — São José dos Campos
+npm run dev:caragua    # desenvolvimento — Caraguatatuba
+
 npm run build:sjc      # build de São José dos Campos
 npm run build:caragua  # build de Caraguatatuba
-npm run pendencias     # o que falta a loja confirmar
-npm run deploy:sjc     # publica (trava se houver pendência)
-npm test        # build + testes
-npm run lint    # ESLint
+
+npm test               # build + a suíte inteira
+npm run lint           # ESLint
+npm run workerd        # roda o build no motor da Cloudflare, em localhost:8799
+
+npm run pendencias     # o que ainda falta a loja confirmar
+npm run deploy:sjc     # publica SJC (recusa se houver pendência)
+npm run deploy:caragua # publica Caraguatatuba
 ```
+
+### Antes de publicar, rode em `workerd`
+
+A suíte roda o Worker **em Node**, onde `fs` existe. O runtime da Cloudflare é
+o `workerd`, que **não tem sistema de arquivos**. Dois deploys já caíram por
+essa diferença, com a suíte 100% verde.
+
+```bash
+npm run build:sjc
+npm run workerd        # em outro terminal, confira as rotas:
+```
+
+```bash
+for r in / /ambientes /ambientes/cozinha /a-loja /a-dalmobile /arquitetos \
+         /privacidade /sitemap.xml /robots.txt; do
+  printf "%s %s\n" "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8799$r)" "$r"
+done
+```
+
+Tudo 200. Qualquer 500 aqui é erro que só apareceria em produção.
+Ver [`tests/README-workerd.md`](tests/README-workerd.md).
+
+## Como o conteúdo funciona
+
+| Onde | O quê |
+|---|---|
+| `public/fotos/<unidade>/<ambiente>/` | as fotos. A pasta é **dado**: o build confere |
+| `conteudo/ambientes/*.md` | título e `alt` de cada foto, texto do ambiente |
+| `conteudo/institucional/*.md` | textos de `/a-dalmobile` e `/arquitetos` |
+| `conteudo/projetos/*.md` | os cases — **sem conteúdo hoje** |
+| `config/sjc.ts` e `config/caragua.ts` | tudo que difere entre as duas lojas |
+
+O build lê e valida esses arquivos e escreve `conteudo/gerado.json`, que é o que
+o Worker carrega. **Campo faltando quebra o build**, com uma mensagem dizendo o
+que fazer. Nada disso é lido em tempo de execução: o Worker não tem disco.
+
+Para publicar foto nova, ver
+[`docs/adicionar-ambiente.md`](docs/adicionar-ambiente.md) — é escrito para quem
+não programa.
 
 ## Publicação
 
-O site roda em **Cloudflare Workers**, na conta da agência. O `vinext build`
-gera `dist/server/wrangler.json` já pronto, e o `npm run deploy` o entrega.
+O site roda em **Cloudflare Workers**, na conta da agência, em **dois projetos
+do Workers Builds** — um por unidade —, que constroem a cada push na `main`.
 
-Na prática a publicação é automática: o repositório está conectado ao
-Cloudflare Workers Builds, que constrói e publica a cada push na `main`.
+Cada projeto precisa do comando de build da sua unidade:
+
+| Projeto | Comando de build |
+|---|---|
+| `dalmobile-sjc` | `npm run build:sjc` |
+| `dalmobile-caragua` | `npm run build:caragua` |
+
+> **`npm run build` puro não serve em CI.** Sem a variável `UNIDADE`, ele cairia
+> no padrão e publicaria São José dos Campos — inclusive no projeto de
+> Caraguatatuba, em silêncio. Por isso o build **recusa rodar em CI** sem ela,
+> com uma mensagem dizendo o que configurar.
+
+Para publicar da sua máquina, `npm run deploy:sjc` ou `npm run deploy:caragua`.
+Os dois rodam `npm run pendencias` antes e **recusam publicar** enquanto houver
+dado da loja por confirmar.
 
 > **Se o projeto estiver numa pasta do Google Drive**, aponte `node_modules` e
 > `dist` para fora dela, senão o build não termina — o Drive tenta sincronizar
