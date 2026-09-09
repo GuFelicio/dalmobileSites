@@ -8,6 +8,34 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.7.2] — 2026-09-09
+
+### O slider voltou à composição do estudo
+
+A primeira versão virou uma tira de cards iguais de 3:2 — ficou grosseira e
+perdeu o desenho aprovado.
+
+Agora cada passo do slider é a **composição original**: a foto grande com o
+título por cima e o par de fotos abaixo. O que muda é que o conjunto se repete
+para o lado, com o resto do acervo na mesma forma. A aparência vem das classes
+`synthesis-project*` do `globals.css`, que é o desenho que o cliente aprovou —
+o componente só as agrupa de três em três e faz rolar.
+
+**As fotos passaram a ser intercaladas entre os ambientes.** Não é enfeite:
+agrupadas por ambiente, os quatro primeiros conjuntos de SJC seriam só cozinha.
+Intercalando, cada conjunto mostra cozinha, quarto e sala — que é o que faz
+querer passar para o lado. A ordem de entrada continua a editorial de
+`lib/ambientes.ts`, então a primeira foto do site é sempre a da cozinha.
+
+12 conjuntos em SJC, 3 em Caraguá. Um contador "1 de 12" diz onde a pessoa
+está, em vez de bolinhas — com doze conjuntos, um ponto por conjunto viraria
+ruído. Uma sobra de uma ou duas fotos volta para o conjunto anterior, para não
+existir passo capenga.
+
+Verificado em `workerd`, não só em Node.
+
+---
+
 ## [0.7.1] — 2026-09-09
 
 ### Correção: o deploy quebrava porque o Worker não tem sistema de arquivos

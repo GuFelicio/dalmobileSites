@@ -1,6 +1,6 @@
 /* Slider da vitrine da home. Ver components/midia/SliderDeFotos.tsx.
-   Rolagem nativa com scroll-snap: sem biblioteca de carrossel, que o
-   CLAUDE.md proíbe instalar, e funcionando sem JavaScript. */
+   Só o trilho e os controles vivem aqui: a aparência de cada cartão vem das
+   classes `synthesis-project*` do globals.css, que é o desenho aprovado. */
 
 .moldura {
   position: relative;
@@ -11,18 +11,11 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: var(--e-3);
 
-  /* Rola DENTRO do contêiner, nunca no body — regra dura do CLAUDE.md.
-     A margem negativa mais o padding fazem a primeira foto começar alinhada
-     ao texto e a última poder sangrar até a borda. */
+  /* Rola DENTRO do contêiner, nunca no body — regra dura do CLAUDE.md. */
   overflow-x: auto;
-  margin-inline: calc(var(--pad-lateral) * -1);
-  padding-inline: var(--pad-lateral);
-
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--pad-lateral);
-  scrollbar-width: none; /* Firefox: a barra some, as setas e o dedo bastam */
+  scrollbar-width: none;            /* Firefox: as setas e o dedo bastam */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -31,127 +24,78 @@
 }
 
 .trilho:focus-visible {
-  outline: 2px solid var(--sobre-escuro);
-  outline-offset: 4px;
+  outline: 2px solid var(--preto);
+  outline-offset: 6px;
 }
 
-.item {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-
-  /* 86vw no telefone deixa uma fresta da próxima foto aparecendo: é o que
-     avisa, sem texto, que dá para arrastar. */
-  width: 86vw;
-}
-
-/* Tablet: duas por vez. É a faixa que quebra — três aqui espremeria a foto
-   a ponto de perder o que ela mostra. */
-@media (min-width: 601px) {
-  .item {
-    width: 46vw;
-  }
-}
-
-/* Desktop: três por vez, com folga. */
-@media (min-width: 1025px) {
-  .item {
-    width: min(32vw, 420px);
-  }
-}
-
-.link {
-  display: block;
-}
-
-.foto {
-  display: block;
+/* Cada conjunto ocupa a largura toda e é um passo do slider: a foto grande
+   com o par abaixo, que é a composição do estudo repetindo. */
+.conjunto {
+  flex: 0 0 100%;
   width: 100%;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  transition: transform var(--mov-hover) var(--mov-ease);
+  scroll-snap-align: start;
+  /* A calha entre um conjunto e o outro sai daqui, e não de `gap`, para o
+     snap parar exatamente na borda do conjunto e não no meio da calha. */
+  padding-right: var(--e-3);
+  box-sizing: border-box;
 }
 
-.link:hover .foto {
-  transform: scale(1.02);
-}
-
-.rotulo {
-  display: block;
-  font-size: var(--fs-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: var(--tr-rotulo);
-  text-transform: uppercase;
-  color: var(--sobre-escuro-55);
-  margin-top: var(--e-2);
-}
-
-.titulo {
-  display: block;
-  font-size: var(--fs-subtitulo);
-  font-weight: var(--peso-normal);
-  letter-spacing: var(--tr-subtitulo);
-  line-height: var(--lh-subtitulo);
-  color: var(--sobre-escuro);
-  margin-top: var(--e-1);
-}
-
-.credito {
-  display: block;
-  font-size: var(--fs-rotulo);
-  letter-spacing: var(--tr-rotulo);
-  text-transform: uppercase;
-  color: var(--sobre-escuro-45);
-  margin-top: var(--e-1);
+.conjunto:last-child {
+  padding-right: 0;
 }
 
 /* ---- Controles ------------------------------------------------------- */
 
 .controles {
   display: flex;
-  gap: var(--e-1);
-  margin-top: var(--e-3);
+  align-items: center;
+  gap: var(--e-2);
+  margin-top: var(--e-4);
 }
 
-/* No telefone o dedo já resolve, e duas setas só ocupariam espaço que a
-   foto quer. */
-@media (max-width: 600px) {
-  .controles {
-    display: none;
-  }
+.botoes {
+  display: flex;
+  gap: var(--e-1);
 }
 
 .botao {
-  width: var(--toque);  /* 44px de alvo de toque */
+  width: var(--toque);   /* 44px de alvo de toque */
   height: var(--toque);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: var(--fio) solid var(--sobre-escuro-fio);
+  border: var(--fio) solid var(--cinza-clr);
   border-radius: 0;
   background: transparent;
-  color: var(--sobre-escuro);
+  color: var(--preto);
   font-size: var(--fs-texto);
   cursor: pointer;
   transition: border-color var(--mov-fio) var(--mov-ease);
 }
 
 .botao:hover:not(:disabled) {
-  border-color: var(--sobre-escuro);
+  border-color: var(--preto);
 }
 
 .botao:disabled {
-  color: var(--sobre-escuro-45);
-  border-color: var(--sobre-escuro-fio-fr);
+  color: var(--cinza);
+  border-color: var(--cinza-clr);
   cursor: default;
 }
 
+.contagem {
+  margin: 0;
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+  font-variant-numeric: tabular-nums;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .foto,
   .botao {
     transition: none;
-  }
-  .link:hover .foto {
-    transform: none;
   }
   .trilho {
     scroll-behavior: auto;

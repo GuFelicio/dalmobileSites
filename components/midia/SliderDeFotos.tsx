@@ -1,30 +1,27 @@
 "use client";
 
 /**
- * SliderDeFotos — a vitrine que passa para o lado.
+ * SliderDeFotos — a vitrine da home.
  *
- * O que é: a galeria horizontal da home. Mostra todas as fotos do acervo
- * daquela unidade, com rótulo do ambiente e título de impacto sob cada uma.
+ * O que é: a composição do estudo — uma foto grande com o título por cima e um
+ * par de fotos menores abaixo — repetindo para o lado. Cada passo do slider é
+ * um conjunto novo, na mesma forma.
  *
  * Onde é usado: app/page.tsx, na seção "Projetos que permanecem".
  *
  * Props:
- *   fotos   as fotos a exibir, já filtradas pela unidade do build
+ *   fotos     as fotos do acervo daquela unidade, já filtradas e ordenadas
  *   idRotulo  id do <h2> que nomeia a região, para leitor de tela
  *
- * COMO ROLA, E POR QUÊ ASSIM: a rolagem é nativa, com `overflow-x: auto` e
- * `scroll-snap`. Não é biblioteca de carrossel — o CLAUDE.md proíbe instalar
- * uma — e não é JavaScript reimplementando arrastar. Com isso:
+ * A APARÊNCIA VEM DAS CLASSES DO ESTUDO (`synthesis-project*`, em
+ * globals.css), de propósito: é o desenho que o cliente aprovou. Este
+ * componente só as agrupa de três em três e faz o conjunto rolar.
  *
- *   · funciona SEM JavaScript, com o dedo no celular e com a roda do mouse
- *   · o teclado navega de foto em foto, porque cada uma tem link focável
- *   · rola dentro do contêiner, nunca no body — regra dura do CLAUDE.md
- *
- * Os botões só acrescentam conforto no desktop, onde não há dedo. Eles são o
- * único motivo de este componente ser "use client".
- *
- * NÃO passa sozinho. Carrossel automático é proibido pelo CLAUDE.md, e com
- * razão: rouba a leitura de quem está olhando uma foto.
+ * COMO ROLA: `overflow-x` com `scroll-snap` nativo, um conjunto por vez. Não é
+ * biblioteca de carrossel — o CLAUDE.md proíbe instalar uma. Funciona sem
+ * JavaScript, aceita o dedo no celular e rola dentro do contêiner, nunca no
+ * body. NÃO passa sozinho: carrossel automático é proibido, e rouba a leitura
+ * de quem está olhando uma foto.
  */
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -42,6 +39,55 @@ export type FotoDoSlider = {
   arquiteto: string | null;
 };
 
+/** Uma foto grande e duas menores: a composição original do estudo. */
+const POR_CONJUNTO = 3;
+
+function agrupar(fotos: FotoDoSlider[]): FotoDoSlider[][] {
+  const conjuntos: FotoDoSlider[][] = [];
+  for (let i = 0; i < fotos.length; i += POR_CONJUNTO) {
+    const conjunto = fotos.slice(i, i + POR_CONJUNTO);
+    // Um conjunto com menos de três fica torto na composição: a última sobra
+    // volta para o conjunto anterior em vez de virar um passo capenga.
+    if (conjunto.length < POR_CONJUNTO && conjuntos.length > 0) {
+      conjuntos[conjuntos.length - 1].push(...conjunto);
+    } else {
+      conjuntos.push(conjunto);
+    }
+  }
+  return conjuntos;
+}
+
+function Cartao({
+  foto,
+  numero,
+  destaque,
+}: {
+  foto: FotoDoSlider;
+  numero: number;
+  destaque: boolean;
+}) {
+  const rotulo = `${String(numero).padStart(2, "0")} / ${foto.ambienteNome.toUpperCase()}`;
+  return (
+    <article className={`synthesis-project ${destaque ? "synthesis-project-featured" : ""}`}>
+      <Foto
+        src={foto.src}
+        alt={foto.alt}
+        /* A grande ocupa a largura toda; as do par, metade a partir do
+           tablet — é o que a composição do estudo já fazia. */
+        sizes={destaque ? "100vw" : "(max-width: 700px) 100vw, 50vw"}
+        prioridade={numero <= 3}
+      />
+      <div>
+        <span>{rotulo}</span>
+        <h3>{foto.titulo}</h3>
+        <Link href={`/ambientes/${foto.ambienteSlug}`}>
+          Ver {foto.ambienteNome.toLowerCase()} <span aria-hidden="true">↗</span>
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 export default function SliderDeFotos({
   fotos,
   idRotulo,
@@ -49,96 +95,88 @@ export default function SliderDeFotos({
   fotos: FotoDoSlider[];
   idRotulo: string;
 }) {
+  const conjuntos = agrupar(fotos);
   const trilho = useRef<HTMLUListElement>(null);
+  const [atual, setAtual] = useState(0);
   const [noComeco, setNoComeco] = useState(true);
-  const [noFim, setNoFim] = useState(false);
+  const [noFim, setNoFim] = useState(conjuntos.length <= 1);
 
-  // Desabilita a seta que não tem para onde ir, em vez de deixá-la clicável
-  // sem efeito. Uma margem de 2px absorve o arredondamento do navegador.
-  const conferirLimites = useCallback(() => {
+  const conferir = useCallback(() => {
     const el = trilho.current;
     if (!el) return;
     setNoComeco(el.scrollLeft <= 2);
     setNoFim(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+    setAtual(Math.round(el.scrollLeft / Math.max(1, el.clientWidth)));
   }, []);
 
   useEffect(() => {
-    conferirLimites();
+    conferir();
     const el = trilho.current;
     if (!el) return;
-    el.addEventListener("scroll", conferirLimites, { passive: true });
-    window.addEventListener("resize", conferirLimites);
+    el.addEventListener("scroll", conferir, { passive: true });
+    window.addEventListener("resize", conferir);
     return () => {
-      el.removeEventListener("scroll", conferirLimites);
-      window.removeEventListener("resize", conferirLimites);
+      el.removeEventListener("scroll", conferir);
+      window.removeEventListener("resize", conferir);
     };
-  }, [conferirLimites]);
+  }, [conferir]);
 
   const passar = (direcao: 1 | -1) => {
     const el = trilho.current;
     if (!el) return;
-    // Anda uma foto por clique: a largura do primeiro item mais a calha.
-    const item = el.querySelector("li");
-    const passo = item ? item.getBoundingClientRect().width + 24 : el.clientWidth * 0.8;
     const suave = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollBy({ left: passo * direcao, behavior: suave ? "smooth" : "auto" });
+    el.scrollBy({ left: el.clientWidth * direcao, behavior: suave ? "smooth" : "auto" });
   };
+
+  if (conjuntos.length === 0) return null;
 
   return (
     <div className={estilos.moldura}>
-      <ul
-        className={estilos.trilho}
-        ref={trilho}
-        // A região é rolável e recebe foco, para quem navega por teclado
-        // conseguir rolá-la sem passar por todos os links.
-        tabIndex={0}
-        role="region"
-        aria-labelledby={idRotulo}
-      >
-        {fotos.map((foto, i) => (
-          <li key={foto.src} className={estilos.item}>
-            <Link href={`/ambientes/${foto.ambienteSlug}`} className={estilos.link}>
-              <Foto
-                src={foto.src}
-                alt={foto.alt}
-                /* No celular a foto ocupa quase a largura toda, com uma fresta
-                   da próxima aparecendo — é o que avisa que dá para arrastar.
-                   No desktop cabem três. */
-                sizes="(max-width: 600px) 86vw, (max-width: 1024px) 46vw, 32vw"
-                prioridade={i < 2}
-                className={estilos.foto}
-              />
-              <span className={estilos.rotulo}>{foto.ambienteNome}</span>
-              <span className={estilos.titulo}>{foto.titulo}</span>
-              {foto.edificio || foto.arquiteto ? (
-                <span className={estilos.credito}>
-                  {[foto.edificio, foto.arquiteto].filter(Boolean).join(" · ")}
-                </span>
+      <ul className={estilos.trilho} ref={trilho} tabIndex={0} role="region" aria-labelledby={idRotulo}>
+        {conjuntos.map((conjunto, iConjunto) => {
+          const [grande, ...par] = conjunto;
+          const base = iConjunto * POR_CONJUNTO;
+          return (
+            <li key={grande.src} className={estilos.conjunto}>
+              <Cartao foto={grande} numero={base + 1} destaque />
+              {par.length > 0 ? (
+                <div className="synthesis-project-pair">
+                  {par.map((foto, i) => (
+                    <Cartao key={foto.src} foto={foto} numero={base + i + 2} destaque={false} />
+                  ))}
+                </div>
               ) : null}
-            </Link>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
 
       <div className={estilos.controles}>
-        <button
-          type="button"
-          className={estilos.botao}
-          onClick={() => passar(-1)}
-          disabled={noComeco}
-          aria-label="Ver as fotos anteriores"
-        >
-          <span aria-hidden="true">←</span>
-        </button>
-        <button
-          type="button"
-          className={estilos.botao}
-          onClick={() => passar(1)}
-          disabled={noFim}
-          aria-label="Ver as próximas fotos"
-        >
-          <span aria-hidden="true">→</span>
-        </button>
+        <div className={estilos.botoes}>
+          <button
+            type="button"
+            className={estilos.botao}
+            onClick={() => passar(-1)}
+            disabled={noComeco}
+            aria-label="Ver o conjunto anterior"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+          <button
+            type="button"
+            className={estilos.botao}
+            onClick={() => passar(1)}
+            disabled={noFim}
+            aria-label="Ver o próximo conjunto"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+        {/* Diz onde a pessoa está sem inventar bolinhas: com doze conjuntos,
+            um indicador por ponto viraria ruído. */}
+        <p className={estilos.contagem} aria-live="polite">
+          {Math.min(atual + 1, conjuntos.length)} de {conjuntos.length}
+        </p>
       </div>
     </div>
   );

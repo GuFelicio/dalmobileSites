@@ -46,9 +46,14 @@ export default function Home() {
   const fotoProcesso = escolherFoto(ambientes, ["cozinha", "banheiro"], 7);
   const fotoContato = escolherFoto(ambientes, ["quartos", "sala-de-estar"], 5);
 
-  // TODAS as fotos do acervo desta unidade, achatadas para o slider e na
-  // ordem editorial de lib/ambientes.ts — cozinha e quartos primeiro.
-  const fotosDoSlider: FotoDoSlider[] = ambientes.flatMap((ambiente) =>
+  // TODAS as fotos do acervo desta unidade, INTERCALADAS entre os ambientes.
+  //
+  // Não é enfeite: o slider mostra três fotos por conjunto, e agrupadas por
+  // ambiente os quatro primeiros conjuntos seriam só cozinha. Intercalando,
+  // cada conjunto mostra cozinha, quarto e sala — que é o que faz a pessoa
+  // querer passar para o lado. A ordem de entrada continua sendo a editorial
+  // de lib/ambientes.ts, então a primeira foto do site é sempre a da cozinha.
+  const porAmbiente = ambientes.map((ambiente) =>
     ambiente.fotos.map((foto) => ({
       src: foto.src,
       titulo: foto.titulo,
@@ -59,6 +64,13 @@ export default function Home() {
       arquiteto: foto.arquiteto,
     })),
   );
+
+  const fotosDoSlider: FotoDoSlider[] = [];
+  for (let volta = 0; volta < Math.max(0, ...porAmbiente.map((f) => f.length)); volta++) {
+    for (const fotos of porAmbiente) {
+      if (fotos[volta]) fotosDoSlider.push(fotos[volta]);
+    }
+  }
 
   return (
     <div className="site site-synthesis">
