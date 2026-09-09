@@ -8,6 +8,48 @@ Formato: **data · o que · por quê · o que foi descartado**.
 
 ---
 
+## 2026-09-09 · O conteúdo é empacotado no build; o Worker não lê disco
+
+**Decisão.** `build/gerar-conteudo.mjs` lê e valida `conteudo/**/*.md` em Node,
+no build, e escreve `conteudo/gerado.json`. As páginas importam esse JSON por
+`lib/conteudo.ts`. **Nenhuma página em `app/` pode importar valor de
+`lib/projetos.ts`, `lib/ambientes-conteudo.ts` ou `lib/institucional.ts`** —
+esses três leem o disco e existem só para o build e para os testes.
+
+**Por que — e isto foi ao ar quebrado.** O runtime do Cloudflare Worker **não
+tem sistema de arquivos**. O deploy das duas unidades falhou com:
+
+```
+Uncaught Error: no such file or directory, readAll
+'/bundle/conteudo/institucional/a-dalmobile.md'
+```
+
+`/a-dalmobile` chamava `lerInstitucional()` em escopo de módulo, e a Cloudflare
+executa o topo do worker para validar. Mas o problema era maior que o erro
+mostrava: `/ambientes` e `/projetos` também liam disco, só que **dentro do
+componente** — teriam dado 500 a cada requisição em produção.
+
+**Por que os testes não pegaram, que é a parte que importa.** A suíte importa
+`dist/server/index.js` **em Node**, onde `fs` existe e `process.cwd()` é a raiz
+do projeto. Tudo passava. O ambiente de teste era mais permissivo que o de
+produção, e essa diferença é invisível até o deploy.
+
+Foi fechado com `tests/bundle-worker.test.mjs`, que **vasculha o bundle** que
+vai para a Cloudflare e falha se `readFileSync(`, `readdirSync(`, `gray-matter`
+ou `js-yaml` estiverem lá — mais uma contraprova de que o conteúdo empacotado
+chegou. Verificado reintroduzindo o bug: a suíte quebra.
+
+**Efeito colateral bom.** `gray-matter` e `js-yaml` deixaram de ir para o
+bundle do Worker. Eles só precisam existir no passo de build.
+
+**Descartado.** `import.meta.glob` com `?raw` para embutir o Markdown cru (o
+`gray-matter` continuaria no bundle, e a validação passaria a rodar a cada
+requisição em vez de uma vez no build) e mover o conteúdo para KV ou R2
+(dependência de serviço e latência por requisição, para dado que muda poucas
+vezes por mês).
+
+---
+
 ## 2026-09-09 · O site passa a ser organizado por ambiente, não por projeto
 
 **Decisão.** O conteúdo principal são as páginas de ambiente

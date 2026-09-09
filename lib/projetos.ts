@@ -178,26 +178,3 @@ export function todosOsProjetos(): Projeto[] {
   return arquivos.map(lerArquivo).sort((a, b) => b.ano - a.ano || a.titulo.localeCompare(b.titulo, "pt-BR"));
 }
 
-/** Filtra os projetos de uma unidade. Um projeto declara onde aparece. */
-export function filtrarPorUnidade(projetos: Projeto[], id: "sjc" | "caragua"): Projeto[] {
-  return projetos.filter((p) => p.unidades.includes(id));
-}
-
-/** Outros projetos no mesmo edifício. O diferencial trabalhando de novo. */
-export function outrosNoEdificio(projetos: Projeto[], projeto: Projeto, limite = 3): Projeto[] {
-  return projetos
-    .filter((p) => p.edificio === projeto.edificio && p.slug !== projeto.slug)
-    .slice(0, limite);
-}
-
-/** Os eixos de filtro do índice, já ordenados e sem repetição. */
-export function eixosDeFiltro(projetos: Projeto[]) {
-  const ambientes = new Set<string>();
-  const edificios = new Set<string>();
-  for (const p of projetos) {
-    p.ambientes.forEach((a) => ambientes.add(a));
-    edificios.add(p.edificio);
-  }
-  const ordenar = (s: Set<string>) => [...s].sort((a, b) => a.localeCompare(b, "pt-BR"));
-  return { ambientes: ordenar(ambientes), edificios: ordenar(edificios) };
-}

@@ -11,15 +11,14 @@
  * impede um projeto de uma unidade de aparecer no site da outra.
  */
 import { unidade } from "../config/derivados.ts";
-import {
-  filtrarPorUnidade,
-  outrosNoEdificio as outrosNoEdificioBase,
-  todosOsProjetos,
-  type Projeto,
-} from "./projetos.ts";
+// Do conteúdo EMPACOTADO, não do disco: o Worker não tem sistema de arquivos.
+// Ver lib/conteudo.ts.
+import { PROJETOS_PUBLICADOS } from "./conteudo.ts";
+import { filtrarPorUnidade, outrosNoEdificio as outrosNoEdificioBase } from "./filtros.ts";
+import type { Projeto } from "./projetos.ts";
 
 export function projetosDaUnidade(): Projeto[] {
-  return filtrarPorUnidade(todosOsProjetos(), unidade.id);
+  return filtrarPorUnidade(PROJETOS_PUBLICADOS, unidade.id);
 }
 
 export function projetoPorSlug(slug: string): Projeto | undefined {

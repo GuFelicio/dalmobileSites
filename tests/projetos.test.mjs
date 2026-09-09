@@ -7,7 +7,8 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import { NOMES_DE_AMBIENTE, ambientePorNome } from "../lib/ambientes.ts";
-import { eixosDeFiltro, filtrarPorUnidade, outrosNoEdificio, todosOsProjetos } from "../lib/projetos.ts";
+import { eixosDeFiltro, filtrarPorUnidade, outrosNoEdificio } from "../lib/filtros.ts";
+import { todosOsProjetos } from "../lib/projetos.ts";
 
 const raiz = fileURLToPath(new URL("..", import.meta.url));
 const projetos = todosOsProjetos();

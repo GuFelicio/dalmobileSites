@@ -22,7 +22,8 @@ import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
-import { eixosDeFiltro, type Projeto } from "../../lib/projetos.ts";
+import { eixosDeFiltro } from "../../lib/filtros.ts";
+import type { Projeto } from "../../lib/projetos.ts";
 import { projetosDaUnidade } from "../../lib/projetos-da-unidade.ts";
 import estilos from "./projetos.module.css";
 

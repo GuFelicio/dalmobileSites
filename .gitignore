@@ -34,3 +34,7 @@ public/fotos-geradas/
 # Ficam no Drive como arquivo morto. O que o site usa são as versões de
 # 2560px em public/fotos/, geradas a partir daqui uma vez só.
 imgs/
+
+# Conteúdo empacotado para o Worker, gerado por build/gerar-conteudo.mjs.
+# A fonte é conteudo/*/*.md, e ESSA sim é versionada.
+conteudo/gerado.json

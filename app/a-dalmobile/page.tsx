@@ -24,14 +24,11 @@ import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
 import { unidade } from "../../config/derivados.ts";
 import { ambientesDaUnidade, escolherFoto } from "../../lib/ambientes-da-unidade.ts";
-import {
-  ehPendente,
-  lerInstitucional,
-  type DadosDalmobile,
-} from "../../lib/institucional.ts";
+import { ehPendente } from "../../config/pendente.ts";
+import { institucional } from "../../lib/conteudo.ts";
 import estilos from "./a-dalmobile.module.css";
 
-const pagina = lerInstitucional<DadosDalmobile>("a-dalmobile");
+const pagina = institucional("a-dalmobile");
 
 export const metadata: Metadata = {
   title: `A Dalmóbile — móveis planejados em ${unidade.cidade}`,

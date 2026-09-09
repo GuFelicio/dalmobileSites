@@ -8,6 +8,36 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.7.1] — 2026-09-09
+
+### Correção: o deploy quebrava porque o Worker não tem sistema de arquivos
+
+Os dois deploys falhavam com `no such file or directory, readAll
+'/bundle/conteudo/institucional/a-dalmobile.md'`.
+
+**A causa.** O conteúdo era lido de `conteudo/**/*.md` com `readFileSync`, em
+tempo de execução. Isso funciona no `npm run dev` e **não existe** no runtime
+do Cloudflare Worker: só o JavaScript empacotado vai para lá.
+
+E era maior que o erro mostrava: `/a-dalmobile` quebrava no *deploy*, porque
+chamava a leitura em escopo de módulo; `/ambientes` e `/projetos` liam disco
+**dentro do componente** e teriam dado 500 a cada requisição em produção.
+
+**A correção.** `build/gerar-conteudo.mjs` lê e valida em Node, no build, e
+escreve `conteudo/gerado.json`. As páginas importam por `lib/conteudo.ts`.
+Campo faltando continua quebrando o build — só que neste passo. `lib/filtros.ts`
+recebeu as funções puras que estavam presas ao módulo que lê disco.
+
+**Por que os testes não pegaram.** A suíte importa `dist/server/index.js` **em
+Node**, onde `fs` existe. O ambiente de teste era mais permissivo que o de
+produção. `tests/bundle-worker.test.mjs` fecha isso: vasculha o bundle e falha
+se `readFileSync(`, `readdirSync(`, `gray-matter` ou `js-yaml` estiverem nele.
+Verificado reintroduzindo o bug. A suíte foi para **47**.
+
+**De quebra:** `gray-matter` e `js-yaml` saíram do bundle do Worker.
+
+---
+
 ## [0.7.0] — 2026-09-09
 
 ### Fase 7 — o mapa de rotas está completo

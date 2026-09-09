@@ -6,18 +6,20 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "npm run fotos && vite",
-    "dev:caragua": "npm run fotos && UNIDADE=caragua vite",
-    "build": "npm run fotos && vinext build",
-    "build:sjc": "npm run fotos && UNIDADE=sjc vinext build",
-    "build:caragua": "npm run fotos && UNIDADE=caragua vinext build",
+    "dev": "npm run preparar && vite",
+    "dev:caragua": "npm run preparar && UNIDADE=caragua vite",
+    "build": "npm run preparar && vinext build",
+    "build:sjc": "npm run preparar && UNIDADE=sjc vinext build",
+    "build:caragua": "npm run preparar && UNIDADE=caragua vinext build",
     "start": "vinext start",
     "deploy:sjc": "npm run pendencias && npm run build:sjc && wrangler deploy -c dist/server/wrangler.json --name dalmobile-sjc",
     "deploy:caragua": "npm run pendencias && npm run build:caragua && wrangler deploy -c dist/server/wrangler.json --name dalmobile-caragua",
     "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "pendencias": "node config/verificar-pendencias.mjs",
-    "fotos": "node build/gerar-imagens.mjs"
+    "fotos": "node build/gerar-imagens.mjs",
+    "conteudo": "node build/gerar-conteudo.mjs",
+    "preparar": "npm run fotos && npm run conteudo"
   },
   "dependencies": {
     "@fontsource/krub": "5.3.0",

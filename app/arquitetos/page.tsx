@@ -22,14 +22,11 @@ import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
 import { linkWhatsApp, unidade } from "../../config/derivados.ts";
-import {
-  ehPendente,
-  lerInstitucional,
-  type DadosArquitetos,
-} from "../../lib/institucional.ts";
+import { ehPendente } from "../../config/pendente.ts";
+import { institucional } from "../../lib/conteudo.ts";
 import estilos from "./arquitetos.module.css";
 
-const pagina = lerInstitucional<DadosArquitetos>("arquitetos");
+const pagina = institucional("arquitetos");
 
 export const metadata: Metadata = {
   title: `Para arquitetos — Dalmóbile ${unidade.cidade}`,

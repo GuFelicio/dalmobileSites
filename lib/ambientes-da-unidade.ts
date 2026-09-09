@@ -6,7 +6,10 @@
  * é o que impede a foto de uma unidade de aparecer no site da outra.
  */
 import { unidade } from "../config/derivados.ts";
-import { ambientesDe, escolherFoto, type PaginaDeAmbiente } from "./ambientes-conteudo.ts";
+import type { PaginaDeAmbiente } from "./ambientes-conteudo.ts";
+// Do conteúdo EMPACOTADO, não do disco: o Worker não tem sistema de
+// arquivos. Ver lib/conteudo.ts.
+import { ambientesDe, escolherFoto } from "./conteudo.ts";
 
 export { escolherFoto };
 
