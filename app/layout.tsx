@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { unidade } from "../config/derivados";
+import { metadataDaPagina } from "../lib/seo.ts";
 
 // Krub self-hosted, do bundle. Nada de Google Fonts por CDN.
 // Só os três pesos da escala do CLAUDE.md: 300, 400 e 600.
@@ -19,11 +20,14 @@ import "./globals.css";
 //
 // PROVISÓRIO: o metadata definitivo, com OpenGraph e schema por página, é a
 // Fase 8. Aqui fica só o que impede o erro de cidade.
-export const metadata: Metadata = {
-  title: `Móveis Planejados em ${unidade.cidade} | Dalmóbile`,
-  description: `Móveis planejados projetados e fabricados pela Dalmóbile em ${unidade.cidade}. Quase cinco décadas de fábrica própria.`,
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
-};
+export const metadata: Metadata = metadataDaPagina({
+  titulo: `Móveis Planejados em ${unidade.cidade} | Dalmóbile`,
+  descricao:
+    `Móveis planejados projetados e fabricados pela Dalmóbile em ${unidade.cidade}. ` +
+    `Fábrica própria há quase cinco décadas.`,
+  caminho: "/",
+  foto: "/fotos/comum/capa/casa-completa.webp",
+});
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

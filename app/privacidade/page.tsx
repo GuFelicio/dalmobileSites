@@ -19,11 +19,17 @@ import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
 import { enderecoEmLinha, linkTelefone, unidade } from "../../config/derivados.ts";
+import { metadataDaPagina } from "../../lib/seo.ts";
 import estilos from "./privacidade.module.css";
 
 export const metadata: Metadata = {
-  title: `Política de privacidade | Dalmóbile ${unidade.cidade}`,
-  description: `Como a Dalmóbile ${unidade.cidade} trata os dados de quem visita o site.`,
+  ...metadataDaPagina({
+    titulo: `Política de privacidade | Dalmóbile ${unidade.cidade}`,
+    descricao: `Como a Dalmóbile ${unidade.cidade} trata os dados de quem visita o site.`,
+    caminho: "/privacidade",
+  }),
+  // Obrigação legal, não conteúdo de busca: fica fora do índice, mas os links
+  // dela continuam sendo seguidos.
   robots: { index: false, follow: true },
 };
 

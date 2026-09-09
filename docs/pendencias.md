@@ -63,11 +63,11 @@ ela diz, com verdade, que o site não coleta dado nenhum.
 
 ## 2. Dados da loja ainda por confirmar
 
-`npm run pendencias` lista sempre o estado atual.
+`npm run pendencias` lista sempre o estado atual. Endereço, telefone, WhatsApp,
+horário e mapa das duas unidades **estão completos**.
 
 | O que | Unidade | Como obter |
 |---|---|---|
-| `mapa.embed` e `mapa.link` | as duas | Google Maps → Compartilhar → **Incorporar um mapa**; copiar o `src` do iframe. Sem isso, `/a-loja` mostra uma foto no lugar do mapa |
 | `analytics.ga` e `analytics.pixel` | as duas | o cliente envia depois; `null` não trava o deploy |
 
 **Divergência conhecida:** a ficha do Google Business de Caraguatatuba ainda
@@ -103,19 +103,10 @@ em `docs/decisoes.md`.
 
 ---
 
-## 5. Conferência visual nas seis larguras
+## 5. Conferência visual — FEITA
 
-**Nenhuma página foi aberta em navegador.** As regras de responsividade estão
-escritas e comentadas, mas ninguém olhou o resultado. É critério de "pronto" de
-todas as fases e continua em aberto.
-
-```
-390 × 844    iPhone padrão      768 × 1024   iPad retrato
-430 × 932    iPhone grande      1024 × 768   iPad paisagem
-1280 × 800   notebook           1920 × 1080  desktop
-```
-
-O tablet é onde quebra — testar retrato e paisagem separadamente.
+O cliente abriu os dois sites e confirmou a responsividade em 09/09/2026.
+Refazer sempre que uma página nova entrar.
 
 ---
 
@@ -143,3 +134,17 @@ não tem nenhuma das duas — a página usa uma foto de ambiente enquanto isso.
 Sem uso desde a remoção dos estudos Editorial e Imersiva: `casa-sabin.webp`,
 `loft-sem-pressa.webp`, `quarto-autoral.webp`, `fabrica.webp`. Ficaram porque a
 definição de quais fotos entram no site ainda estava aberta. Podem ser apagadas.
+
+---
+
+## 9. Redirects dos sites antigos
+
+O item 6 da Fase 8 pede redirects das URLs que o Google já indexou dos sites
+anteriores. **Não foi feito: não temos a lista dessas URLs.**
+
+Para levantá-la: no Google Search Console de cada domínio, ou buscando
+`site:dalmobilesjc.com.br` e `site:dalmobilecaraguatatuba.com.br`. Com a lista,
+os redirects entram no `worker/index.ts`, antes do handler.
+
+Sem isso, cada URL antiga indexada vira um 404 — a página 404 existe e é
+prestativa, mas o link perde a autoridade que tinha acumulado.

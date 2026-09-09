@@ -22,18 +22,22 @@ import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
 import { linkWhatsApp, unidade } from "../../config/derivados.ts";
+import { ambientesDaUnidade } from "../../lib/ambientes-da-unidade.ts";
+import { metadataDaPagina } from "../../lib/seo.ts";
 import { ehPendente } from "../../config/pendente.ts";
 import { institucional } from "../../lib/conteudo.ts";
 import estilos from "./arquitetos.module.css";
 
 const pagina = institucional("arquitetos");
 
-export const metadata: Metadata = {
-  title: `Para arquitetos — Dalmóbile ${unidade.cidade}`,
-  description:
+export const metadata: Metadata = metadataDaPagina({
+  titulo: `Para arquitetos — Dalmóbile ${unidade.cidade}`,
+  descricao:
     `Detalhamento técnico, fábrica própria e visita à produção. Como a ` +
     `Dalmóbile ${unidade.cidade} trabalha com escritórios de arquitetura.`,
-};
+  caminho: "/arquitetos",
+  foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
+});
 
 export default function Arquitetos() {
   const d = pagina.dados;

@@ -66,7 +66,7 @@ docs/           documentação
 
 ## Estado
 
-**Fases 1 a 7 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
+**Fases 1 a 8 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
 layout base — cabeçalho, rodapé, menu mobile e as três superfícies, em
 `components/layout/`. O `npm test` roda 12 testes que policiam as regras do
 `CLAUDE.md`.
@@ -89,5 +89,8 @@ Duas páginas são andaime temporário e saem na Fase 3: `app/page.tsx` (os trê
 estudos de layout) e `app/teste-layout/` (a revisão dos componentes nas três
 superfícies).
 
-**Próxima: Fase 8 — sitemap, robots e SEO por página.** Ver
+**Próxima: Fase 9 — verificação cruzada final e publicação.**
+
+O que trava a publicação hoje não é código: são as 18 pendências de
+[`docs/pendencias.md`](docs/pendencias.md), que dependem da loja. Ver
 [`docs/prompts-construcao.md`](docs/prompts-construcao.md).

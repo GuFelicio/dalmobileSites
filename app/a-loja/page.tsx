@@ -33,14 +33,17 @@ import {
   unidade,
 } from "../../config/derivados.ts";
 import { ambientesDaUnidade, escolherFoto } from "../../lib/ambientes-da-unidade.ts";
+import { metadataDaPagina } from "../../lib/seo.ts";
 import estilos from "./a-loja.module.css";
 
-export const metadata: Metadata = {
-  title: `Showroom em ${unidade.cidade} | Dalmóbile`,
-  description:
+export const metadata: Metadata = metadataDaPagina({
+  titulo: `Showroom em ${unidade.cidade} | Dalmóbile`,
+  descricao:
     `Endereço, telefone, WhatsApp e horário do showroom da Dalmóbile em ` +
     `${unidade.cidade}. ${unidade.endereco.logradouro}, ${unidade.endereco.bairro}.`,
-};
+  caminho: "/a-loja",
+  foto: escolherFoto(ambientesDaUnidade(), ["sala-de-estar", "cozinha"], 0)?.src,
+});
 
 export default function ALoja() {
   const whatsapp = linkWhatsApp();

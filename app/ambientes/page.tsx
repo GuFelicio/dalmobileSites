@@ -18,15 +18,18 @@ import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
 import { unidade } from "../../config/derivados.ts";
+import { metadataDaPagina } from "../../lib/seo.ts";
 import { ambientesDaUnidade } from "../../lib/ambientes-da-unidade.ts";
 import estilos from "./ambientes.module.css";
 
-export const metadata: Metadata = {
-  title: `Ambientes — Móveis planejados em ${unidade.cidade} | Dalmóbile`,
-  description:
+export const metadata: Metadata = metadataDaPagina({
+  titulo: `Ambientes — Móveis planejados em ${unidade.cidade} | Dalmóbile`,
+  descricao:
     `Cozinha, quartos, sala, home office, closet e banheiro planejados pela ` +
     `Dalmóbile em ${unidade.cidade}. Fotos de projetos executados.`,
-};
+  caminho: "/ambientes",
+  foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
+});
 
 export default function HubDeAmbientes() {
   const ambientes = ambientesDaUnidade();

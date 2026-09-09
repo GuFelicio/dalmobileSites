@@ -22,7 +22,7 @@ import { Header } from "../../../components/layout/Header";
 import { Section } from "../../../components/layout/Section";
 import Foto from "../../../components/midia/Foto";
 import { unidade } from "../../../config/derivados.ts";
-import { urlParaPreview } from "../../../lib/fotos.ts";
+import { metadataDaPagina } from "../../../lib/seo.ts";
 import { ambientePorSlugDaUnidade, ambientesDaUnidade } from "../../../lib/ambientes-da-unidade.ts";
 import estilos from "./ambiente.module.css";
 
@@ -40,18 +40,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const descricao = `${ambiente.chamada} ${ambiente.nome} ${ambiente.planejado} pela Dalmóbile em ${unidade.cidade}, em projetos executados.`;
 
-  return {
-    title: `${ambiente.nome} ${ambiente.planejado} em ${unidade.cidade} | Dalmóbile`,
-    description: descricao,
-    // O vendedor manda o link no WhatsApp: o preview é o produto naquele momento.
-    openGraph: {
-      title: `${ambiente.nome} ${ambiente.planejado} — Dalmóbile ${unidade.cidade}`,
-      description: descricao,
-      url: `${unidade.dominio}/ambientes/${ambiente.slug}`,
-      type: "article",
-      images: [{ url: `${unidade.dominio}${urlParaPreview(ambiente.fotos[0].src)}` }],
-    },
-  };
+  return metadataDaPagina({
+    titulo: `${ambiente.nome} ${ambiente.planejado} em ${unidade.cidade} | Dalmóbile`,
+    descricao,
+    caminho: `/ambientes/${ambiente.slug}`,
+    foto: ambiente.fotos[0].src,
+    tipo: "article",
+  });
 }
 
 export default async function PaginaDeAmbiente({ params }: Props) {

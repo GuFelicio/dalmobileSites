@@ -8,6 +8,42 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.9.0] — 2026-09-09
+
+### Fase 8 — o site existe para o Google
+
+**Entrou**
+
+- **`app/sitemap.ts`** — gerado do config e do conteúdo. Cada build produz o
+  seu: o sitemap de Caraguá tem 10 URLs e não cita SJC em lugar nenhum.
+  As fotos de cada ambiente entram como `<image:image>` — o site é 90% imagem,
+  e a busca por imagem é porta de entrada que a concorrência não trabalha.
+  `/projetos` **não entra** enquanto estiver sem conteúdo: sitemap apontando
+  para índice vazio ensina o Google que o site tem página fraca.
+- **`app/robots.ts`** — aponta para o sitemap da unidade e bloqueia
+  `/_vinext/` e, enquanto dormente, `/projetos`.
+- **`lib/seo.ts`** — monta OpenGraph, Twitter Card e link canônico num lugar
+  só, para nenhuma página repetir a conta e nenhuma esquecer.
+- **OpenGraph em todas as páginas indexáveis.** Antes existia só nas de
+  ambiente: home, `/a-loja` e as institucionais iam para o WhatsApp como um
+  retângulo cinza.
+- **Link canônico** em toda página, com o domínio da unidade.
+- 7 testes novos. A suíte foi para **55**.
+
+**Verificado**
+
+Nos dois builds e em `workerd`: 9 rotas em 200, `/nao-existe` em 404, o
+sitemap de Caraguá sem nenhuma menção a SJC, e o schema `LocalBusiness` com
+endereço, telefone e horário saindo do config.
+
+**Não feito, e por quê**
+
+O item 6 da fase pede **redirects das URLs indexadas dos sites antigos**. Não
+temos essa lista. Registrado em `docs/pendencias.md` com o caminho para
+levantá-la no Search Console.
+
+---
+
 ## [0.8.0] — 2026-09-09
 
 ### Caraguatatuba ganhou paleta própria: areia no lugar do cinza

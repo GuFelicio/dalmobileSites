@@ -23,6 +23,7 @@ import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
 import { unidade } from "../../config/derivados.ts";
+import { metadataDaPagina } from "../../lib/seo.ts";
 import { ambientesDaUnidade, escolherFoto } from "../../lib/ambientes-da-unidade.ts";
 import { ehPendente } from "../../config/pendente.ts";
 import { institucional } from "../../lib/conteudo.ts";
@@ -30,12 +31,14 @@ import estilos from "./a-dalmobile.module.css";
 
 const pagina = institucional("a-dalmobile");
 
-export const metadata: Metadata = {
-  title: `A Dalmóbile — móveis planejados em ${unidade.cidade}`,
-  description:
+export const metadata: Metadata = metadataDaPagina({
+  titulo: `A Dalmóbile — móveis planejados em ${unidade.cidade}`,
+  descricao:
     `Fábrica própria, projeto, fabricação e montagem. Conheça a Dalmóbile ` +
     `${unidade.cidade}: processo, materiais e perguntas frequentes.`,
-};
+  caminho: "/a-dalmobile",
+  foto: escolherFoto(ambientesDaUnidade(), ["cozinha", "sala-de-estar"], 2)?.src,
+});
 
 export default function ADalmobile() {
   const d = pagina.dados;
