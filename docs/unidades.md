@@ -31,6 +31,22 @@ npm run deploy:caragua
 **Todo componente importa de `config/derivados`, nunca de `config/sjc.ts`
 direto.** Import direto embute uma unidade específica no bundle das duas.
 
+### Na Cloudflare, o comando de build precisa dizer a unidade
+
+Cada projeto do Workers Builds roda **um** comando, e é ele que decide qual
+site sai:
+
+| Projeto | Comando de build |
+|---|---|
+| `dalmobile-sjc` | `npm run build:sjc` |
+| `dalmobile-caragua` | `npm run build:caragua` |
+
+> **`npm run build` puro não serve em CI.** Sem `UNIDADE`, ele cairia no padrão
+> e publicaria São José dos Campos — inclusive no projeto de Caraguatatuba, em
+> silêncio e com o build verde. Por isso o `vite.config.ts` **recusa** buildar
+> em CI sem a variável, com uma mensagem dizendo o que configurar. Fora de CI o
+> padrão continua valendo, para o `npm run dev` não exigir cerimônia.
+
 ### Por que alias, e não um `if`
 
 Esta é a decisão que sustenta o projeto inteiro. Com um `if` em runtime, os

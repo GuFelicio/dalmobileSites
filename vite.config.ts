@@ -13,7 +13,28 @@ const UNIDADES = ["sjc", "caragua"] as const;
 type IdDeUnidade = (typeof UNIDADES)[number];
 
 function unidadeDoBuild(): IdDeUnidade {
-  const escolhida = process.env.UNIDADE ?? "sjc";
+  const declarada = process.env.UNIDADE;
+
+  // EM CI, UNIDADE É OBRIGATÓRIA. Sem isto, um build sem a variável cai no
+  // padrão e publica São José dos Campos — inclusive no projeto de Caraguá,
+  // em silêncio, com o build verde. É o mesmo erro que derrubou o site
+  // anterior, só que na camada de deploy, onde nenhum teste alcança.
+  // A Cloudflare Workers Builds define CI=true.
+  if (!declarada && process.env.CI) {
+    throw new Error(
+      "UNIDADE não definida.\n\n" +
+        "Em CI ela é obrigatória: sem ela este build publicaria São José dos\n" +
+        "Campos, mesmo no projeto de Caraguatatuba.\n\n" +
+        "Na Cloudflare, use o comando de build da unidade:\n" +
+        "  npm run build:sjc      (dalmobilesjc.com.br)\n" +
+        "  npm run build:caragua  (dalmobilecaraguatatuba.com.br)\n\n" +
+        "ou declare UNIDADE nas variáveis de ambiente do projeto.\n" +
+        "Ver docs/unidades.md.",
+    );
+  }
+
+  // Fora de CI o padrão é sjc, para `npm run dev` não exigir cerimônia.
+  const escolhida = declarada ?? "sjc";
   if (!UNIDADES.includes(escolhida as IdDeUnidade)) {
     throw new Error(
       `UNIDADE="${escolhida}" não existe. Use uma de: ${UNIDADES.join(", ")}.`,

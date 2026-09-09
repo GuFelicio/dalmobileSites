@@ -8,6 +8,23 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.5.1] — 2026-09-09
+
+### Trava: em CI, o build recusa rodar sem saber a unidade
+
+`npm run build` sem `UNIDADE` caía no padrão e produzia **São José dos Campos**.
+Nos dois projetos da Cloudflare com o comando padrão, os **dois** sites sairiam
+SJC — em silêncio, com o build verde. É o mesmo erro que derrubou o site
+anterior, só que na camada de deploy, onde nenhum teste alcança.
+
+`vite.config.ts` agora recusa buildar quando `CI` está definida e `UNIDADE` não,
+com uma mensagem que diz qual comando usar em cada projeto. Fora de CI o padrão
+continua valendo, para o `npm run dev` não exigir cerimônia.
+
+Documentado em `docs/unidades.md`, com a tabela de comando por projeto.
+
+---
+
 ## [0.5.0] — 2026-09-09
 
 ### O acervo real entrou, e o site virou organizado por ambiente
