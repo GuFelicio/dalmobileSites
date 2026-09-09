@@ -147,7 +147,8 @@ export default async function Case({ params }: Props) {
                 <>
                   <dt>Arquiteto</dt>
                   <dd>
-                    <Link href="/arquitetos">{projeto.arquiteto!.nome}</Link>
+                    {/* /arquitetos ainda não existe; ver docs/pendencias.md. */}
+                    {projeto.arquiteto!.nome}
                   </dd>
                 </>
               ) : null}

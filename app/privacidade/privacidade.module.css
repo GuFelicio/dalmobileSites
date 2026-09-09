@@ -1,0 +1,61 @@
+/* Política de privacidade. Texto corrido em superfície papel. */
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: 0;
+}
+
+.atualizado {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+  margin: var(--e-2) 0 0;
+}
+
+/* Texto corrido nunca em largura total: medida de 62 a 66 caracteres. */
+.texto {
+  max-width: var(--medida);
+  margin-top: var(--e-4);
+}
+
+.texto h2 {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: var(--e-4) 0 var(--e-1);
+}
+
+.texto h2:first-child {
+  margin-top: 0;
+}
+
+.texto p {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  margin: 0 0 var(--e-2);
+}
+
+.texto a {
+  border-bottom: var(--fio) solid var(--cinza-clr);
+}
+
+.texto a:hover {
+  border-color: var(--preto);
+}
+
+.volta {
+  margin-top: var(--e-4);
+  font-size: var(--fs-texto);
+}
+
+.volta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque); /* alvo de toque de 44px */
+  border-bottom: var(--fio) solid var(--cinza-clr);
+}

@@ -89,8 +89,11 @@ export const unidade: Unidade = {
     // informação de prédio e de arquiteto. A rota e a camada continuam no
     // código, prontas. Ver docs/decisoes.md.
     { rotulo: "Ambientes", href: "/ambientes" },
-    { rotulo: "A Dalmóbile", href: "/a-dalmobile" },
-    { rotulo: "Arquitetos", href: "/arquitetos" },
     { rotulo: "A loja", href: "/a-loja" },
+    // "A Dalmóbile" e "Arquitetos" entram quando as páginas existirem — são
+    // a Fase 7 e dependem de texto institucional que ainda não temos. Até lá
+    // não são linkadas: o CLAUDE.md proíbe CTA sem destino real, e elas
+    // estavam dando 404 no menu e no rodapé de toda página.
+    // Ver docs/pendencias.md.
   ],
 };

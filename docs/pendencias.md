@@ -6,31 +6,36 @@ Quem resolver um item, apaga daqui e registra no `CHANGELOG.md`.
 
 ---
 
-## 1. Rotas que dão 404, linkadas de toda página
+## 1. Duas páginas institucionais ainda não existem
 
-**O impacto maior:** `/a-loja` é o destino de *"Falar sobre um projeto assim"*,
-a chamada final de **toda** página de ambiente. O principal CTA do site aponta
-hoje para uma página que não existe.
+`/a-loja`, `/privacidade` e a 404 foram construídas. **Nenhum link do site
+aponta hoje para rota inexistente** — e um teste varre cinco páginas e falha se
+voltar a apontar.
 
-| Rota | Linkada de | Fase |
+Faltam duas, ambas da Fase 7, e ambas **dependem de texto que não temos**:
+
+| Rota | O que precisa | Fase |
 |---|---|---|
-| `/a-loja` | menu, rodapé e a chamada final de todo ambiente | 7 |
-| `/a-dalmobile` | menu e rodapé | 7 |
-| `/arquitetos` | menu, rodapé e a ficha do case | 7 |
-| `/privacidade` | rodapé | 8 |
+| `/a-dalmobile` | institucional, processo, números da fábrica, FAQ | 7 |
+| `/arquitetos` | proposta de parceria e a lista de arquitetos parceiros | 7 |
 
-Isso viola o `CLAUDE.md` — *"Nenhum CTA sem destino real"* — e o checklist de
-deploy.
+Enquanto não existirem, **não são linkadas** — o menu tem só "Ambientes" e
+"A loja". O `CLAUDE.md` proíbe CTA sem destino real, e elas estavam dando 404
+no menu e no rodapé de toda página.
 
-**`/a-loja` é a mais urgente**, e é também onde o mapa vive: a seção 9 do
-`docs/direcao-site.md` a define como duas colunas, com foto da fachada ou mapa
-à esquerda e endereço, telefone, horário e WhatsApp à direita. Endereço,
-telefone, horário e WhatsApp **já estão confirmados** nos dois configs — falta
-só o `embed` do mapa.
+> **Nenhum número da fábrica vai ao ar sem confirmação da loja** — anos, prazo,
+> garantia, quantidade de projetos. Sem confirmação, usar formulação verdadeira
+> sem número ("mais de 40 anos").
 
-> O teste `nenhum CTA sem destino real` **não pega isto**: ele só verifica
-> `href="#"` e âncora sem `href`, não se a rota interna resolve. Fechar esse
-> furo faz parte da correção.
+### O formulário de contato
+
+A seção 11 da direção define um formulário próprio, e ele **não existe**.
+Precisa de endpoint no Worker, validação, consentimento de LGPD e o campo que
+diz de qual unidade veio o lead. Até lá, WhatsApp e telefone são o caminho, e
+os dois são destinos reais.
+
+Quando o formulário entrar, **`/privacidade` precisa ser revista junto**: hoje
+ela diz, com verdade, que o site não coleta dado nenhum.
 
 ---
 
@@ -40,7 +45,7 @@ só o `embed` do mapa.
 
 | O que | Unidade | Como obter |
 |---|---|---|
-| `mapa.embed` e `mapa.link` | as duas | Google Maps → Compartilhar → **Incorporar um mapa**; copiar o `src` do iframe |
+| `mapa.embed` e `mapa.link` | as duas | Google Maps → Compartilhar → **Incorporar um mapa**; copiar o `src` do iframe. Sem isso, `/a-loja` mostra uma foto no lugar do mapa |
 | `analytics.ga` e `analytics.pixel` | as duas | o cliente envia depois; `null` não trava o deploy |
 
 **Divergência conhecida:** a ficha do Google Business de Caraguatatuba ainda
@@ -104,7 +109,14 @@ dela para página nova.
 
 ---
 
-## 7. Imagens órfãs em `public/assets/`
+## 7. Foto da fachada
+
+A seção 9 da direção pede foto da fachada e do interior em `/a-loja`. O acervo
+não tem nenhuma das duas — a página usa uma foto de ambiente enquanto isso.
+
+---
+
+## 8. Imagens órfãs em `public/assets/`
 
 Sem uso desde a remoção dos estudos Editorial e Imersiva: `casa-sabin.webp`,
 `loft-sem-pressa.webp`, `quarto-autoral.webp`, `fabrica.webp`. Ficaram porque a

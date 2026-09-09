@@ -1,0 +1,65 @@
+/* 404. Uma linha honesta e os caminhos mais úteis. Sem piada. */
+
+.codigo {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+  margin: 0;
+}
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: var(--e-2) 0 0;
+}
+
+.texto {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida);
+  margin: var(--e-2) 0 0;
+  color: var(--cinza-texto);
+}
+
+.subtitulo {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: var(--e-5) 0 var(--e-2);
+}
+
+.caminhos,
+.atalhos {
+  list-style: none;
+  margin: var(--e-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-1);
+}
+
+.caminho,
+.atalho {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque); /* alvo de toque de 44px */
+  padding: 0 var(--e-2);
+  border: var(--fio) solid var(--cinza-clr);
+  font-size: var(--fs-texto);
+}
+
+/* O primeiro caminho é o mais provável: destaca por superfície, não por cor. */
+.caminhos li:first-child .caminho {
+  background: var(--preto);
+  border-color: var(--preto);
+  color: var(--branco);
+}
+
+.caminho:hover,
+.atalho:hover {
+  border-color: var(--preto);
+}

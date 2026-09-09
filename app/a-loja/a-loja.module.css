@@ -1,0 +1,180 @@
+/* Página do showroom. Superfície papel: o texto manda.
+   Ver app/a-loja/page.tsx e a seção 9 do docs/direcao-site.md. */
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: 0;
+}
+
+.subtitulo {
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  margin: 0 0 var(--e-3);
+}
+
+.intro {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida); /* 62 a 66 caracteres */
+  margin: var(--e-2) 0 0;
+  color: var(--cinza-texto);
+}
+
+/* Duas colunas no desktop. Empilhado abaixo disso, com os DADOS primeiro:
+   quem abre esta página no telefone quer o endereço, não o mapa. */
+.colunas {
+  display: grid;
+  gap: var(--e-4);
+  margin-top: var(--e-4);
+}
+
+@media (min-width: 1025px) {
+  .colunas {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--e-5);
+    align-items: start;
+  }
+}
+
+.lista {
+  margin: 0;
+  display: grid;
+  gap: var(--e-3);
+}
+
+.lista dt {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+}
+
+.lista dd {
+  margin: var(--e-1) 0 0;
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+}
+
+.lista dd a {
+  border-bottom: var(--fio) solid var(--cinza-clr);
+  /* Alvo de toque: o link de contato é o que mais se toca nesta página. */
+  display: inline-block;
+  padding-block: 10px; /* (44 − 17 de linha − 2 de fio) / 2, arredondado */
+}
+
+.lista dd a:hover {
+  border-color: var(--preto);
+}
+
+.endereco {
+  font-style: normal;
+  max-width: var(--medida);
+}
+
+.linkMapa {
+  display: inline-block;
+  margin-top: var(--e-1);
+}
+
+.horarios {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e-1);
+}
+
+.horarios li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-1);
+  justify-content: space-between;
+  max-width: 34ch; /* a linha de horário não precisa da medida de leitura */
+  border-bottom: var(--fio) solid var(--cinza-clr);
+  padding-bottom: var(--e-1);
+}
+
+.dias {
+  color: var(--cinza-texto);
+}
+
+/* O mapa e a foto ocupam o mesmo lugar: só um dos dois existe por vez. */
+.mapa,
+.foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+}
+
+.foto {
+  object-fit: cover;
+}
+
+/* ---- Faixa da outra loja --------------------------------------------- */
+
+.outraLoja {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-2);
+  padding-block: var(--e-4);
+}
+
+.outraTexto {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: 0;
+  max-width: var(--medida);
+}
+
+.outraAcao {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  padding: 0 var(--e-3);
+  border: var(--fio) solid var(--preto);
+  font-size: var(--fs-texto);
+  color: var(--preto);
+  transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
+}
+
+.outraAcao:hover {
+  background: var(--preto);
+  color: var(--branco);
+}
+
+/* ---- Atalhos para os ambientes --------------------------------------- */
+
+.atalhos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-1);
+}
+
+.atalho {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  padding: 0 var(--e-2);
+  border: var(--fio) solid var(--cinza-clr);
+  font-size: var(--fs-texto);
+}
+
+.atalho:hover {
+  border-color: var(--preto);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outraAcao { transition: none; }
+}

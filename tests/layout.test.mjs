@@ -148,25 +148,36 @@ test("a home é server component: nada de estado de protótipo no cliente", asyn
   assert.match(html, /<title>Móveis Planejados em [^<]+ \| Dalmóbile<\/title>/);
 });
 
-test("todo link interno da home leva a uma rota que existe", async () => {
+test("todo link interno leva a uma rota que existe", async () => {
   // O teste antigo só via href="#" e âncora sem href. Passava com a home
   // inteira apontando para #sintese-contato e com quatro rotas 404 no menu e
-  // no rodapé. Agora confere o destino de verdade.
-  const { html } = await renderizar("/");
-  const corpo = html.slice(html.indexOf("<body"));
-  const internos = [...corpo.matchAll(/href="(\/[^"#?]*)"/g)]
-    .map((m) => m[1])
-    .filter((h) => !h.startsWith("/assets") && !h.startsWith("/fotos") && h !== "/favicon.svg");
+  // no rodapé.
+  //
+  // Varre VÁRIAS páginas, e não só a home: a home é o andaime do estudo e tem
+  // rodapé próprio, então os links do componente Footer — que é justamente
+  // onde estavam as rotas quebradas — não apareciam nela.
+  const paginas = ["/", "/ambientes", "/ambientes/cozinha", "/a-loja", "/privacidade"];
+  const internos = new Set();
+  for (const pagina of paginas) {
+    const { html } = await renderizar(pagina);
+    const corpo = html.slice(html.indexOf("<body"));
+    for (const m of corpo.matchAll(/href="(\/[^"#?]*)"/g)) {
+      const href = m[1];
+      if (href.startsWith("/assets") || href.startsWith("/fotos")) continue;
+      if (href === "/favicon.svg") continue;
+      internos.add(href);
+    }
+  }
 
   const quebrados = [];
-  for (const rota of [...new Set(internos)]) {
+  for (const rota of internos) {
     const { resposta } = await renderizar(rota);
     if (resposta.status !== 200) quebrados.push(`${rota} → ${resposta.status}`);
   }
   assert.deepEqual(
     quebrados,
     [],
-    `link da home apontando para rota inexistente:\n${quebrados.join("\n")}\n` +
+    `link apontando para rota inexistente:\n${quebrados.join("\n")}\n` +
       `Ver docs/pendencias.md.`,
   );
 });

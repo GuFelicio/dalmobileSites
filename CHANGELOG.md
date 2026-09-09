@@ -8,6 +8,48 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.6.0] — 2026-09-09
+
+### `/a-loja`, `/privacidade` e a 404
+
+O CTA principal do site — *"Falar sobre um projeto assim"*, no fim de toda
+página de ambiente — apontava para uma página que **não existia**.
+
+**Entrou**
+
+- **`/a-loja`** — endereço, telefone, WhatsApp e horário completo, tudo do
+  config, mais atalhos para os ambientes e a faixa da outra loja. Carrega o
+  **schema `LocalBusiness`** gerado do config, que é o que sustenta a busca
+  local. Horário não confirmado **não entra no schema**.
+- **`/privacidade`** — LGPD. Diz, com verdade, que o site não coleta dado
+  nenhum, porque ainda não tem formulário. **Precisa ser revista quando o
+  formulário entrar.**
+- **404** — uma linha honesta e os caminhos mais úteis, sem piada. Importa
+  agora: é onde cai quem clicar no que ainda não existe.
+- `mapaDaUnidade()` e `schemaLocalBusiness()` em `config/derivados.ts`.
+
+**O mapa**
+
+`mapa.embed` continua pendente. A página **não renderiza iframe vazio**: sem o
+dado, mostra uma foto de ambiente no lugar. Quando o embed chegar, o mapa nasce
+sozinho.
+
+**Mudou**
+
+- `/a-dalmobile` e `/arquitetos` **saíram do menu e do rodapé**. Não existem, e
+  dependem de texto institucional que ainda não temos — linkar para elas era
+  404 em toda página. O menu ficou com "Ambientes" e "A loja".
+- A ficha do case dormente deixou de linkar `/arquitetos`.
+
+**O teste de links estava furado**
+
+Ele varria só a home — e a home é o andaime do estudo, com rodapé próprio. Os
+links do componente `Footer`, que é **onde estavam as rotas quebradas**, nunca
+eram vistos. Agora varre cinco páginas. Verificado injetando uma rota falsa: o
+teste acusa `→ 404` e quebra a suíte.
+
+---
+
 ## [0.5.2] — 2026-09-09
 
 ### A home passou a usar o acervo real e a levar a algum lugar
