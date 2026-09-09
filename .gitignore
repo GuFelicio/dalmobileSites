@@ -29,3 +29,8 @@ Dir Base/
 # Variações de imagem geradas no build por build/gerar-imagens.mjs.
 # O original fica em public/fotos/ e ESSE sim é versionado.
 public/fotos-geradas/
+
+# Originais em resolução cheia, entregues pela fotografia (250 MB).
+# Ficam no Drive como arquivo morto. O que o site usa são as versões de
+# 2560px em public/fotos/, geradas a partir daqui uma vez só.
+imgs/
