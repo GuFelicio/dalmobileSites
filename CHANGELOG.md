@@ -18,6 +18,12 @@ componente foi tocado**: os nomes semânticos não mudaram.
 
 - `app/tokens.css` ganhou `:root[data-paleta="palha"]` com quatro valores.
   Continua sendo o único arquivo do projeto com cor literal.
+
+  O painel do hero usa **`#fff4eb`**, a cor escolhida pelo cliente. A faixa e o
+  rodapé usam **`#eed5c1`**, a mesma família dois passos mais funda: eles
+  encostam no papel (`#f5f4f0`), e em `#fff4eb` separariam em **1,02** — ou
+  seja, sumiriam dentro da página. O painel pode ser quase branco porque pousa
+  **sobre a foto**, e o que o separa é a imagem atrás.
 - `config/tipos.ts` ganhou `paleta: "neutra" | "palha"`. O config escolhe
   **pelo nome** — o hex nunca sai de `tokens.css`.
 - O `<html>` carrega `data-paleta`, vindo do config da unidade.

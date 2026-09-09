@@ -39,7 +39,7 @@
 
      Contraste medido, com --preto (#20211f) por cima:
        cinza atual #97958f → 5,40:1
-       palha       #cfc4a9 → 9,33:1
+       palha       #fff4eb → 14,93:1
      ------------------------------------------------------------------ */
 
   /* Nada aqui: a camada 1 acima é a paleta neutra, o padrão. */
@@ -166,10 +166,18 @@
    Trocar estes quatro valores troca o site do litoral inteiro.
    ------------------------------------------------------------------ */
 :root[data-paleta="palha"] {
-  --c-cinza:        #cfc4a9;  /* faixas, rodapé, tiras de chamada           */
-  --c-cinza-painel: #cfc4a9;  /* painel sólido do hero                      */
+  /* O painel do hero pousa SOBRE A FOTO, então pode ser quase branco: o que
+     o separa é a imagem atrás, não o fundo da página.                      */
+  --c-cinza-painel: #fff4eb;  /* painel sólido do hero — 14,93:1 com a tinta */
+
+  /* Faixa, rodapé e tiras de chamada encostam no papel (#f5f4f0). Em
+     #fff4eb elas separariam do papel em 1,02 — ou seja, sumiriam dentro da
+     página. Este tom é a MESMA família, dois passos mais fundo, e separa em
+     1,28. Para efeito de comparação, o cinza da paleta neutra separa em 2,52. */
+  --c-cinza:        #eed5c1;  /* faixas, rodapé, tiras de chamada           */
+
   --c-cinza-texto:  #5f5847;  /* texto de apoio sobre papel — 6,42:1        */
-  --c-linha:        #c6bda6;  /* fio sobre claro, estado desativado         */
+  --c-linha:        #e7d8c9;  /* fio sobre claro, estado desativado         */
 }
 
 /* ====================================================================
