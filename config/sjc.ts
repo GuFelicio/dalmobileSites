@@ -20,6 +20,7 @@ export const unidade: Unidade = {
   cidade: "São José dos Campos",
   estado: "SP",
   dominio: "https://dalmobilesjc.com.br",
+  paleta: "neutra",
 
   endereco: {
     logradouro: "Av. Barão do Rio Branco, 736",

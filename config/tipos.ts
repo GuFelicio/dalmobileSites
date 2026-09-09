@@ -48,6 +48,19 @@ export type Unidade = {
   /** Domínio do site desta unidade, sem barra final. Base do sitemap e do OG. */
   dominio: string;
 
+  /**
+   * A variante de paleta desta unidade.
+   *
+   * "neutra" é a padrão. "palha" troca a família do cinza por tons de areia,
+   * para o site do litoral. Os VALORES vivem em app/tokens.css — aqui só se
+   * escolhe pelo nome, porque `app/tokens.css` é o único arquivo do projeto
+   * com cor literal, e um teste barra qualquer outra.
+   *
+   * Só a família do cinza muda: preto, papel e branco são os mesmos nos dois
+   * sites. Não é cor de acento — é superfície. Ver docs/decisoes.md.
+   */
+  paleta: "neutra" | "palha";
+
   endereco: {
     logradouro: string;
     bairro: string;

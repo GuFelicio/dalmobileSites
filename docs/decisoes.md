@@ -8,6 +8,48 @@ Formato: **data · o que · por quê · o que foi descartado**.
 
 ---
 
+## 2026-09-09 · Caraguatatuba usa a paleta "palha"; SJC segue na neutra
+
+**Decisão.** O site do litoral troca a **família do cinza** por tons de areia.
+Preto, papel e branco são os mesmos nos dois. A escolha é um campo do config
+(`paleta: "neutra" | "palha"`), e os valores vivem em `app/tokens.css`, sob
+`:root[data-paleta="palha"]`, aplicado por um atributo no `<html>`.
+
+| | neutra (SJC) | palha (Caraguá) |
+|---|---|---|
+| `--c-cinza` | `#9e9b95` | `#cfc4a9` |
+| `--c-cinza-painel` | `#97958f` | `#cfc4a9` |
+| `--c-cinza-texto` | `#5d5d58` | `#5f5847` |
+| `--c-linha` | `#d3d0c9` | `#c6bda6` |
+
+**Por quê.** Pedido do cliente: dar cara de litoral ao site de Caraguatatuba.
+A areia clara faz isso sem tocar no desenho — nenhum componente muda, nenhuma
+regra de layout muda, e os nomes semânticos (`--cinza`, `--cinza-clr`,
+`--cinza-texto`) continuam os mesmos.
+
+**A tensão com o `CLAUDE.md`, que precisa ficar escrita.** O documento descreve
+a paleta como **acromática** e diz que *"não existe cor de acento"*. A palha é
+cromática. O que sustenta a decisão é que (a) ela é **superfície**, não acento —
+não há um elemento colorido para chamar atenção, e sim um fundo que mudou de
+temperatura; e (b) o `docs/decisoes.md` de 04/09 já registra que a paleta em
+uso é **provisória**, vinda do estudo, e que *"as cores definitivas ainda não
+foram fechadas com a loja"*. Quando forem, esta decisão volta à mesa.
+
+**Onde NÃO está o hex.** No config. `app/tokens.css` é o único arquivo do
+projeto com cor literal, e um teste barra qualquer outra — inclusive `hsl()`,
+`oklch()` e `color-mix()`. O config escolhe **pelo nome**.
+
+**Contraste, medido.** O painel do hero herda texto escuro, e não branco como
+eu supus a princípio: sobre o cinza dá 5,40:1, e sobre a palha, **9,33:1**. O
+texto de apoio sobre papel foi de 6,02 para 6,42. Nenhuma troca piorou nada.
+
+**Descartado.** Trocar só o painel do hero (deixaria palha em cima e cinza no
+rodapé, no mesmo site), pôr o hex no config (quebra a regra de cor literal e o
+teste que a guarda) e um segundo arquivo de CSS por unidade (é exatamente a
+duplicação por unidade que o `CLAUDE.md` proíbe).
+
+---
+
 ## 2026-09-09 · O conteúdo é empacotado no build; o Worker não lê disco
 
 **Decisão.** `build/gerar-conteudo.mjs` lê e valida `conteudo/**/*.md` em Node,

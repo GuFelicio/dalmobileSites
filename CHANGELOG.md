@@ -8,6 +8,32 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.8.0] — 2026-09-09
+
+### Caraguatatuba ganhou paleta própria: areia no lugar do cinza
+
+Só a **família do cinza** muda — painel do hero, faixas, rodapé e tiras de
+chamada. Preto, papel e branco são os mesmos nos dois sites, e **nenhum
+componente foi tocado**: os nomes semânticos não mudaram.
+
+- `app/tokens.css` ganhou `:root[data-paleta="palha"]` com quatro valores.
+  Continua sendo o único arquivo do projeto com cor literal.
+- `config/tipos.ts` ganhou `paleta: "neutra" | "palha"`. O config escolhe
+  **pelo nome** — o hex nunca sai de `tokens.css`.
+- O `<html>` carrega `data-paleta`, vindo do config da unidade.
+- Teste novo: a variante existe em `tokens.css` e as duas unidades a declaram.
+  A suíte foi para **48**.
+
+**Contraste medido, e uma correção do que eu havia afirmado.** Eu disse que o
+painel do hero usava texto branco e reprovava com 3,00:1. Estava errado: ele
+herda texto escuro de `.site-synthesis`, e passa com 5,40:1. Sobre a palha vai
+para **9,33:1**. O texto de apoio sobre papel foi de 6,02 para 6,42.
+
+Verificado nos dois builds e em `workerd`: `<html data-paleta="palha">` e a
+regra no CSS servido.
+
+---
+
 ## [0.7.2] — 2026-09-09
 
 ### O slider voltou à composição do estudo

@@ -24,6 +24,8 @@ export const unidade: Unidade = {
   cidade: "Caraguatatuba",
   estado: "SP",
   dominio: "https://dalmobilecaraguatatuba.com.br",
+  // Areia no lugar do cinza: o site do litoral. Ver app/tokens.css.
+  paleta: "palha",
 
   endereco: {
     logradouro: "Av. Espírito Santo, 58",

@@ -29,6 +29,22 @@
   --c-preto:        #111211;  /* fundo do documento, superfície de imagem  */
 
   /* ------------------------------------------------------------------
+     1b. VARIANTE DE PALETA POR UNIDADE — "palha"
+     Aplicada por `data-paleta` no <html>, vindo do config da unidade.
+     Ver config/tipos.ts e docs/decisoes.md.
+
+     Troca só a FAMÍLIA DO CINZA por tons de areia, para o site do litoral.
+     Nada mais muda: preto, papel e branco são os mesmos nos dois sites, e o
+     desenho continua sendo um só. A cor NÃO é de acento — é superfície.
+
+     Contraste medido, com --preto (#20211f) por cima:
+       cinza atual #97958f → 5,40:1
+       palha       #cfc4a9 → 9,33:1
+     ------------------------------------------------------------------ */
+
+  /* Nada aqui: a camada 1 acima é a paleta neutra, o padrão. */
+
+  /* ------------------------------------------------------------------
      2. COR — CAMADA SEMÂNTICA
      Nomes fixos do CLAUDE.md. É por aqui que o componente pede cor.
      Nunca renomear: a troca da paleta acontece na camada 1.
@@ -138,6 +154,22 @@
 
   /* Alvo de toque mínimo, para não repetir o botão de 30px do estudo. */
   --toque: 44px;
+}
+
+/* ------------------------------------------------------------------
+   A PALETA "PALHA", do site de Caraguatatuba.
+
+   Só a família do cinza muda. É o único lugar do projeto com cor literal
+   de variante — o componente continua falando só com os nomes semânticos
+   (--cinza, --cinza-clr, --cinza-texto), que não mudam de nome.
+
+   Trocar estes quatro valores troca o site do litoral inteiro.
+   ------------------------------------------------------------------ */
+:root[data-paleta="palha"] {
+  --c-cinza:        #cfc4a9;  /* faixas, rodapé, tiras de chamada           */
+  --c-cinza-painel: #cfc4a9;  /* painel sólido do hero                      */
+  --c-cinza-texto:  #5f5847;  /* texto de apoio sobre papel — 6,42:1        */
+  --c-linha:        #c6bda6;  /* fio sobre claro, estado desativado         */
 }
 
 /* ====================================================================

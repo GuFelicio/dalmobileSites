@@ -80,3 +80,26 @@ test("a Krub carrega só os pesos 300, 400 e 600", async () => {
   assert.deepEqual(proibidos, [], `Peso de fonte fora da escala do CLAUDE.md: ${proibidos.join(", ")}`);
   assert.ok(pesos.length > 0, "nenhum peso da Krub importado");
 });
+
+test("a variante de paleta só existe em app/tokens.css, e o config a escolhe por nome", async () => {
+  // O site do litoral usa a família do cinza em tons de areia. Os VALORES
+  // ficam em app/tokens.css, que é o único arquivo com cor literal; o config
+  // só diz o nome. Se alguém escrever o hex da palha num componente, o teste
+  // "nenhuma cor literal fora de app/tokens.css" já barra — este garante o
+  // outro lado: que a variante não sumiu e que as duas unidades a declaram.
+  const tokens = await readFile(path.join(root, ARQUIVO_DE_TOKENS), "utf8");
+  assert.match(
+    tokens,
+    /:root\[data-paleta="palha"\]/,
+    "a variante de paleta sumiu de app/tokens.css",
+  );
+
+  for (const unidade of ["sjc", "caragua"]) {
+    const config = await readFile(path.join(root, "config", `${unidade}.ts`), "utf8");
+    assert.match(
+      config,
+      /paleta: "(neutra|palha)"/,
+      `config/${unidade}.ts não declara paleta`,
+    );
+  }
+});
