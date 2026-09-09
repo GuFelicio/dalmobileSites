@@ -18,6 +18,7 @@
 import Link from "next/link";
 
 import Foto from "../components/midia/Foto";
+import SliderDeFotos, { type FotoDoSlider } from "../components/midia/SliderDeFotos";
 import { enderecoEmLinha, linkWhatsApp, unidade } from "../config/derivados";
 import { ambientesDaUnidade, escolherFoto } from "../lib/ambientes-da-unidade.ts";
 
@@ -37,7 +38,6 @@ export default function Home() {
   // A vitrine sai do acervo real desta unidade, não de foto de estudo. Como
   // vem do config, o site de Caraguá mostra os ambientes de Caraguá sozinho.
   const ambientes = ambientesDaUnidade();
-  const vitrine = ambientes.slice(0, 3);
   const whatsapp = linkWhatsApp();
 
   // As três fotos de apoio da home. A lista de preferência cai para o que a
@@ -45,6 +45,20 @@ export default function Home() {
   const fotoManifesto = escolherFoto(ambientes, ["sala-de-estar", "cozinha"], 3);
   const fotoProcesso = escolherFoto(ambientes, ["cozinha", "banheiro"], 7);
   const fotoContato = escolherFoto(ambientes, ["quartos", "sala-de-estar"], 5);
+
+  // TODAS as fotos do acervo desta unidade, achatadas para o slider e na
+  // ordem editorial de lib/ambientes.ts — cozinha e quartos primeiro.
+  const fotosDoSlider: FotoDoSlider[] = ambientes.flatMap((ambiente) =>
+    ambiente.fotos.map((foto) => ({
+      src: foto.src,
+      titulo: foto.titulo,
+      alt: foto.alt,
+      ambienteNome: ambiente.nome,
+      ambienteSlug: ambiente.slug,
+      edificio: foto.edificio,
+      arquiteto: foto.arquiteto,
+    })),
+  );
 
   return (
     <div className="site site-synthesis">
@@ -97,48 +111,17 @@ export default function Home() {
 
         <section className="synthesis-projects" id="sintese-projetos">
           <div className="synthesis-section-heading">
-            <div><p className="eyebrow">02 — MUNDOS CRIADOS</p><h2>Projetos que permanecem.</h2></div>
+            <div>
+              <p className="eyebrow">02 — MUNDOS CRIADOS</p>
+              <h2 id="titulo-vitrine">Projetos que permanecem.</h2>
+            </div>
             <Link href="/ambientes">Explorar portfólio <Arrow /></Link>
           </div>
 
-          {/* Os três primeiros ambientes desta unidade, com a primeira foto de
-              cada. Antes eram três fotos de estudo com rótulos inventados
-              ("EXPRESSIVO", "ORGÂNICO") e "Ver projeto" apontando para a
-              própria página. Agora é acervo real, e o link leva ao ambiente. */}
-          {vitrine[0] ? (
-            <article className="synthesis-project synthesis-project-featured">
-              <Foto
-                src={vitrine[0].fotos[0].src}
-                alt={vitrine[0].fotos[0].alt}
-                sizes="(max-width: 1024px) 100vw, 66vw"
-              />
-              <div>
-                <span>01 / {vitrine[0].nome.toUpperCase()}</span>
-                <h3>{vitrine[0].fotos[0].titulo}</h3>
-                <Link href={`/ambientes/${vitrine[0].slug}`}>Ver {vitrine[0].nome.toLowerCase()} <Arrow /></Link>
-              </div>
-            </article>
-          ) : null}
-
-          <div className="synthesis-project-pair">
-            {vitrine.slice(1).map((ambiente, i) => (
-              <article
-                key={ambiente.slug}
-                className={`synthesis-project ${i === 0 ? "synthesis-project-light" : "synthesis-project-dark"}`}
-              >
-                <Foto
-                  src={ambiente.fotos[0].src}
-                  alt={ambiente.fotos[0].alt}
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                />
-                <div>
-                  <span>0{i + 2} / {ambiente.nome.toUpperCase()}</span>
-                  <h3>{ambiente.fotos[0].titulo}</h3>
-                  <Link href={`/ambientes/${ambiente.slug}`}>Ver {ambiente.nome.toLowerCase()} <Arrow /></Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          {/* O acervo inteiro desta unidade, passando para o lado. Antes eram
+              três fotos de estudo com rótulos inventados. O slider rola por
+              scroll-snap nativo: sem biblioteca, e funciona sem JavaScript. */}
+          <SliderDeFotos fotos={fotosDoSlider} idRotulo="titulo-vitrine" />
         </section>
 
         <section className="synthesis-process" id="sintese-processo">
