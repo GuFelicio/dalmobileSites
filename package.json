@@ -19,7 +19,8 @@
     "pendencias": "node config/verificar-pendencias.mjs",
     "fotos": "node build/gerar-imagens.mjs",
     "conteudo": "node build/gerar-conteudo.mjs",
-    "preparar": "npm run fotos && npm run conteudo"
+    "preparar": "npm run fotos && npm run conteudo",
+    "workerd": "wrangler dev -c dist/server/wrangler.json --port 8799 --local"
   },
   "dependencies": {
     "@fontsource/krub": "5.3.0",

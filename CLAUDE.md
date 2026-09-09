@@ -257,6 +257,9 @@ Mantém: o runtime Cloudflare. O site é 90% imagem, e toda foto de conteúdo pa
 - [ ] `:focus-visible` visível em todo elemento focável
 - [ ] Menu mobile funcionando — nada de botão hambúrguer sem handler
 - [ ] `alt` descritivo em toda imagem
+- [ ] **Rodado em `workerd`, não só em Node:** `npm run workerd` e todas as rotas
+      em 200. O runtime da Cloudflare não tem sistema de arquivos, e a suíte
+      roda em Node, onde tem — dois deploys já caíram por essa diferença
 - [ ] **Nenhum andaime de protótipo no build:** seletor de layout, barra de debug,
       título de estudo, rota de teste
 - [ ] Nenhum link âncora apontando para a própria seção
