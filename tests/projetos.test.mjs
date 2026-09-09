@@ -92,10 +92,20 @@ test('"outros projetos neste edifício" nunca inclui o próprio projeto', () => 
   }
 });
 
-test("campo obrigatório faltando quebra com mensagem que diz o que fazer", () => {
-  // Não basta quebrar: quem publica projeto não é quem programa.
-  const arquivos = readdirSync(path.join(raiz, "conteudo/projetos"));
-  assert.ok(arquivos.length > 0, "nenhum projeto de exemplo em conteudo/projetos/");
+test("a camada de projetos continua funcionando, mesmo sem conteúdo", () => {
+  // O conteúdo de projeto saiu quando o site passou a ser organizado por
+  // ambiente: falta a informação de prédio e de arquiteto para montar um case.
+  // O CÓDIGO fica, e este teste garante que ele não apodrece — o dia em que o
+  // cliente trouxer os dados, a camada tem que subir sem conserto.
+  // Ver docs/decisoes.md.
+  let arquivos = [];
+  try { arquivos = readdirSync(path.join(raiz, "conteudo/projetos")); } catch { /* pasta pode não existir */ }
+  assert.ok(Array.isArray(todosOsProjetos()), "a leitura de projetos quebrou");
+  assert.equal(
+    todosOsProjetos().length,
+    arquivos.filter((a) => a.endsWith(".md")).length,
+    "a contagem de projetos não bate com os arquivos em conteudo/projetos/",
+  );
 });
 
 test("todo projeto de exemplo está marcado como exemplo", () => {

@@ -102,7 +102,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza);
+  color: var(--cinza-texto);
   margin: 0 0 var(--e-2);
 }
 
@@ -117,7 +117,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza);
+  color: var(--cinza-texto);
 }
 
 .ficha dd {
@@ -139,7 +139,7 @@
 /* O código do acabamento é o que sustenta a comparação de proposta. Fica
    visível, em apoio — não escondido. */
 .codigo {
-  color: var(--cinza);
+  color: var(--cinza-texto);
   font-variant-numeric: tabular-nums;
 }
 

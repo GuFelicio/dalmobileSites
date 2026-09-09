@@ -1,0 +1,162 @@
+/* Página do ambiente. Ver app/ambientes/[slug]/page.tsx e a seção 6.2
+   do docs/direcao-site.md. */
+
+.caminho ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-1);
+  list-style: none;
+  margin: 0 0 var(--e-3);
+  padding: 0;
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+}
+
+.caminho li + li::before {
+  content: "/";
+  margin-right: var(--e-1);
+  color: var(--cinza-clr);
+}
+
+.caminho a:hover { color: var(--preto); }
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: 0;
+}
+
+.chamada {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  max-width: var(--medida);
+  margin: var(--e-2) 0 0;
+}
+
+.texto p {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida); /* 62 a 66 caracteres */
+  margin: var(--e-3) 0 0;
+  color: var(--cinza-texto);
+}
+
+/* ---- Galeria -------------------------------------------------------- */
+
+.galeria {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e-5);
+}
+
+.item figure { margin: 0; }
+
+/* Uma foto por bloco, sangrando. Nunca mosaico, nunca miniatura. */
+.foto {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* A legenda mantém a margem lateral mesmo com a foto sangrando até a borda. */
+.legenda {
+  display: block;
+  padding-inline: var(--pad-lateral);
+  margin-top: var(--e-2);
+  max-width: var(--medida);
+}
+
+.legendaTitulo {
+  display: block;
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  color: var(--sobre-escuro);
+}
+
+.credito {
+  display: block;
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--sobre-escuro-55);
+  margin-top: var(--e-1);
+}
+
+/* ---- Outros ambientes ----------------------------------------------- */
+
+.outrosTitulo {
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  margin: 0 0 var(--e-3);
+}
+
+.outros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-1);
+}
+
+.outrosLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque); /* alvo de toque de 44px */
+  padding: 0 var(--e-2);
+  border: var(--fio) solid var(--cinza-clr);
+  font-size: var(--fs-texto);
+}
+
+.outrosLink:hover { border-color: var(--preto); }
+
+/* ---- Chamada final --------------------------------------------------- */
+
+.chamadaFinal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-3);
+  padding-block: var(--e-4);
+}
+
+.chamadaTexto {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  margin: 0;
+  max-width: var(--medida);
+}
+
+.chamadaAcao {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  padding: 0 var(--e-3);
+  border: var(--fio) solid var(--preto);
+  font-size: var(--fs-texto);
+  color: var(--preto);
+  transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
+}
+
+.chamadaAcao:hover {
+  background: var(--preto);
+  color: var(--branco);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chamadaAcao { transition: none; }
+}

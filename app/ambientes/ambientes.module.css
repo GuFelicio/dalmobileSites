@@ -1,0 +1,89 @@
+/* Hub de ambientes. Superfície papel: o texto manda.
+   Ver app/ambientes/page.tsx e a seção 6.1 do docs/direcao-site.md. */
+
+.titulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+  margin: 0;
+}
+
+.intro {
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida); /* 62 a 66 caracteres */
+  margin: var(--e-2) 0 0;
+  color: var(--cinza-texto);
+}
+
+/* Grade 2/3/4 colunas. Card pequeno funciona aqui: são rótulos com foto de
+   apoio, não peças de portfólio — por isso não vale a regra de 2 colunas
+   dos projetos. */
+.grade {
+  list-style: none;
+  margin: var(--e-4) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--e-3) var(--e-2);
+}
+
+@media (min-width: 601px) {
+  .grade {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--e-4) var(--e-3);
+  }
+}
+
+@media (min-width: 1025px) {
+  .grade {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cardLink {
+  display: block;
+}
+
+/* 4:3, conforme a direção. */
+.cardFoto {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--c-papel-baixo);
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--mov-hover) var(--mov-ease);
+}
+
+.cardLink:hover .cardImg {
+  transform: scale(1.02);
+}
+
+.cardNome {
+  display: block;
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  margin-top: var(--e-2);
+}
+
+.cardContagem {
+  display: block;
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+  margin-top: 4px; /* meia unidade: a contagem é apoio do nome, não item novo */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardImg { transition: none; }
+  .cardLink:hover .cardImg { transform: none; }
+}

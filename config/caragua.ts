@@ -85,7 +85,9 @@ export const unidade: Unidade = {
   // Caraguá sai do acervo do litoral, e pode não ser o mesmo de SJC. Este
   // menu é o de SJC até a curadoria definir.
   navegacao: [
-    { rotulo: "Projetos", href: "/projetos" },
+    // "Projetos" sai do menu enquanto não houver case publicado: falta a
+    // informação de prédio e de arquiteto. A rota e a camada continuam no
+    // código, prontas. Ver docs/decisoes.md.
     { rotulo: "Ambientes", href: "/ambientes" },
     { rotulo: "A Dalmóbile", href: "/a-dalmobile" },
     { rotulo: "Arquitetos", href: "/arquitetos" },

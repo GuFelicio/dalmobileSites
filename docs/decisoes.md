@@ -8,6 +8,107 @@ Formato: **data · o que · por quê · o que foi descartado**.
 
 ---
 
+## 2026-09-09 · O site passa a ser organizado por ambiente, não por projeto
+
+**Decisão.** O conteúdo principal são as páginas de ambiente
+(`/ambientes/[slug]`), que reúnem fotos de apartamentos diferentes. As rotas de
+projeto (`/projetos` e `/projetos/[slug]`) e toda a camada `lib/projetos.ts`
+**ficam no código, sem conteúdo**, e fora do menu.
+
+**Por quê.** O acervo que chegou tem 45 fotos de seis apartamentos, e **nenhuma
+informação de prédio ou de arquiteto**. Um case exige ficha técnica: local, ano,
+acabamentos com código, arquiteto. Sem esses dados não há case — e seis
+apartamentos com sete fotos cada não sustentam as "trinta" que a direção prevê.
+
+**O que isso custa, e é preciso dizer.** A seção 6 do `docs/direcao-site.md`
+afirma que o cruzamento nos dois sentidos — ambiente aponta para projeto,
+projeto aponta para ambiente — *"é a estrutura que nenhum concorrente tem: a
+Costa Flores tem o portfólio e não tem as páginas de ambiente; o Top Vale tem o
+inverso"*. Indo só por ambiente, o site fica onde o Top Vale está. Perdem-se
+também a ficha técnica e o crédito do arquiteto, que o `CLAUDE.md` chama de
+ativos que nenhum concorrente de SJC tem.
+
+**Como isso fica reversível, que é o ponto.** Cada foto carrega os campos
+`edificio` e `arquiteto`, hoje vazios, e o **nome do arquivo preserva a origem**
+(`27062023-riz4771`, `dalmobile-calabasasapto93-0919`). Hoje ainda dá para saber
+de que apartamento cada foto veio; daqui a seis meses não daria. Quando os dados
+chegarem, o agrupamento por projeto sai daí sem reescrever conteúdo.
+
+**Descartado.** Apagar a camada de projetos (jogaria fora a Fase 4 inteira e o
+caminho de volta), inventar prédio e arquiteto para ter cases (o `CLAUDE.md`
+proíbe número ou nome sem confirmação) e deixar `/projetos` no menu apontando
+para uma página vazia.
+
+---
+
+## 2026-09-09 · A lista de ambientes vem do acervo, não do catálogo
+
+**Decisão.** Os ambientes do site são sete: cozinha, quartos, sala de estar,
+home office, closet, banheiro e espaço gourmet.
+
+**Por quê.** A seção 3.3 do `docs/direcao-site.md` lista "os oito dos
+catálogos": cozinha compacta, closet, lavanderia, casa integrada, home office,
+sala de estar, cozinha gourmet, banheiro. O acervo real não bate com essa lista
+em três pontos:
+
+- **"Quartos" não está no catálogo, e é o ambiente MAIS fotografado** — doze das
+  45 fotos. Deixá-lo de fora tiraria do site o segundo maior conjunto de provas.
+- **O acervo não separa cozinha compacta de gourmet.** As onze fotos de cozinha
+  são cozinhas, e forçar a divisão criaria duas páginas com critério inventado.
+- **"Casa integrada" e "lavanderia" não têm nenhuma foto.** Página de ambiente
+  sem foto não é página.
+
+Entrou "espaço gourmet" no lugar da pasta "churrasqueira" do acervo.
+
+**Descartado.** Manter os oito do catálogo e reclassificar as fotos à força
+(nove fotos de quarto viariam "closet", que é outra coisa) e criar páginas
+vazias para os ambientes sem foto.
+
+---
+
+## 2026-09-09 · Os originais das fotos ficam fora do repositório
+
+**Decisão.** `imgs/` está no `.gitignore`. O que se versiona é a versão de
+2560px em WebP, em `public/fotos/`.
+
+**Por quê.** Medido: os 46 originais somam **250 MB**; em 2560px WebP somam
+**20 MB**, com qualidade 86. O site nunca serve acima de 1920px, então a
+diferença é invisível no navegador e brutal no repositório. Projetando o acervo
+completo — 30 projetos, ~300 fotos —, seriam **1,6 GB contra ~100 MB**.
+
+**O que fica combinado.** Os originais em resolução cheia são arquivo morto e
+vivem no Drive. Se um dia for preciso um recorte ou uma impressão, é lá.
+
+**Descartado.** Commitar os originais (clone e build da Cloudflare ficariam
+lentos, e o GitHub avisa) e Git LFS (resolve o peso, mas acrescenta ferramenta
+que quem entrar depois precisa instalar, e o build da Cloudflare precisaria
+suportar).
+
+---
+
+## 2026-09-09 · `--cinza-texto`: a camada semântica ganhou um token de texto
+
+**Decisão.** Acrescentado `--cinza-texto` à camada semântica de
+`app/tokens.css`, apontando para `--c-cinza-texto` (`#5d5d58`).
+
+**Por quê.** A camada semântica tinha `--preto`, `--cinza`, `--cinza-clr`,
+`--papel` e `--branco`, e nenhum token para **texto de apoio sobre papel**.
+Usar `--cinza` para isso reprova em acessibilidade: medido, `--cinza` sobre
+`--papel` dá **2,52:1**, e o mínimo do WCAG AA para texto é **4,5:1**. O novo
+token dá **6,02:1**.
+
+O valor já existia na camada 1, nomeado para essa função — o que faltava era a
+ponte semântica. Três lugares do case da Fase 4 já usavam `--cinza` como cor de
+texto e estavam reprovando; foram corrigidos.
+
+**A regra que fica:** `--cinza` para faixa e superfície, `--cinza-texto` para
+texto sobre papel.
+
+**Descartado.** Usar `--cinza` mesmo assim (reprova em contraste) e escrever o
+hex direto no componente (o `CLAUDE.md` proíbe, e um teste barra).
+
+---
+
 ## 2026-09-08 · O estudo escolhido é o 03 Síntese; os outros dois ficam no histórico
 
 **Decisão.** Dos três estudos de layout, vale o **03 Síntese**. O Editorial e o

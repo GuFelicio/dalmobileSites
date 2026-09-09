@@ -8,6 +8,53 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.5.0] — 2026-09-09
+
+### O acervo real entrou, e o site virou organizado por ambiente
+
+**45 fotos reais** de seis apartamentos, de 250 MB para 20 MB no repositório.
+
+**Entrou**
+
+- `conteudo/ambientes/*.md` — sete ambientes, com título de impacto e `alt`
+  escritos foto a foto, olhando cada uma das 45.
+- `/ambientes` (hub, grade 2/3/4 colunas, foto 4:3) e `/ambientes/[slug]`
+  (texto, galeria grande empilhada, chamada final).
+- `lib/ambientes-conteudo.ts` (núcleo puro) e `lib/ambientes-da-unidade.ts`.
+- Concordância por ambiente em `lib/ambientes.ts` — `artigo`, `planejado` e
+  `singular`. Sem isso o site escrevia "Cozinha planejado" no `<title>` e
+  "Quer um quartos assim" na chamada.
+- Capa do site: `casaCompleta.jpg`, que mostra estar, jantar e gourmet juntos.
+- 9 testes de ambiente. A suíte foi de 32 para **41**.
+- `docs/adicionar-ambiente.md`.
+
+**Mudou**
+
+- A lista de ambientes passou a vir do acervo, não do catálogo: entraram
+  **Quartos** (o mais fotografado, 12 fotos) e **Espaço gourmet**; saíram
+  cozinha compacta/gourmet separadas, casa integrada e lavanderia, sem foto.
+- `imgs/` foi para o `.gitignore`: os originais em resolução cheia são arquivo
+  morto e vivem no Drive.
+- `/projetos` saiu do menu. A rota e a camada continuam no código, sem
+  conteúdo, esperando prédio e arquiteto.
+- Os três projetos de exemplo e suas fotos foram removidos.
+
+**Corrigido — acessibilidade**
+
+`--cinza` como cor de texto sobre papel dá **2,52:1** de contraste, e o WCAG AA
+exige 4,5:1. A camada semântica não tinha token para texto de apoio; ganhou
+`--cinza-texto`, com **6,02:1**. Três lugares do case da Fase 4 já reprovavam.
+
+**Pendente**
+
+- **Prédio e arquiteto de cada foto.** Os campos existem e estão vazios; a
+  linha de crédito não aparece enquanto for assim.
+- Mapa das duas lojas.
+- **Conferência visual nas seis larguras** — as páginas novas nunca foram
+  abertas em navegador.
+
+---
+
 ## [0.4.1] — 2026-09-08
 
 ### Corretiva — o andaime de protótipo saiu do ar

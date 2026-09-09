@@ -39,6 +39,11 @@
   --papel:      var(--c-papel);
   --branco:     var(--c-branco);
 
+  /* Texto de apoio sobre papel. NÃO é --cinza: medido, --cinza sobre --papel
+     dá 2,52:1 de contraste, e o mínimo do WCAG AA para texto é 4,5:1. Este
+     dá 6,02:1. Use --cinza para faixa e superfície, este para texto. */
+  --cinza-texto: var(--c-cinza-texto);
+
   /* Não existe cor de acento. Se faltar destaque, a resposta é escala
      ou troca de superfície. Único desvio previsto: verde e vermelho de
      sistema em erro e sucesso de formulário (Fase 7).                  */
