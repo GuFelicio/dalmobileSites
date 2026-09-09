@@ -18,6 +18,7 @@ Dois sites (São José dos Campos e Caraguatatuba) gerados de **um repositório 
 | [`docs/unidades.md`](docs/unidades.md) | o que cada campo do config faz |
 | [`docs/prompts-construcao.md`](docs/prompts-construcao.md) | o plano de nove fases |
 | [`CHANGELOG.md`](CHANGELOG.md) | o que mudou em cada entrega |
+| [`docs/pendencias.md`](docs/pendencias.md) | **o que falta para o site ir ao ar** |
 
 Em caso de conflito entre os documentos, **o `CLAUDE.md` vence**.
 

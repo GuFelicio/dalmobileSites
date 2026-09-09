@@ -8,6 +8,53 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [0.5.2] — 2026-09-09
+
+### A home passou a usar o acervo real e a levar a algum lugar
+
+**O problema.** A home era o estudo promovido a conteúdo, e **nenhum botão
+levava às páginas de ambiente**. Toda ação apontava para `#sintese-contato` — e
+"Agendar uma visita" ficava *dentro* daquela seção, apontando para ela mesma,
+que é o "link âncora para a própria seção" proibido pelo `CLAUDE.md`. A seção
+02, "Projetos que permanecem", mostrava três fotos de estudo com rótulos
+inventados ("EXPRESSIVO", "ORGÂNICO", "CONTEMPORÂNEO").
+
+**Corrigido**
+
+- Menu, hero, "Explorar portfólio" e os cards levam a `/ambientes` e
+  `/ambientes/[slug]`. Âncora sobrou só onde é legítima: seção da própria página.
+- "Agendar uma visita" virou **"Falar no WhatsApp"**, com destino real e a
+  mensagem que identifica a unidade de origem.
+- A seção 02 mostra os **três primeiros ambientes desta unidade**, com a foto e
+  o título reais, e cada card leva à página do ambiente.
+- Hero, manifesto, processo e contato passaram a usar fotos do acervo, via
+  `<Foto>` com `srcSet`. **Só o logo da marca restou de `public/assets/`.**
+- `MÓVEIS PERSONALIZADOS · SJC` e `SHOWROOM SJC` estavam com a sigla escrita à
+  mão — outro vazamento que o teste de cidade cruzada não pega, porque a sigla
+  não é o nome da cidade. Agora vêm do config.
+
+**Ordem editorial, não alfabética**
+
+`ambientesDe()` passou a ordenar pela lista de `lib/ambientes.ts`, e não pela
+ordem do sistema de arquivos. Em ordem alfabética a home abria com **Banheiro**;
+agora abre com Cozinha, Quartos e Sala de estar. Vale também para `/ambientes`.
+
+**Dois testes novos, para o furo que deixou isso passar**
+
+O teste `nenhum CTA sem destino real` só via `href="#"` e âncora sem `href`.
+Passava com a home inteira apontando para si mesma e com quatro rotas 404 no
+menu e no rodapé. Agora: um teste **busca cada link interno da home e confere
+se a rota responde 200**, e outro falha se uma seção tiver link para si mesma.
+A suíte foi de 41 para **43**.
+
+**`docs/pendencias.md`**
+
+Documento novo com o que falta: as quatro rotas 404, os dados de loja, prédio e
+arquiteto por foto, a camada de projetos dormente, a conferência nas seis
+larguras e a home provisória.
+
+---
+
 ## [0.5.1] — 2026-09-09
 
 ### Trava: em CI, o build recusa rodar sem saber a unidade

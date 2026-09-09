@@ -6,7 +6,9 @@
  * é o que impede a foto de uma unidade de aparecer no site da outra.
  */
 import { unidade } from "../config/derivados.ts";
-import { ambientesDe, type PaginaDeAmbiente } from "./ambientes-conteudo.ts";
+import { ambientesDe, escolherFoto, type PaginaDeAmbiente } from "./ambientes-conteudo.ts";
+
+export { escolherFoto };
 
 export function ambientesDaUnidade(): PaginaDeAmbiente[] {
   return ambientesDe(unidade.id);

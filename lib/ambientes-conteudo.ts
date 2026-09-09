@@ -17,7 +17,7 @@ import path from "node:path";
 
 import matter from "gray-matter";
 
-import { ambientePorSlug } from "./ambientes.ts";
+import { AMBIENTES, ambientePorSlug } from "./ambientes.ts";
 
 const PASTA = path.join(process.cwd(), "conteudo/ambientes");
 
@@ -163,8 +163,34 @@ export function todosOsAmbientes(): PaginaDeAmbiente[] {
  * Caraguá de aparecer no site de SJC.
  */
 export function ambientesDe(id: UnidadeId): PaginaDeAmbiente[] {
+  const ordem = AMBIENTES.map((a) => a.slug);
   return todosOsAmbientes()
     .filter((a) => a.unidades.includes(id))
     .map((a) => ({ ...a, fotos: a.fotos.filter((f) => f.unidade === id) }))
-    .filter((a) => a.fotos.length > 0);
+    .filter((a) => a.fotos.length > 0)
+    // A ORDEM É A DE lib/ambientes.ts, não a alfabética do sistema de
+    // arquivos. É decisão editorial: cozinha e quartos são o que a loja tem
+    // de mais forte, e a vitrine da home mostra os três primeiros. Em ordem
+    // alfabética a home abria com "Banheiro".
+    .sort((a, b) => ordem.indexOf(a.slug) - ordem.indexOf(b.slug));
+}
+
+/**
+ * Escolhe uma foto entre os ambientes disponíveis, por ordem de preferência.
+ *
+ * Existe porque a home precisa de fotos específicas em seções específicas, mas
+ * os ambientes variam por unidade — Caraguá não tem home office nem closet.
+ * A lista de preferência cai para o que existir, e a home nunca fica sem foto.
+ */
+export function escolherFoto(
+  ambientes: PaginaDeAmbiente[],
+  preferencia: string[],
+  indice = 0,
+) {
+  for (const slug of preferencia) {
+    const ambiente = ambientes.find((a) => a.slug === slug);
+    const foto = ambiente?.fotos[indice] ?? ambiente?.fotos[0];
+    if (foto) return foto;
+  }
+  return ambientes[0]?.fotos[indice] ?? ambientes[0]?.fotos[0];
 }

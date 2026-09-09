@@ -148,3 +148,40 @@ test("a home é server component: nada de estado de protótipo no cliente", asyn
   assert.match(html, /<title>Móveis Planejados em [^<]+ \| Dalmóbile<\/title>/);
 });
 
+test("todo link interno da home leva a uma rota que existe", async () => {
+  // O teste antigo só via href="#" e âncora sem href. Passava com a home
+  // inteira apontando para #sintese-contato e com quatro rotas 404 no menu e
+  // no rodapé. Agora confere o destino de verdade.
+  const { html } = await renderizar("/");
+  const corpo = html.slice(html.indexOf("<body"));
+  const internos = [...corpo.matchAll(/href="(\/[^"#?]*)"/g)]
+    .map((m) => m[1])
+    .filter((h) => !h.startsWith("/assets") && !h.startsWith("/fotos") && h !== "/favicon.svg");
+
+  const quebrados = [];
+  for (const rota of [...new Set(internos)]) {
+    const { resposta } = await renderizar(rota);
+    if (resposta.status !== 200) quebrados.push(`${rota} → ${resposta.status}`);
+  }
+  assert.deepEqual(
+    quebrados,
+    [],
+    `link da home apontando para rota inexistente:\n${quebrados.join("\n")}\n` +
+      `Ver docs/pendencias.md.`,
+  );
+});
+
+test("nenhuma âncora aponta para a seção que a contém", async () => {
+  // "Agendar uma visita" ficava dentro de #sintese-contato e apontava para
+  // #sintese-contato. O CLAUDE.md proíbe: âncora só dentro da própria página,
+  // e nunca para a própria seção.
+  const { html } = await renderizar("/");
+  for (const secao of [...html.matchAll(/<section[^>]*id="([^"]+)"([\s\S]*?)<\/section>/g)]) {
+    assert.doesNotMatch(
+      secao[2],
+      new RegExp(`href="#${secao[1]}"`),
+      `a seção #${secao[1]} tem link para si mesma`,
+    );
+  }
+});
+

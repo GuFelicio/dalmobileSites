@@ -15,7 +15,11 @@
 
 // A cidade vem do config, nunca escrita à mão: até andaime entra no bundle, e
 // o teste de cidade cruzada vasculha tudo.
-import { unidade } from "../config/derivados";
+import Link from "next/link";
+
+import Foto from "../components/midia/Foto";
+import { enderecoEmLinha, linkWhatsApp, unidade } from "../config/derivados";
+import { ambientesDaUnidade, escolherFoto } from "../lib/ambientes-da-unidade.ts";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -30,27 +34,47 @@ function Brand({ light = false }: { light?: boolean }) {
 }
 
 export default function Home() {
+  // A vitrine sai do acervo real desta unidade, não de foto de estudo. Como
+  // vem do config, o site de Caraguá mostra os ambientes de Caraguá sozinho.
+  const ambientes = ambientesDaUnidade();
+  const vitrine = ambientes.slice(0, 3);
+  const whatsapp = linkWhatsApp();
+
+  // As três fotos de apoio da home. A lista de preferência cai para o que a
+  // unidade tiver: Caraguá não tem home office nem closet.
+  const fotoManifesto = escolherFoto(ambientes, ["sala-de-estar", "cozinha"], 3);
+  const fotoProcesso = escolherFoto(ambientes, ["cozinha", "banheiro"], 7);
+  const fotoContato = escolherFoto(ambientes, ["quartos", "sala-de-estar"], 5);
+
   return (
     <div className="site site-synthesis">
       <header className="header synthesis-header">
         <Brand light />
         <nav aria-label="Navegação principal">
+          {/* Âncora só para seção desta página. "Ambientes" é ROTA: era
+              âncora e não levava a lugar nenhum. */}
           <a href="#sintese-manifesto">A Dalmóbile</a>
-          <a href="#sintese-projetos">Projetos</a>
+          <Link href="/ambientes">Ambientes</Link>
           <a href="#sintese-processo">Como criamos</a>
         </nav>
-        <a className="synthesis-header-link" href="#sintese-contato">Showroom {unidade.nome} <Arrow /></a>
+        <Link className="synthesis-header-link" href="/ambientes">Ver ambientes <Arrow /></Link>
       </header>
 
       <main>
         <section className="synthesis-hero">
-          <img className="synthesis-hero-image" src="/assets/casacor-madeira.webp" alt="Ambiente Dalmóbile em madeira com iluminação acolhedora" />
+          <Foto
+            className="synthesis-hero-image"
+            src="/fotos/comum/capa/casa-completa.webp"
+            alt="Sala de estar, jantar e espaço gourmet integrados, com forro ripado em madeira, jardim vertical e mesa de jantar em madeira maciça"
+            sizes="100vw"
+            prioridade
+          />
           <div className="synthesis-shade" aria-hidden="true" />
           <div className="synthesis-hero-panel">
-            <p className="eyebrow">MÓVEIS PERSONALIZADOS · SJC</p>
+            <p className="eyebrow">MÓVEIS PERSONALIZADOS · {unidade.nome.toUpperCase()}</p>
             <h1>Crie seu <em>mundo.</em></h1>
             <p>Design, precisão e liberdade para criar ambientes que expressem a sua forma de viver.</p>
-            <a href="#sintese-projetos">Descubra nossos projetos <Arrow /></a>
+            <Link href="/ambientes">Ver os ambientes <Arrow /></Link>
           </div>
           <div className="synthesis-project-note">
             <span>PROJETO EM DESTAQUE</span>
@@ -66,7 +90,7 @@ export default function Home() {
             <a href="#sintese-processo">Conheça a nossa essência <Arrow /></a>
           </div>
           <figure className="synthesis-manifesto-image">
-            <img src="/assets/manifesto.webp" alt="Pessoa observando os acabamentos de um ambiente Dalmóbile" />
+            <Foto src={fotoManifesto.src} alt={fotoManifesto.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
             <figcaption>DESIGN BRASILEIRO · ESSÊNCIA ITALIANA</figcaption>
           </figure>
         </section>
@@ -74,27 +98,52 @@ export default function Home() {
         <section className="synthesis-projects" id="sintese-projetos">
           <div className="synthesis-section-heading">
             <div><p className="eyebrow">02 — MUNDOS CRIADOS</p><h2>Projetos que permanecem.</h2></div>
-            <a href="#sintese-contato">Explorar portfólio <Arrow /></a>
+            <Link href="/ambientes">Explorar portfólio <Arrow /></Link>
           </div>
-          <article className="synthesis-project synthesis-project-featured">
-            <img src="/assets/le-tt.webp" alt="Ambiente expressivo em madeira e tons profundos" />
-            <div><span>01 / EXPRESSIVO</span><h3>Matéria, luz e personalidade.</h3><a href="#sintese-contato">Ver projeto <Arrow /></a></div>
-          </article>
+
+          {/* Os três primeiros ambientes desta unidade, com a primeira foto de
+              cada. Antes eram três fotos de estudo com rótulos inventados
+              ("EXPRESSIVO", "ORGÂNICO") e "Ver projeto" apontando para a
+              própria página. Agora é acervo real, e o link leva ao ambiente. */}
+          {vitrine[0] ? (
+            <article className="synthesis-project synthesis-project-featured">
+              <Foto
+                src={vitrine[0].fotos[0].src}
+                alt={vitrine[0].fotos[0].alt}
+                sizes="(max-width: 1024px) 100vw, 66vw"
+              />
+              <div>
+                <span>01 / {vitrine[0].nome.toUpperCase()}</span>
+                <h3>{vitrine[0].fotos[0].titulo}</h3>
+                <Link href={`/ambientes/${vitrine[0].slug}`}>Ver {vitrine[0].nome.toLowerCase()} <Arrow /></Link>
+              </div>
+            </article>
+          ) : null}
+
           <div className="synthesis-project-pair">
-            <article className="synthesis-project synthesis-project-light">
-              <img src="/assets/spa-vivix.webp" alt="Spa com formas curvas e iluminação indireta" />
-              <div><span>02 / ORGÂNICO</span><h3>Formas que acolhem.</h3><a href="#sintese-contato">Ver projeto <Arrow /></a></div>
-            </article>
-            <article className="synthesis-project synthesis-project-dark">
-              <img src="/assets/refugio-poeta.webp" alt="Bar residencial com madeira e obras de arte" />
-              <div><span>03 / CONTEMPORÂNEO</span><h3>Um universo particular.</h3><a href="#sintese-contato">Ver projeto <Arrow /></a></div>
-            </article>
+            {vitrine.slice(1).map((ambiente, i) => (
+              <article
+                key={ambiente.slug}
+                className={`synthesis-project ${i === 0 ? "synthesis-project-light" : "synthesis-project-dark"}`}
+              >
+                <Foto
+                  src={ambiente.fotos[0].src}
+                  alt={ambiente.fotos[0].alt}
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
+                <div>
+                  <span>0{i + 2} / {ambiente.nome.toUpperCase()}</span>
+                  <h3>{ambiente.fotos[0].titulo}</h3>
+                  <Link href={`/ambientes/${ambiente.slug}`}>Ver {ambiente.nome.toLowerCase()} <Arrow /></Link>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
         <section className="synthesis-process" id="sintese-processo">
           <div className="synthesis-process-image">
-            <img src="/assets/tecnologia.webp" alt="Seleção técnica de acabamento Dalmóbile" />
+            <Foto src={fotoProcesso.src} alt={fotoProcesso.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
             <span>PRECISÃO EM CADA ESCOLHA</span>
           </div>
           <div className="synthesis-process-copy">
@@ -111,12 +160,20 @@ export default function Home() {
 
         <section className="synthesis-contact" id="sintese-contato">
           <div className="synthesis-contact-copy">
-            <p className="eyebrow">SHOWROOM SJC</p>
+            <p className="eyebrow">SHOWROOM {unidade.nome.toUpperCase()}</p>
             <h2>Seu mundo começa com uma conversa.</h2>
-            <p>Conheça de perto materiais, acabamentos e possibilidades para o seu projeto.</p>
-            <a href="#sintese-contato">Agendar uma visita <Arrow /></a>
+            <p>{enderecoEmLinha()}</p>
+            {/* Destino REAL. Antes apontava para #sintese-contato, que é esta
+                mesma seção — o "link âncora para a própria seção" que o
+                CLAUDE.md proíbe. /a-loja ainda não existe; ver
+                docs/pendencias.md. */}
+            {whatsapp ? (
+              <a href={whatsapp}>Falar no WhatsApp <Arrow /></a>
+            ) : (
+              <span aria-disabled="true">Contato em breve</span>
+            )}
           </div>
-          <div className="synthesis-contact-image"><img src="/assets/casacor-organico.webp" alt="Ambiente Dalmóbile com formas orgânicas e marcenaria clara" /></div>
+          <div className="synthesis-contact-image"><Foto src={fotoContato.src} alt={fotoContato.alt} sizes="(max-width: 1024px) 100vw, 50vw" /></div>
         </section>
       </main>
     </div>
