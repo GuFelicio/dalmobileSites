@@ -10,34 +10,27 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ## [não publicado] — 2026-09-14
 
-### Estudo de cena 3D, em rota de desenvolvimento
+### Estudo de cena 3D: construído e descartado no mesmo dia
 
-Protótipo para decidir se o bloco 01 da home ganha uma cena de materiais.
-**Nada disto está no site publicado.**
+O protótipo em `/laboratorio` com three.js foi **rejeitado e removido**. Fica o
+registro, porque a razão é útil para a próxima tentativa.
 
-- `app/laboratorio/` — reproduz o enquadramento do bloco 01 ("Nenhuma casa é
-  igual à planta"), para a decisão ser tomada olhando o lugar certo. Responde
-  **404 fora do `npm run dev`**.
-- `components/midia/CenaMateriais.tsx` — three.js puro, geometria 100%
-  procedural: seis chapas com a espessura real de cada acabamento, uma lâmina
-  curvada por deslocamento de vértices e uma fita de borda seguindo a mesma
-  curva. Scroll controla; o mouse faz 6% de parallax; sem sombra e sem
-  pós-processamento.
-- `components/midia/materiais.ts` — cor, rugosidade e espessura num arquivo
-  só, com o passo a passo para trocar por foto de material real.
-- 4 testes novos. A suíte foi para **61**.
+**Por que falhou.** Geometria procedural sem textura produz placas planas e
+cores chapadas — aparência de amostruário técnico, não de marcenaria. Era o
+resultado inevitável da técnica, não um problema de ajuste.
 
-**three.js puro, sem React Three Fiber.** O R3F pesa 2,1 MB e declara
-`expo`/`react-native` como peers; a cena não tem estado de React — é um loop
-de `requestAnimationFrame`.
+**O que a investigação da referência revelou.** O site tomado como referência
+(costaflores.com.br) **não usa 3D em tempo real**: é WordPress + Elementor
+servindo **vídeos MP4 renderizados** com um efeito de escala no scroll. Zero
+`three`, zero `.glb`, zero `gsap` no HTML. A qualidade cinematográfica vem de
+renderização offline — o caminho do WebGL estava errado desde o início.
 
-**O peso não encosta em nenhuma página real.** Medido: a home continua em
-**89 KB gzip**, e um teste falha se `three` ou `CenaMateriais` aparecerem nos
-arquivos que qualquer página carrega.
+**Removido:** `app/laboratorio/`, `components/midia/CenaMateriais.*`,
+`components/midia/materiais.ts`, `tests/laboratorio.test.mjs`, e as
+dependências `three` e `@types/three`. A home voltou a **88 KB gzip** e o
+build inteiro a 92 KB (era 274 KB com o three).
 
-**Três regras do `CLAUDE.md` seguem valendo, e por isso o estudo é estudo:**
-a proibição de biblioteca de animação, a de parallax, e *"interface que chama
-atenção para si é interface errada"*. Adotar a cena exige reabrir as três.
+A animação passou a ser produzida fora deste repositório.
 
 ---
 

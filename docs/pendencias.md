@@ -181,27 +181,3 @@ os redirects entram no `worker/index.ts`, antes do handler.
 
 Sem isso, cada URL antiga indexada vira um 404 — a página 404 existe e é
 prestativa, mas o link perde a autoridade que tinha acumulado.
-
----
-
-## 10. O laboratório de cena 3D é temporário
-
-`app/laboratorio/` e `components/midia/CenaMateriais.tsx` são um **estudo**,
-pedido em 14/09/2026 para decidir se a home ganha uma cena 3D no bloco 01.
-
-**Ele não vai ao ar:** a rota responde 404 fora do `npm run dev`, e um teste
-falha se alguém publicá-la. Nenhuma página real carrega o `three` — verificado
-em teste, e a home continua baixando 89 KB gzip.
-
-**Para ver:** `npm run dev` e abrir `/laboratorio`.
-
-**Quando a decisão for tomada, os dois caminhos são:**
-
-| Decisão | O que fazer |
-|---|---|
-| **Não adotar** | `rm -rf app/laboratorio components/midia/CenaMateriais* components/midia/materiais.ts`, `npm rm three @types/three`, e apagar `tests/laboratorio.test.mjs` |
-| **Adotar** | Antes de mais nada, reabrir três regras do `CLAUDE.md`: a proibição de biblioteca de animação (linha 243), a de parallax (linha 111) e a regra zero — *"interface que chama atenção para si é interface errada"*. A cena custa **~128 KB gzip contra os 89 KB que a home inteira baixa hoje**, num site cuja regra é abrir rápido no 4G |
-
-> Enquanto o estudo existir, cada deploy sobe **720 KB** de um chunk que
-> ninguém consegue baixar. Não prejudica o visitante, mas é desperdício —
-> mais uma razão para decidir logo.
