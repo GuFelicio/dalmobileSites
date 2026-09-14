@@ -39,8 +39,9 @@ import estilos from "./a-loja.module.css";
 export const metadata: Metadata = metadataDaPagina({
   titulo: `Showroom em ${unidade.cidade} | Dalmóbile`,
   descricao:
-    `Endereço, telefone, WhatsApp e horário do showroom da Dalmóbile em ` +
-    `${unidade.cidade}. ${unidade.endereco.logradouro}, ${unidade.endereco.bairro}.`,
+    `Showroom Dalmóbile na ${unidade.endereco.logradouro} — ` +
+    `${unidade.endereco.bairro}, ${unidade.cidade}. ` +
+    unidade.horarios.map((h) => `${h.dias} das ${h.abre} às ${h.fecha}`).join(", ") + ".",
   caminho: "/a-loja",
   foto: escolherFoto(ambientesDaUnidade(), ["sala-de-estar", "cozinha"], 0)?.src,
 });
@@ -64,10 +65,15 @@ export default function ALoja() {
       />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>Showroom {unidade.nome}</h1>
+        <h1 className={estilos.titulo}>Showroom {unidade.cidade}</h1>
+        {/* A versão anterior estava certa na ideia e vaga na execução. Esta
+            LISTA o que só o showroom resolve: quem é do ramo reconhece os
+            quatro, quem não é entende na hora por que vale a visita. */}
+        <p className={estilos.chamada}>Venha ver de perto o que a foto não resolve.</p>
         <p className={estilos.intro}>
-          Venha ver de perto os acabamentos, as ferragens e a marcenaria montada. É a maneira
-          mais rápida de decidir o que só a foto não resolve.
+          Acabamento se decide na mão: a cor sob a luz do ambiente, a textura da borda, o peso
+          da ferragem, o ruído da corrediça ao fechar. No showroom tudo isso está montado. Se
+          puder, traga a planta do imóvel — a conversa anda muito mais rápido.
         </p>
 
         <div className={estilos.colunas}>
@@ -141,7 +147,11 @@ export default function ALoja() {
 
       <Section superficie="cinza" semRespiro>
         <div className={estilos.outraLoja}>
-          <p className={estilos.outraTexto}>A Dalmóbile também atende em outra cidade.</p>
+          {/* Nomear a região é melhor para busca e para o leitor do que
+              "também atende em outra cidade". */}
+          <p className={estilos.outraTexto}>
+            A Dalmóbile também atende a partir de {unidade.outraUnidade.cidade}.
+          </p>
           <a href={unidade.outraUnidade.url} className={estilos.outraAcao}>
             {unidade.outraUnidade.nome}
           </a>

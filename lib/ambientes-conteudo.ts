@@ -53,6 +53,12 @@ export type PaginaDeAmbiente = {
   singular: string;
   /** Uma linha, sob o título. */
   chamada: string;
+  /**
+   * A pergunta que fecha a página. Própria de cada ambiente: sete páginas
+   * terminando na mesma fôrma é padrão de texto gerado, e o leitor percebe
+   * na segunda página. O botão continua o mesmo — botão é interface.
+   */
+  chamadaFinal: string;
   /** O parágrafo do corpo. */
   texto: string;
   unidades: UnidadeId[];
@@ -137,6 +143,7 @@ function lerArquivo(arquivo: string): PaginaDeAmbiente {
     planejado: ambiente.planejado,
     singular: ambiente.singular,
     chamada: exigir(data.chamada, "chamada", arquivo),
+    chamadaFinal: exigir(data.chamadaFinal, "chamadaFinal", arquivo),
     texto: exigir(content.trim() || null, "texto do corpo", arquivo),
     unidades,
     fotos,

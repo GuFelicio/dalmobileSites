@@ -152,6 +152,66 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-09-14 · A outra cidade pode ser nomeada no corpo, nunca no SEO
+
+**Decisão.** Reverte a entrada de 08/09 ("O link para a outra loja não cita a
+cidade dela"). A copy aprovada nomeia a loja irmã de propósito, e o teste de
+cidade cruzada passou a proibir onde o dano acontece, em vez de banir a string.
+
+**A regra nova, em duas camadas:**
+
+1. **Banimento absoluto** nos campos que dizem ao Google de que praça o site é:
+   `<title>`, `meta description`, OpenGraph, Twitter, canônico, `<h1>`, o schema
+   e o **sitemap inteiro**. Zero tolerância — uma só menção já faz o site ser
+   lido errado.
+2. **No corpo, só menção declarada.** Toda ocorrência tem que casar com uma das
+   frases de `MENCOES_DECLARADAS`, em `tests/unidade-cruzada.test.mjs`. Hoje são
+   três: o rótulo do link cruzado, a faixa da página da loja e a resposta do FAQ.
+   Uma menção nova quebra a suíte e obriga alguém a olhar — que é o ponto.
+
+**Por quê.** A proibição original tratava a string como o perigo. O perigo é o
+site ser *sobre* a cidade errada. Um link dizendo "Ver a loja de Caraguatatuba"
+não confunde o Google e ajuda quem chegou na praça errada — e "Nossa outra
+loja", que era a saída anterior, deixava o leitor sem saber onde é a outra loja.
+
+**O teste ficou mais forte, não mais fraco.** Antes varria arquivos de `dist/`,
+com a carga do RSC repetindo cada frase e o `<title>` valendo tanto quanto um
+comentário. Agora renderiza as sete páginas e separa campo estrutural de corpo.
+Verificado das duas formas: cidade errada no `<title>` quebra; menção nova no
+corpo quebra.
+
+**Descartado.** Manter o banimento absoluto (obrigaria a escrever "nossa outra
+loja", pior para o leitor e para a busca) e remover o teste (é o que existe
+para impedir o erro que derrubou o site anterior).
+
+---
+
+## 2026-09-14 · A cidade nos textos compartilhados é `{{cidade}}`, não texto fixo
+
+**Decisão.** `conteudo/institucional/*.md` usa `{{cidade}}` e `{{outraCidade}}`,
+substituídos por `lib/texto.ts` a partir do config da unidade.
+
+**Por quê — e isto quase foi ao ar errado.** A copy aprovada traz *"Fábrica
+própria desde 1977. Loja em São José dos Campos"* como subtítulo de
+`/a-dalmobile`. Só que o arquivo institucional é **um só para os dois sites**:
+escrito assim, o site de Caraguatatuba iria ao ar com a cidade errada na segunda
+linha da página. É literalmente o erro que derrubou o site anterior, reaparecido
+por outra porta — desta vez pela copy, não pelo código.
+
+A alternativa seria um arquivo por unidade, e o `CLAUDE.md` é explícito: *"nunca
+duplicar componente, estilo ou texto por unidade — se algo precisa ser
+diferente, vira campo no config"*.
+
+**O que isso obriga.** Quem escrever copy institucional **não escreve nome de
+cidade**. Escreve `{{cidade}}`. Está documentado no topo do próprio arquivo de
+conteúdo, que é onde a pessoa vai olhar.
+
+**Descartado.** Um arquivo por unidade (duplicação proibida, e os dois
+divergiriam na terceira edição) e detectar a cidade por regex no render (
+adivinhação: "São José" aparece em nome de rua e de bairro).
+
+---
+
 ## 2026-09-09 · Caraguatatuba usa a paleta "palha"; SJC segue na neutra
 
 **Decisão.** O site do litoral troca a **família do cinza** por tons de areia.

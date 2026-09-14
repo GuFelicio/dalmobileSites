@@ -3,6 +3,12 @@ nome: Banheiro
 slug: banheiro
 unidades: [sjc, caragua]
 chamada: Marcenaria que convive com água todo dia.
+
+# A chamada final é própria de cada ambiente: sete páginas terminando na
+# mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
+# gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
+# botão é interface, não texto.
+chamadaFinal: Quer um banheiro assim?
 fotos:
   - src: /fotos/sjc/banheiro/20092023-riz1838.webp
     titulo: Gabinete em L com bancada única
@@ -31,6 +37,7 @@ fotos:
     arquiteto:
 ---
 
-É o ambiente que mais castiga o material: vapor, respingo e produto de limpeza
-todo dia. A marcenaria de banheiro se resolve no acabamento e na ferragem, não
-no desenho.
+É o ambiente que mais castiga o material: vapor, respingo e produto de limpeza.
+Por isso a decisão aqui está no acabamento e na ferragem — borda selada,
+corrediça que não enferruja, gabinete suspenso para não apoiar no piso molhado.
+O desenho vem depois disso, não antes.

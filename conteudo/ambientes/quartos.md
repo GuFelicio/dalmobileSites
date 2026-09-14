@@ -2,7 +2,13 @@
 nome: Quartos
 slug: quartos
 unidades: [sjc, caragua]
-chamada: Cabeceira, iluminação e guarda-roupa desenhados na mesma peça.
+chamada: Cabeceira, luz e guarda-roupa saem da mesma peça.
+
+# A chamada final é própria de cada ambiente: sete páginas terminando na
+# mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
+# gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
+# botão é interface, não texto.
+chamadaFinal: Quer um quarto resolvido assim?
 fotos:
   - src: /fotos/sjc/quartos/27062023-riz4900.webp
     titulo: Arco colorido feito de marcenaria
@@ -66,5 +72,7 @@ fotos:
     arquiteto:
 ---
 
-O quarto é o ambiente em que a marcenaria some: cabeceira, iluminação, criado e
-guarda-roupa saem da mesma peça, e o que se vê é uma parede só.
+Quando a marcenaria assume a parede inteira, o quarto para de parecer montado
+por partes. A cabeceira recebe a iluminação, o criado deixa de ser móvel solto e
+o guarda-roupa encosta no teto — que é onde ele deixa de juntar poeira em cima.
+O que se vê é uma parede, não quatro móveis.

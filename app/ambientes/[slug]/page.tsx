@@ -124,9 +124,10 @@ export default async function PaginaDeAmbiente({ params }: Props) {
 
       <Section superficie="cinza" semRespiro>
         <div className={estilos.chamadaFinal}>
-          <p className={estilos.chamadaTexto}>
-            Quer {ambiente.artigo} {ambiente.singular} assim no seu apartamento?
-          </p>
+          {/* A pergunta vem do conteúdo, não de uma fôrma. Ver
+              conteudo/ambientes/*.md e a régua de voz em
+              copy-site-dalmobile-sjc.md. */}
+          <p className={estilos.chamadaTexto}>{ambiente.chamadaFinal}</p>
           <Link href="/a-loja" className={estilos.chamadaAcao}>
             Falar sobre um projeto assim
           </Link>

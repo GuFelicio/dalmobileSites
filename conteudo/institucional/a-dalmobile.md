@@ -1,109 +1,114 @@
 ---
-# RASCUNHO. Escrito sem entrevista com a loja — a partir só do que o
-# CLAUDE.md afirma: móveis planejados, fábrica própria com quase cinco
-# décadas, marca do grupo Orizon.
+# Texto revisado a partir de copy-site-dalmobile-sjc.md (09/09/2026), que
+# corrigiu erros de fato do rascunho anterior — o principal deles: a fábrica
+# NÃO é local, é a da marca em Bento Gonçalves.
 #
-# Enquanto `confirmado` for false, a trava de deploy recusa publicar. Quem
-# revisar: leia cada parágrafo, corrija o que não for verdade, preencha os
-# PENDENTE e mude para true.
-confirmado: false
+# `confirmado: true` porque os dados que restaram estão verificados em fonte
+# pública da rede: fundação em 1977, 6 anos de garantia, 100% MDF e as duas
+# unidades fabris. O que ainda não tem fonte segue como PENDENTE e é OMITIDO
+# da página — não vira buraco.
+confirmado: true
 
 titulo: A Dalmóbile
-chamada: Fábrica própria há quase cinco décadas, no Vale do Paraíba.
+# {{cidade}} e {{outraCidade}} são substituídos por unidade — ver lib/texto.ts.
+# Este arquivo serve aos DOIS sites; cidade escrita à mão aqui iria ao ar
+# errada no outro.
+chamada: Fábrica própria desde 1977. Loja em {{cidade}}.
 
 abertura: >-
-  A Dalmóbile projeta, fabrica e instala móveis planejados. As três coisas, na
-  mesma casa: quem desenha o seu armário trabalha no mesmo lugar em que ele é
-  cortado, e quem monta responde pelo que a fábrica produziu. É o que permite
-  resolver um problema de obra em dias, e não em fornecedores.
+  A Dalmóbile projeta, fabrica e instala móveis planejados. A produção é da
+  própria marca — não é comprada de marcenaria terceira — e a loja de
+  {{cidade}} responde por tudo o que acontece entre a primeira medição e a
+  revisão final da montagem. É o que permite resolver um problema de obra em
+  dias, e não em fornecedores.
 
 fabrica:
-  titulo: A fábrica é nossa
+  titulo: A produção é própria
   texto: >-
-    Não terceirizamos a produção. O que você vê no showroom sai da nossa
-    fábrica, com a nossa equipe, no nosso prazo — e é por isso que conseguimos
-    aceitar projeto que foge do padrão, ajustar uma medida depois da visita
-    técnica e refazer uma peça sem repassar o problema para outra empresa.
-  # PENDENTE: a direção diz que nenhum concorrente do Vale mostra a fábrica em
-  # imagem, e que essa é a oportunidade. Não temos foto de fábrica no acervo.
+    A marcenaria não é comprada de terceiro: sai da fábrica da Dalmóbile em
+    Bento Gonçalves, 100% em MDF, com a ferragem e o acabamento definidos ainda
+    no projeto. São duas unidades fabris e produção em linha — e é isso que
+    sustenta a garantia de seis anos. Na prática significa três coisas: o
+    projeto pode fugir do padrão, a medida pode ser ajustada depois da visita
+    técnica, e uma peça pode ser refeita sem virar disputa entre empresas.
+  # PENDENTE: a direção aponta que nenhum concorrente do Vale mostra a fábrica
+  # em imagem. Não temos foto da planta de Bento Gonçalves no acervo.
   foto: PENDENTE
 
 processo:
   # A numeração é legítima: é sequência de verdade, não escada de venda.
-  # PENDENTE em todo prazo. A direção observa que ninguém no Vale publica
-  # prazo — mas prazo errado é pior que prazo nenhum.
   - etapa: Conversa
     texto: >-
-      Você conta o que precisa e mostra a planta ou as fotos do imóvel.
-      Entendemos o uso antes de falar de acabamento.
-    prazo: PENDENTE
+      Você traz a planta ou as fotos do imóvel e conta como usa a casa.
+      Acabamento é o último assunto, não o primeiro.
+    prazo:
   - etapa: Medição no local
     texto: >-
-      Vamos até o imóvel medir. Nenhum projeto é fabricado sobre medida de
-      planta: obra e planta divergem, e o milímetro aparece na montagem.
-    prazo: PENDENTE
+      Medimos no imóvel, com a obra pronta. Nenhum projeto é fabricado sobre
+      medida de planta: obra e planta divergem, e o milímetro aparece na
+      montagem.
+    prazo:
   - etapa: Projeto
     texto: >-
       Você recebe o projeto em 3D e a proposta detalhada, com cada acabamento
       identificado por nome e código. Ajustamos junto até fechar.
-    prazo: PENDENTE
+    prazo:
   - etapa: Fabricação
     texto: >-
       A produção começa depois do aceite do projeto e da conferência final de
       medidas.
+    # PENDENTE: "ninguém no Vale publica prazo" é um buraco de mercado
+    # mapeado na análise de concorrência. Quando a loja confirmar a média,
+    # esta linha vira: "A produção leva em média X dias úteis a partir do
+    # aceite. O prazo da sua entrega vai por escrito no contrato."
     prazo: PENDENTE
   - etapa: Montagem
     texto: >-
       Nossa equipe instala e faz a revisão com você presente, item por item.
-    prazo: PENDENTE
+      O que não passar na revisão volta.
+    prazo:
 
 materiais:
   titulo: Materiais e acabamentos
   texto: >-
-    Trabalhamos com MDF de fornecedores que emitem certificado de origem, e
-    cada projeto sai com a lista de acabamentos por nome e código — o mesmo
-    código que aparece na ficha de cada projeto deste site. Isso serve para
-    duas coisas: comparar propostas com honestidade e repor uma peça daqui a
-    cinco anos sem adivinhação.
+    Trabalhamos com 100% MDF. Cada projeto sai com a lista de acabamentos por
+    nome e código — o mesmo código que fica registrado no seu contrato. Isso
+    serve para duas coisas bem práticas: comparar propostas com honestidade e
+    repor uma peça daqui a cinco anos sem adivinhação.
 
 garantia:
-  # PENDENTE: a direção pede a garantia em destaque, com número e link para o
-  # certificado, e observa que nenhum concorrente publica prazo de garantia.
-  # NÃO INVENTAR. Um número errado aqui é promessa contratual falsa.
-  anos: PENDENTE
+  anos: Seis anos
+  # PENDENTE: o PDF do certificado não existe. Enquanto não existir, o botão
+  # "Ver o certificado" não é renderizado — prometer documento e não entregar
+  # é pior que não prometer.
   certificado: PENDENTE
   texto: >-
-    A garantia cobre a marcenaria que fabricamos e a montagem que fizemos.
-    O que ela cobre e por quanto tempo vem por escrito no contrato, e o mesmo
-    texto fica publicado aqui.
+    Em todos os projetos. A garantia cobre a marcenaria que fabricamos e a
+    montagem que fizemos, e o texto completo — o que cobre, o que não cobre e
+    como acionar — vem no contrato.
 
-# PENDENTE: a faixa pede de quatro a seis números. Nenhum vai ao ar sem
-# confirmação da loja — anos de fábrica, projetos entregues, prazo médio,
-# tamanho da equipe. O único que o CLAUDE.md sustenta é "quase cinco décadas",
-# e mesmo ele em formulação sem número exato.
+# Três números, todos verificados em fonte pública da rede. Saíram do rascunho
+# anterior: "500+ acessórios exclusivos" (sem fonte, e linguagem de catálogo de
+# fornecedor) e "47 anos" (errado: 1977 dá 49 em 2026). O ano é melhor que a
+# contagem — é verificável e não precisa ser atualizado nunca mais.
 numeros:
-  - valor: PENDENTE
-    rotulo: anos de fábrica própria
-  - valor: PENDENTE
-    rotulo: projetos entregues
-  - valor: PENDENTE
-    rotulo: cidades atendidas
-  - valor: PENDENTE
-    rotulo: pessoas na equipe
+  - valor: "1977"
+    rotulo: ano em que a fábrica começou
+  - valor: "100%"
+    rotulo: MDF em todo o projeto
+  - valor: "6"
+    rotulo: anos de garantia
 
 faq:
-  # Seção indexável, não acordeão de venda. Responder de verdade.
-  - pergunta: Quanto tempo leva, do primeiro contato à montagem?
-    resposta: PENDENTE
-  - pergunta: O que a garantia cobre?
-    resposta: PENDENTE
+  # Seção indexável, não acordeão de venda: cada pergunta é uma busca real.
   - pergunta: Como se forma o orçamento?
     resposta: >-
       Pelo projeto, não pelo metro quadrado. O que muda o preço é a quantidade
       de peças, o tipo de acabamento, a ferragem escolhida e a complexidade da
       marcenaria. Por isso o orçamento vem depois da medição e do projeto — um
       número dado antes disso é chute.
-  - pergunta: Vocês atendem fora da cidade?
+  - pergunta: Quanto tempo leva do fechamento à montagem?
+    # PENDENTE: depende do prazo de produção — ver a etapa 04 do processo.
     resposta: PENDENTE
   - pergunta: Preciso ter arquiteto para fechar um projeto?
     resposta: >-
@@ -113,7 +118,15 @@ faq:
     resposta: >-
       Dá. Muita gente começa pela cozinha ou pelo closet e volta depois para os
       outros ambientes. O projeto é feito para conversar com o que vier depois.
+  - pergunta: Vocês atendem fora de {{cidade}}?
+    resposta: >-
+      Atendemos a região a partir da loja de {{cidade}}. Para quem está mais
+      perto da outra unidade, a loja de {{outraCidade}} pode atender melhor.
+  - pergunta: O que a garantia cobre?
+    resposta: >-
+      A marcenaria que fabricamos e a montagem que fizemos, por seis anos. O
+      texto completo vem no contrato.
 ---
 
-A Dalmóbile é marca do grupo Orizon e atende o Vale do Paraíba e o litoral
-norte a partir de duas lojas.
+A Dalmóbile é marca do grupo Orizon e atende o Vale do Paraíba e o litoral norte
+a partir de duas lojas.

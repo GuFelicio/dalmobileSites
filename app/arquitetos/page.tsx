@@ -26,6 +26,7 @@ import { ambientesDaUnidade } from "../../lib/ambientes-da-unidade.ts";
 import { metadataDaPagina } from "../../lib/seo.ts";
 import { ehPendente } from "../../config/pendente.ts";
 import { institucional } from "../../lib/conteudo.ts";
+import { comCidade } from "../../lib/texto.ts";
 import estilos from "./arquitetos.module.css";
 
 const pagina = institucional("arquitetos");
@@ -33,8 +34,8 @@ const pagina = institucional("arquitetos");
 export const metadata: Metadata = metadataDaPagina({
   titulo: `Para arquitetos — Dalmóbile ${unidade.cidade}`,
   descricao:
-    `Detalhamento técnico, fábrica própria e visita à produção. Como a ` +
-    `Dalmóbile ${unidade.cidade} trabalha com escritórios de arquitetura.`,
+    `Detalhamento técnico de marcenaria, visita à fábrica e fila separada para ` +
+    `orçamento de escritório. Parceria com escritórios de arquitetura.`,
   caminho: "/arquitetos",
   foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
 });
@@ -50,10 +51,10 @@ export default function Arquitetos() {
       <Header superficie="papel" />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>{pagina.titulo}</h1>
-        <p className={estilos.chamada}>{pagina.chamada}</p>
+        <h1 className={estilos.titulo}>{comCidade(pagina.titulo)}</h1>
+        <p className={estilos.chamada}>{comCidade(pagina.chamada)}</p>
         <div className={estilos.texto}>
-          <p>{d.abertura}</p>
+          <p>{comCidade(d.abertura)}</p>
         </div>
       </Section>
 
@@ -63,7 +64,7 @@ export default function Arquitetos() {
           {parceria.map((bloco) => (
             <li key={bloco.titulo} className={estilos.bloco}>
               <h3 className={estilos.blocoTitulo}>{bloco.titulo}</h3>
-              <p className={estilos.blocoTexto}>{bloco.texto}</p>
+              <p className={estilos.blocoTexto}>{comCidade(bloco.texto)}</p>
               {/* Prazo de resposta é compromisso com um escritório. Sem
                   confirmação da loja, não vai ao ar. */}
               {bloco.prazo && !ehPendente(bloco.prazo) ? (
@@ -99,7 +100,7 @@ export default function Arquitetos() {
 
       <Section superficie="cinza" semRespiro>
         <div className={estilos.chamadaFinal}>
-          <p className={estilos.chamadaTexto}>{pagina.texto}</p>
+          <p className={estilos.chamadaTexto}>{comCidade(pagina.texto)}</p>
           {/* O formulário próprio é a seção 11 e ainda não existe. O WhatsApp
               é destino real, e a mensagem já identifica a unidade. */}
           {whatsapp ? (

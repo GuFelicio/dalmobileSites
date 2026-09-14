@@ -40,6 +40,9 @@ export default function Privacidade() {
 
       <Section superficie="papel">
         <h1 className={estilos.titulo}>Política de privacidade</h1>
+        {/* Data FIXA, da última alteração real do texto. Não usar a data de hoje:
+            a página se atualizaria sozinha todo dia e perderia a função.
+            Mudou o texto? mude esta data junto. */}
         <p className={estilos.atualizado}>Atualizada em 9 de setembro de 2026.</p>
 
         <div className={estilos.texto}>
@@ -50,14 +53,15 @@ export default function Privacidade() {
           </p>
 
           <h2>Que dados este site coleta</h2>
+          {/* ATENÇÃO: "não usa cookie de rastreamento" precisa continuar
+              verdadeiro depois do go-live. Se GA4 ou pixel entrarem — e a
+              direção prevê os dois —, esta página tem que ser reescrita
+              ANTES, não depois. É contradição de LGPD, não de copy. */}
           <p>
             <strong>Nenhum.</strong> Este site não tem formulário, não pede cadastro e não usa
-            cookie de identificação. Navegar por ele não deixa dado seu conosco.
-          </p>
-          <p>
-            Se você nos escrever pelo WhatsApp ou ligar, aí sim recebemos o que você nos contar
-            — nome, telefone e o que precisa. Usamos isso para responder e para conduzir o seu
-            projeto, e nada além disso.
+            cookie de rastreamento. Se você falar com a gente pelo WhatsApp ou pelo telefone,
+            aí sim ficam registrados o seu contato e o que você contou sobre o projeto —
+            usados só para responder e tocar o seu projeto, e por mais ninguém.
           </p>
 
           <h2>Com quem compartilhamos</h2>

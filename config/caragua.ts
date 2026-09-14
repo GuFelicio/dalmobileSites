@@ -79,7 +79,8 @@ export const unidade: Unidade = {
   // O rótulo NÃO cita a cidade da outra unidade — só a URL a contém, e isso é
   // inevitável, porque a cidade está no domínio. Ver docs/decisoes.md.
   outraUnidade: {
-    nome: "Ver a outra loja",
+    nome: "Ver a loja de São José dos Campos",
+    cidade: "São José dos Campos",
     url: "https://dalmobilesjc.com.br",
   },
 
@@ -92,7 +93,7 @@ export const unidade: Unidade = {
     // código, prontas. Ver docs/decisoes.md.
     { rotulo: "Ambientes", href: "/ambientes" },
     { rotulo: "A Dalmóbile", href: "/a-dalmobile" },
-    { rotulo: "Arquitetos", href: "/arquitetos" },
+    { rotulo: "Para arquitetos", href: "/arquitetos" },
     { rotulo: "A loja", href: "/a-loja" },
   ],
 };

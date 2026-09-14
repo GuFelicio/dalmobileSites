@@ -216,3 +216,14 @@
 @media (prefers-reduced-motion: reduce) {
   .chamadaAcao { transition: none; }
 }
+
+.certificado {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque); /* alvo de toque de 44px */
+  border-bottom: var(--fio) solid var(--cinza-clr);
+  font-size: var(--fs-texto);
+  margin-top: var(--e-2);
+}
+
+.certificado:hover { border-color: var(--preto); }

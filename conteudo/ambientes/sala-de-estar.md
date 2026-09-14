@@ -2,7 +2,13 @@
 nome: Sala de estar
 slug: sala-de-estar
 unidades: [sjc, caragua]
-chamada: O painel de TV é o que segura a sala inteira.
+chamada: Estar e jantar resolvidos na mesma marcenaria.
+
+# A chamada final é própria de cada ambiente: sete páginas terminando na
+# mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
+# gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
+# botão é interface, não texto.
+chamadaFinal: Quer uma sala resolvida assim?
 fotos:
   - src: /fotos/sjc/sala-de-estar/06.webp
     titulo: Mesa de jantar em madeira maciça
@@ -46,6 +52,7 @@ fotos:
     arquiteto:
 ---
 
-É a primeira coisa que se vê ao entrar, e quase sempre a última a ser decidida.
-O painel de TV organiza a sala inteira: esconde a fiação, sustenta a iluminação
-e define onde cada móvel pode ficar.
+Na maioria das casas os dois dividem o mesmo cômodo, e é a marcenaria que separa
+um do outro sem levantar parede. Painel que engole a fiação, rack suspenso que
+libera o piso, estante que marca onde a mesa começa. A sala fica maior sem mudar
+de tamanho.

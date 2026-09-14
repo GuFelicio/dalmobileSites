@@ -8,6 +8,54 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [1.0.0-rc2] — 2026-09-14
+
+### A copy revisada entrou no site inteiro
+
+Aplicado `copy-site-dalmobile-sjc.md`. **As pendências caíram de 18 para 4.**
+
+**Correções de fato, não de estilo**
+
+- **A fábrica não é local.** O texto no ar dizia que *"quem desenha o seu
+  armário trabalha no mesmo lugar em que ele é cortado"* — descrição de uma
+  marcenaria de bairro. A produção é da indústria da marca, em **Bento
+  Gonçalves**, com duas unidades fabris. O argumento fica mais forte, não mais
+  fraco: repetibilidade e uma garantia que alguém tem tamanho para honrar.
+- **"47 anos" estava errado** — 1977 dá 49 em 2026. Trocado pelo **ano**, que
+  é verificável e não envelhece.
+- **"500+ acessórios exclusivos" saiu**: sem fonte, e linguagem de catálogo de
+  fornecedor.
+- **A garantia de 6 anos entrou na página institucional.** A home anunciava
+  "6 anos" e `/a-dalmobile` se recusava a dar o número — duas páginas do mesmo
+  site dizendo coisas diferentes.
+- **Cozinha:** o subtítulo e o fim do parágrafo eram a mesma frase invertida.
+- **Sala de estar:** o texto era todo sobre painel de TV, e metade das fotos é
+  mesa de jantar e estante. O texto prometia uma galeria que não era aquela.
+- **`/arquitetos`** dizia *"todo projeto publicado credita o arquiteto"* — e
+  nenhum credita, porque não há cases. Virou compromisso, não descrição.
+- **O menu da home** levava a âncoras: quem entrava pela home nunca descobria
+  `/a-dalmobile` nem `/arquitetos`. Agora são rotas, vindas do config.
+- **"no seu apartamento" saiu** das sete chamadas finais — exclui casa, que é
+  metade do portfólio. Cada ambiente ganhou a sua pergunta: sete páginas na
+  mesma fôrma é padrão de texto gerado.
+
+**Uma armadilha que quase foi ao ar**
+
+A copy traz *"Loja em São José dos Campos"* como subtítulo de `/a-dalmobile` —
+e o arquivo institucional é **um só para os dois sites**. Escrito assim, o site
+de Caraguatatuba iria ao ar com a cidade errada na segunda linha. `lib/texto.ts`
+substitui `{{cidade}}` e `{{outraCidade}}` por unidade.
+
+**O teste de cidade cruzada foi reescrito**
+
+A copy nomeia a loja irmã de propósito, o que reverte a decisão de 08/09. A
+proibição deixou de ser "a string não existe" e passou a ser: **banimento
+absoluto** em `<title>`, description, OpenGraph, canônico, `<h1>`, schema e
+sitemap; **no corpo, só menção declarada**. O teste agora renderiza as sete
+páginas em vez de varrer arquivos de `dist/` — verificado das duas formas.
+
+---
+
 ## [1.0.0-rc] — 2026-09-09
 
 ### Fase 9 — verificação cruzada e documentação completa

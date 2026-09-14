@@ -119,9 +119,15 @@ export type Unidade = {
     pixel: string | null;
   };
 
-  /** A outra loja, para o link cruzado do rodapé. */
+  /** A outra loja, para o link cruzado do rodapé e da página da loja. */
   outraUnidade: {
+    /** O rótulo do link, como ele aparece escrito. */
     nome: string;
+    /**
+     * A cidade da outra loja. Usada para substituir {{outraCidade}} nos
+     * textos compartilhados — ver lib/texto.ts.
+     */
+    cidade: string;
     url: string;
   };
 

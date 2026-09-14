@@ -1,19 +1,22 @@
 ---
-# RASCUNHO. Escrito sem entrevista com a loja. Enquanto `confirmado` for
-# false, a trava de deploy recusa publicar.
+# Texto revisado a partir de copy-site-dalmobile-sjc.md (09/09/2026).
 #
-# A direção chama esta página do "buraco mais valioso do mercado": nenhum dos
-# seis sites de SJC analisados tem área para arquiteto.
-confirmado: false
+# Duas correções de fato vieram de lá:
+#   · "marceneiro" virou "fornecedor" — arquiteto que contrata marcenaria
+#     industrializada não chama a Dalmóbile de marceneiro
+#   · o bloco de crédito deixou de DESCREVER algo que não existe (nenhum
+#     projeto do site credita ninguém hoje) e virou COMPROMISSO: fica
+#     verdadeiro agora e continua verdadeiro quando os cases entrarem
+confirmado: true
 
 titulo: Para arquitetos
-chamada: Detalhamento técnico, fábrica própria e resposta rápida a orçamento de escritório.
+chamada: Detalhamento técnico, produção própria e fila separada para orçamento de escritório.
 
 abertura: >-
-  Quem projeta precisa de um marceneiro que leia projeto, discuta solução e
-  entregue no prazo combinado com o cliente. A Dalmóbile fabrica o que
-  desenha, então a conversa sobre viabilidade acontece com quem vai cortar a
-  peça — e não com um intermediário.
+  Quem projeta precisa de um fornecedor que leia projeto, discuta viabilidade e
+  entregue no prazo que já foi combinado com o cliente. Como a produção é da
+  própria Dalmóbile, essa conversa acontece com quem responde pela peça — não
+  com um intermediário que leva a dúvida embora e volta três dias depois.
 
 parceria:
   - titulo: Detalhamento técnico
@@ -23,38 +26,29 @@ parceria:
       de qualquer corte.
   - titulo: Orçamento de escritório
     texto: >-
-      Orçamento de escritório entra numa fila própria, separada do balcão.
-      O prazo de resposta está combinado abaixo e vale para projeto completo.
-    # PENDENTE: a direção pede prazo de resposta a orçamento de escritório, e
-    # observa que ninguém no Vale publica isso. Prazo é compromisso: só a loja
-    # pode definir.
-    prazo: PENDENTE
+      Orçamento de escritório entra numa fila própria, separada do balcão, e
+      vale para projeto completo.
+    prazo: Respondemos em até um dia útil.
   - titulo: Visita à fábrica
     texto: >-
-      Você e o seu cliente podem ver a produção. É o argumento mais forte que
-      temos, e o que mais convence quem está comparando propostas.
+      Você e o seu cliente podem ver a produção em Bento Gonçalves. Duas
+      unidades fabris, produção em linha, MDF processado na própria planta. É o
+      argumento mais forte que temos, e o que mais convence quem está comparando
+      propostas.
   - titulo: Crédito no projeto
     texto: >-
-      Todo projeto publicado neste site credita o arquiteto que o assinou, com
-      autorização prévia. É o seu trabalho, e ele aparece com o seu nome.
+      Projeto assinado por você que for publicado neste site vai com o seu nome.
+      Só entra com a sua autorização, por escrito, e sai a qualquer momento se
+      você pedir.
 
 # PENDENTE: a lista de arquitetos parceiros, com os projetos que cada um
-# assinou, linkando para os cases.
-#
-# NÃO PREENCHER SEM AUTORIZAÇÃO POR ESCRITO DE CADA UM. Publicar nome de
-# terceiro sem consentimento é problema jurídico, e a autorização vale por
-# projeto — não uma vez só. Ver CLAUDE.md, seção "Conteúdo".
-#
-# Depende também dos cases existirem: hoje a camada de projetos está sem
-# conteúdo, porque falta prédio e arquiteto de cada apartamento.
-# Ver docs/pendencias.md.
+# assinou. NÃO PREENCHER SEM AUTORIZAÇÃO POR ESCRITO DE CADA UM — e ela vale
+# por projeto, não uma vez só. Depende também de os cases existirem.
 parceiros: []
 
-# PENDENTE: a direção pede formulário próprio, separado do de cliente final,
-# e ele é a seção 11 — precisa de endpoint no Worker, validação e LGPD.
-# Até lá, o WhatsApp da unidade é o caminho, e é destino real.
+# PENDENTE: formulário próprio, separado do de cliente final. É a seção 11 da
+# direção e precisa de endpoint no Worker, validação e LGPD.
 formulario: false
 ---
 
-Se você projeta e quer conhecer a fábrica, fale com a loja. Respondemos em até
-um dia útil.
+Se você projeta e quer conhecer a fábrica, fale com a loja.

@@ -25,8 +25,8 @@ import estilos from "./ambientes.module.css";
 export const metadata: Metadata = metadataDaPagina({
   titulo: `Ambientes — Móveis planejados em ${unidade.cidade} | Dalmóbile`,
   descricao:
-    `Cozinha, quartos, sala, home office, closet e banheiro planejados pela ` +
-    `Dalmóbile em ${unidade.cidade}. Fotos de projetos executados.`,
+    `Cozinha, quartos, sala, home office, closet, banheiro e espaço gourmet ` +
+    `planejados pela Dalmóbile em ${unidade.cidade}. Fotos de projetos executados.`,
   caminho: "/ambientes",
   foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
 });
@@ -40,9 +40,12 @@ export default function HubDeAmbientes() {
 
       <Section superficie="papel">
         <h1 className={estilos.titulo}>Ambientes</h1>
+        {/* Dizer que NÃO há render é mais forte do que dizer que as fotos são
+            de projetos executados: nomeia o que a concorrência faz. */}
         <p className={estilos.intro}>
-          Cada ambiente pede uma solução diferente de marcenaria. Estas são fotos de projetos
-          que a Dalmóbile desenhou, fabricou e instalou.
+          Cada ambiente resolve um problema diferente de marcenaria. As fotos abaixo são de
+          projetos que a Dalmóbile desenhou, fabricou e instalou — nenhum render, nenhuma
+          imagem de banco.
         </p>
 
         <ul className={estilos.grade}>

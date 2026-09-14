@@ -6,26 +6,41 @@ Quem resolver um item, apaga daqui e registra no `CHANGELOG.md`.
 
 ---
 
-## 1. Os textos institucionais são RASCUNHO e travam o deploy
+## 1. Quatro dados que a loja ainda precisa confirmar
 
-Todas as rotas do mapa existem: `/`, `/ambientes`, `/ambientes/[slug]`,
-`/a-loja`, `/a-dalmobile`, `/arquitetos`, `/privacidade` e a 404. **Nenhum link
-do site aponta para rota inexistente**, e um teste varre cinco páginas e falha
-se voltar a apontar.
+A copy foi revisada e aplicada em 14/09/2026 (`copy-site-dalmobile-sjc.md`), e
+os textos institucionais saíram de rascunho: `confirmado: true`. As pendências
+caíram de **18 para 4**.
 
-Mas `/a-dalmobile` e `/arquitetos` foram escritas **sem entrevista com a loja**,
-a partir só do que o `CLAUDE.md` afirma. São rascunho, e
-`conteudo/institucional/*.md` traz `confirmado: false` — a trava de deploy
-recusa publicar enquanto for assim.
+| Campo | O que é | O que fazer |
+|---|---|---|
+| `processo[3].prazo` | prazo de produção, em dias úteis | Confirmar a média. "Ninguém no Vale publica prazo" é um buraco de mercado mapeado — uma frase, e o site passa a ter algo que nenhum concorrente da cidade tem |
+| `faq[1].resposta` | "Quanto tempo leva do fechamento à montagem?" | Depende do prazo acima |
+| `garantia.certificado` | o PDF do certificado | Conseguir o arquivo. Sem ele, o botão não é renderizado — prometer documento e não entregar é pior que não prometer |
+| `fabrica.foto` | foto da planta de Bento Gonçalves | Nenhum concorrente do Vale mostra a sua fábrica |
 
-### O que alguém da loja precisa fazer
+**Campo pendente não vira buraco na página: ele é OMITIDO.** Um teste falha se
+a palavra "PENDENTE" chegar ao HTML.
 
-1. **Ler cada parágrafo** de `conteudo/institucional/a-dalmobile.md` e
-   `arquitetos.md` e corrigir o que não for verdade.
-2. **Preencher os 16 campos `PENDENTE`.** Cada um é uma promessa ao cliente:
+### Dois itens da copy que dependem da loja, fora do sistema de pendências
 
-| Campo | O que é |
-|---|---|
+- **Telefone.** O site mostra dois números: o WhatsApp vai para
+  `(12) 99604-9888` e o rodapé mostra `(12) 3341-8777`. Definir qual é qual e
+  bater com o Google Business.
+- **Horário de sábado.** O site diz **08h–14h**; os catálogos dizem **9h–13h**.
+  Confirmar e igualar nos três lugares.
+
+### O formulário de contato
+
+Seção 11 da direção, não existe. Precisa de endpoint no Worker, validação,
+consentimento de LGPD e o campo que diz de qual unidade veio o lead. Até lá,
+WhatsApp e telefone são o caminho, e os dois são destinos reais.
+
+**Quando ele entrar, `/privacidade` precisa ser reescrita ANTES** — hoje ela
+afirma que o site não usa cookie de rastreamento. Se GA4 ou pixel entrarem, a
+afirmação vira falsa, e isso é problema de LGPD, não de copy.
+
+---|---|
 | `processo[].prazo` (5) | prazo de cada etapa, em dias. Ninguém no Vale publica isso |
 | `garantia.anos` e `.certificado` | prazo de garantia e link do certificado |
 | `numeros[].valor` (4) | a faixa de números: anos, projetos, cidades, equipe |

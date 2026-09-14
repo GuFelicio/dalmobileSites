@@ -2,7 +2,13 @@
 nome: Closet
 slug: closet
 unidades: [sjc]
-chamada: Aberto, iluminado, e dimensionado pelo que a pessoa realmente tem.
+chamada: Dimensionado por contagem, não por metro quadrado.
+
+# A chamada final é própria de cada ambiente: sete páginas terminando na
+# mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
+# gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
+# botão é interface, não texto.
+chamadaFinal: Quer um closet desenhado assim?
 fotos:
   - src: /fotos/sjc/closet/27062023-riz4891.webp
     titulo: Closet infantil na altura da criança
@@ -21,6 +27,7 @@ fotos:
     arquiteto:
 ---
 
-Closet não se resolve por metro quadrado, e sim por contagem: quantos cabides,
-quantos pares, quantas gavetas. A medida sai do que a pessoa tem hoje, com folga
-para o que vem.
+Antes de desenhar, a gente conta: quantos cabides longos, quantos curtos, quantos
+pares, quantas gavetas. O que sai todo dia fica na altura do olho, o que amassa
+ganha gaveta rasa, o que é de estação vai para cima. A medida sai do que você tem
+hoje, com folga para o que vem.

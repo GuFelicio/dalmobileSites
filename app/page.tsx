@@ -19,7 +19,7 @@ import Link from "next/link";
 
 import Foto from "../components/midia/Foto";
 import SliderDeFotos, { type FotoDoSlider } from "../components/midia/SliderDeFotos";
-import { enderecoEmLinha, linkWhatsApp, unidade } from "../config/derivados";
+import { enderecoEmLinha, linkWhatsApp, navegacao, unidade } from "../config/derivados";
 import { ambientesDaUnidade, escolherFoto } from "../lib/ambientes-da-unidade.ts";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
@@ -76,14 +76,26 @@ export default function Home() {
     <div className="site site-synthesis">
       <header className="header synthesis-header">
         <Brand light />
+        {/* Rotas, não âncoras. "A Dalmóbile" e "Como criamos" apontavam para
+            seções desta página, e quem entrava pela home nunca descobria
+            /a-dalmobile nem /arquitetos. As âncoras continuam existindo; só
+            não ocupam o lugar das páginas. */}
         <nav aria-label="Navegação principal">
-          {/* Âncora só para seção desta página. "Ambientes" é ROTA: era
-              âncora e não levava a lugar nenhum. */}
-          <a href="#sintese-manifesto">A Dalmóbile</a>
-          <Link href="/ambientes">Ambientes</Link>
-          <a href="#sintese-processo">Como criamos</a>
+          {navegacao.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.rotulo}
+            </Link>
+          ))}
         </nav>
-        <Link className="synthesis-header-link" href="/ambientes">Ver ambientes <Arrow /></Link>
+        {whatsapp ? (
+          <a className="synthesis-header-link" href={whatsapp}>
+            Falar no WhatsApp <Arrow />
+          </a>
+        ) : (
+          <Link className="synthesis-header-link" href="/a-loja">
+            Showroom {unidade.nome} <Arrow />
+          </Link>
+        )}
       </header>
 
       <main>
@@ -97,37 +109,52 @@ export default function Home() {
           />
           <div className="synthesis-shade" aria-hidden="true" />
           <div className="synthesis-hero-panel">
-            <p className="eyebrow">MÓVEIS PERSONALIZADOS · {unidade.nome.toUpperCase()}</p>
-            <h1>Crie seu <em>mundo.</em></h1>
-            <p>Design, precisão e liberdade para criar ambientes que expressem a sua forma de viver.</p>
+            {/* "Crie seu mundo" é assinatura de marca e continua no rodapé,
+                onde assinatura fica. Como manchete, não dizia nada que o
+                concorrente não pudesse dizer. */}
+            <p className="eyebrow">MÓVEIS PLANEJADOS · {unidade.cidade.toUpperCase()}</p>
+            <h1>O projeto começa na medição.</h1>
+            <p>
+              Marcenaria desenhada, fabricada e instalada pela Dalmóbile. Fábrica própria
+              desde 1977.
+            </p>
             <Link href="/ambientes">Ver os ambientes <Arrow /></Link>
           </div>
-          <div className="synthesis-project-note">
-            <span>PROJETO EM DESTAQUE</span>
-            <strong>Onde o detalhe se transforma em experiência.</strong>
-          </div>
+
         </section>
 
         <section className="synthesis-manifesto" id="sintese-manifesto">
           <div className="synthesis-manifesto-content">
-            <p className="eyebrow">01 — LIBERDADE CRIATIVA</p>
-            <h2>Cada espaço é um mundo particular.</h2>
-            <p>Escolher como viver é um ato de liberdade criativa. Por isso, cada projeto nasce da escuta, do repertório e de escolhas que revelam identidade.</p>
-            <a href="#sintese-processo">Conheça a nossa essência <Arrow /></a>
+            {/* "Liberdade criativa", "escuta", "repertório" e "identidade" são
+                palavras que qualquer marcenaria do país usa. A mesma ideia —
+                o projeto é seu, não é catálogo — dita por um fato de ofício. */}
+            <p className="eyebrow">01 — COMO PROJETAMOS</p>
+            <h2>Nenhuma casa é igual à planta.</h2>
+            <p>
+              A medição é feita no imóvel, com a obra pronta — é de lá que sai o desenho.
+              O pé-direito real, o vão que ficou dois centímetros fora do projeto, a tomada
+              que ninguém previu. O móvel se ajusta à casa; nunca o contrário.
+            </p>
+            <Link href="/a-dalmobile">Como trabalhamos <Arrow /></Link>
           </div>
           <figure className="synthesis-manifesto-image">
             <Foto src={fotoManifesto.src} alt={fotoManifesto.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
-            <figcaption>DESIGN BRASILEIRO · ESSÊNCIA ITALIANA</figcaption>
+            {/* Três dados verificáveis no lugar de "essência italiana", que não
+                se sustentava em nada no site. */}
+            <figcaption>FÁBRICA PRÓPRIA · 100% MDF · 6 ANOS DE GARANTIA</figcaption>
           </figure>
         </section>
 
         <section className="synthesis-projects" id="sintese-projetos">
           <div className="synthesis-section-heading">
             <div>
-              <p className="eyebrow">02 — MUNDOS CRIADOS</p>
-              <h2 id="titulo-vitrine">Projetos que permanecem.</h2>
+              {/* "Fotografado depois da montagem" faz uma afirmação que a
+                  concorrência não pode fazer: aqui não tem render, não tem
+                  banco de imagem, não tem apartamento de fornecedor. */}
+              <p className="eyebrow">02 — PROJETOS EXECUTADOS</p>
+              <h2 id="titulo-vitrine">Fotografado depois da montagem.</h2>
             </div>
-            <Link href="/ambientes">Explorar portfólio <Arrow /></Link>
+            <Link href="/ambientes">Ver todos os ambientes <Arrow /></Link>
           </div>
 
           {/* O acervo inteiro desta unidade, passando para o lado. Antes eram
@@ -139,15 +166,24 @@ export default function Home() {
         <section className="synthesis-process" id="sintese-processo">
           <div className="synthesis-process-image">
             <Foto src={fotoProcesso.src} alt={fotoProcesso.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
-            <span>PRECISÃO EM CADA ESCOLHA</span>
+            <span>O QUE VEM POR ESCRITO</span>
           </div>
           <div className="synthesis-process-copy">
-            <p className="eyebrow">03 — DO CONCEITO AO DETALHE</p>
-            <h2>Tecnologia que amplia a criação.</h2>
-            <p>Produção própria, materiais nobres e domínio integral do processo para transformar intenção em soluções milimetricamente personalizadas.</p>
+            <p className="eyebrow">03 — DA FÁBRICA À MONTAGEM</p>
+            <h2>Produção própria, com garantia publicada.</h2>
+            <p>
+              A marcenaria não é comprada de terceiro: sai da fábrica da própria Dalmóbile,
+              100% em MDF, com ferragem e acabamento definidos no projeto. Cada proposta vai
+              com a lista de acabamentos por nome e código — o que permite comparar
+              orçamentos com honestidade e repor uma peça daqui a cinco anos sem adivinhação.
+            </p>
+            {/* Três números verificados em fonte pública da rede. Saíram
+                "500+ acessórios exclusivos" (sem fonte, e linguagem de catálogo
+                de fornecedor) e "47 anos" (errado: 1977 dá 49 em 2026). O ano
+                é melhor que a contagem: é verificável e não envelhece. */}
             <div className="synthesis-stats">
-              <div><strong>47</strong><span>anos de história</span></div>
-              <div><strong>500+</strong><span>acessórios exclusivos</span></div>
+              <div><strong>1977</strong><span>ano em que a fábrica começou</span></div>
+              <div><strong>100%</strong><span>MDF em todo o projeto</span></div>
               <div><strong>6</strong><span>anos de garantia</span></div>
             </div>
           </div>
@@ -155,9 +191,19 @@ export default function Home() {
 
         <section className="synthesis-contact" id="sintese-contato">
           <div className="synthesis-contact-copy">
-            <p className="eyebrow">SHOWROOM {unidade.nome.toUpperCase()}</p>
-            <h2>Seu mundo começa com uma conversa.</h2>
+            {/* "Seu mundo começa com uma conversa" é o clichê mais comum do
+                setor. "Venha com a planta em mãos" diz o próximo passo
+                concreto, sinaliza que ali se fala de projeto e qualifica quem
+                chega. E publicar o horário é vantagem direta: o concorrente
+                mais forte da cidade não publica o dele. */}
+            <p className="eyebrow">SHOWROOM {unidade.cidade.toUpperCase()}</p>
+            <h2>Venha com a planta em mãos.</h2>
             <p>{enderecoEmLinha()}</p>
+            <p>
+              {unidade.horarios
+                .map((h) => `${h.dias}, ${h.abre} às ${h.fecha}`)
+                .join(" · ")}
+            </p>
             {/* Destino REAL. Antes apontava para #sintese-contato, que é esta
                 mesma seção — o "link âncora para a própria seção" que o
                 CLAUDE.md proíbe. /a-loja ainda não existe; ver

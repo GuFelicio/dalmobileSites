@@ -27,6 +27,7 @@ import { metadataDaPagina } from "../../lib/seo.ts";
 import { ambientesDaUnidade, escolherFoto } from "../../lib/ambientes-da-unidade.ts";
 import { ehPendente } from "../../config/pendente.ts";
 import { institucional } from "../../lib/conteudo.ts";
+import { comCidade } from "../../lib/texto.ts";
 import estilos from "./a-dalmobile.module.css";
 
 const pagina = institucional("a-dalmobile");
@@ -34,8 +35,8 @@ const pagina = institucional("a-dalmobile");
 export const metadata: Metadata = metadataDaPagina({
   titulo: `A Dalmóbile — móveis planejados em ${unidade.cidade}`,
   descricao:
-    `Fábrica própria, projeto, fabricação e montagem. Conheça a Dalmóbile ` +
-    `${unidade.cidade}: processo, materiais e perguntas frequentes.`,
+    `Fábrica própria desde 1977, 100% MDF e 6 anos de garantia. Como a ` +
+    `Dalmóbile projeta, fabrica e instala em ${unidade.cidade}.`,
   caminho: "/a-dalmobile",
   foto: escolherFoto(ambientesDaUnidade(), ["cozinha", "sala-de-estar"], 2)?.src,
 });
@@ -55,17 +56,17 @@ export default function ADalmobile() {
       <Header superficie="papel" />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>{pagina.titulo}</h1>
-        <p className={estilos.chamada}>{pagina.chamada}</p>
+        <h1 className={estilos.titulo}>{comCidade(pagina.titulo)}</h1>
+        <p className={estilos.chamada}>{comCidade(pagina.chamada)}</p>
         <div className={estilos.texto}>
-          <p>{d.abertura}</p>
+          <p>{comCidade(d.abertura)}</p>
         </div>
       </Section>
 
       <Section superficie="papel">
         <h2 className={estilos.secao}>{d.fabrica?.titulo}</h2>
         <div className={estilos.texto}>
-          <p>{d.fabrica?.texto}</p>
+          <p>{comCidade(d.fabrica?.texto ?? "")}</p>
         </div>
         {/* A direção pede foto de fábrica e o acervo não tem. Até ter, uma
             foto de projeto executado, que é o ativo que a loja realmente tem. */}
@@ -101,13 +102,22 @@ export default function ADalmobile() {
       <Section superficie="papel">
         <h2 className={estilos.secao}>{d.materiais?.titulo}</h2>
         <div className={estilos.texto}>
-          <p>{d.materiais?.texto}</p>
+          <p>{comCidade(d.materiais?.texto ?? "")}</p>
         </div>
 
         <h2 className={estilos.secao}>Garantia</h2>
         <div className={estilos.texto}>
           {garantiaAnos ? <p className={estilos.garantiaAnos}>{garantiaAnos}</p> : null}
           <p>{d.garantia?.texto}</p>
+          {/* Prometer o documento e não entregar é pior que não prometer: o
+              botão só existe quando o PDF existe. Ver docs/pendencias.md. */}
+          {d.garantia?.certificado && !ehPendente(d.garantia.certificado) ? (
+            <p>
+              <a href={d.garantia.certificado} className={estilos.certificado}>
+                Ver o certificado de garantia ↗
+              </a>
+            </p>
+          ) : null}
         </div>
       </Section>
 
@@ -134,8 +144,8 @@ export default function ADalmobile() {
           <dl className={estilos.faq}>
             {faq.map((p) => (
               <div key={p.pergunta} className={estilos.item}>
-                <dt className={estilos.pergunta}>{p.pergunta}</dt>
-                <dd className={estilos.resposta}>{p.resposta}</dd>
+                <dt className={estilos.pergunta}>{comCidade(p.pergunta)}</dt>
+                <dd className={estilos.resposta}>{comCidade(p.resposta)}</dd>
               </div>
             ))}
           </dl>
@@ -144,7 +154,7 @@ export default function ADalmobile() {
 
       <Section superficie="cinza" semRespiro>
         <div className={estilos.chamadaFinal}>
-          <p className={estilos.chamadaTexto}>{pagina.texto}</p>
+          <p className={estilos.chamadaTexto}>{comCidade(pagina.texto)}</p>
           <Link href="/a-loja" className={estilos.chamadaAcao}>
             Showroom {unidade.nome}
           </Link>

@@ -2,7 +2,13 @@
 nome: Cozinha
 slug: cozinha
 unidades: [sjc, caragua]
-chamada: A cozinha é onde a marcenaria trabalha mais e aparece menos.
+chamada: É onde a marcenaria mais trabalha e menos aparece.
+
+# A chamada final é própria de cada ambiente: sete páginas terminando na
+# mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
+# gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
+# botão é interface, não texto.
+chamadaFinal: Quer resolver a sua cozinha?
 fotos:
   - src: /fotos/sjc/cozinha/19052023-riz2690.webp
     titulo: Ilha de jantar que dispensa a mesa
@@ -61,6 +67,7 @@ fotos:
     arquiteto:
 ---
 
-Cooktop, coifa, torre de fornos, adega, lixeira, tomada: tudo tem lugar antes de
-a primeira peça ser cortada. É o ambiente onde a marcenaria mais trabalha e
-menos aparece.
+Cooktop, coifa, torre de fornos, adega, lixeira e tomada têm lugar definido
+antes de a primeira peça ser cortada. Depois disso o desenho é consequência: a
+porta abre para o lado que não trava a passagem, a bancada fica na altura de
+quem cozinha, e o que é feio some atrás de uma porta.

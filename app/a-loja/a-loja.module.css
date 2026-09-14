@@ -16,6 +16,15 @@
   margin: 0 0 var(--e-3);
 }
 
+.chamada {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  max-width: var(--medida);
+  margin: var(--e-2) 0 0;
+}
+
 .intro {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);

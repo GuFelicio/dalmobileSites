@@ -2,7 +2,13 @@
 nome: Home office
 slug: home-office
 unidades: [sjc]
-chamada: Trabalhar em casa virou permanente, e a marcenaria acompanhou.
+chamada: Trabalho que some quando o expediente acaba.
+
+# A chamada final é própria de cada ambiente: sete páginas terminando na
+# mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
+# gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
+# botão é interface, não texto.
+chamadaFinal: Quer um home office assim?
 fotos:
   - src: /fotos/sjc/home-office/19052023-riz2600.webp
     titulo: Biblioteca do chão ao teto
@@ -31,6 +37,7 @@ fotos:
     arquiteto:
 ---
 
-Deixou de ser um canto emprestado da sala. Hoje é ambiente próprio, com fiação
-pensada, iluminação de tarefa e lugar para guardar o que não deve aparecer na
-chamada de vídeo.
+Deixou de ser um canto emprestado da sala. Hoje pede fiação por dentro do móvel,
+luz de tarefa sobre a bancada e porta que fecha na frente do que não deve
+aparecer na chamada de vídeo. Às seis da tarde o escritório desaparece e o
+cômodo volta a ser o que era.
