@@ -22,13 +22,31 @@ caíram de **18 para 4**.
 **Campo pendente não vira buraco na página: ele é OMITIDO.** Um teste falha se
 a palavra "PENDENTE" chegar ao HTML.
 
-### Dois itens da copy que dependem da loja, fora do sistema de pendências
+### Telefone — RESOLVIDO em 14/09/2026
 
-- **Telefone.** O site mostra dois números: o WhatsApp vai para
-  `(12) 99604-9888` e o rodapé mostra `(12) 3341-8777`. Definir qual é qual e
-  bater com o Google Business.
-- **Horário de sábado.** O site diz **08h–14h**; os catálogos dizem **9h–13h**.
-  Confirmar e igualar nos três lugares.
+Um número só, nas duas lojas: **(12) 99604-9888**, o mesmo do WhatsApp.
+Saíram do site o fixo de SJC `(12) 3341-8777` e o celular de Caraguá
+`(12) 98270-3186`.
+
+> Se alguém ainda atende por um desses, reverter é trocar uma linha em
+> `config/sjc.ts` ou `config/caragua.ts`.
+
+### Horário — CONFERIR CONTRA O GOOGLE MEU NEGÓCIO
+
+Não consegui ler a ficha: o Google Maps só monta a página com JavaScript, e o
+HTML que o servidor devolve não traz horário nem telefone.
+
+O que está no site hoje, e precisa bater **exatamente** com a ficha de cada
+loja — divergência derruba a busca local e invalida o schema `LocalBusiness`:
+
+| | Segunda a sexta | Sábado |
+|---|---|---|
+| **São José dos Campos** | 09h00 às 19h00 | 08h00 às 14h00 |
+| **Caraguatatuba** | 09h00 às 18h00 | 09h00 às 14h00 |
+
+> A copy apontou divergência no sábado de SJC: o site diz **08h–14h**, os
+> catálogos dizem **9h–13h**. Vale abrir as duas fichas e conferir linha a
+> linha.
 
 ### O formulário de contato
 

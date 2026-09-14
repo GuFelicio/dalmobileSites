@@ -42,9 +42,15 @@ export const unidade: Unidade = {
     altura: 177,
   },
 
-  // É um celular, não um fixo. Ainda não confirmado se é o mesmo número do
-  // WhatsApp — enquanto não for, o campo whatsapp abaixo segue null.
-  telefone: "(12) 98270-3186",
+  // UM NÚMERO SÓ, nas duas lojas. Decisão do cliente em 14/09/2026, que
+  // resolve a divergência que havia no site: o WhatsApp ia para um número e
+  // o rodapé mostrava outro.
+  //
+  // O fixo (12) 3341-8777, que era o número de SJC, SAIU do site. Se alguém
+  // ainda atende por ele, reverter é trocar esta linha de volta.
+  //
+  // O celular (12) 98270-3186, que era o de Caraguá, SAIU do site.
+  telefone: "(12) 99604-9888",
 
   // ATENÇÃO: é o MESMO número do WhatsApp de SJC. Confirmado pelo cliente em
   // 08/09/2026. Ver a nota em docs/unidades.md sobre a origem do lead.

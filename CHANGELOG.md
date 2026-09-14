@@ -8,6 +8,33 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [1.0.0-rc3] — 2026-09-14
+
+### Capa nova, telefone unificado e a rota de teste fora do ar
+
+- **Capa da home trocada.** Foto nova de `casaCompleta.jpg` — sala com painel
+  de madeira do chão ao teto e forro iluminado. O `alt` foi reescrito junto:
+  o anterior descrevia a foto antiga (jantar e gourmet integrados), e teria
+  ficado descrevendo uma imagem que não estava mais lá.
+- **Um telefone só, nas duas lojas:** `(12) 99604-9888`, o mesmo do WhatsApp.
+  Saíram o fixo de SJC e o celular de Caraguá. Resolve a divergência que a
+  copy apontou — o site mostrava dois números diferentes.
+- **`/teste-layout` foi removida.** Estava **no ar respondendo 200** desde a
+  Fase 2, sem link nenhum apontando para ela. O checklist do `CLAUDE.md`
+  proíbe rota de teste no build. Os testes de layout passaram a usar
+  `/ambientes`, que é página de verdade, e um teste novo falha se
+  `/teste-layout`, `/teste`, `/debug` ou `/preview` voltarem a responder.
+- **O teste do rodapé travava o telefone antigo** em vez de ler o config, e
+  quebrou no dia em que a loja unificou o número — ou seja, por estar certo.
+  Agora confere a regra: endereço, telefone e horários vêm do config.
+
+A suíte foi para **57**.
+
+**Não resolvido:** o horário não pôde ser conferido contra o Google Meu
+Negócio — o Maps só monta a ficha com JavaScript. Ver `docs/pendencias.md`.
+
+---
+
 ## [1.0.0-rc2] — 2026-09-14
 
 ### A copy revisada entrou no site inteiro

@@ -35,7 +35,13 @@ export const unidade: Unidade = {
     altura: 177,
   },
 
-  telefone: "(12) 3341-8777",
+  // UM NÚMERO SÓ, nas duas lojas. Decisão do cliente em 14/09/2026, que
+  // resolve a divergência que havia no site: o WhatsApp ia para um número e
+  // o rodapé mostrava outro.
+  //
+  // O fixo (12) 3341-8777, que era o número de SJC, SAIU do site. Se alguém
+  // ainda atende por ele, reverter é trocar esta linha de volta.
+  telefone: "(12) 99604-9888",
 
   // ATENÇÃO: é o MESMO número do WhatsApp de Caraguá. Confirmado pelo cliente
   // em 08/09/2026. Ver a nota em docs/unidades.md sobre a origem do lead.

@@ -4,6 +4,18 @@ import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
+
+import { unidade } from "../config/sjc.ts";
+
+/**
+ * A página usada para exercitar cabeçalho e rodapé.
+ *
+ * Era `/teste-layout`, o andaime da Fase 2 — que ficou no ar respondendo 200
+ * mesmo sem estar linkada em lugar nenhum. O checklist "Obrigatório antes de
+ * qualquer deploy" do CLAUDE.md proíbe rota de teste no build, então a rota
+ * saiu e os testes passaram a usar uma página de verdade.
+ */
+const PAGINA_COM_LAYOUT = "/ambientes";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
@@ -35,17 +47,22 @@ async function componentes() {
 }
 
 test("o rodapé traz endereço, telefone e horário", async () => {
-  const { resposta, html } = await renderizar("/teste-layout");
+  const { resposta, html } = await renderizar(PAGINA_COM_LAYOUT);
   assert.equal(resposta.status, 200);
 
-  assert.ok(html.includes("Av. Barão do Rio Branco, 736"), "falta o logradouro no rodapé");
-  assert.ok(html.includes("Jardim Esplanada"), "falta o bairro no rodapé");
-  assert.ok(html.includes("(12) 3341-8777"), "falta o telefone no rodapé");
-  assert.ok(html.includes("09h00"), "falta o horário no rodapé");
+  // Do CONFIG, nunca literal: o teste travava o número antigo e quebrou no
+  // dia em que a loja unificou o telefone — ou seja, por estar certo.
+  assert.ok(html.includes(unidade.endereco.logradouro), "falta o logradouro no rodapé");
+  assert.ok(html.includes(unidade.endereco.bairro), "falta o bairro no rodapé");
+  assert.ok(html.includes(unidade.telefone), "falta o telefone no rodapé");
+  for (const horario of unidade.horarios) {
+    assert.ok(html.includes(horario.dias), `falta "${horario.dias}" no rodapé`);
+    assert.ok(html.includes(horario.abre), `falta a abertura de ${horario.dias}`);
+  }
 });
 
 test("o botão de menu tem handler e estado, não só aria-label", async () => {
-  const { html } = await renderizar("/teste-layout");
+  const { html } = await renderizar(PAGINA_COM_LAYOUT);
   // O painel existe no DOM e o botão o controla e anuncia se está aberto.
   assert.match(html, /aria-controls="menu-principal"/, "o botão não aponta para o painel");
   assert.match(html, /aria-expanded="(true|false)"/, "o botão não anuncia se está aberto");
@@ -53,14 +70,14 @@ test("o botão de menu tem handler e estado, não só aria-label", async () => {
 });
 
 test("nenhum CTA sem destino real", async () => {
-  const { html } = await renderizar("/teste-layout");
+  const { html } = await renderizar(PAGINA_COM_LAYOUT);
   assert.doesNotMatch(html, /href="#"/, 'há link apontando para "#"');
   // <a(?=[\s>]) para não casar com <address>, que também começa com "<a".
   assert.doesNotMatch(html, /<a(?=[\s>])(?![^>]*\bhref=)/, "há âncora sem href");
 });
 
 test("ação sem destino aparece desabilitada, nunca como link", async () => {
-  const { html } = await renderizar("/teste-layout");
+  const { html } = await renderizar(PAGINA_COM_LAYOUT);
 
   // A REGRA, não o estado: uma ação marcada "em breve" nunca pode estar dentro
   // de um <a>. A primeira versão deste teste exigia que a ação DESABILITADA
@@ -79,7 +96,7 @@ test("ação sem destino aparece desabilitada, nunca como link", async () => {
 });
 
 test("o link de WhatsApp identifica de qual unidade veio o lead", async () => {
-  const { html } = await renderizar("/teste-layout");
+  const { html } = await renderizar(PAGINA_COM_LAYOUT);
   if (!html.includes("wa.me")) return; // sem número ainda, nada a conferir
 
   // As duas unidades dividem o mesmo número. Sem a mensagem pré-preenchida,
@@ -91,9 +108,11 @@ test("o link de WhatsApp identifica de qual unidade veio o lead", async () => {
 });
 
 test("o sábado está registrado", async () => {
-  const { html } = await renderizar("/teste-layout");
-  assert.ok(html.includes("Sábado"), "falta o horário de sábado no rodapé");
-  assert.ok(html.includes("14h00"), "falta o fechamento de sábado");
+  const { html } = await renderizar(PAGINA_COM_LAYOUT);
+  const sabado = unidade.horarios.find((h) => h.dias.toLowerCase().includes("sábado"));
+  assert.ok(sabado, "o config não declara horário de sábado");
+  assert.ok(html.includes(sabado.dias), "falta o sábado no rodapé");
+  assert.ok(html.includes(sabado.fecha), "falta o fechamento de sábado no rodapé");
 });
 
 test("nenhum dado de unidade escrito direto em componente", async () => {
@@ -196,3 +215,13 @@ test("nenhuma âncora aponta para a seção que a contém", async () => {
   }
 });
 
+test("nenhuma rota de teste no build", async () => {
+  // /teste-layout era o andaime da Fase 2 e ficou no ar respondendo 200 até
+  // 14/09/2026, sem link nenhum apontando para ela. O checklist do CLAUDE.md
+  // proíbe rota de teste no build — e rota que ninguém linka é rota que
+  // ninguém confere.
+  for (const rota of ["/teste-layout", "/teste", "/debug", "/preview"]) {
+    const { resposta } = await renderizar(rota);
+    assert.equal(resposta.status, 404, `a rota de teste ${rota} está no ar`);
+  }
+});

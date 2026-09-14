@@ -103,7 +103,7 @@ export default function Home() {
           <Foto
             className="synthesis-hero-image"
             src="/fotos/comum/capa/casa-completa.webp"
-            alt="Sala de estar, jantar e espaço gourmet integrados, com forro ripado em madeira, jardim vertical e mesa de jantar em madeira maciça"
+            alt="Sala de estar com painel de madeira do chão ao teto, televisão embutida entre os armários, rack suspenso e forro de madeira iluminado por LED"
             sizes="100vw"
             prioridade
           />
