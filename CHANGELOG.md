@@ -8,6 +8,39 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-09-14
+
+### Estudo de cena 3D, em rota de desenvolvimento
+
+Protótipo para decidir se o bloco 01 da home ganha uma cena de materiais.
+**Nada disto está no site publicado.**
+
+- `app/laboratorio/` — reproduz o enquadramento do bloco 01 ("Nenhuma casa é
+  igual à planta"), para a decisão ser tomada olhando o lugar certo. Responde
+  **404 fora do `npm run dev`**.
+- `components/midia/CenaMateriais.tsx` — three.js puro, geometria 100%
+  procedural: seis chapas com a espessura real de cada acabamento, uma lâmina
+  curvada por deslocamento de vértices e uma fita de borda seguindo a mesma
+  curva. Scroll controla; o mouse faz 6% de parallax; sem sombra e sem
+  pós-processamento.
+- `components/midia/materiais.ts` — cor, rugosidade e espessura num arquivo
+  só, com o passo a passo para trocar por foto de material real.
+- 4 testes novos. A suíte foi para **61**.
+
+**three.js puro, sem React Three Fiber.** O R3F pesa 2,1 MB e declara
+`expo`/`react-native` como peers; a cena não tem estado de React — é um loop
+de `requestAnimationFrame`.
+
+**O peso não encosta em nenhuma página real.** Medido: a home continua em
+**89 KB gzip**, e um teste falha se `three` ou `CenaMateriais` aparecerem nos
+arquivos que qualquer página carrega.
+
+**Três regras do `CLAUDE.md` seguem valendo, e por isso o estudo é estudo:**
+a proibição de biblioteca de animação, a de parallax, e *"interface que chama
+atenção para si é interface errada"*. Adotar a cena exige reabrir as três.
+
+---
+
 ## [1.0.0-rc3] — 2026-09-14
 
 ### Capa nova, telefone unificado e a rota de teste fora do ar

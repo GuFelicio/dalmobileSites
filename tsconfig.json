@@ -12,6 +12,9 @@
     // O config é importado tanto pelo Vite quanto pelo node --test, e o node
     // exige a extensão explícita ao executar .ts direto. Ver config/.
     "allowImportingTsExtensions": true,
+    // import.meta.env do Vite — usado pela rota de laboratório para se
+    // desligar fora do modo de desenvolvimento.
+    "types": ["vite/client", "node"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",

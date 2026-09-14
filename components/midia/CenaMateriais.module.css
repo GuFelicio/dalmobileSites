@@ -1,0 +1,61 @@
+/* Cena de estudo. Ver components/midia/CenaMateriais.tsx.
+   PROTÓTIPO: só existe em app/laboratorio/, que é rota de desenvolvimento. */
+
+.moldura {
+  position: relative;
+  width: 100%;
+  /* A mesma proporção da foto que ocupa este lugar no bloco 01 da home, para
+     o estudo ser julgado no enquadramento real. */
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--papel);
+}
+
+.tela {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Fallback ---------------------------------------------------------
+   O que se vê antes de a cena carregar, e o que fica para sempre em
+   navegador sem WebGL. Não é spinner: é uma superfície do site com um
+   rótulo, que não chama atenção para si enquanto espera. */
+
+.fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--e-3);
+  background: var(--cinza);
+  transition: opacity var(--mov-fade) var(--mov-ease);
+}
+
+/* Some quando a cena assume, sem piscar. */
+.moldura[data-estado="rodando"] .fallback {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rotulo {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+}
+
+.legenda {
+  margin: var(--e-1) 0 0;
+  font-size: var(--fs-rotulo);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback {
+    transition: none;
+  }
+}
