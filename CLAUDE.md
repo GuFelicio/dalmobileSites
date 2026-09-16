@@ -1,5 +1,9 @@
 # Dalmóbile — site institucional
 
+> **Este arquivo são as REGRAS.** Para entender o projeto e fazer as tarefas do
+> dia a dia, leia [`MANUAL.md`](MANUAL.md) — ele é o documento de entrada e
+> aponta para cá quando a regra importa.
+
 Dois sites (São José dos Campos e Caraguatatuba) gerados de **um repositório só**.
 Cliente: Dalmóbile, móveis planejados, fábrica com quase cinco décadas. Marca do grupo Orizon.
 

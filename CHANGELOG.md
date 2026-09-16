@@ -8,6 +8,41 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [1.0.0-rc4] — 2026-09-16
+
+### `MANUAL.md`: um documento de entrada que se basta
+
+Escrito para ser lido por uma IA que não conhece o projeto — cole o arquivo e
+ela entende o que é o site e como fazer as tarefas do dia a dia. Uma pessoa lê
+só a seção da sua tarefa.
+
+Cobre: o que é o projeto e a regra que explica quase todas as decisões; como
+rodar; todas as rotas; onde fica cada coisa; as três regras de arquitetura que
+não podem ser quebradas; publicar fotos; mudar texto; mudar dado da loja; o
+estado de hoje com as pendências; publicação; o que cada teste protege; o
+design fechado; e um mapa dos outros documentos.
+
+**Todos os números do manual foram medidos, não estimados** — 57 testes, 88 KB
+gzip na home, 4 pendências, 7 ambientes — e reconferidos depois de escrito.
+
+A última seção é dirigida a IAs, com as quatro coisas que este projeto aprendeu
+do jeito difícil: a suíte verde não significa que sobe; teste que trava valor
+quebra quando o código fica certo; nenhum número vai ao ar sem confirmação da
+loja; e verifique antes de afirmar.
+
+### Organização
+
+- `copy-site-dalmobile-sjc.md` saiu da raiz para **`docs/copy/sjc.md`**, com as
+  6 referências atualizadas. `docs/copy/LEIA-ME.md` explica a relação entre a
+  copy aprovada e o que está no ar — e avisa que quem escrever a de Caraguá
+  **não escreve nome de cidade**, escreve `{{cidade}}`.
+- `README.md` e `CLAUDE.md` passaram a apontar para o manual logo no topo.
+
+A raiz ficou só com `MANUAL.md`, `README.md`, `CLAUDE.md`, `CHANGELOG.md` e os
+arquivos de configuração.
+
+---
+
 ## [não publicado] — 2026-09-14
 
 ### Estudo de cena 3D: construído e descartado no mesmo dia
@@ -65,7 +100,7 @@ Negócio — o Maps só monta a ficha com JavaScript. Ver `docs/pendencias.md`.
 
 ### A copy revisada entrou no site inteiro
 
-Aplicado `copy-site-dalmobile-sjc.md`. **As pendências caíram de 18 para 4.**
+Aplicado `docs/copy/sjc.md`. **As pendências caíram de 18 para 4.**
 
 **Correções de fato, não de estilo**
 

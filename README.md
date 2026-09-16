@@ -2,18 +2,24 @@
 
 Dois sites (São José dos Campos e Caraguatatuba) gerados de **um repositório só**.
 
-A fonte da verdade das regras é o [`CLAUDE.md`](CLAUDE.md). Em caso de conflito
-entre documentos, ele vence.
+👉 **Comece por [`MANUAL.md`](MANUAL.md)** — é o documento de entrada, e sozinho
+já explica o projeto e as tarefas mais comuns. Serve também para colar numa IA
+e pedir que ela trabalhe no site.
+
+A fonte da verdade das **regras** é o [`CLAUDE.md`](CLAUDE.md). Em caso de
+conflito entre documentos, ele vence.
 
 ## Documentos
 
 | Arquivo | O que é |
 |---|---|
+| [`MANUAL.md`](MANUAL.md) | **o documento de entrada — leia este primeiro** |
 | [`CLAUDE.md`](CLAUDE.md) | as regras: tokens, paleta, escala, forma, responsividade, stack |
 | [`docs/direcao-site.md`](docs/direcao-site.md) | o que cada página tem, em que ordem, e por quê |
 | [`docs/design-system.md`](docs/design-system.md) | os tokens e como usá-los |
 | [`docs/decisoes.md`](docs/decisoes.md) | log de decisões: o que, por quê, o que foi descartado |
 | [`docs/adicionar-ambiente.md`](docs/adicionar-ambiente.md) | **como publicar fotos novas** |
+| [`docs/copy/`](docs/copy/) | o texto aprovado pelo cliente, por unidade |
 | [`docs/adicionar-projeto.md`](docs/adicionar-projeto.md) | como publicar um projeto (dormente) |
 | [`docs/unidades.md`](docs/unidades.md) | o que cada campo do config faz |
 | [`docs/prompts-construcao.md`](docs/prompts-construcao.md) | o plano de nove fases |

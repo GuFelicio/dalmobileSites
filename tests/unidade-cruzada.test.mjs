@@ -18,7 +18,7 @@
 //      das frases da lista abaixo. Uma menção nova quebra a suíte e obriga
 //      alguém a olhar — que é o ponto.
 //
-// Ver docs/decisoes.md e copy-site-dalmobile-sjc.md.
+// Ver docs/decisoes.md e docs/copy/sjc.md.
 import assert from "node:assert/strict";
 import test from "node:test";
 

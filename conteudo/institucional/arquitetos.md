@@ -1,5 +1,5 @@
 ---
-# Texto revisado a partir de copy-site-dalmobile-sjc.md (09/09/2026).
+# Texto revisado a partir de docs/copy/sjc.md (09/09/2026).
 #
 # Duas correções de fato vieram de lá:
 #   · "marceneiro" virou "fornecedor" — arquiteto que contrata marcenaria

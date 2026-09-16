@@ -1,5 +1,5 @@
 ---
-# Texto revisado a partir de copy-site-dalmobile-sjc.md (09/09/2026), que
+# Texto revisado a partir de docs/copy/sjc.md (09/09/2026), que
 # corrigiu erros de fato do rascunho anterior — o principal deles: a fábrica
 # NÃO é local, é a da marca em Bento Gonçalves.
 #

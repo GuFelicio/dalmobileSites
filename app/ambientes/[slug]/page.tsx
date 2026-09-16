@@ -126,7 +126,7 @@ export default async function PaginaDeAmbiente({ params }: Props) {
         <div className={estilos.chamadaFinal}>
           {/* A pergunta vem do conteúdo, não de uma fôrma. Ver
               conteudo/ambientes/*.md e a régua de voz em
-              copy-site-dalmobile-sjc.md. */}
+              docs/copy/sjc.md. */}
           <p className={estilos.chamadaTexto}>{ambiente.chamadaFinal}</p>
           <Link href="/a-loja" className={estilos.chamadaAcao}>
             Falar sobre um projeto assim

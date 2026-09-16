@@ -8,7 +8,7 @@ Quem resolver um item, apaga daqui e registra no `CHANGELOG.md`.
 
 ## 1. Quatro dados que a loja ainda precisa confirmar
 
-A copy foi revisada e aplicada em 14/09/2026 (`copy-site-dalmobile-sjc.md`), e
+A copy foi revisada e aplicada em 14/09/2026 (`docs/copy/sjc.md`), e
 os textos institucionais saíram de rascunho: `confirmado: true`. As pendências
 caíram de **18 para 4**.
 
