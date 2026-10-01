@@ -1,72 +1,78 @@
 "use client";
 
 /**
- * VideoEmLoop — o vídeo em loop da home.
+ * VideoEmLoop — o vídeo de fundo da capa da home.
  *
- * O que é: faixa de vídeo decorativo, largura total, sem som e sem controle.
+ * O que é: vídeo decorativo em loop, sem som e sem controle, que preenche a
+ * área que o contém. Não tem estilo próprio: o enquadramento (posição,
+ * tamanho, object-fit) vem de `className`, de quem o usa.
  *
- * Onde é usado: app/page.tsx, logo abaixo da capa, no lugar da antiga seção
- * "01 — Como projetamos".
+ * Onde é usado: app/page.tsx, no fundo da `.synthesis-hero`, no lugar da foto
+ * de abertura.
  *
  * Props:
- *   webm    fonte principal (VP9, mais leve)
- *   mp4     fallback H.264, para o Safari antigo
- *   poster  primeiro quadro; é o que aparece antes de tocar e com
- *           prefers-reduced-motion
+ *   webm       fonte principal (VP9, mais leve)
+ *   mp4        fallback H.264, para o Safari antigo
+ *   poster     primeiro quadro; é o que aparece antes de tocar e com
+ *              prefers-reduced-motion
+ *   className  classe de enquadramento
  *
- * QUANDO TOCA: só quando a faixa entra na tela, e pausa quando sai. Por isso
- * NÃO tem o atributo `autoplay`: com ele, o vídeo começaria a rodar no
- * carregamento, antes de a pessoa chegar até ele. Quem dá o play é o
- * IntersectionObserver abaixo. Sem JavaScript, fica o poster.
+ * QUANDO TOCA: `autoplay`, porque é o primeiro conteúdo da página — começa
+ * antes mesmo de o JavaScript carregar. Pausa quando a capa sai da tela e
+ * volta quando ela reaparece, para não gastar bateria rodando fora de vista.
  *
- * Com prefers-reduced-motion: reduce, nunca toca — fica só o poster.
+ * Com prefers-reduced-motion: reduce, para e volta ao poster.
  */
 import { useEffect, useRef } from "react";
-
-import estilos from "./VideoEmLoop.module.css";
 
 type Props = {
   webm: string;
   mp4: string;
   poster: string;
+  className?: string;
 };
 
-export default function VideoEmLoop({ webm, mp4, poster }: Props) {
+export default function VideoEmLoop({ webm, mp4, poster, className }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
 
-    // O React não escreve `muted` no HTML do servidor; sem isto o navegador
-    // trata o vídeo como tendo som e recusa o play() sem gesto do usuário.
+    // Garante o mudo também pela propriedade: sem ele o navegador trata o
+    // vídeo como tendo som e recusa o autoplay.
     video.muted = true;
 
     const movimentoReduzido = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (movimentoReduzido.matches) return;
+    let naTela = true;
 
-    const observador = new IntersectionObserver(
-      ([entrada]) => {
-        if (entrada.isIntersecting) {
-          // play() devolve promessa que rejeita se o navegador bloquear (modo
-          // de economia de bateria, por exemplo). Aí fica o poster, e está bem.
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      // 25% visível já conta como "chegou": a faixa é alta, e esperar ela
-      // entrar inteira faria o vídeo começar tarde no celular.
-      { threshold: 0.25 },
-    );
+    const tocar = () => {
+      // play() rejeita se o navegador bloquear (economia de bateria, por
+      // exemplo). Aí fica o poster, e está bem.
+      if (naTela && !movimentoReduzido.matches) video.play().catch(() => {});
+    };
+
+    const mostrarSoOPoster = () => {
+      // O `autoplay` do HTML pode ter começado antes da hidratação. load()
+      // devolve o vídeo ao estado inicial, que exibe o poster.
+      video.pause();
+      video.removeAttribute("autoplay");
+      video.load();
+    };
+
+    if (movimentoReduzido.matches) mostrarSoOPoster();
+
+    const observador = new IntersectionObserver(([entrada]) => {
+      naTela = entrada.isIntersecting;
+      if (naTela) tocar();
+      else video.pause();
+    });
     observador.observe(video);
 
-    // Se a pessoa ligar o "reduzir movimento" com a página aberta, para.
+    // A pessoa pode mudar o "reduzir movimento" com a página aberta.
     const aoMudarPreferencia = () => {
-      if (movimentoReduzido.matches) {
-        observador.disconnect();
-        video.pause();
-      }
+      if (movimentoReduzido.matches) mostrarSoOPoster();
+      else tocar();
     };
     movimentoReduzido.addEventListener("change", aoMudarPreferencia);
 
@@ -77,21 +83,20 @@ export default function VideoEmLoop({ webm, mp4, poster }: Props) {
   }, []);
 
   return (
-    <div className={estilos.faixa}>
-      <video
-        ref={ref}
-        className={estilos.video}
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster={poster}
-        aria-hidden="true"
-        tabIndex={-1}
-      >
-        <source src={webm} type="video/webm" />
-        <source src={mp4} type="video/mp4" />
-      </video>
-    </div>
+    <video
+      ref={ref}
+      className={className}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      poster={poster}
+      aria-hidden="true"
+      tabIndex={-1}
+    >
+      <source src={webm} type="video/webm" />
+      <source src={mp4} type="video/mp4" />
+    </video>
   );
 }

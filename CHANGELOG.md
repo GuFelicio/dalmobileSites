@@ -8,6 +8,26 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-01 · vídeo na capa
+
+### O vídeo vai para o fundo da capa; a seção 01 volta
+
+Vale para os dois sites.
+
+- O **fundo da capa** passou a ser o vídeo em loop (`autoplay`, mudo, `cover`,
+  poster `hero-loop-poster.jpg`, `aria-hidden`), no lugar da foto
+  `casa-completa.webp`. O painel da capa não mudou.
+- O véu `.synthesis-shade`, que escurecia a imagem inteira, saiu. Ficou só um
+  gradiente no topo (token novo `--degrade-cabecalho`) para o cabeçalho.
+- Com `prefers-reduced-motion`, o vídeo para no poster.
+- A **faixa de vídeo separada saiu** (com `VideoEmLoop.module.css`), e a seção
+  **"01 — Como projetamos" voltou** como era, com a numeração 01/02/03.
+
+Por que e o que foi descartado: `docs/decisoes.md`, primeira entrada de
+2026-10-01.
+
+---
+
 ## [não publicado] — 2026-10-01
 
 ### Vídeo em loop no lugar da seção "01 — Como projetamos"

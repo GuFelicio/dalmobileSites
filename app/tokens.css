@@ -97,6 +97,11 @@
   --veu-20: rgb(0 0 0 / .20);
   --veu-12: rgb(0 0 0 / .12);
 
+  /* Gradiente do topo da capa em vídeo, para o cabeçalho branco ficar
+     legível. NÃO é véu: cobre só a faixa do cabeçalho, de cima para baixo
+     até sumir. Ver .synthesis-hero-top e docs/decisoes.md, 2026-10-01. */
+  --degrade-cabecalho: rgb(0 0 0 / .35);
+
   /* ------------------------------------------------------------------
      5. TIPOGRAFIA
      Krub e só Krub, self-hosted via @fontsource. Decisão travada:

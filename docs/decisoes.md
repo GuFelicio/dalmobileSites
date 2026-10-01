@@ -152,7 +152,43 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-01 · O vídeo vai para o fundo da capa; a seção 01 volta
+
+**Decisão.** O vídeo em loop saiu da faixa separada e virou o **fundo da capa**
+(`.synthesis-hero`), no lugar da foto `casa-completa.webp`. A faixa foi removida
+e a seção "01 — Como projetamos" voltou exatamente como era antes, com a foto,
+a legenda e a numeração 01/02/03. O painel da capa (rótulo, H1, texto e "Ver
+os ambientes") não mudou.
+
+**Como se comporta agora.**
+- `autoplay`, porque passou a ser o primeiro conteúdo da página: começa antes
+  mesmo do JavaScript. Pausa se a capa sai da tela e volta quando ela reaparece.
+- `prefers-reduced-motion: reduce` → para e volta ao poster (`load()`), mesmo
+  que o autoplay tenha começado antes da hidratação.
+- `object-fit: cover` e `object-position: center` em todas as larguras.
+- O `.synthesis-shade`, que escurecia a foto inteira, **saiu**. No lugar há só
+  um gradiente no topo (`--degrade-cabecalho`, preto a 35% até sumir em 22% da
+  altura), para o cabeçalho branco ficar legível sobre as partes claras do
+  vídeo. O vídeo em si não é escurecido.
+- A foto `casa-completa.webp` continua no repositório: é a imagem de
+  compartilhamento (OpenGraph) em `app/layout.tsx`.
+
+**Desvio consciente do `CLAUDE.md`.** A regra diz que "na abertura, a foto entra
+inteira e o título vive numa faixa preta abaixo dela". A capa já não seguia isso
+desde o estudo 03 (o painel fica sobre a imagem, como "painel sólido ancorado",
+que o próprio `CLAUDE.md` admite). O vídeo mantém esse painel e tira o véu, então
+fica mais perto da regra do que estava.
+
+**Descartado.** Manter a faixa separada abaixo da capa (o pedido do cliente era
+o vídeo na abertura) e manter o véu da foto sobre o vídeo (o cliente pediu
+explicitamente sem filtro escuro).
+
+---
+
 ## 2026-10-01 · Vídeo em loop no lugar da seção "01 — Como projetamos"
+
+> **Substituída no mesmo dia** pela entrada acima: o vídeo foi para a capa e a
+> seção 01 voltou. Fica o registro do que foi tentado.
 
 **Decisão.** A seção do manifesto da home (rótulo "01 — Como projetamos",
 título "Nenhuma casa é igual à planta.", texto sobre a medição no imóvel, link

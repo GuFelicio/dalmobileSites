@@ -41,8 +41,9 @@ export default function Home() {
   const ambientes = ambientesDaUnidade();
   const whatsapp = linkWhatsApp();
 
-  // As duas fotos de apoio da home. A lista de preferência cai para o que a
+  // As três fotos de apoio da home. A lista de preferência cai para o que a
   // unidade tiver: Caraguá não tem home office nem closet.
+  const fotoManifesto = escolherFoto(ambientes, ["sala-de-estar", "cozinha"], 3);
   const fotoProcesso = escolherFoto(ambientes, ["cozinha", "banheiro"], 7);
   const fotoContato = escolherFoto(ambientes, ["quartos", "sala-de-estar"], 5);
 
@@ -100,14 +101,19 @@ export default function Home() {
 
       <main>
         <section className="synthesis-hero">
-          <Foto
-            className="synthesis-hero-image"
-            src="/fotos/comum/capa/casa-completa.webp"
-            alt="Sala de estar com painel de madeira do chão ao teto, televisão embutida entre os armários, rack suspenso e forro de madeira iluminado por LED"
-            sizes="100vw"
-            prioridade
+          {/* Vídeo de projeto executado no fundo da capa, no lugar da foto. É
+              decorativo (aria-hidden): o título e o texto estão no painel.
+              Ver docs/decisoes.md, 2026-10-01. */}
+          <VideoEmLoop
+            className="synthesis-hero-video"
+            webm="/videos/hero-loop.webm"
+            mp4="/videos/hero-loop.mp4"
+            poster="/videos/hero-loop-poster.jpg"
           />
-          <div className="synthesis-shade" aria-hidden="true" />
+          {/* Só o topo escurece, e pouco: é o que deixa o logo, o menu e o
+              "Falar no WhatsApp" legíveis sobre as partes claras do vídeo. O
+              vídeo em si nunca é escurecido. */}
+          <div className="synthesis-hero-top" aria-hidden="true" />
           <div className="synthesis-hero-panel">
             {/* "Crie seu mundo" é assinatura de marca e continua no rodapé,
                 onde assinatura fica. Como manchete, não dizia nada que o
@@ -123,15 +129,27 @@ export default function Home() {
 
         </section>
 
-        {/* Vídeo em loop no lugar da antiga "01 — Como projetamos". É
-            decorativo (aria-hidden): o que a seção dizia — medição no imóvel,
-            fábrica própria, MDF, garantia — continua em /a-dalmobile e na
-            seção "Da fábrica à montagem" logo abaixo. Ver docs/decisoes.md. */}
-        <VideoEmLoop
-          webm="/videos/hero-loop.webm"
-          mp4="/videos/hero-loop.mp4"
-          poster="/videos/hero-loop-poster.jpg"
-        />
+        <section className="synthesis-manifesto" id="sintese-manifesto">
+          <div className="synthesis-manifesto-content">
+            {/* "Liberdade criativa", "escuta", "repertório" e "identidade" são
+                palavras que qualquer marcenaria do país usa. A mesma ideia —
+                o projeto é seu, não é catálogo — dita por um fato de ofício. */}
+            <p className="eyebrow">01 — COMO PROJETAMOS</p>
+            <h2>Nenhuma casa é igual à planta.</h2>
+            <p>
+              A medição é feita no imóvel, com a obra pronta — é de lá que sai o desenho.
+              O pé-direito real, o vão que ficou dois centímetros fora do projeto, a tomada
+              que ninguém previu. O móvel se ajusta à casa; nunca o contrário.
+            </p>
+            <Link href="/a-dalmobile">Como trabalhamos <Arrow /></Link>
+          </div>
+          <figure className="synthesis-manifesto-image">
+            <Foto src={fotoManifesto.src} alt={fotoManifesto.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
+            {/* Três dados verificáveis no lugar de "essência italiana", que não
+                se sustentava em nada no site. */}
+            <figcaption>FÁBRICA PRÓPRIA · 100% MDF · 6 ANOS DE GARANTIA</figcaption>
+          </figure>
+        </section>
 
         <section className="synthesis-projects" id="sintese-projetos">
           <div className="synthesis-section-heading">
@@ -139,7 +157,7 @@ export default function Home() {
               {/* "Fotografado depois da montagem" faz uma afirmação que a
                   concorrência não pode fazer: aqui não tem render, não tem
                   banco de imagem, não tem apartamento de fornecedor. */}
-              <p className="eyebrow">01 — PROJETOS EXECUTADOS</p>
+              <p className="eyebrow">02 — PROJETOS EXECUTADOS</p>
               <h2 id="titulo-vitrine">Fotografado depois da montagem.</h2>
             </div>
             <Link href="/ambientes">Ver todos os ambientes <Arrow /></Link>
@@ -157,7 +175,7 @@ export default function Home() {
             <span>O QUE VEM POR ESCRITO</span>
           </div>
           <div className="synthesis-process-copy">
-            <p className="eyebrow">02 — DA FÁBRICA À MONTAGEM</p>
+            <p className="eyebrow">03 — DA FÁBRICA À MONTAGEM</p>
             <h2>Produção própria, com garantia publicada.</h2>
             <p>
               A marcenaria não é comprada de terceiro: sai da fábrica da própria Dalmóbile,
