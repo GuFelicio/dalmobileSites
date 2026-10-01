@@ -81,7 +81,7 @@ verdes. Ver [`tests/README-workerd.md`](tests/README-workerd.md).
 
 | Rota | O que é |
 |---|---|
-| `/` | home — capa, manifesto, vitrine de fotos, fábrica, contato |
+| `/` | home — capa, vídeo em loop, vitrine de fotos, fábrica, contato |
 | `/ambientes` | hub: grade dos ambientes daquela unidade |
 | `/ambientes/[slug]` | página do ambiente: texto + galeria |
 | `/a-loja` | endereço, telefone, WhatsApp, horário, mapa, schema `LocalBusiness` |
