@@ -152,6 +152,50 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-01 · Começa a V2 do layout, numa branch, com a V1 preservada
+
+**Decisão.** Os dois sites ganham uma V2 de layout, construída na branch
+`v2-layout` em cinco fases, uma por sessão, com commit entre elas. A V1 fica
+marcada na tag **`v1-layout`** (commit `32ad8f4`, o que está no ar) e continua
+em `main` até a V2 ser aprovada. A direção completa está em
+`docs/direcao-layout-sites.md`.
+
+**O que muda.**
+- Fase 1 — defeitos e tokens: cabeçalho legível nas páginas internas, menu
+  mobile de tela cheia, medida de leitura de 34em, três superfícies em vez de
+  cinco, três respiros verticais (curto, médio, longo), utilitário de sangria.
+- Fase 2 — home: cada seção com forma própria. Saem os rótulos numerados
+  (01 —, 02 —…), o carrossel e as legendas sobre foto. A abertura passa a ser
+  o **vídeo inteiro em 16:9, sem nada por cima**, com título e dek numa faixa
+  preta abaixo — decisão de 01/10: o vídeo fica, o cartão sobre ele sai.
+- Fase 3 — páginas internas: régua nunca mais larga que o texto, grades sem
+  vão, /arquitetos como lista editorial.
+- Fase 4 — as duas unidades: abertura própria por unidade, vinda do config.
+- Fase 5 — verificação nas seis larguras e folha de comparação V1 × V2.
+
+**O que não muda.** Nenhum texto (a copy de setembro está aprovada), nenhuma
+cor da marca, raio 0, zero sombra, Krub 300/400/600, alinhamento à esquerda,
+foto sem filtro, nenhuma dependência nova, a camada de config por unidade.
+
+**Por quê.** A home é a mesma molécula repetida quatro vezes — rótulo
+numerado, título grande, parágrafo, link com seta — e lê como site gerado.
+As internas deixam 45% da largura vazia ao lado do texto, com réguas
+atravessando a página. E há três defeitos de fato: cabeçalho ilegível nas
+internas, menu mobile sem itens e linhas de ~88 caracteres.
+
+**Como voltar.** `git checkout v1-layout` traz a V1 byte por byte. A V2 só vai
+para `main` depois de aprovada na folha de comparação.
+
+**Em aberto antes da fase 1.** Afrouxar o tracking dos displays (−0.045em no
+XL, −0.03em no L) e corrigir a paleta do `CLAUDE.md` para os valores que estão
+no código. As duas decisões são do cliente.
+
+**Descartado.** Construir a V2 direto em `main` (perde o ponto de comparação e
+publica pela metade) e um segundo repositório (é o erro que o projeto inteiro
+existe para evitar).
+
+---
+
 ## 2026-10-01 · O vídeo vai para o fundo da capa; a seção 01 volta
 
 **Decisão.** O vídeo em loop saiu da faixa separada e virou o **fundo da capa**
