@@ -152,6 +152,34 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-01 · V2, fase 1: medida em `em`, cabeçalho sólido, menu sempre preto
+
+**Decisões.**
+- `--medida` passa de `64ch` para **`34em`**. `ch` é a largura do algarismo 0,
+  mais largo que a letra média da Krub: 64ch dava 77 caracteres por linha.
+  34em dá ~64, e acompanha o corpo do texto.
+- O **cabeçalho tem fundo sólido** da superfície em que está, sempre. A
+  transparência fica só para a abertura da home (`sobreAbertura`).
+- O **painel do menu mobile é sempre preto**, em qualquer página.
+- A **home passa a usar o `Header` comum**. O cabeçalho próprio dela, herdado
+  do estudo, escondia a navegação no celular.
+- O **cinza de costura vira `#E8E6E0`** e a faixa cinza ganha fio de
+  separação (`--fio-sup`) também na paleta neutra: sem ele, o cinza claro
+  sumiria contra o papel.
+
+**Por quê.** São os defeitos 3.1, 3.2 e 3.3 e o sistema 4.1–4.4 de
+`docs/direcao-layout-sites-dalmobile.md`.
+
+**Não aplicado.** O tracking mais aberto dos displays e a correção da paleta do
+`CLAUDE.md` — as duas são do cliente e ainda não foram aprovadas.
+
+**Descartado.** Manter o menu herdando a superfície do cabeçalho (sobre papel,
+um painel claro de tela cheia lia como página, não como menu) e trocar só o
+valor de `--fs-subtitulo` para o dek (o Subtítulo também é usado em títulos de
+etapa e perguntas do FAQ, que não são dek).
+
+---
+
 ## 2026-10-01 · Começa a V2 do layout, numa branch, com a V1 preservada
 
 **Decisão.** Os dois sites ganham uma V2 de layout, construída na branch

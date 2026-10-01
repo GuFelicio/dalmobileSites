@@ -14,15 +14,15 @@
  * Props:
  *   aberto     se o painel está visível.
  *   aoFechar   chamado no Esc, no botão de fechar e ao seguir um link.
- *   superficie a superfície do cabeçalho que o abriu, para o painel herdar
- *              o mesmo fundo sólido.
+ *
+ * O painel é SEMPRE preto, em qualquer página (V2, direção de layout, seção
+ * 3.2). Até a V1 ele herdava a superfície do cabeçalho.
  */
 import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
 import { navegacao, linkTelefone, linkWhatsApp, unidade } from "../../config/derivados";
 import { Fechar, WhatsApp } from "../icons";
 import { Brand } from "./Brand";
-import type { Superficie } from "./Section";
 import estilos from "./MobileMenu.module.css";
 
 const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -30,10 +30,9 @@ const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"
 type MobileMenuProps = {
   aberto: boolean;
   aoFechar: () => void;
-  superficie: Superficie;
 };
 
-export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
+export function MobileMenu({ aberto, aoFechar }: MobileMenuProps) {
   const painel = useRef<HTMLDivElement>(null);
   const focoAnterior = useRef<HTMLElement | null>(null);
 
@@ -87,7 +86,11 @@ export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
 
     return () => {
       document.body.style.overflow = overflowAnterior;
-      focoAnterior.current?.focus();
+      // Devolve o foco ao botão que abre o menu. Não basta "quem tinha o foco
+      // antes": no Safari o toque num botão não dá foco a ele, e o foco caía
+      // no <body> — quem navega por teclado perdia o lugar.
+      const botao = document.querySelector<HTMLElement>('[aria-controls="menu-principal"]');
+      (botao ?? focoAnterior.current)?.focus();
     };
   }, [aberto]);
 
@@ -104,7 +107,7 @@ export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
     <div
       ref={painel}
       id="menu-principal"
-      className={[estilos.painel, estilos[superficie]].join(" ")}
+      className={estilos.painel}
       // hidden mantém o painel fora da ordem de tabulação quando fechado,
       // sem precisar desmontá-lo — a animação de saída precisa dele no DOM.
       hidden={!aberto}
@@ -113,7 +116,7 @@ export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
       aria-label="Navegação principal"
     >
       <div className={estilos.topo}>
-        <Brand claro={superficie === "preto"} />
+        <Brand claro />
         <button type="button" className={estilos.fechar} onClick={aoFechar}>
           <Fechar />
           <span className={estilos.rotuloFechar}>Fechar</span>

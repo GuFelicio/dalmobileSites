@@ -17,23 +17,14 @@
 // o teste de cidade cruzada vasculha tudo.
 import Link from "next/link";
 
+import { Header } from "../components/layout/Header";
 import Foto from "../components/midia/Foto";
 import SliderDeFotos, { type FotoDoSlider } from "../components/midia/SliderDeFotos";
 import VideoEmLoop from "../components/midia/VideoEmLoop";
-import { enderecoEmLinha, linkWhatsApp, navegacao, unidade } from "../config/derivados";
+import { enderecoEmLinha, linkWhatsApp, unidade } from "../config/derivados";
 import { ambientesDaUnidade, escolherFoto } from "../lib/ambientes-da-unidade.ts";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
-
-function Brand({ light = false }: { light?: boolean }) {
-  return (
-    <img
-      className={`brand-mark${light ? " brand-mark--light" : ""}`}
-      src="/assets/dalmobile-logo.png"
-      alt="Dalmóbile — Crie seu mundo"
-    />
-  );
-}
 
 export default function Home() {
   // A vitrine sai do acervo real desta unidade, não de foto de estudo. Como
@@ -75,29 +66,10 @@ export default function Home() {
 
   return (
     <div className="site site-synthesis">
-      <header className="header synthesis-header">
-        <Brand light />
-        {/* Rotas, não âncoras. "A Dalmóbile" e "Como criamos" apontavam para
-            seções desta página, e quem entrava pela home nunca descobria
-            /a-dalmobile nem /arquitetos. As âncoras continuam existindo; só
-            não ocupam o lugar das páginas. */}
-        <nav aria-label="Navegação principal">
-          {navegacao.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.rotulo}
-            </Link>
-          ))}
-        </nav>
-        {whatsapp ? (
-          <a className="synthesis-header-link" href={whatsapp}>
-            Falar no WhatsApp <Arrow />
-          </a>
-        ) : (
-          <Link className="synthesis-header-link" href="/a-loja">
-            Showroom {unidade.nome} <Arrow />
-          </Link>
-        )}
-      </header>
+      {/* O mesmo cabeçalho das outras páginas, transparente sobre o vídeo da
+          abertura até 80px de rolagem. Até a V1 a home tinha um cabeçalho
+          próprio que, no celular, escondia o menu inteiro. */}
+      <Header superficie="preto" sobreAbertura />
 
       <main>
         <section className="synthesis-hero">

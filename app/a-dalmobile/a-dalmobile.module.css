@@ -9,11 +9,14 @@
   margin: 0;
 }
 
+/* Dek de página: menor que o Subtítulo e na cor de apoio, para título, dek e
+   corpo não lerem como uma parede só (V2, direção de layout, seção 4.3). */
 .chamada {
-  font-size: var(--fs-subtitulo);
+  font-size: var(--fs-dek);
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
+  color: var(--cinza-texto);
   max-width: var(--medida);
   margin: var(--e-2) 0 0;
 }
@@ -61,7 +64,9 @@
   grid-template-columns: auto 1fr;
   gap: var(--e-2);
   align-items: start;
-  border-top: var(--fio) solid var(--sobre-escuro-fio);
+  /* Escuro sobre o cinza claro da V2. Até a V1 eram fio e texto BRANCOS
+     sobre o cinza médio, a ~2,5:1 — e sobre #e8e6e0 sumiriam. */
+  border-top: var(--fio) solid var(--cinza-clr);
   padding-top: var(--e-2);
 }
 
@@ -69,7 +74,7 @@
   font-size: var(--fs-rotulo);
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
-  color: var(--sobre-escuro-55);
+  color: var(--cinza-texto);
   font-variant-numeric: tabular-nums;
   /* Alinha o número com a primeira linha do título, não com o topo da caixa. */
   padding-top: 4px;
@@ -87,7 +92,7 @@
   line-height: var(--lh-texto);
   max-width: var(--medida);
   margin: var(--e-1) 0 0;
-  color: var(--sobre-escuro-70);
+  color: var(--cinza-texto);
 }
 
 .prazo {
@@ -95,7 +100,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--cinza-texto);
   margin: var(--e-1) 0 0;
 }
 
@@ -145,7 +150,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--cinza-texto);
   margin-top: var(--e-1);
 }
 

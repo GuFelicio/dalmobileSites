@@ -8,24 +8,46 @@
   gap: var(--e-3);
   min-height: var(--alt-cabecalho);
   padding-inline: var(--pad-lateral);
-  background: transparent;
-  /* Fundo e fio entram junto ao fixar. Transição só na cor, nunca na
-     posição: cabeçalho que se mexe é interface chamando atenção para si. */
+  /* Transição só na cor, nunca na posição: cabeçalho que se mexe é
+     interface chamando atenção para si. */
   transition: background-color var(--mov-fade) ease, border-color var(--mov-fade) ease;
   border-bottom: var(--fio) solid transparent;
 }
 
-/* Cor do texto pela superfície em que o cabeçalho está pousado. */
-.preto { color: var(--sobre-escuro); }
-.cinza { color: var(--preto); }
-.papel { color: var(--preto); }
+/* O cabeçalho herda a superfície em que está: fundo SÓLIDO, texto e fio
+   dela. Sólido e não translúcido — nada de backdrop-filter deixando o
+   conteúdo vazar por trás do menu. Valores da direção de layout, seção 3.1. */
+.preto {
+  background: var(--c-preto);
+  color: var(--cab-texto-sobre-preto);
+  border-bottom-color: var(--cab-fio-sobre-preto);
+}
+.papel {
+  background: var(--papel);
+  color: var(--preto);
+  border-bottom-color: var(--cab-fio-sobre-papel);
+}
+.cinza {
+  background: var(--cinza);
+  color: var(--preto);
+  border-bottom-color: var(--cab-fio-sobre-papel);
+}
 
-/* Depois de 80px de rolagem: fundo SÓLIDO da superfície em que está.
-   Sólido e não translúcido — nada de backdrop-filter deixando a foto
-   vazar por trás do menu. */
-.fixado.preto { background: var(--c-preto); border-bottom-color: var(--sobre-escuro-fio); }
-.fixado.cinza { background: var(--cinza); border-bottom-color: var(--preto); }
-.fixado.papel { background: var(--papel); border-bottom-color: var(--cinza-clr); }
+/* Home: a mídia de abertura passa POR BAIXO do cabeçalho. A margem negativa
+   puxa a capa para cima exatamente a altura dele, e a altura é fixa para a
+   conta fechar. */
+.sobreAbertura {
+  height: var(--alt-cabecalho);
+  margin-bottom: calc(-1 * var(--alt-cabecalho));
+}
+
+/* Antes dos 80px de rolagem, sobre a abertura: transparente, texto claro.
+   O gradiente do topo da capa (.synthesis-hero-top) garante a leitura. */
+.transparente {
+  background: transparent;
+  color: var(--cab-texto-sobre-preto);
+  border-bottom-color: var(--cab-fio-sobre-preto);
+}
 
 .marca {
   display: inline-flex;
@@ -87,8 +109,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--e-1);
-  min-width: var(--toque);
-  min-height: var(--toque);
+  /* 48px: é a única porta para a navegação no celular. */
+  min-width: var(--toque-menu);
+  min-height: var(--toque-menu);
   padding: 0;
   border: 0;
   background: transparent;

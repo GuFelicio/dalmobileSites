@@ -4,9 +4,17 @@
    inverter dentro dela (um chip ativo, por exemplo) sem saber em qual está. */
 
 .section {
-  /* O respiro entre seções vem da escala: 128px desktop, 72px mobile. */
-  padding-block: var(--e-secao);
+  /* Respiro normal entre seções da mesma superfície: 120px desktop, 72px
+     mobile. Os três intervalos da V2 estão em app/tokens.css. */
+  padding-block: var(--respiro);
   padding-inline: var(--pad-lateral);
+}
+
+/* Respiro longo (180px / 96px) embaixo da seção: antes de uma troca de
+   superfície, ou antes da seção mais importante da página. Nunca em duas
+   seções seguidas. */
+.respiroLongo {
+  padding-bottom: var(--respiro-longo);
 }
 
 /* Preto — abertura, faixa de projetos, índice, cases, galerias. A imagem manda. */

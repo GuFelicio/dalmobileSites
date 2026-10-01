@@ -8,6 +8,56 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [V2 · fase 1] — 2026-10-01 · defeitos e tokens
+
+Branch `v2-layout`. Nenhuma seção redesenhada; nenhum texto mudou.
+
+### Defeitos corrigidos
+
+- **Cabeçalho legível em todas as páginas.** Nas internas ele era transparente
+  e o texto escuro ficava sobre o body preto: **1,16:1**. Agora tem o fundo
+  sólido da superfície em que está — menor contraste medido: **15,2:1**, nas
+  seis larguras, nos dois sites. Só sobre a abertura da home ele é
+  transparente, até 80px de rolagem.
+- **A home tem menu no celular.** Ela usava um cabeçalho próprio que escondia a
+  navegação e deixava só o WhatsApp de 42px. Passou a usar o `Header` comum:
+  botão de 48×48px, painel de tela cheia sempre preto, itens em 32px peso 300,
+  foco preso, fecha com Esc. O foco agora **volta ao botão** ao fechar (antes
+  caía no `<body>` quando o menu era aberto por toque).
+- **Medida de leitura.** `--medida` passou de `64ch` (77 caracteres medidos)
+  para `34em`. Maior linha medida: **66**. Os parágrafos da home, que tinham
+  largura fixa em px, usam o token.
+- **"O processo" (/a-dalmobile)** tinha texto e fios brancos sobre o cinza, a
+  ~2,5:1. Agora escuros.
+
+### Tokens
+
+- **Três superfícies:** preto `#111211`, papel `#F9F8F5`, cinza `#E8E6E0`.
+  Saíram o oliva `#484B45` (a seção da fábrica ficou preta), o cinza médio
+  `#9E9B95` e o papel `#F5F4F0` das internas. Caraguá mantém o cinza palha.
+- **Três respiros:** `--respiro-curto` 56/40, `--respiro` 120/72,
+  `--respiro-longo` 180/96. `Section` e rodapé usam `--respiro`; `Section`
+  ganhou `respiro="longo"`. O 112px e o 122px da home saíram.
+- **Sangria:** utilitário `.bleed`, já em uso na foto de `/a-dalmobile`.
+- **Dek de página:** `--fs-dek` 20/19px na cor de apoio.
+- Novos: `--cab-*` (cabeçalho), `--fs-menu`, `--toque-menu`.
+
+### Não feito, de propósito
+
+- **Tracking dos displays (item 8):** sem aprovação, mantido como está.
+- **Paleta do `CLAUDE.md`:** continua descrevendo outra paleta; a correção
+  espera aprovação.
+- Uso de `respiro="longo"` e de `.bleed` página por página: é composição, fica
+  para as fases 2 e 3.
+
+### Verificado
+
+57/57 testes nas duas unidades; lint e `tsc` limpos; `workerd` com todas as
+rotas em 200; seis larguras sem rolagem horizontal; menu testado em 390px
+(abre, 20 Tabs sem escapar, Esc fecha, foco volta ao botão).
+
+---
+
 ## [não publicado] — 2026-10-01 · vídeo na capa
 
 ### O vídeo vai para o fundo da capa; a seção 01 volta

@@ -15,18 +15,20 @@
      #8B8884 / #C9C6C1 / #F2F1EE) entra aqui quando a loja fechar as
      cores. Trocar SÓ estas onze linhas troca o site inteiro.
      ------------------------------------------------------------------ */
+  /* V2 (01/10/2026): TRÊS superfícies — preto, papel, cinza. Saíram do uso
+     o oliva #484b45 e o cinza médio #9e9b95, e o papel #f5f4f0 das páginas
+     internas, que era um sexto tom. Nenhuma cor nova: os três valores que
+     ficaram já estavam no site. Ver docs/direcao-layout-sites-dalmobile.md,
+     seção 4.1. */
   --c-branco:       #ffffff;  /* superfície elevada, reverso do wordmark   */
-  --c-papel-alto:   #f9f8f5;  /* papel um degrau acima do fundo            */
-  --c-papel:        #f5f4f0;  /* fundo das páginas de leitura              */
-  --c-papel-fundo:  #efede7;  /* papel rebaixado, faixa de apoio           */
-  --c-papel-baixo:  #e8e6e0;  /* papel mais rebaixado, faixa de projetos   */
+  --c-papel-alto:   #f9f8f5;  /* SUPERFÍCIE PAPEL; texto sobre preto       */
+  --c-papel-baixo:  #e8e6e0;  /* SUPERFÍCIE CINZA (a de costura)           */
   --c-linha:        #d3d0c9;  /* fio sobre claro, estado desativado        */
-  --c-cinza:        #9e9b95;  /* cinza da marca: costura, faixas           */
-  --c-cinza-painel: #97958f;  /* painel sólido do hero da Síntese          */
+  --c-cinza:        #e8e6e0;  /* cinza de costura — era #9e9b95 até a V1   */
+  --c-cinza-painel: #97958f;  /* painel do hero — SAI na fase 2 da V2      */
   --c-cinza-texto:  #5d5d58;  /* texto de apoio sobre papel                */
-  --c-oliva:        #484b45;  /* superfície escura de processo             */
   --c-tinta:        #20211f;  /* texto principal, tarja                    */
-  --c-preto:        #111211;  /* fundo do documento, superfície de imagem  */
+  --c-preto:        #111211;  /* SUPERFÍCIE PRETA; fundo do documento      */
 
   /* ------------------------------------------------------------------
      1b. VARIANTE DE PALETA POR UNIDADE — "palha"
@@ -52,7 +54,7 @@
   --preto:      var(--c-tinta);
   --cinza:      var(--c-cinza);
   --cinza-clr:  var(--c-linha);
-  --papel:      var(--c-papel);
+  --papel:      var(--c-papel-alto);
   --branco:     var(--c-branco);
 
   /* Texto de apoio sobre papel. NÃO é --cinza: medido, --cinza sobre --papel
@@ -61,12 +63,12 @@
   --cinza-texto: var(--c-cinza-texto);
 
   /* Fio que separa uma faixa da superfície vizinha.
-     TRANSPARENTE na paleta neutra, de propósito: ali o cinza (#9e9b95) já
-     separa do papel em 2,52 e o fio seria ruído. Na paleta palha a faixa é
-     quase branca e separa em 1,02 — o fio é o que a torna uma faixa.
+     Até a V1 era transparente na paleta neutra, porque o cinza #9e9b95 já
+     separava do papel. Com o cinza claro da V2 (#e8e6e0, 1,13:1 contra o
+     papel) a faixa sumiria sem ele — como já acontecia na paleta palha.
      É a separação que o CLAUDE.md prescreve: "por fio de 1px e por espaço,
      zero sombra". */
-  --fio-sup: transparent;
+  --fio-sup: var(--c-linha);
 
   /* Não existe cor de acento. Se faltar destaque, a resposta é escala
      ou troca de superfície. Único desvio previsto: verde e vermelho de
@@ -97,6 +99,13 @@
   --veu-20: rgb(0 0 0 / .20);
   --veu-12: rgb(0 0 0 / .12);
 
+  /* Cabeçalho sobre cada superfície (V2, fase 1). O texto claro é o próprio
+     papel, não branco puro; os fios têm a opacidade da direção de layout,
+     seção 3.1. */
+  --cab-texto-sobre-preto: var(--c-papel-alto);
+  --cab-fio-sobre-preto:   rgb(249 248 245 / .14);
+  --cab-fio-sobre-papel:   rgb(32 33 31 / .12);
+
   /* Gradiente do topo da capa em vídeo, para o cabeçalho branco ficar
      legível. NÃO é véu: cobre só a faixa do cabeçalho, de cima para baixo
      até sumir. Ver .synthesis-hero-top e docs/decisoes.md, 2026-10-01. */
@@ -123,9 +132,20 @@
   --fs-texto:      17px;    --tr-texto:      0;         --lh-texto:      1.62;
   --fs-rotulo:     10.5px;  --tr-rotulo:     0.24em;    --lh-rotulo:     1.4;
 
+  /* Dek de página: a linha logo abaixo do título. Menor que o Subtítulo e na
+     cor de apoio, para título, dek e corpo não lerem como uma parede só.
+     20px desktop, 19px mobile — direção de layout, seção 4.3. */
+  --fs-dek: 20px;
+
+  /* Itens do painel de menu mobile — direção de layout, seção 3.2. */
+  --fs-menu: 32px;
+
   /* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em
-     largura total.                                                     */
-  --medida: 64ch;
+     largura total.
+     34em e não 64ch: `ch` é a largura do algarismo 0, mais largo que a letra
+     média da Krub, e 64ch dava 77 caracteres por linha (medido em 01/10).
+     34em dá ~64. Em em, a medida acompanha o corpo do próprio texto.      */
+  --medida: 34em;
 
   /* ------------------------------------------------------------------
      6. ESPAÇO — base 8
@@ -138,7 +158,16 @@
   --e-6:  96px;
   --e-7: 128px;
 
-  --e-secao:  var(--e-7);  /* respiro entre seções: 128 desktop, 72 mobile */
+  /* Ritmo vertical da V2: TRÊS intervalos, não um. Intervalo constante é a
+     principal razão de uma página parecer gerada. Direção de layout, 4.2.
+     Regra: nunca dois longos seguidos, nunca três curtos seguidos.
+     Mobile (até 600px) no fim do arquivo: 40 · 72 · 96.                */
+  --respiro-curto:  56px;   /* entre blocos irmãos da mesma seção          */
+  --respiro:       120px;   /* entre seções da mesma superfície            */
+  --respiro-longo: 180px;   /* antes de troca de superfície, e antes da
+                               seção mais importante da página            */
+
+  --e-secao:  var(--respiro);  /* nome antigo, mantido para quem já usa   */
   --e-margem: 20px;        /* margem lateral do texto no mobile            */
 
   /* Margem lateral da página. Cresce com a tela, mas nunca abaixo dos 20px
@@ -167,6 +196,9 @@
 
   /* Alvo de toque mínimo, para não repetir o botão de 30px do estudo. */
   --toque: 44px;
+  /* Botão que abre o menu: 48px, acima do mínimo, porque é a única porta
+     para a navegação no celular. Direção de layout, seção 3.2. */
+  --toque-menu: 48px;
 }
 
 /* ------------------------------------------------------------------
@@ -208,6 +240,10 @@
     --fs-texto:      16.5px;
     /* --fs-rotulo não muda: 10.5px em toda largura. */
 
-    --e-secao: 72px;
+    --fs-dek: 19px;
+
+    --respiro-curto: 40px;
+    --respiro:       72px;
+    --respiro-longo: 96px;
   }
 }

@@ -69,13 +69,14 @@ export default function ADalmobile() {
           <p>{comCidade(d.fabrica?.texto ?? "")}</p>
         </div>
         {/* A direção pede foto de fábrica e o acervo não tem. Até ter, uma
-            foto de projeto executado, que é o ativo que a loja realmente tem. */}
+            foto de projeto executado, que é o ativo que a loja realmente tem.
+            Sangra de ponta a ponta (.bleed, V2): por isso sizes="100vw". */}
         {foto ? (
           <Foto
             src={foto.src}
             alt={foto.alt}
-            sizes="(max-width: 1024px) 100vw, 66vw"
-            className={estilos.foto}
+            sizes="100vw"
+            className={`${estilos.foto} bleed`}
           />
         ) : null}
       </Section>

@@ -9,11 +9,14 @@
   margin: 0;
 }
 
+/* Dek de página: menor que o Subtítulo e na cor de apoio, para título, dek e
+   corpo não lerem como uma parede só (V2, direção de layout, seção 4.3). */
 .chamada {
-  font-size: var(--fs-subtitulo);
+  font-size: var(--fs-dek);
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
+  color: var(--cinza-texto);
   max-width: var(--medida);
   margin: var(--e-2) 0 0;
 }

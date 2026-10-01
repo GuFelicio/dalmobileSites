@@ -30,17 +30,38 @@ estas onze linhas troca o site inteiro, sem tocar em nenhum componente.
 | Token | Valor | Papel |
 |---|---|---|
 | `--c-branco` | `#ffffff` | superfície elevada, reverso do wordmark |
-| `--c-papel-alto` | `#f9f8f5` | papel um degrau acima do fundo |
-| `--c-papel` | `#f5f4f0` | fundo das páginas de leitura |
-| `--c-papel-fundo` | `#efede7` | papel rebaixado, faixa de apoio |
-| `--c-papel-baixo` | `#e8e6e0` | papel mais rebaixado, faixa de projetos |
+| `--c-papel-alto` | `#f9f8f5` | **superfície papel**; texto claro sobre preto |
+| `--c-papel-baixo` | `#e8e6e0` | **superfície cinza** (costura) |
 | `--c-linha` | `#d3d0c9` | fio sobre claro, estado desativado |
-| `--c-cinza` | `#9e9b95` | cinza da marca: costura, faixas |
-| `--c-cinza-painel` | `#97958f` | painel sólido do hero |
+| `--c-cinza` | `#e8e6e0` | cinza de costura — era `#9e9b95` até a V1 |
+| `--c-cinza-painel` | `#97958f` | painel do hero — sai na fase 2 da V2 |
 | `--c-cinza-texto` | `#5d5d58` | texto de apoio sobre papel |
-| `--c-oliva` | `#484b45` | superfície escura de processo |
 | `--c-tinta` | `#20211f` | texto principal, tarja |
-| `--c-preto` | `#111211` | fundo do documento, superfície de imagem |
+| `--c-preto` | `#111211` | **superfície preta**; fundo do documento |
+
+### V2 — três superfícies (01/10/2026)
+
+Até a V1 a home usava cinco tons de fundo (`#111211`, `#F9F8F5`, `#E8E6E0`,
+`#484B45`, `#9E9B95`) e as internas um sexto (`#f5f4f0`). Ficam **três**, todos
+valores que já estavam no site — nenhuma cor nova:
+
+| Superfície | Valor | Onde |
+|---|---|---|
+| preto | `#111211` | abertura, fábrica, galerias, menu mobile |
+| papel | `#F9F8F5` | páginas de leitura, hub de ambientes, FAQ |
+| cinza | `#E8E6E0` | faixas de costura e transição, rodapé |
+
+Saíram `--c-oliva` (`#484b45`; a seção da fábrica ficou preta), `--c-papel`
+(`#f5f4f0`) e `--c-papel-fundo`. **No máximo quatro trocas de superfície por
+página.** Na paleta palha de Caraguá, o cinza continua `#fff4eb`.
+
+Com o cinza claro, a faixa cinza separa do papel por **fio** (`--fio-sup`), não
+mais pela diferença de tom. E texto sobre cinza é **escuro** (`--preto`,
+`--cinza-texto`), nunca `--sobre-escuro-*`.
+
+> O `CLAUDE.md` ainda descreve outra paleta (`#171614`, `#8B8884`, `#F2F1EE`).
+> A correção dele está pendente de aprovação do cliente — ver
+> `docs/decisoes.md`.
 
 O estudo tinha **37 hex distintos em 46 ocorrências**. Boa parte era papel quase
 igual repetido (`#f6f5f1`, `#f5f4f1`, `#f7f6f3`, `#f8f7f4`…). A Fase 1 colapsou
@@ -55,7 +76,7 @@ camada 1, e é isso que mantém a troca barata.
 --preto:     var(--c-tinta);
 --cinza:     var(--c-cinza);
 --cinza-clr: var(--c-linha);
---papel:     var(--c-papel);
+--papel:     var(--c-papel-alto);
 --branco:    var(--c-branco);
 ```
 
@@ -80,6 +101,25 @@ espalhava (`.16 .17 .2 .23 .25 .45 .48 .55 .58 .62 .65 .66 .68 .7 .72`).
 | `--sobre-escuro-45` | numeração, estado inativo |
 | `--sobre-escuro-fio` | fio de 1px |
 | `--sobre-escuro-fio-fr` | fio quase apagado |
+
+### Cabeçalho
+
+O cabeçalho (`components/layout/Header.tsx`) tem o **fundo sólido da superfície
+em que está**. Até a V1 ele era transparente até rolar, e nas páginas internas o
+texto escuro ficava sobre o body preto, a 1,16:1.
+
+| Superfície | Fundo | Texto | Fio inferior |
+|---|---|---|---|
+| preto | `--c-preto` | `--cab-texto-sobre-preto` (`#f9f8f5`) | `--cab-fio-sobre-preto` (`.14`) |
+| papel | `--papel` | `--preto` | `--cab-fio-sobre-papel` (`.12`) |
+
+A única exceção é a abertura da home (`sobreAbertura`): transparente sobre o
+vídeo até 80px de rolagem, depois preto sólido.
+
+```tsx
+<Header superficie="papel" />            {/* página interna */}
+<Header superficie="preto" sobreAbertura /> {/* só na home */}
+```
 
 ### Véu sobre foto — temporário
 
@@ -119,14 +159,21 @@ Hierarquia por **escala e tracking**, nunca por engordar peso.
 | Display L | `--fs-display-l` | `--tr-display-l` | `--lh-display-l` | 48px → 32px |
 | Seção | `--fs-secao` | `--tr-secao` | `--lh-secao` | 34px → 26px |
 | Subtítulo | `--fs-subtitulo` | `--tr-subtitulo` | `--lh-subtitulo` | 22px → 20px |
+| Dek de página | `--fs-dek` | `--tr-subtitulo` | `--lh-subtitulo` | 20px → 19px, cor `--cinza-texto` |
+| Item do menu mobile | `--fs-menu` | `--tr-secao` | `--lh-secao` | 32px, peso 300 |
 | Texto | `--fs-texto` | `--tr-texto` | `--lh-texto` | 17px → 16.5px |
 | Rótulo | `--fs-rotulo` | `--tr-rotulo` | `--lh-rotulo` | 10.5px, igual em toda largura |
 
 Os valores mobile trocam sozinhos em `@media (max-width: 600px)`, dentro do
 próprio `tokens.css`. **O componente não precisa de media query para tipografia.**
 
-Medida de leitura: `--medida` (`64ch`, dentro da faixa de 62 a 66 do `CLAUDE.md`).
-Nunca texto corrido em largura total.
+Medida de leitura: `--medida` = **`34em`** (~64 caracteres). Nunca texto corrido
+em largura total. Até a V1 era `64ch`, que dava **77** caracteres por linha:
+`ch` é a largura do algarismo 0, mais largo que a letra média da Krub. Medido
+na V2: nenhuma linha passa de 66 caracteres, nas seis larguras.
+
+O **dek** — a linha logo abaixo do título da página — usa `--fs-dek` e a cor
+`--cinza-texto`, para título, dek e corpo não lerem como uma parede só.
 
 ### Exemplo de uso
 
@@ -169,7 +216,25 @@ Escala base 8. Sem valor fora dela em componente novo.
 | `--e-6` | 96px |
 | `--e-7` | 128px |
 
-- `--e-secao` — respiro entre seções: **128px** no desktop, **72px** no mobile (troca sozinho).
+### Ritmo vertical — três intervalos (V2)
+
+Intervalo constante é a principal razão de uma página parecer gerada. São três,
+e trocam sozinhos no mobile (até 600px):
+
+| Token | Desktop | Mobile | Quando |
+|---|---|---|---|
+| `--respiro-curto` | 56px | 40px | entre blocos irmãos da mesma seção |
+| `--respiro` | 120px | 72px | entre seções da mesma superfície |
+| `--respiro-longo` | 180px | 96px | antes de troca de superfície, e antes da seção mais importante |
+
+**Nunca dois longos seguidos, nunca três curtos seguidos.** `Section` usa
+`--respiro` por padrão; `respiro="longo"` põe 180px embaixo dela.
+
+```tsx
+<Section superficie="papel" respiro="longo">…</Section>
+```
+
+- `--e-secao` — nome antigo, hoje igual a `--respiro`. Não usar em código novo.
 - `--e-margem` — margem lateral do texto no mobile: **20px**. A foto sangra até a borda; o texto mantém a margem.
 - `--pad-lateral` — margem lateral da **página**: `clamp(20px, 5vw, 80px)`. Cresce com a tela e nunca desce abaixo dos 20px do mobile. É o que `Section`, `Header`, `Footer` e `MobileMenu` usam para alinhar tudo na mesma calha vertical. Não invente outro recuo lateral: use este.
 - `--alt-cabecalho` — altura do cabeçalho: **88px**. Vale como offset de âncora e como altura da barra do `MobileMenu`, para o painel abrir alinhado ao cabeçalho que o cobre.
@@ -182,6 +247,21 @@ Escala base 8. Sem valor fora dela em componente novo.
 - Separação por fio de 1px (`--fio`) e por espaço. **Zero sombra.**
 - Alinhamento **à esquerda** em tudo. Nada centralizado.
 - `--toque` (44px) é o alvo de toque mínimo, com espaço entre alvos vizinhos.
+- `--toque-menu` (48px) é o botão que abre e fecha o menu mobile: a única porta
+  para a navegação no celular.
+
+### Sangria
+
+`.bleed` (em `app/globals.css`) leva uma foto de ponta a ponta da tela, mesmo
+dentro de uma seção com margem lateral. **Texto nunca sangra.** A meta da V2 é
+pelo menos duas fotos sangrando por página.
+
+```tsx
+<Foto src={…} alt={…} sizes="100vw" className={`${estilos.foto} bleed`} />
+```
+
+Foto que sangra pede `sizes="100vw"`. O utilitário usa `!important` para vencer
+a largura que o componente dá à própria foto.
 
 ```css
 .chip {
