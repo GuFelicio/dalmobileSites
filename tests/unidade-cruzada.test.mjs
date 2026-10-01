@@ -24,6 +24,7 @@ import test from "node:test";
 
 import { unidade as caragua } from "../config/caragua.ts";
 import { unidade as sjc } from "../config/sjc.ts";
+import { renderizar as buscar, unidadeDoBuild } from "./unidade-do-build.mjs";
 
 const PAGINAS = [
   "/",
@@ -49,22 +50,13 @@ const MENCOES_DECLARADAS = [
 ];
 
 async function renderizar(rota) {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-  const resposta = await worker.fetch(
-    new Request(`http://localhost${rota}`, { headers: { accept: "text/html" } }),
-    { ASSETS: { fetch: async () => new Response("nf", { status: 404 }) } },
-    { waitUntil() {}, passThroughOnException() {} },
-  );
-  return resposta.text();
+  return (await buscar(rota)).corpo;
 }
 
-/** A unidade deste build, deduzida do domínio que o canônico declara. */
-async function unidadeDoBuild() {
-  const html = await renderizar("/");
-  return html.includes(sjc.dominio) ? { esta: sjc, outra: caragua } : { esta: caragua, outra: sjc };
-}
+// unidadeDoBuild() vem de ./unidade-do-build.mjs e lê o CANÔNICO da home. A
+// versão que existia aqui procurava o domínio de SJC em qualquer lugar do
+// HTML — e o rodapé de Caraguá tem o link para a loja de SJC, então o build de
+// Caraguá era testado como se fosse SJC.
 
 /** Os campos que dizem ao Google de que cidade o site é. */
 function camposEstruturais(html) {
@@ -147,16 +139,7 @@ test("no corpo, a outra cidade só aparece nas menções declaradas", async () =
 test("o sitemap não cita a outra unidade", async () => {
   // O sitemap é o que o Google lê primeiro. Nenhuma exceção aqui.
   const { outra } = await unidadeDoBuild();
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-  const xml = await (
-    await worker.fetch(
-      new Request("http://localhost/sitemap.xml"),
-      { ASSETS: { fetch: async () => new Response("nf", { status: 404 }) } },
-      { waitUntil() {}, passThroughOnException() {} },
-    )
-  ).text();
+  const { corpo: xml } = await buscar("/sitemap.xml", "application/xml");
 
   assert.ok(!xml.includes(outra.dominio), `sitemap com URL de ${outra.cidade}`);
   assert.ok(!xml.includes(outra.cidade), `sitemap citando ${outra.cidade}`);

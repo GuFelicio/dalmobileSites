@@ -54,7 +54,9 @@ npm install
 npm run dev            # São José dos Campos — http://localhost:5173
 npm run dev:caragua    # Caraguatatuba
 
-npm test               # build + 57 testes
+npm test               # builda e testa as DUAS unidades (57 testes cada)
+npm run test:sjc       # só São José dos Campos
+npm run test:caragua   # só Caraguatatuba
 npm run lint
 npx tsc --noEmit
 
@@ -331,8 +333,16 @@ mais são esquecidos:
 
 ## 10. Os testes, e o que cada um protege
 
-57 testes. `npm test` roda o build antes, então eles sempre testam o que seria
-publicado.
+57 testes, rodados **uma vez para cada unidade**: `npm test` builda SJC e
+testa, depois builda Caraguá e testa. Eles sempre testam o que seria publicado,
+nos dois sites.
+
+Os testes que dependem da unidade (`seo`, `layout`, `unidade-cruzada`) **não
+importam config fixo**: descobrem de qual unidade é o build pelo canônico da
+home, em `tests/unidade-do-build.mjs`. Até 01/10/2026 eles importavam
+`config/sjc.ts`, e o build de Caraguá reprovava em 9 testes sem ter erro —
+enquanto um erro de verdade em Caraguá passaria. Não volte a importar o config
+de uma unidade num teste que olha o HTML.
 
 | Arquivo | Protege |
 |---|---|

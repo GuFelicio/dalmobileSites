@@ -3,7 +3,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { unidade } from "../config/sjc.ts";
+import { renderizar as buscar, unidadeDoBuild } from "./unidade-do-build.mjs";
+
+// O config da unidade deste build — SJC ou Caraguá. Era config/sjc.ts fixo, e
+// o site de Caraguá reprovava aqui por ser de Caraguá.
+const { esta: unidade } = await unidadeDoBuild();
 
 const PAGINAS = [
   "/",
@@ -14,18 +18,6 @@ const PAGINAS = [
   "/arquitetos",
   "/privacidade",
 ];
-
-async function buscar(rota, aceita = "text/html") {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-  const resposta = await worker.fetch(
-    new Request(`http://localhost${rota}`, { headers: { accept: aceita } }),
-    { ASSETS: { fetch: async () => new Response("nf", { status: 404 }) } },
-    { waitUntil() {}, passThroughOnException() {} },
-  );
-  return { resposta, corpo: await resposta.text() };
-}
 
 test("toda página tem title e description com a cidade da unidade", async () => {
   for (const rota of PAGINAS) {

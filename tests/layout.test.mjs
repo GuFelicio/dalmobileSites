@@ -5,7 +5,10 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 
-import { unidade } from "../config/sjc.ts";
+import { UNIDADES, unidadeDoBuild } from "./unidade-do-build.mjs";
+
+// O config da unidade deste build — SJC ou Caraguá. Era config/sjc.ts fixo.
+const { esta: unidade } = await unidadeDoBuild();
 
 /**
  * A página usada para exercitar cabeçalho e rodapé.
@@ -118,11 +121,11 @@ test("o sábado está registrado", async () => {
 test("nenhum dado de unidade escrito direto em componente", async () => {
   // Tudo tem que vir de app/dados-unidade.ts — na Fase 3, do config. Foi
   // assim que o site anterior acabou indexado com a cidade errada.
+  // Cidade e rua das DUAS unidades, do config: a lista antiga só tinha a rua
+  // de SJC, e a de Caraguá podia ser escrita num componente sem ninguém ver.
   const proibidos = [
-    "São José dos Campos",
-    "Caraguatatuba",
-    "Barão do Rio Branco",
-    "3341-8777",
+    ...UNIDADES.flatMap((u) => [u.cidade, u.endereco.logradouro]),
+    "3341-8777", // telefone antigo de SJC, antes da unificação
   ];
   const infratores = [];
   for (const arquivo of await componentes()) {

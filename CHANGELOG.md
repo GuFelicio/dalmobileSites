@@ -8,6 +8,33 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-01 · testes por unidade
+
+### A suíte passa a testar Caraguá de verdade
+
+**O problema.** Rodada sobre o build de Caraguá, a suíte reprovava em 9 de 57
+testes sem haver erro no site. `seo.test.mjs` e `layout.test.mjs` importavam
+`config/sjc.ts` fixo (cobravam cidade, domínio, endereço e schema de SJC), e
+`unidade-cruzada.test.mjs` deduzia a unidade procurando o domínio de SJC em
+qualquer lugar do HTML — que em Caraguá aparece no link do rodapé para a loja
+irmã. O lado perigoso: **um erro real em Caraguá passaria**, porque o teste de
+cidade cruzada procurava "Caraguatatuba" no site de Caraguá.
+
+**A correção.**
+- `tests/unidade-do-build.mjs`: descobre a unidade do build pelo
+  `<link rel="canonical">` da home e expõe o `renderizar` que os três arquivos
+  repetiam.
+- `seo`, `layout` e `unidade-cruzada` usam esse ajudante.
+- O teste "nenhum dado de unidade escrito em componente" passou a proibir cidade
+  e rua das duas unidades, lidas do config (só tinha a rua de SJC).
+- `npm test` = `test:sjc` + `test:caragua`: builda e testa as duas unidades.
+
+**Verificado.** 57/57 em SJC e 57/57 em Caraguá. E a prova de que o teste
+morde: com "São José dos Campos" plantado no H1, o build de Caraguá reprova em
+dois testes de cidade cruzada.
+
+---
+
 ## [1.0.0-rc4] — 2026-09-16
 
 ### `MANUAL.md`: um documento de entrada que se basta

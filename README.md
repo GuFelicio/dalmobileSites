@@ -43,7 +43,7 @@ npm run dev:caragua    # desenvolvimento — Caraguatatuba
 npm run build:sjc      # build de São José dos Campos
 npm run build:caragua  # build de Caraguatatuba
 
-npm test               # build + a suíte inteira
+npm test               # build + a suíte inteira, nas DUAS unidades
 npm run lint           # ESLint
 npm run workerd        # roda o build no motor da Cloudflare, em localhost:8799
 
