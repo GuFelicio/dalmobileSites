@@ -158,7 +158,7 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 `v2-layout` em cinco fases, uma por sessão, com commit entre elas. A V1 fica
 marcada na tag **`v1-layout`** (commit `32ad8f4`, o que está no ar) e continua
 em `main` até a V2 ser aprovada. A direção completa está em
-`docs/direcao-layout-sites.md`.
+`docs/direcao-layout-sites-dalmobile.md`.
 
 **O que muda.**
 - Fase 1 — defeitos e tokens: cabeçalho legível nas páginas internas, menu
