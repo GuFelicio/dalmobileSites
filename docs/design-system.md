@@ -206,6 +206,19 @@ Mínimo e lento.
 
 **Proibido:** parallax, scroll sequestrado, carrossel automático, contador animado.
 
+**Vídeo em loop** (`components/midia/VideoEmLoop.tsx`, só na home): sem som,
+sem controle, toca quando entra na tela e pausa quando sai. Com
+`prefers-reduced-motion` mostra só o poster. Ver `docs/decisoes.md`
+(2026-10-01).
+
+```tsx
+<VideoEmLoop
+  webm="/videos/hero-loop.webm"
+  mp4="/videos/hero-loop.mp4"
+  poster="/videos/hero-loop-poster.jpg"
+/>
+```
+
 `@media (prefers-reduced-motion: reduce)` está no fim do `globals.css` e zera
 transição e animação em tudo. É obrigatório e já vale para o que vier.
 

@@ -8,6 +8,30 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-01
+
+### Vídeo em loop no lugar da seção "01 — Como projetamos"
+
+Vale para os dois sites (o `app/page.tsx` é o mesmo).
+
+**Saiu** a seção do manifesto da home: rótulo "01 — Como projetamos", H2
+"Nenhuma casa é igual à planta.", o parágrafo sobre a medição no imóvel, o link
+"Como trabalhamos" (→ `/a-dalmobile`) e a foto com a legenda "Fábrica própria ·
+100% MDF · 6 anos de garantia". O CSS `.synthesis-manifesto*` saiu junto.
+
+**Entrou** `components/midia/VideoEmLoop.tsx`: vídeo largura total, sem som e
+sem controle, que toca quando entra na tela e pausa quando sai. Com
+`prefers-reduced-motion`, só o poster. Arquivos em `public/videos/`:
+`hero-loop.webm` (4,4 MB, VP9), `hero-loop.mp4` (7,6 MB, H.264, fallback) e
+`hero-loop-poster.jpg`.
+
+As seções seguintes foram renumeradas: "01 — Projetos executados" e "02 — Da
+fábrica à montagem". A capa e o H1 não mudaram.
+
+Por que e o que foi descartado: `docs/decisoes.md`, entrada de 2026-10-01.
+
+---
+
 ## [1.0.0-rc4] — 2026-09-16
 
 ### `MANUAL.md`: um documento de entrada que se basta

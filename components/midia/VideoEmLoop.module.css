@@ -1,0 +1,27 @@
+/* Faixa de vídeo em loop da home. Ver components/midia/VideoEmLoop.tsx. */
+
+.faixa {
+  /* Superfície preta: é imagem, e a imagem manda (CLAUDE.md, Superfícies).
+     Também é a cor que aparece no instante antes de o poster carregar. */
+  background: var(--c-preto);
+
+  /* Altura: o vídeo é 1920×1080, então 56.25vw (= 9/16 da largura) mostra o
+     quadro inteiro, sem corte, do notebook para cima.
+     - Teto de 100svh: num monitor largo e baixo, a faixa não passa de uma
+       tela. svh, e não vh — a barra do navegador móvel quebra vh.
+     - Piso de 480px: no celular (390px), 9/16 dá 219px, uma tira fina demais
+       para um vídeo de ambiente. Com 480px o object-fit corta as laterais e
+       mantém o centro do quadro, que é onde está o móvel. */
+  height: clamp(480px, 56.25vw, 100svh);
+  overflow: hidden;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* cover: preenche a faixa em qualquer proporção, sem barra preta. O que
+     sobra é cortado nas bordas, nunca a imagem achatada. */
+  object-fit: cover;
+  object-position: center;
+}

@@ -152,6 +152,45 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-01 · Vídeo em loop no lugar da seção "01 — Como projetamos"
+
+**Decisão.** A seção do manifesto da home (rótulo "01 — Como projetamos",
+título "Nenhuma casa é igual à planta.", texto sobre a medição no imóvel, link
+"Como trabalhamos" e a foto com a legenda "Fábrica própria · 100% MDF · 6 anos
+de garantia") saiu. No lugar entrou uma faixa de vídeo em loop, largura total,
+sem som e sem controle: `components/midia/VideoEmLoop.tsx`. A capa continua
+igual, com o H1. As seções seguintes foram renumeradas (01 Projetos
+executados, 02 Da fábrica à montagem).
+
+**Por quê.** Pedido do cliente: um vídeo de projeto executado mostra a
+marcenaria melhor que o texto. O conteúdo da seção não se perdeu: a medição e
+o processo estão em `/a-dalmobile`, e fábrica, MDF e garantia estão na seção
+"Da fábrica à montagem", logo abaixo na home.
+
+**Como se comporta.**
+- Toca só quando a faixa entra na tela (IntersectionObserver, 25% visível) e
+  pausa quando sai. **Sem o atributo `autoplay`**, de propósito: com ele, o
+  vídeo começaria no carregamento, antes de a pessoa chegar até ele.
+- `preload="auto"`, sem lazy-load: a faixa fica logo abaixo da capa e é
+  alcançada na primeira rolagem. O custo é o download do webm (4,4 MB) já no
+  carregamento da home.
+- `prefers-reduced-motion: reduce` → nunca toca; fica o poster.
+- `aria-hidden`: é decorativo, não carrega informação.
+- webm (VP9) primeiro, mp4 (H.264) de fallback. Arquivos em `public/videos/`,
+  um conjunto só, servido pelos dois sites.
+- Altura `clamp(480px, 56.25vw, 100svh)`: o quadro 16:9 inteiro do notebook
+  para cima, e no celular 480px com corte nas laterais (`object-fit: cover`).
+
+**Não conflita com "carrossel automático proibido".** O vídeo é um plano
+contínuo de um ambiente, não troca de conteúdo nem rouba a leitura de uma foto
+— que é o que a regra protege. Não é escurecido nem tem texto por cima.
+
+**Descartado.** Pôr o vídeo na capa (tiraria o H1 e a foto de abertura da
+primeira dobra) e tocar com `autoplay` desde o carregamento (gasta bateria e
+dados com um vídeo que ainda não está na tela).
+
+---
+
 ## 2026-09-14 · A outra cidade pode ser nomeada no corpo, nunca no SEO
 
 **Decisão.** Reverte a entrada de 08/09 ("O link para a outra loja não cita a
