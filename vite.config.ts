@@ -53,6 +53,12 @@ function unidadeDoBuild(): IdDeUnidade {
 const bindingsLocais = {
   main: "./worker/index.ts",
   compatibility_flags: ["nodejs_compat"],
+  // Sem endereços de preview (*.workers.dev por versão ou por branch). O site
+  // publica direto de `main`; os previews só deixavam no ar versões que não
+  // valem mais — a V2 descartada continuava aberta em v2-layout-*.workers.dev.
+  // Para voltar a ter preview por branch, é tirar esta linha. Ver
+  // docs/decisoes.md, 02/10/2026.
+  preview_urls: false,
 };
 
 export default defineConfig(async () => {

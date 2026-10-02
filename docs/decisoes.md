@@ -152,6 +152,21 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · Sem endereços de preview no Cloudflare
+
+**Decisão.** `preview_urls: false` na configuração do Worker, em
+`vite.config.ts`. O site publica direto de `main`; os previews por branch só
+mantinham no ar versões que não valem mais — a V2 descartada continuava
+acessível em `v2-layout-*.workers.dev`.
+
+**Por que pela configuração, e não pelo painel.** Fica escrito no repositório
+(quem vier depois sabe que é decisão) e não exige login na conta da Cloudflare
+na máquina de desenvolvimento.
+
+**Para voltar a ter preview por branch:** tirar a linha `preview_urls: false`.
+
+---
+
 ## 2026-10-02 · A home termina numa barra preta com a marca, não no rodapé completo
 
 **Decisão do cliente.** Depois da seção da loja — que já mostra endereço,

@@ -8,6 +8,16 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-02 · sem endereços de preview
+
+- `preview_urls: false` na configuração do Worker (`vite.config.ts`). Os
+  endereços `*.workers.dev` de preview deixam de responder — entre eles os da V2
+  descartada (`v2-layout-dalmobilesjc…` e `v2-layout-dalmobilecaragua…`). Os
+  sites de produção não mudam.
+- A tag `v1-layout` foi apagada, a pedido do cliente.
+
+---
+
 ## [não publicado] — 2026-10-02 · o fim da home
 
 - A home termina numa **barra preta só com a marca da unidade**, logo depois da
