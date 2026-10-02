@@ -4,16 +4,24 @@
  * Header — o cabeçalho do site.
  *
  * O que é: o lockup da marca com o nome da unidade, os cinco itens do menu e
- * a ação de contato. Fica no topo, transparente sobre o conteúdo, e ganha
- * fundo sólido depois de 80px de rolagem. Abaixo de 1025px o menu vira um
- * painel de tela cheia (components/layout/MobileMenu.tsx).
+ * a ação de contato. Fica no topo, sticky, com o fundo SÓLIDO da superfície em
+ * que está. A única exceção é a abertura da home (`sobreAbertura`): ali ele é
+ * transparente sobre o vídeo e ganha o fundo sólido depois de 80px de
+ * rolagem. Abaixo de 1025px o menu vira um painel de tela cheia
+ * (components/layout/MobileMenu.tsx).
+ *
+ * Até 02/10/2026 ele era transparente em TODA página até rolar, e nas
+ * internas o texto escuro ficava sobre o body preto: contraste de 1,16:1,
+ * menu invisível.
  *
  * Onde é usado: em TODA página. O CLAUDE.md exige cabeçalho completo em cada
  * uma — a pessoa chega por qualquer porta, e nenhuma página é a segunda.
  *
  * Props:
- *   superficie  a superfície em que o cabeçalho está pousado. Decide a cor do
- *               texto e o fundo sólido que ele assume ao rolar. Obrigatória.
+ *   superficie     a superfície em que o cabeçalho está pousado. Decide a cor
+ *                  do texto e o fundo sólido. Obrigatória.
+ *   sobreAbertura  só na home: transparente sobre o vídeo da abertura, que
+ *                  passa por baixo dele, até 80px de rolagem.
  */
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -29,9 +37,10 @@ const ROLAGEM_PARA_FIXAR = 80;
 
 type HeaderProps = {
   superficie: Superficie;
+  sobreAbertura?: boolean;
 };
 
-export function Header({ superficie }: HeaderProps) {
+export function Header({ superficie, sobreAbertura = false }: HeaderProps) {
   const [fixado, setFixado] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
 
@@ -48,7 +57,14 @@ export function Header({ superficie }: HeaderProps) {
 
   const whatsapp = linkWhatsApp();
 
-  const classes = [estilos.header, estilos[superficie], fixado ? estilos.fixado : ""]
+  // Sólido sempre; transparente só sobre a abertura da home, antes de rolar.
+  const transparente = sobreAbertura && !fixado;
+  const classes = [
+    estilos.header,
+    estilos[superficie],
+    sobreAbertura ? estilos.sobreAbertura : "",
+    transparente ? "" : estilos.fixado,
+  ]
     .filter(Boolean)
     .join(" ");
 

@@ -10,10 +10,9 @@
 :root {
   /* ------------------------------------------------------------------
      1. COR — CAMADA BRUTA
-     PROVISÓRIA: são os valores medidos do estudo 03 Síntese, neutros
-     quentes. A paleta acromática definitiva do CLAUDE.md (#171614 /
-     #8B8884 / #C9C6C1 / #F2F1EE) entra aqui quando a loja fechar as
-     cores. Trocar SÓ estas onze linhas troca o site inteiro.
+     DEFINITIVA: são as cores que estão no ar, confirmadas pelo cliente em
+     02/10/2026 como as corretas. O CLAUDE.md espelha esta tabela. Trocar
+     SÓ estas linhas troca o site inteiro.
      ------------------------------------------------------------------ */
   --c-branco:       #ffffff;  /* superfície elevada, reverso do wordmark   */
   --c-papel-alto:   #f9f8f5;  /* papel um degrau acima do fundo            */
@@ -124,8 +123,11 @@
   --fs-rotulo:     10.5px;  --tr-rotulo:     0.24em;    --lh-rotulo:     1.4;
 
   /* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em
-     largura total.                                                     */
-  --medida: 64ch;
+     largura total.
+     34em e não 64ch: `ch` é a largura do algarismo 0, mais largo que a letra
+     média da Krub, e 64ch dava 77 caracteres por linha (medido em 02/10/2026).
+     34em dá ~64. Em em, a medida acompanha o corpo do próprio texto.      */
+  --medida: 34em;
 
   /* ------------------------------------------------------------------
      6. ESPAÇO — base 8

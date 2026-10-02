@@ -8,6 +8,27 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-02 · ajustes na V1
+
+A V2 de layout foi descartada pelo cliente (fica só a tag `v2-arquivo`, fora
+de uso). Destes ajustes, todos sobre a V1, nenhum muda o desenho das seções:
+
+- **Cabeçalho legível nas páginas internas.** Ele era transparente até rolar, e
+  o texto escuro ficava sobre o body preto (1,16:1). Agora tem o fundo sólido
+  da superfície desde o topo. Na home continua transparente sobre o vídeo e
+  fica sólido depois de 80px de rolagem.
+- **A home tem menu no celular.** O cabeçalho próprio da home escondia a
+  navegação e deixava só o WhatsApp de 42px. Ela passou a usar o `Header`
+  comum, com o painel de tela cheia, foco preso e Esc. O foco volta ao botão
+  ao fechar o menu.
+- **Medida de leitura de no máximo 66 caracteres.** `--medida` de `64ch` (77
+  caracteres medidos) para `34em`; os parágrafos da home com largura fixa em px
+  passaram a usar o token.
+- **`CLAUDE.md` com as cores que estão no ar**, por decisão do cliente. Nenhuma
+  cor do site mudou.
+
+---
+
 ## [não publicado] — 2026-10-01 · vídeo na capa
 
 ### O vídeo vai para o fundo da capa; a seção 01 volta

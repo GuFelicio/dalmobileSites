@@ -20,12 +20,23 @@
 .cinza { color: var(--preto); }
 .papel { color: var(--preto); }
 
-/* Depois de 80px de rolagem: fundo SÓLIDO da superfície em que está.
-   Sólido e não translúcido — nada de backdrop-filter deixando a foto
-   vazar por trás do menu. */
+/* Fundo SÓLIDO da superfície em que está — em toda página, sempre. Até
+   02/10/2026 só entrava depois de 80px de rolagem, e nas páginas internas o
+   texto escuro ficava sobre o body preto (1,16:1). A única exceção é a
+   abertura da home (.sobreAbertura), antes de rolar. Sólido e não
+   translúcido — nada de backdrop-filter deixando a foto vazar. */
 .fixado.preto { background: var(--c-preto); border-bottom-color: var(--sobre-escuro-fio); }
 .fixado.cinza { background: var(--cinza); border-bottom-color: var(--preto); }
 .fixado.papel { background: var(--papel); border-bottom-color: var(--cinza-clr); }
+
+/* Home: o vídeo da abertura passa POR BAIXO do cabeçalho. A margem negativa
+   puxa a capa para cima exatamente a altura dele, e a altura é fixa para a
+   conta fechar. O gradiente do topo da capa (.synthesis-hero-top) garante a
+   leitura enquanto ele está transparente. */
+.sobreAbertura {
+  height: var(--alt-cabecalho);
+  margin-bottom: calc(-1 * var(--alt-cabecalho));
+}
 
 .marca {
   display: inline-flex;

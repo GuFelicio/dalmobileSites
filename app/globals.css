@@ -58,28 +58,10 @@ img { display: block; max-width: 100%; }
 /* 100svh e não 100vh: a barra do navegador móvel quebra vh. */
 /* Sem padding-top: a compensação da barra fixa do seletor de estudos saiu
    junto com ele. */
-.site { min-height: 100svh; overflow: hidden; }
+/* overflow-x: clip, não hidden — hidden criaria um contêiner de rolagem e o
+   cabeçalho sticky da home deixaria de grudar no topo. */
+.site { min-height: 100svh; overflow-x: clip; }
 
-.header {
-  height: 92px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(24px, 4.5vw, 76px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
-}
-.header nav { display: flex; gap: 30px; font-size: 12px; }
-.header nav a,
-.header-link { transition: opacity var(--mov-fio) ease; }
-.header nav a:hover,
-.header-link:hover { opacity: .55; }
-
-.brand-mark { width: 134px; height: auto; }
-.brand-mark--light { filter: invert(1) brightness(4); }
 
 .eyebrow {
   font-size: 11px;
@@ -87,7 +69,6 @@ img { display: block; max-width: 100%; }
   letter-spacing: .2em;
   text-transform: uppercase;
 }
-.header-link { display: flex; gap: 12px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 .manifesto-image { width: 100%; height: 470px; object-fit: cover; }
 .process-copy { padding: 110px clamp(38px, 7vw, 120px); display: flex; flex-direction: column; justify-content: center; }
 .process-copy h2 {
@@ -118,22 +99,9 @@ img { display: block; max-width: 100%; }
   background: var(--papel);
   color: var(--preto);
 }
-.synthesis-header {
-  color: var(--sobre-escuro);
-  border-bottom: var(--fio) solid var(--sobre-escuro-fio);
-  padding-inline: var(--synthesis-gutter);
-}
-.synthesis-header nav { margin-left: auto; margin-right: 54px; }
-.synthesis-header-link {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.synthesis-header-link span { transition: transform var(--mov-fio) ease; }
-.synthesis-header-link:hover span { transform: translate(3px, -3px); }
+/* O cabeçalho próprio da home (.synthesis-header) saiu em 02/10/2026: no
+   celular ele escondia o menu inteiro. A home usa components/layout/Header,
+   como as outras páginas. */
 
 .synthesis-hero {
   /* 100svh, e não 100vh: a barra do navegador móvel quebra vh.
@@ -223,7 +191,7 @@ img { display: block; max-width: 100%; }
   font-weight: var(--peso-leve);
 }
 .synthesis-manifesto-content > p:not(.eyebrow) {
-  max-width: 620px;
+  max-width: var(--medida);
   margin: 0 0 30px;
   color: var(--c-cinza-texto);
   font-size: 16px;
@@ -317,7 +285,7 @@ img { display: block; max-width: 100%; }
   letter-spacing: var(--tr-display-l);
   font-weight: var(--peso-leve);
 }
-.synthesis-process-copy > p:not(.eyebrow) { max-width: 630px; margin: 0; font-size: 16px; line-height: 1.7; color: var(--sobre-escuro-70); }
+.synthesis-process-copy > p:not(.eyebrow) { max-width: var(--medida); margin: 0; font-size: 16px; line-height: 1.7; color: var(--sobre-escuro-70); }
 .synthesis-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -346,7 +314,7 @@ img { display: block; max-width: 100%; }
   letter-spacing: var(--tr-display-l);
   font-weight: var(--peso-leve);
 }
-.synthesis-contact-copy > p:not(.eyebrow) { max-width: 520px; margin: 0; font-size: 16px; line-height: 1.75; }
+.synthesis-contact-copy > p:not(.eyebrow) { max-width: var(--medida); margin: 0; font-size: 16px; line-height: 1.75; }
 .synthesis-contact-copy > a {
   align-self: flex-start;
   display: flex;
@@ -369,7 +337,6 @@ img { display: block; max-width: 100%; }
    Responsivo — série única, depois da fusão dos dois blocos da Síntese
    ========================================================================== */
 @media (max-width: 980px) {
-  .synthesis-header nav { display: none; }
   .synthesis-hero-panel { width: min(510px, 58vw); }
   .synthesis-project-note { width: 25vw; }
   .synthesis-manifesto { grid-template-columns: minmax(0, 1fr) minmax(280px, .62fr); gap: 48px; }
@@ -384,16 +351,6 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 700px) {
   .site-synthesis { --synthesis-gutter: 20px; --synthesis-section: 72px; }
-  .synthesis-header-link {
-    font-size: 0;
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-content: center;
-    border: var(--fio) solid var(--sobre-escuro-45);
-    border-radius: 0; /* border-radius 0 em tudo — CLAUDE.md */
-  }
-  .synthesis-header-link span { font-size: 16px; }
   .synthesis-hero { min-height: 700px; }
   .synthesis-hero-panel { left: 20px; right: 20px; bottom: 20px; width: auto; padding: 40px 24px 36px; }
   .synthesis-hero-panel::before { right: 30px; height: 34px; }

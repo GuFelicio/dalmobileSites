@@ -152,6 +152,26 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · A V2 de layout foi descartada; a V1 fica, com três ajustes
+
+**Decisão.** O cliente viu a V2 (fases 0 a 4, construída em `v2-layout` a partir
+de `docs/direcao-layout-sites-dalmobile.md`) e preferiu manter a V1. A branch foi
+apagada; o código ficou na tag **`v2-arquivo`**, só como arquivo. A direção de
+layout e o roteiro da V2 não entraram no `main`.
+
+**O que foi aproveitado**, refeito sobre a V1 e sem mudar o desenho das seções:
+- cabeçalho com fundo sólido nas páginas internas (era 1,16:1 de contraste);
+- a home com o `Header` comum, e portanto com menu no celular;
+- `--medida` em `34em` (com `64ch` as linhas tinham 77 caracteres);
+- o `CLAUDE.md` passa a descrever as cores que estão no ar — o cliente
+  confirmou que são as corretas.
+
+**Descartado.** Tudo o mais da V2: as três superfícies, os três respiros, a nova
+home, a grade editorial, o gabarito das internas, a composição da home no
+config.
+
+---
+
 ## 2026-10-01 · O vídeo vai para o fundo da capa; a seção 01 volta
 
 **Decisão.** O vídeo em loop saiu da faixa separada e virou o **fundo da capa**

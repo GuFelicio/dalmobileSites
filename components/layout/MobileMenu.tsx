@@ -87,7 +87,11 @@ export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
 
     return () => {
       document.body.style.overflow = overflowAnterior;
-      focoAnterior.current?.focus();
+      // Devolve o foco ao botão que abre o menu. Não basta "quem tinha o foco
+      // antes": no Safari o toque num botão não dá foco a ele, e o foco caía
+      // no <body> — quem navega por teclado perdia o lugar.
+      const botao = document.querySelector<HTMLElement>('[aria-controls="menu-principal"]');
+      (botao ?? focoAnterior.current)?.focus();
     };
   }, [aberto]);
 

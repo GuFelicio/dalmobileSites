@@ -23,9 +23,11 @@ camada 2 — semântica  --preto etc. os nomes que o componente usa
 
 ### Camada 1 — valores brutos
 
-**Provisórios.** São os neutros quentes do estudo 03. A paleta acromática
-definitiva do `CLAUDE.md` entra aqui quando a loja fechar as cores — e trocar
-estas onze linhas troca o site inteiro, sem tocar em nenhum componente.
+**Definitivos.** São as cores que estão no ar, confirmadas pelo cliente em
+02/10/2026 como as corretas; o `CLAUDE.md` espelha esta tabela. Até essa data
+o `CLAUDE.md` descrevia outra paleta (`#171614`, `#8B8884`, `#F2F1EE`), que
+nunca chegou ao código. Trocar estas linhas troca o site inteiro, sem tocar em
+nenhum componente.
 
 | Token | Valor | Papel |
 |---|---|---|
@@ -125,7 +127,10 @@ Hierarquia por **escala e tracking**, nunca por engordar peso.
 Os valores mobile trocam sozinhos em `@media (max-width: 600px)`, dentro do
 próprio `tokens.css`. **O componente não precisa de media query para tipografia.**
 
-Medida de leitura: `--medida` (`64ch`, dentro da faixa de 62 a 66 do `CLAUDE.md`).
+Medida de leitura: `--medida` = **`34em`** (~64 caracteres, dentro da faixa de
+62 a 66 do `CLAUDE.md`). Até 02/10/2026 era `64ch`, que dava **77** caracteres
+por linha: `ch` é a largura do algarismo 0, mais largo que a letra média da
+Krub.
 Nunca texto corrido em largura total.
 
 ### Exemplo de uso

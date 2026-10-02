@@ -57,13 +57,35 @@ Navegação sempre com `next/link`. **Âncora só dentro da própria página, nu
 ## Design — decisões fechadas, não reabrir sem pedir
 
 ### Paleta — acromática
+
+**As cores corretas são as que estão no ar** (decisão do cliente, 02/10/2026).
+Os valores moram em `app/tokens.css`; esta tabela os espelha. Até essa data o
+documento descrevia outra paleta (`#171614`, `#8B8884`, `#C9C6C1`, `#F2F1EE`)
+que nunca chegou ao código.
+
 ```
---preto     #171614   wordmark, tarja, superfície de imagem
---cinza     #8B8884   cinza da marca: faixas de costura, rodapé
---cinza-clr #C9C6C1   linhas sobre escuro, estados desativados
---papel     #F2F1EE   fundo das páginas de leitura
---branco    #FFFFFF   superfície elevada, reverso do wordmark
+--c-preto        #111211   superfície de imagem, fundo do documento
+--c-tinta        #20211F   texto principal, tarja
+--c-oliva        #484B45   superfície escura da seção de processo da home
+--c-cinza        #9E9B95   cinza da marca: faixas de costura, rodapé
+--c-cinza-painel #97958F   painel sólido da abertura da home
+--c-cinza-texto  #5D5D58   texto de apoio sobre papel
+--c-linha        #D3D0C9   fios sobre claro, estados desativados
+--c-papel-baixo  #E8E6E0   faixa de projetos da home
+--c-papel-fundo  #EFEDE7   papel rebaixado, faixa de apoio
+--c-papel        #F5F4F0   fundo das páginas de leitura
+--c-papel-alto   #F9F8F5   papel um degrau acima do fundo
+--c-branco       #FFFFFF   superfície elevada, reverso do wordmark
 ```
+
+No componente, use os **nomes semânticos** de `app/tokens.css` (`--preto`,
+`--cinza`, `--cinza-clr`, `--papel`, `--branco`, `--cinza-texto`). Atenção:
+ali `--preto` é a **tinta do texto** (`#20211F`); a superfície preta é
+`--c-preto`.
+
+Caraguatatuba usa a paleta **"palha"**: a família do cinza troca por areia
+(`#FFF4EB` nas faixas e no painel, `#5F5847` no texto de apoio, `#E7D8C9` e
+`#CDB49A` nos fios). Nada mais muda entre as unidades.
 
 **Não existe cor de acento.** Se faltar destaque, a resposta é escala ou troca de superfície — nunca cor nova. Único desvio: verde e vermelho de sistema em erro e sucesso de formulário, no menor tamanho possível.
 
