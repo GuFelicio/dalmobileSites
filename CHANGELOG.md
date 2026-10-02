@@ -8,6 +8,18 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [V2] — 2026-10-02 · tracking e paleta do `CLAUDE.md`
+
+- **Tracking afrouxado:** Display XL −0.045em (era −0.065), Display L −0.03em
+  (era −0.055), Seção −0.02em (era −0.04). As letras encostavam na Krub 300.
+- **`CLAUDE.md` com a paleta da V1**, a que está no ar, por decisão do cliente.
+  A paleta antiga do documento nunca tinha chegado ao código. Nenhuma cor do
+  site mudou neste passo.
+
+Motivos e alternativas: `docs/decisoes.md`, 2026-10-02.
+
+---
+
 ## [V2 · fase 2] — 2026-10-02 · a home
 
 Branch `v2-layout`. Cada seção com forma própria — nenhuma repete a silhueta

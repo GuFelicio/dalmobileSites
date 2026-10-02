@@ -57,21 +57,40 @@ Navegação sempre com `next/link`. **Âncora só dentro da própria página, nu
 ## Design — decisões fechadas, não reabrir sem pedir
 
 ### Paleta — acromática
+
+**As cores corretas são as da V1, que está no ar** (decisão do cliente,
+02/10/2026). Os valores moram em `app/tokens.css`; esta tabela os espelha.
+Até essa data o documento descrevia outra paleta (`#171614`, `#8B8884`,
+`#C9C6C1`, `#F2F1EE`) que nunca chegou ao código.
+
 ```
---preto     #171614   wordmark, tarja, superfície de imagem
---cinza     #8B8884   cinza da marca: faixas de costura, rodapé
---cinza-clr #C9C6C1   linhas sobre escuro, estados desativados
---papel     #F2F1EE   fundo das páginas de leitura
---branco    #FFFFFF   superfície elevada, reverso do wordmark
+--c-preto        #111211   superfície preta: abertura, fábrica, galerias, rodapé, menu
+--c-tinta        #20211F   texto principal, wordmark escuro, tarja
+--c-papel-alto   #F9F8F5   superfície papel; texto claro sobre preto
+--c-papel-baixo  #E8E6E0   superfície cinza: faixas de costura e transição
+--c-linha        #D3D0C9   fios sobre claro, estados desativados
+--c-cinza-texto  #5D5D58   texto de apoio sobre papel e cinza
+--c-branco       #FFFFFF   superfície elevada, reverso do wordmark
 ```
+
+No componente, use os **nomes semânticos** de `app/tokens.css`. Atenção: ali
+`--preto` é a **tinta do texto** (`#20211F`); a superfície preta é `--c-preto`.
+
+Caraguatatuba usa a paleta **"palha"**: a família do cinza troca por areia
+(`#FFF4EB` na faixa, `#5F5847` no texto de apoio, `#E7D8C9` e `#CDB49A` nos
+fios). Nada mais muda entre as unidades.
+
+Também são da V1 e saíram de uso na V2, quando as superfícies foram de cinco
+para três: `#9E9B95` (cinza médio), `#484B45` (oliva), `#F5F4F0` (papel das
+internas), `#97958F` (painel do hero). Não voltar com eles sem decisão nova.
 
 **Não existe cor de acento.** Se faltar destaque, a resposta é escala ou troca de superfície — nunca cor nova. Único desvio: verde e vermelho de sistema em erro e sucesso de formulário, no menor tamanho possível.
 
 Todo valor de cor vem de token. **Zero hex literal em componente.**
 
 ### Superfícies — três fundos, um por função
-- **Preto** — abertura, faixa de projetos, índice de projetos, cases, galerias. A imagem manda.
-- **Cinza** — faixas de transição, números, rodapé, tiras de chamada. Costura.
+- **Preto** — abertura, seção da fábrica, índice de projetos, cases, galerias, rodapé, menu mobile. A imagem manda.
+- **Cinza** — faixas de transição e de costura, vitrine de projetos da home, tiras de chamada.
 - **Papel** — institucional, arquitetos, a loja, ambientes, FAQ, privacidade, 404. O texto manda.
 
 Máximo **quatro trocas de superfície por página**.
@@ -87,12 +106,14 @@ Stack de fallback obrigatória em toda declaração:
 font-family: "Krub", "Segoe UI", system-ui, -apple-system, sans-serif;
 ```
 
-Hierarquia por escala e tracking, nunca por engordar peso:
+Hierarquia por escala e tracking, nunca por engordar peso. O tracking foi
+afrouxado em 02/10/2026: com −0.065em e −0.055em as letras se tocavam na Krub
+300 (ver `docs/decisoes.md`).
 | Papel | Desktop | Mobile | Peso | Tracking |
 |---|---|---|---|---|
-| Display XL | 64px | 40px | 300 | −0.065em |
-| Display L | 48px | 32px | 300 | −0.055em |
-| Seção | 34px | 26px | 300 | −0.04em |
+| Display XL | 64px | 40px | 300 | −0.045em |
+| Display L | 48px | 32px | 300 | −0.03em |
+| Seção | 34px | 26px | 300 | −0.02em |
 | Subtítulo | 22px | 20px | 400 | −0.01em |
 | Texto | 17px / 1.62 | 16.5px | 400 | 0 |
 | Rótulo | 10.5px | 10.5px | 600 | 0.24em, caixa alta |

@@ -23,9 +23,9 @@ camada 2 — semântica  --preto etc. os nomes que o componente usa
 
 ### Camada 1 — valores brutos
 
-**Provisórios.** São os neutros quentes do estudo 03. A paleta acromática
-definitiva do `CLAUDE.md` entra aqui quando a loja fechar as cores — e trocar
-estas onze linhas troca o site inteiro, sem tocar em nenhum componente.
+**Definitivos.** São as cores da V1, a versão no ar, confirmadas pelo cliente em
+02/10/2026 como as corretas. O `CLAUDE.md` espelha esta tabela. Trocar estas
+linhas troca o site inteiro, sem tocar em nenhum componente.
 
 | Token | Valor | Papel |
 |---|---|---|
@@ -59,9 +59,9 @@ Com o cinza claro, a faixa cinza separa do papel por **fio** (`--fio-sup`), não
 mais pela diferença de tom. E texto sobre cinza é **escuro** (`--preto`,
 `--cinza-texto`), nunca `--sobre-escuro-*`.
 
-> O `CLAUDE.md` ainda descreve outra paleta (`#171614`, `#8B8884`, `#F2F1EE`).
-> A correção dele está pendente de aprovação do cliente — ver
-> `docs/decisoes.md`.
+> Até 02/10/2026 o `CLAUDE.md` descrevia outra paleta (`#171614`, `#8B8884`,
+> `#F2F1EE`), que nunca chegou ao código. Foi corrigido para as cores da V1 —
+> ver `docs/decisoes.md`.
 
 O estudo tinha **37 hex distintos em 46 ocorrências**. Boa parte era papel quase
 igual repetido (`#f6f5f1`, `#f5f4f1`, `#f7f6f3`, `#f8f7f4`…). A Fase 1 colapsou

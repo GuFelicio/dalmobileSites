@@ -152,6 +152,31 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · Tracking afrouxado; a paleta do `CLAUDE.md` passa a ser a da V1
+
+**Tracking.** Display XL de −0.065em para **−0.045em**, Display L de −0.055em
+para **−0.03em**, Seção de −0.04em para **−0.02em**. O cliente deixou a escolha
+para o desenho. Comparadas lado a lado na Krub 300, com o título real da home:
+- os valores antigos encostam letras ("Nenhuma", "começa") — o defeito 3.5 da
+  direção de layout;
+- −0.03em em tudo deixa o título de 64px frouxo, com cara de corpo de texto
+  ampliado;
+- −0.045em no XL e −0.03em no L mantêm a tensão do display sem encostar nada.
+  Quanto maior o corpo, mais fechado pode ser — por isso o XL segue mais
+  apertado que o L.
+
+**Paleta.** O cliente confirmou: as cores corretas são as da V1, a que está no
+ar. O `CLAUDE.md` descrevia `#171614`, `#8B8884`, `#C9C6C1` e `#F2F1EE`, que
+nunca chegaram ao código, e passou a espelhar `app/tokens.css`. Os tons da V1
+que a V2 tirou de uso (`#9E9B95`, `#484B45`, `#F5F4F0`, `#97958F`) ficam
+registrados lá como fora de uso, não como erro.
+
+**Descartado.** −0.03em no Display XL (frouxo no tamanho em que o título é a
+peça principal da página) e trazer o código para a paleta antiga do
+`CLAUDE.md` (trocaria todas as cores do site no ar).
+
+---
+
 ## 2026-10-02 · V2, fase 2: as leituras feitas onde a direção se contradiz
 
 A home seguiu `docs/direcao-layout-sites-dalmobile.md`, seção 5. Em quatro
