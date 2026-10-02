@@ -50,16 +50,12 @@
 
 /* Dois por linha a partir do tablet: são blocos curtos, e uma coluna só
    deixaria a página comprida demais para o pouco texto que cada um tem. */
-@media (min-width: 601px) {
-  .blocos {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--e-4) var(--e-3);
-    /* A grade inteira na largura de duas colunas de texto: cada régua para
-       onde o texto do bloco para, e a grade fecha sem sobra à direita.
-       Antes, em telas largas, a régua atravessava a coluna e o texto ocupava
-       pouco mais da metade dela (ajustes de layout, 02/10/2026). */
-    max-width: calc(var(--medida) * 2 + var(--e-3));
-  }
+/* Uma coluna, em toda largura: com os 5 blocos da copy v3, nenhuma grade de
+   duas colunas fecha sem vão (2+2+1) — e esticar o último deixaria a régua
+   mais larga que o texto. A lista inteira fica na medida do texto, então
+   cada régua para onde o texto para. Até 02/10/2026 era uma grade 2×2. */
+.blocos {
+  max-width: var(--medida);
 }
 
 .bloco {

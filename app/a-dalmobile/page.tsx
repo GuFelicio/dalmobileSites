@@ -150,7 +150,9 @@ export default function ADalmobile() {
 
       <Section superficie="cinza" semRespiro>
         <div className={estilos.chamadaFinal}>
-          <p className={estilos.chamadaTexto}>{comCidade(pagina.texto)}</p>
+          {/* Texto só se o conteúdo tiver: desde a copy v3 o corpo está vazio
+              e a faixa fica só com o botão. */}
+          {pagina.texto ? <p className={estilos.chamadaTexto}>{comCidade(pagina.texto)}</p> : null}
           <Link href="/a-loja" className={estilos.chamadaAcao}>
             Showroom {unidade.nome}
           </Link>

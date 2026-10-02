@@ -157,12 +157,11 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 A copy v3 (`docs/copy-v3.md`) foi aplicada literalmente. Nos pontos abaixo o
 roteiro (`docs/prompt-copy-v3.md`) não dizia, ou se contradizia:
 
-1. **O fecho de `/a-dalmobile` nomeia as duas cidades nos dois sites** ("As
-   lojas Dalmóbile de São José dos Campos e Caraguatatuba atendem o Vale do
-   Paraíba e o litoral norte."). O roteiro manda copiar a copy literalmente e,
-   ao mesmo tempo, só permite três menções à outra cidade. Ficou o texto da
-   copy, e a frase entrou na allowlist do teste de cidade cruzada. **Decisão
-   pendente do cliente.**
+1. **O fecho de `/a-dalmobile` ficou de fora.** A copy (A7) pedia "As lojas
+   Dalmóbile de São José dos Campos e Caraguatatuba atendem o Vale do Paraíba e
+   o litoral norte." nos dois sites, e o roteiro só permite três menções à
+   outra cidade. O cliente decidiu tirar a frase; a faixa do fim da página fica
+   só com o botão do showroom.
 2. **Texto diferente por unidade sem duplicar arquivo.** Quartos e sala de
    Caraguá ficam no mesmo `.md`, em `porUnidade`. A pergunta de área do FAQ é
    uma frase só, com `{{regiao}}` e `{{outraRegiao}}`. A description da home e
@@ -179,12 +178,13 @@ roteiro (`docs/prompt-copy-v3.md`) não dizia, ou se contradizia:
 6. **As fotos removidas saíram do conteúdo, não do disco.** Os arquivos ficam em
    `public/fotos/`, sem uso; voltar é relistar.
 
-**Consequências de layout, não corrigidas (o roteiro proíbe mexer em layout):**
-- `/arquitetos` passou de 4 para 5 blocos: a grade 2×2 termina com um bloco só
-  na última linha.
-- O carrossel da home agrupa de 3 em 3 e junta a sobra ao grupo anterior. Com
-  uma foto a menos em cada site, um grupo fica com 5 fotos e todos os outros
-  ganham um vão vazio embaixo, da altura dele.
+**Duas consequências de layout, corrigidas com aprovação do cliente:**
+- `/arquitetos` passou de 4 para 5 blocos, e a grade 2×2 terminaria com um
+  bloco sozinho. Virou lista de uma coluna, na medida do texto, com régua entre
+  os blocos.
+- O carrossel agrupava de 3 em 3 e juntava a sobra ao grupo anterior. Com uma
+  foto a menos em cada site, um grupo ficava com 5 fotos e todos os outros
+  ganhavam um vão vazio embaixo. Agora a sobra vira o último grupo, mais curto.
 
 ---
 

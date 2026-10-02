@@ -24,7 +24,14 @@ A copy de 09/09 (`docs/copy/sjc.md`) virou histórico.
   campo `porUnidade`). 19 legendas trocadas (14 de SJC, 5 de Caraguá).
 - **/a-dalmobile:** abertura, fábrica, processo, materiais (com "Personalizar não
   é adaptar."), números e FAQ na ordem da copy; pergunta de área própria de
-  cada site; Caraguá ganha "Não moro em Caraguatatuba…".
+  cada site; Caraguá ganha "Não moro em Caraguatatuba…". O fecho da copy (A7),
+  que citava as duas cidades nos dois sites, **não entrou** por decisão do
+  cliente: a faixa do fim fica só com o botão do showroom.
+- **/arquitetos:** os 5 blocos da copy viraram uma lista de uma coluna, na
+  medida do texto. A grade 2×2 terminaria com um bloco sozinho (2+2+1).
+- **Carrossel da home:** a sobra de fotos (quando o acervo não é múltiplo de 3)
+  vira o último conjunto, mais curto, em vez de engordar o anterior — o que
+  deixava um vão vazio embaixo de todos os outros conjuntos.
 - **/arquitetos:** abertura e blocos novos ("O que dá para especificar", "A
   fábrica", crédito no formato do Dalmóbile Reconhece); saiu "Visita à fábrica".
 - **/a-loja:** texto novo, endereço no formato da copy, uma linha de WhatsApp
@@ -55,8 +62,9 @@ grátis, gratuito, "6 anos", [CONFIRMAR e [CIDADE.
 `config/tipos.ts` ganhou `regiao`, `outraUnidade.regiao` e `textos`;
 `lib/texto.ts`, `{{regiao}}` e `{{outraRegiao}}`; o conteúdo de ambiente,
 `porUnidade` e `nomeNoTitulo`; o FAQ, `unidades`. Redirect 301 no Worker para
-ambiente que a unidade não publica. A allowlist do teste de cidade cruzada foi
-atualizada para as frases novas.
+ambiente que a unidade não publica. A allowlist do teste de cidade cruzada tem
+só as três menções permitidas: rodapé, pergunta de área do FAQ e faixa de
+`/a-loja`.
 
 ### Verificado
 57/57 testes nas duas unidades; build dos dois alvos; `workerd` com todas as

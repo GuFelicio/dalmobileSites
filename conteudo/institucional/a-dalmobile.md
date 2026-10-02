@@ -111,6 +111,8 @@ faq:
       Depois do aceite, o pedido pode ser acompanhado na fábrica pelo site da
       Dalmóbile, etapa por etapa. E a loja combina com você como prefere aprovar
       o projeto e receber a montagem.
----
 
-As lojas Dalmóbile de São José dos Campos e Caraguatatuba atendem o Vale do Paraíba e o litoral norte.
+# Sem texto no corpo, de propósito: o fecho da copy v3 (A7) citava as duas
+# cidades nos dois sites e saiu por decisão do cliente (02/10/2026). A faixa
+# do fim da página fica só com o botão para o showroom.
+---

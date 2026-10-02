@@ -45,14 +45,12 @@ const POR_CONJUNTO = 3;
 function agrupar(fotos: FotoDoSlider[]): FotoDoSlider[][] {
   const conjuntos: FotoDoSlider[][] = [];
   for (let i = 0; i < fotos.length; i += POR_CONJUNTO) {
-    const conjunto = fotos.slice(i, i + POR_CONJUNTO);
-    // Um conjunto com menos de três fica torto na composição: a última sobra
-    // volta para o conjunto anterior em vez de virar um passo capenga.
-    if (conjunto.length < POR_CONJUNTO && conjuntos.length > 0) {
-      conjuntos[conjuntos.length - 1].push(...conjunto);
-    } else {
-      conjuntos.push(conjunto);
-    }
+    // A sobra (uma ou duas fotos, quando o acervo não é múltiplo de três)
+    // vira o ÚLTIMO conjunto, mais curto. Até 02/10/2026 ela se juntava ao
+    // conjunto anterior, que ficava com 4 ou 5 fotos — e como todo conjunto
+    // toma a altura do mais alto, TODOS os outros ganhavam um vão vazio
+    // embaixo. Assim, só o último passo é mais baixo.
+    conjuntos.push(fotos.slice(i, i + POR_CONJUNTO));
   }
   return conjuntos;
 }
