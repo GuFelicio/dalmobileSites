@@ -85,7 +85,7 @@ verdes. Ver [`tests/README-workerd.md`](tests/README-workerd.md).
 | `/ambientes` | hub: grade dos ambientes daquela unidade |
 | `/ambientes/[slug]` | página do ambiente: texto + galeria |
 | `/a-loja` | endereço, telefone, WhatsApp, horário, mapa, schema `LocalBusiness` |
-| `/a-dalmobile` | institucional: fábrica, processo, materiais, garantia, FAQ |
+| `/a-dalmobile` | institucional: fábrica, processo, materiais, FAQ |
 | `/arquitetos` | proposta de parceria com escritórios |
 | `/privacidade` | LGPD |
 | `/sitemap.xml` · `/robots.txt` | gerados do config, um por unidade |
@@ -262,16 +262,17 @@ alimentar.
 
 ## 8. O estado de hoje, e o que falta
 
-### Pendências com a loja — 4
+### Pendências com a loja — 1
 
 Rode `npm run pendencias` para ver o estado atual. Hoje:
 
 | Campo | O que é |
 |---|---|
-| `a-dalmobile.processo[3].prazo` | prazo de produção em dias úteis |
-| `a-dalmobile.faq[1].resposta` | "quanto tempo leva" — depende do prazo acima |
-| `a-dalmobile.garantia.certificado` | o PDF do certificado |
 | `a-dalmobile.fabrica.foto` | foto da fábrica de Bento Gonçalves |
+
+O prazo de produção, a pergunta "quanto tempo leva" e o certificado de garantia
+deixaram de ser pendência na copy v3 (02/10/2026): **garantia e prazo saíram do
+site** por decisão de marca. Ver `docs/vocabulario.md`, 2.3.
 
 **Enquanto houver pendência, `npm run deploy:*` não publica.**
 
@@ -439,7 +440,9 @@ Teste a **regra**, lendo do config — nunca o valor.
 **3. Nenhum número vai ao ar sem confirmação da loja.** Anos de fábrica,
 garantia, prazo, quantidade de projetos. Se não tiver confirmação, use
 `PENDENTE` e deixe a trava de deploy fazer o trabalho. Um prazo de garantia
-inventado não é texto ruim — é promessa contratual falsa.
+inventado não é texto ruim — é promessa contratual falsa. (Desde a copy v3,
+garantia e prazo nem entram no site: ficam na conversa de venda. Ver
+`docs/vocabulario.md`.)
 
 **4. Verifique antes de afirmar.** Este projeto tem números medidos em quase
 todo documento. Se você for dizer que algo pesa, mede. Se for dizer que uma

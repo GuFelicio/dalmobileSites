@@ -2,7 +2,7 @@
 nome: Cozinha
 slug: cozinha
 unidades: [sjc, caragua]
-chamada: É onde a marcenaria mais trabalha e menos aparece.
+chamada: É onde o móvel mais trabalha e menos aparece.
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
 # mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
@@ -26,17 +26,17 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/sjc/cozinha/44.webp
-    titulo: Cristaleira espelhada que dobra o ambiente
+    titulo: Adega de vidro com prateleira iluminada
     alt: Cozinha cinza com armários superiores de vidro e moldura metálica, mesa posta em primeiro plano
     edificio:
     arquiteto:
   - src: /fotos/sjc/cozinha/45.webp
-    titulo: Vidro, metal e luz embutida
+    titulo: Armário superior de vidro com perfil de alumínio
     alt: Cozinha vista pela sala, com adega de vidro, prateleiras iluminadas e mesa de jantar posta
     edificio:
     arquiteto:
   - src: /fotos/sjc/cozinha/debora-toledo-jardim-das-industrias-14.webp
-    titulo: Torre de eletros em inox
+    titulo: Torre de fornos embutida
     alt: Cozinha bege com torre de fornos em inox, coifa de vidro e bancada em pedra clara junto à janela
     edificio:
     arquiteto:
@@ -51,17 +51,17 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/caragua/cozinha/dalmobile-calabasasapto93-0919.webp
-    titulo: Branco total, aberto para o mar
+    titulo: Bancada amadeirada que vira mesa de refeição
     alt: Cozinha branca integrada à sala de jantar, com bancada de madeira clara, banquetas e porta azul ao fundo
     edificio:
     arquiteto:
   - src: /fotos/caragua/cozinha/dalmobile-calabasasapto93-0953.webp
-    titulo: Tudo embutido, nada à mostra
+    titulo: Frentes sem puxador e nicho aberto para a louça
     alt: Cozinha compacta branca com cooktop, cuba e nicho aberto com louças azuis, coifa retrátil embutida
     edificio:
     arquiteto:
   - src: /fotos/caragua/cozinha/dalmobile-calabasasapto93-0965.webp
-    titulo: Ilha com coifa suspensa
+    titulo: Ilha de cooktop com bancada amadeirada ao lado
     alt: Cozinha branca com ilha de cooktop, coifa de inox suspensa e bancada de madeira clara ao lado
     edificio:
     arquiteto:
@@ -70,4 +70,5 @@ fotos:
 Cooktop, coifa, torre de fornos, adega, lixeira e tomada têm lugar definido
 antes de a primeira peça ser cortada. Depois disso o desenho é consequência: a
 porta abre para o lado que não trava a passagem, a bancada fica na altura de
-quem cozinha, e o que é feio some atrás de uma porta.
+quem cozinha e o que é feio fica atrás de uma porta. Com a edição milimétrica, o
+último armário fecha o vão na medida exata da parede.

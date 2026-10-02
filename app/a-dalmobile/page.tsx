@@ -1,7 +1,7 @@
 /**
  * /a-dalmobile — a página institucional.
  *
- * O que é: quem é a Dalmóbile, a fábrica, o processo, materiais, garantia,
+ * O que é: quem é a Dalmóbile, a fábrica, o processo, materiais,
  * números e as perguntas frequentes. Segue a seção 7 do docs/direcao-site.md.
  * Texto longo, medida curta, muito respiro.
  *
@@ -12,7 +12,7 @@
  * de deploy recusa publicar.
  *
  * Todo campo ainda com o sentinela PENDENTE é OMITIDO da página, e não
- * renderizado como buraco: prazo, garantia e número da faixa são promessa, e
+ * renderizado como buraco: prazo e número da faixa são promessa, e
  * promessa sem confirmação da loja não vai ao ar. Ver docs/pendencias.md.
  */
 import type { Metadata } from "next";
@@ -33,10 +33,10 @@ import estilos from "./a-dalmobile.module.css";
 const pagina = institucional("a-dalmobile");
 
 export const metadata: Metadata = metadataDaPagina({
-  titulo: `A Dalmóbile — móveis planejados em ${unidade.cidade}`,
+  titulo: `A Dalmóbile · móveis planejados em ${unidade.cidade}`,
   descricao:
-    `Fábrica própria desde 1977, 100% MDF e 6 anos de garantia. Como a ` +
-    `Dalmóbile projeta, fabrica e instala em ${unidade.cidade}.`,
+    `Móveis personalizados com fábrica própria em Bento Gonçalves desde 1977. ` +
+    `Como a Dalmóbile projeta, fabrica e monta em ${unidade.cidade}.`,
   caminho: "/a-dalmobile",
   foto: escolherFoto(ambientesDaUnidade(), ["cozinha", "sala-de-estar"], 2)?.src,
 });
@@ -48,8 +48,10 @@ export default function ADalmobile() {
 
   const processo = d.processo ?? [];
   const numeros = (d.numeros ?? []).filter((n) => !ehPendente(n.valor));
-  const faq = (d.faq ?? []).filter((p) => !ehPendente(p.resposta));
-  const garantiaAnos = ehPendente(d.garantia?.anos) ? null : d.garantia?.anos;
+  // Perguntas de uma unidade só (`unidades`) aparecem só no site dela.
+  const faq = (d.faq ?? []).filter(
+    (p) => !ehPendente(p.resposta) && (!p.unidades || p.unidades.includes(unidade.id)),
+  );
 
   return (
     <>
@@ -104,22 +106,15 @@ export default function ADalmobile() {
         <h2 className={estilos.secao}>{d.materiais?.titulo}</h2>
         <div className={estilos.texto}>
           <p>{comCidade(d.materiais?.texto ?? "")}</p>
-        </div>
-
-        <h2 className={estilos.secao}>Garantia</h2>
-        <div className={estilos.texto}>
-          {garantiaAnos ? <p className={estilos.garantiaAnos}>{garantiaAnos}</p> : null}
-          <p>{d.garantia?.texto}</p>
-          {/* Prometer o documento e não entregar é pior que não prometer: o
-              botão só existe quando o PDF existe. Ver docs/pendencias.md. */}
-          {d.garantia?.certificado && !ehPendente(d.garantia.certificado) ? (
+          {/* A frase oficial da fábrica, em itálico (copy v3, A7). */}
+          {d.materiais?.fecho ? (
             <p>
-              <a href={d.garantia.certificado} className={estilos.certificado}>
-                Ver o certificado de garantia ↗
-              </a>
+              <em>{d.materiais.fecho}</em>
             </p>
           ) : null}
         </div>
+        {/* A seção Garantia saiu na copy v3: garantia, certificado e prazos
+            ficam na conversa de venda, não no site (docs/vocabulario.md). */}
       </Section>
 
       {/* A faixa de números só existe se houver número confirmado. Faixa com

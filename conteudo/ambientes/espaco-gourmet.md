@@ -18,6 +18,6 @@ fotos:
 ---
 
 Churrasqueira, chopeira, cooktop e uma bancada com espaço para quem só quer ficar
-por perto. A marcenaria aqui trabalha para uma noite específica: superfície que
-aguenta calor e copo, armário para o que não se usa toda semana, circulação que
-não trava com dez pessoas em pé.
+por perto. O projeto trabalha para uma noite específica: armário para o que só
+sai em dia de festa, lugar certo para a chopeira e circulação que não trava com
+dez pessoas em pé.

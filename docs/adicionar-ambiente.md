@@ -78,6 +78,35 @@ ela nasce sozinha sob o título da foto.
 
 ---
 
+## Texto próprio de uma unidade (`porUnidade`)
+
+O texto de um ambiente é **um só** para os dois sites. Quando uma loja precisa
+de texto próprio — porque as fotos dela mostram outra solução —, ele vai no
+mesmo arquivo, em `porUnidade`, e substitui o padrão **só no site daquela
+unidade**. Só três campos podem ser próprios: `chamada`, `texto` e
+`chamadaFinal`; o que faltar vem do padrão.
+
+```yaml
+porUnidade:
+  caragua:
+    chamada: Cabeceira, luz e apoio na mesma peça.
+    texto: >-
+      A cabeceira é baixa e corre a parede inteira: …
+```
+
+Hoje usam: `quartos` e `sala-de-estar` (Caraguatatuba, copy v3).
+
+`nomeNoTitulo` (opcional) muda como o ambiente se chama no `<title>` —
+`quartos` usa "Quartos e dormitórios".
+
+## Ambiente sem foto numa unidade
+
+Se uma unidade fica sem nenhuma foto de um ambiente, **o ambiente some do site
+dela** sozinho: do hub, de "Outros ambientes", de "Antes de vir" e do sitemap. O
+endereço antigo (`/ambientes/<slug>`) responde **301 para `/ambientes`**
+(`worker/index.ts`). Chegando foto, basta listá-la: a página volta. É o caso do
+banheiro em Caraguatatuba desde a copy v3.
+
 ## Passo 3 — Se o ambiente ainda não existe
 
 1. Acrescente-o em `lib/ambientes.ts`, com `nome`, `slug`, `singular`, `artigo`

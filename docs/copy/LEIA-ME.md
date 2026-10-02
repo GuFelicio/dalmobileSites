@@ -1,12 +1,14 @@
 # Copy do site
 
-Um arquivo por unidade. O texto aprovado pelo cliente vive aqui; o que está
-**no ar** vive em `conteudo/` e em `app/`.
+> **Desde 02/10/2026 a fonte de texto é a copy v3,
+> [`docs/copy-v3.md`](../copy-v3.md)**, que cobre os dois sites (parte A comum,
+> B só SJC, C só Caraguatatuba). As regras de palavra estão em
+> [`docs/vocabulario.md`](../vocabulario.md). Esta pasta guarda o histórico.
 
 | Arquivo | Unidade | Estado |
 |---|---|---|
-| [`sjc.md`](sjc.md) | São José dos Campos | aplicado em 14/09/2026 |
-| `caragua.md` | Caraguatatuba | **não existe ainda** |
+| [`../copy-v3.md`](../copy-v3.md) | as duas | **em vigor**, aplicada em 02/10/2026 |
+| [`sjc.md`](sjc.md) | São José dos Campos | histórico — aplicado em 14/09/2026, substituído |
 
 ## Como isto se relaciona com o que está no ar
 

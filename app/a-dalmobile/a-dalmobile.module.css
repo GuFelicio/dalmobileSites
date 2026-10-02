@@ -106,14 +106,8 @@
   margin: var(--e-1) 0 0;
 }
 
-/* ---- Garantia e números ---------------------------------------------- */
+/* ---- Números ------------------------------------------------------------ */
 
-.garantiaAnos {
-  font-size: var(--fs-display-l);
-  font-weight: var(--peso-leve);
-  letter-spacing: var(--tr-display-l);
-  margin: var(--e-2) 0 0;
-}
 
 .numeros {
   list-style: none;
@@ -236,13 +230,3 @@
   .chamadaAcao { transition: none; }
 }
 
-.certificado {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--toque); /* alvo de toque de 44px */
-  border-bottom: var(--fio) solid var(--cinza-clr);
-  font-size: var(--fs-texto);
-  margin-top: var(--e-2);
-}
-
-.certificado:hover { border-color: var(--preto); }

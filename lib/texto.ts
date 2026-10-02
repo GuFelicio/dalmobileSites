@@ -2,7 +2,9 @@
  * Substituição de cidade nos textos compartilhados.
  *
  * O que é: troca `{{cidade}}` pela cidade desta unidade e `{{outraCidade}}`
- * pela cidade da outra, nos textos que os DOIS sites compartilham.
+ * pela cidade da outra, nos textos que os DOIS sites compartilham. Desde a
+ * copy v3, também `{{regiao}}` e `{{outraRegiao}}` — a região que cada loja
+ * atende (FAQ de área de /a-dalmobile).
  *
  * Onde é usado: nas páginas institucionais, que leem o mesmo arquivo de
  * conteúdo nas duas unidades.
@@ -22,5 +24,7 @@ import { unidade } from "../config/derivados.ts";
 export function comCidade(texto: string): string {
   return texto
     .replaceAll("{{cidade}}", unidade.cidade)
-    .replaceAll("{{outraCidade}}", unidade.outraUnidade.cidade);
+    .replaceAll("{{outraCidade}}", unidade.outraUnidade.cidade)
+    .replaceAll("{{outraRegiao}}", unidade.outraUnidade.regiao)
+    .replaceAll("{{regiao}}", unidade.regiao);
 }

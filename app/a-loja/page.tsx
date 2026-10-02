@@ -25,7 +25,6 @@ import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
 import {
-  enderecoEmLinha,
   linkTelefone,
   linkWhatsApp,
   mapaDaUnidade,
@@ -38,10 +37,15 @@ import estilos from "./a-loja.module.css";
 
 export const metadata: Metadata = metadataDaPagina({
   titulo: `Showroom em ${unidade.cidade} | Dalmóbile`,
+  // Formato da copy v3 (B5 e C6): "…, 736, Jardim Esplanada, São José dos
+  // Campos. Segunda a sexta das 09h00 às 19h00, sábado das 08h00 às 14h00."
+  // Os dias depois do primeiro vão em minúscula, no meio da frase.
   descricao:
-    `Showroom Dalmóbile na ${unidade.endereco.logradouro} — ` +
+    `Showroom Dalmóbile na ${unidade.endereco.logradouro}, ` +
     `${unidade.endereco.bairro}, ${unidade.cidade}. ` +
-    unidade.horarios.map((h) => `${h.dias} das ${h.abre} às ${h.fecha}`).join(", ") + ".",
+    unidade.horarios
+      .map((h, i) => `${i === 0 ? h.dias : h.dias.charAt(0).toLowerCase() + h.dias.slice(1)} das ${h.abre} às ${h.fecha}`)
+      .join(", ") + ".",
   caminho: "/a-loja",
   foto: escolherFoto(ambientesDaUnidade(), ["sala-de-estar", "cozinha"], 0)?.src,
 });
@@ -71,9 +75,9 @@ export default function ALoja() {
             quatro, quem não é entende na hora por que vale a visita. */}
         <p className={estilos.chamada}>Venha ver de perto o que a foto não resolve.</p>
         <p className={estilos.intro}>
-          Acabamento se decide na mão: a cor sob a luz do ambiente, a textura da borda, o peso
-          da ferragem, o ruído da corrediça ao fechar. No showroom tudo isso está montado. Se
-          puder, traga a planta do imóvel — a conversa anda muito mais rápido.
+          Acabamento se decide na mão: a cor da laca sob a luz do ambiente, a textura da
+          borda, o peso da porta, o ruído da corrediça ao fechar. No showroom tudo isso está
+          montado. Se puder, traga a planta do imóvel, a conversa anda muito mais rápido.
         </p>
 
         <div className={estilos.colunas}>
@@ -84,7 +88,10 @@ export default function ALoja() {
             <dl className={estilos.lista}>
               <dt>Endereço</dt>
               <dd>
-                <address className={estilos.endereco}>{enderecoEmLinha()}</address>
+                {/* No formato da copy v3 (B5 e C6): rua · bairro, cidade, UF · CEP. */}
+                <address className={estilos.endereco}>
+                  {`${unidade.endereco.logradouro} · ${unidade.endereco.bairro}, ${unidade.cidade}, ${unidade.estado} · ${unidade.endereco.cep}`}
+                </address>
                 {mapa ? (
                   <a href={mapa.link} className={estilos.linkMapa}>
                     Abrir no mapa
@@ -92,17 +99,14 @@ export default function ALoja() {
                 ) : null}
               </dd>
 
-              <dt>Telefone</dt>
-              <dd>
-                <a href={linkTelefone()}>{unidade.telefone}</a>
-              </dd>
-
+              {/* Telefone e WhatsApp são o mesmo número desde a copy v3: uma
+                  linha só, com o número, que abre o WhatsApp desta loja. */}
               <dt>WhatsApp</dt>
               <dd>
                 {whatsapp ? (
-                  <a href={whatsapp}>Falar no WhatsApp</a>
+                  <a href={whatsapp}>{unidade.telefone}</a>
                 ) : (
-                  <span aria-disabled="true">Em breve</span>
+                  <a href={linkTelefone()}>{unidade.telefone}</a>
                 )}
               </dd>
 
@@ -156,7 +160,8 @@ export default function ALoja() {
           {/* Nomear a região é melhor para busca e para o leitor do que
               "também atende em outra cidade". */}
           <p className={estilos.outraTexto}>
-            A Dalmóbile também atende a partir de {unidade.outraUnidade.cidade}.
+            No {unidade.outraUnidade.regiao}, a Dalmóbile atende pela loja de{" "}
+            {unidade.outraUnidade.cidade}.
           </p>
           <a href={unidade.outraUnidade.url} className={estilos.outraAcao}>
             {unidade.outraUnidade.nome}

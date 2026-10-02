@@ -18,6 +18,7 @@ export const unidade: Unidade = {
   id: "sjc",
   nome: "São José dos Campos",
   cidade: "São José dos Campos",
+  regiao: "Vale do Paraíba",
   estado: "SP",
   dominio: "https://dalmobilesjc.com.br",
   paleta: "neutra",
@@ -35,16 +36,10 @@ export const unidade: Unidade = {
     altura: 177,
   },
 
-  // UM NÚMERO SÓ, nas duas lojas. Decisão do cliente em 14/09/2026, que
-  // resolve a divergência que havia no site: o WhatsApp ia para um número e
-  // o rodapé mostrava outro.
-  //
-  // O fixo (12) 3341-8777, que era o número de SJC, SAIU do site. Se alguém
-  // ainda atende por ele, reverter é trocar esta linha de volta.
+  // Telefone e WhatsApp são o mesmo número, e é desta loja só: cada unidade
+  // tem o seu desde a copy v3 (02/10/2026). O fixo (12) 3341-8777, antigo,
+  // saiu do site em 14/09/2026.
   telefone: "(12) 99604-9888",
-
-  // ATENÇÃO: é o MESMO número do WhatsApp de Caraguá. Confirmado pelo cliente
-  // em 08/09/2026. Ver a nota em docs/unidades.md sobre a origem do lead.
   whatsapp: "5512996049888",
 
   horarios: [
@@ -75,7 +70,16 @@ export const unidade: Unidade = {
   outraUnidade: {
     nome: "Ver a loja de Caraguatatuba",
     cidade: "Caraguatatuba",
+    regiao: "litoral norte",
     url: "https://dalmobilecaraguatatuba.com.br",
+  },
+
+  textos: {
+    descricaoHome:
+      "Móveis planejados personalizados em São José dos Campos. Fábrica própria desde 1977, 100% MDF e edição milimétrica. Veja projetos executados.",
+    // A copy v3 não muda esta; é a que já estava no ar.
+    descricaoAmbientes:
+      "Cozinha, quartos, sala, home office, closet, banheiro e espaço gourmet planejados pela Dalmóbile em São José dos Campos. Fotos de projetos executados.",
   },
 
   // Cinco itens, conforme o mapa de rotas do CLAUDE.md.

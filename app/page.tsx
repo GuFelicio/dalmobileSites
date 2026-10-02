@@ -95,8 +95,8 @@ export default function Home() {
             <p className="eyebrow">MÓVEIS PLANEJADOS · {unidade.cidade.toUpperCase()}</p>
             <h1>O projeto começa na medição.</h1>
             <p>
-              Marcenaria desenhada, fabricada e instalada pela Dalmóbile. Fábrica própria
-              desde 1977.
+              Móveis personalizados, editados milímetro a milímetro para o seu imóvel.
+              Fábrica própria desde 1977.
             </p>
             <Link href="/ambientes">Ver os ambientes <Arrow /></Link>
           </div>
@@ -111,17 +111,17 @@ export default function Home() {
             <p className="eyebrow">COMO PROJETAMOS</p>
             <h2>Nenhuma casa é igual à planta.</h2>
             <p>
-              A medição é feita no imóvel, com a obra pronta — é de lá que sai o desenho.
-              O pé-direito real, o vão que ficou dois centímetros fora do projeto, a tomada
-              que ninguém previu. O móvel se ajusta à casa; nunca o contrário.
+              A medição é feita no imóvel, com a obra pronta, e é de lá que sai o desenho:
+              o pé-direito real, o vão que ficou dois centímetros fora do projeto, a tomada
+              que ninguém previu. Na Dalmóbile não existe módulo padrão. Cada peça é editada
+              milímetro a milímetro para caber no que a obra entregou.
             </p>
             <Link href="/a-dalmobile">Como trabalhamos <Arrow /></Link>
           </div>
           <figure className="synthesis-manifesto-image">
             <Foto src={fotoManifesto.src} alt={fotoManifesto.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
-            {/* Três dados verificáveis no lugar de "essência italiana", que não
-                se sustentava em nada no site. */}
-            <figcaption>FÁBRICA PRÓPRIA · 100% MDF · 6 ANOS DE GARANTIA</figcaption>
+            {/* Três fatos de processo (copy v3, A2). A garantia saiu do site. */}
+            <figcaption>FÁBRICA PRÓPRIA · 100% MDF · EDIÇÃO MILIMÉTRICA</figcaption>
           </figure>
         </section>
 
@@ -146,25 +146,24 @@ export default function Home() {
         <section className="synthesis-process" id="sintese-processo">
           <div className="synthesis-process-image">
             <Foto src={fotoProcesso.src} alt={fotoProcesso.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
-            <span>O QUE VEM POR ESCRITO</span>
+            <span>O QUE VEM DA FÁBRICA</span>
           </div>
           <div className="synthesis-process-copy">
             <p className="eyebrow">DA FÁBRICA À MONTAGEM</p>
-            <h2>Produção própria, com garantia publicada.</h2>
+            <h2>Do MDF ao vidro, tudo sai da mesma fábrica.</h2>
             <p>
-              A marcenaria não é comprada de terceiro: sai da fábrica da própria Dalmóbile,
-              100% em MDF, com ferragem e acabamento definidos no projeto. Cada proposta vai
-              com a lista de acabamentos por nome e código — o que permite comparar
-              orçamentos com honestidade e repor uma peça daqui a cinco anos sem adivinhação.
+              Os móveis saem das duas fábricas da Dalmóbile em Bento Gonçalves, na Serra
+              Gaúcha, que produzem a linha inteira: MDF, laca, vidro e alumínio. A borda é
+              colada com cola PUR, que não solta com calor e umidade, o fundo recebe proteção
+              antimofo e todo móvel leva o selo de origem impresso na chapa.
             </p>
-            {/* Três números verificados em fonte pública da rede. Saíram
-                "500+ acessórios exclusivos" (sem fonte, e linguagem de catálogo
-                de fornecedor) e "47 anos" (errado: 1977 dá 49 em 2026). O ano
-                é melhor que a contagem: é verificável e não envelhece. */}
+            <Link href="/a-dalmobile">Conheça a Dalmóbile <Arrow /></Link>
+            {/* Três números verificados (copy v3, A4). "6 anos de garantia" saiu:
+                garantia é conversa de venda, não de site. */}
             <div className="synthesis-stats">
               <div><strong>1977</strong><span>ano em que a fábrica começou</span></div>
-              <div><strong>100%</strong><span>MDF em todo o projeto</span></div>
-              <div><strong>6</strong><span>anos de garantia</span></div>
+              <div><strong>2</strong><span>fábricas próprias em Bento Gonçalves</span></div>
+              <div><strong>100%</strong><span>MDF em toda a linha</span></div>
             </div>
           </div>
         </section>

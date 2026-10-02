@@ -51,7 +51,8 @@ export function institucional<K extends keyof Conteudo["institucional"]>(
 export function ambientesDe(id: UnidadeId): PaginaDeAmbiente[] {
   const ordem = AMBIENTES.map((a) => a.slug);
   return AMBIENTES_PUBLICADOS.filter((a) => a.unidades.includes(id))
-    .map((a) => ({ ...a, fotos: a.fotos.filter((f) => f.unidade === id) }))
+    // O texto próprio da unidade (porUnidade) por cima do padrão.
+    .map((a) => ({ ...a, ...a.porUnidade[id], fotos: a.fotos.filter((f) => f.unidade === id) }))
     .filter((a) => a.fotos.length > 0)
     .sort((a, b) => ordem.indexOf(a.slug) - ordem.indexOf(b.slug));
 }

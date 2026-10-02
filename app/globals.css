@@ -52,13 +52,15 @@ img { display: block; max-width: 100%; }
 .synthesis-hero-panel > a,
 .synthesis-manifesto-content > a,
 .synthesis-section-heading > a,
-.synthesis-project div > a {
+.synthesis-project div > a,
+.synthesis-process-copy > a {
   position: relative;
 }
 .synthesis-hero-panel > a::before,
 .synthesis-manifesto-content > a::before,
 .synthesis-section-heading > a::before,
-.synthesis-project div > a::before {
+.synthesis-project div > a::before,
+.synthesis-process-copy > a::before {
   content: "";
   position: absolute;
   left: 0;
@@ -287,6 +289,9 @@ img { display: block; max-width: 100%; }
   letter-spacing: var(--tr-display-l);
   font-weight: var(--peso-leve);
 }
+/* "Conheça a Dalmóbile" (copy v3, A4): o mesmo desenho dos links das outras
+   seções — fio de 1px embaixo, seta afastada do texto. */
+.synthesis-process-copy > a { align-self: flex-start; display: inline-flex; gap: 22px; margin-top: 30px; padding-bottom: 7px; border-bottom: var(--fio) solid; font-size: 12px; }
 .synthesis-process-copy > p:not(.eyebrow) { max-width: var(--medida); margin: 0; font-size: 16px; line-height: 1.7; color: var(--sobre-escuro-70); }
 .synthesis-stats {
   display: grid;

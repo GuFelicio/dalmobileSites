@@ -43,6 +43,12 @@ export type Unidade = {
    * NUNCA citar a da outra unidade. O teste de cidade cruzada guarda isto.
    */
   cidade: string;
+  /**
+   * A região que esta loja atende, como aparece no meio da frase ("o Vale do
+   * Paraíba", "o litoral norte" — com minúscula, ver docs/vocabulario.md).
+   * Entra no FAQ de área de /a-dalmobile e na faixa de /a-loja.
+   */
+  regiao: string;
   estado: string;
 
   /** Domínio do site desta unidade, sem barra final. Base do sitemap e do OG. */
@@ -128,7 +134,19 @@ export type Unidade = {
      * textos compartilhados — ver lib/texto.ts.
      */
     cidade: string;
+    /** A região que a outra loja atende. Ver `regiao`. */
+    regiao: string;
     url: string;
+  };
+  /**
+   * Textos de SEO que NÃO são simétricos entre as unidades — por isso são
+   * campo, e não `{{cidade}}` num texto compartilhado. Fonte: docs/copy-v3.md.
+   */
+  textos: {
+    /** meta description da home (copy v3, B1 e C1). */
+    descricaoHome: string;
+    /** meta description do hub /ambientes (copy v3, C4; SJC mantém a de antes). */
+    descricaoAmbientes: string;
   };
 
   /**

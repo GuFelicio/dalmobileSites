@@ -1,5 +1,10 @@
 # Copy do site — Dalmóbile São José dos Campos
 
+> **HISTÓRICO — não usar.** Substituído em 02/10/2026 pela copy v3,
+> [`docs/copy-v3.md`](../copy-v3.md), que é a única fonte de texto dos dois
+> sites. As regras de palavra estão em [`docs/vocabulario.md`](../vocabulario.md).
+> Este arquivo fica só como registro do que esteve no ar até então.
+
 **Revisão completa, 09/09/2026.** Cobre as páginas que estão no ar em `dalmobilesjc.gustavo-89c.workers.dev`: home, hub de ambientes, as 7 páginas de ambiente, A Dalmóbile, Para arquitetos, A loja e Privacidade.
 
 Cada bloco abaixo é para copiar direto no código. Onde há uma decisão pendente, está marcado com **⚠️** e listado no fim do documento.

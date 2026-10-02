@@ -22,6 +22,7 @@ export const unidade: Unidade = {
   id: "caragua",
   nome: "Caraguatatuba",
   cidade: "Caraguatatuba",
+  regiao: "litoral norte",
   estado: "SP",
   dominio: "https://dalmobilecaraguatatuba.com.br",
   // Areia no lugar do cinza: o site do litoral. Ver app/tokens.css.
@@ -42,19 +43,11 @@ export const unidade: Unidade = {
     altura: 177,
   },
 
-  // UM NÚMERO SÓ, nas duas lojas. Decisão do cliente em 14/09/2026, que
-  // resolve a divergência que havia no site: o WhatsApp ia para um número e
-  // o rodapé mostrava outro.
-  //
-  // O fixo (12) 3341-8777, que era o número de SJC, SAIU do site. Se alguém
-  // ainda atende por ele, reverter é trocar esta linha de volta.
-  //
-  // O celular (12) 98270-3186, que era o de Caraguá, SAIU do site.
-  telefone: "(12) 99604-9888",
-
-  // ATENÇÃO: é o MESMO número do WhatsApp de SJC. Confirmado pelo cliente em
-  // 08/09/2026. Ver a nota em docs/unidades.md sobre a origem do lead.
-  whatsapp: "5512996049888",
+  // O número DESTA loja (copy v3, 02/10/2026). Até então o site de Caraguá
+  // mostrava o número da outra unidade em todo lugar — topo, menu, rodapé,
+  // loja, privacidade e o link do WhatsApp. Telefone e WhatsApp são o mesmo.
+  telefone: "(12) 99602-1234",
+  whatsapp: "5512996021234",
 
   horarios: [
     { dias: "Segunda a sexta", abre: "09h00", fecha: "18h00", confirmado: true },
@@ -70,9 +63,9 @@ export const unidade: Unidade = {
     link: "https://maps.google.com/?cid=9613548396593281282",
   },
 
-  // DIVERGÊNCIA CONHECIDA: a ficha ainda mostra o telefone antigo. O cliente
-  // vai atualizar. Endereço, telefone e horário têm que bater EXATAMENTE com
-  // o Google Business — divergência derruba a busca local.
+  // Endereço, telefone e horário têm que bater EXATAMENTE com o Google
+  // Business — divergência derruba a busca local. Conferir a ficha depois da
+  // troca de número da copy v3.
   googleBusiness: "https://share.google/w7Pq6YmLPUP1T8imm",
 
   // PENDENTE: medição própria desta unidade. Reaproveitar a de SJC
@@ -87,7 +80,15 @@ export const unidade: Unidade = {
   outraUnidade: {
     nome: "Ver a loja de São José dos Campos",
     cidade: "São José dos Campos",
+    regiao: "Vale do Paraíba",
     url: "https://dalmobilesjc.com.br",
+  },
+
+  textos: {
+    descricaoHome:
+      "Móveis planejados personalizados em Caraguatatuba e no litoral norte. Fábrica própria desde 1977, 100% MDF e edição milimétrica. Veja projetos executados.",
+    descricaoAmbientes:
+      "Cozinha, quartos e sala planejados pela Dalmóbile em Caraguatatuba. Fotos de projetos executados.",
   },
 
   // PENDENTE de curadoria: a direção diz que o conjunto de ambientes de

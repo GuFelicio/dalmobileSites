@@ -68,6 +68,7 @@ config é compilado**, e o teste de cidade cruzada pode ser absoluto.
 | `id` | `"sjc"` ou `"caragua"`. É o valor de `UNIDADE` | seleção de build, nome do Worker |
 | `nome` | nome curto da unidade | texto acessível do lockup |
 | `cidade` | cidade por extenso | `<title>`, `meta description`, schema, rodapé |
+| `regiao` | a região que a loja atende, em minúscula no meio da frase ("Vale do Paraíba", "litoral norte") | FAQ de área de `/a-dalmobile`, faixa de `/a-loja` |
 | `estado` | UF | endereço, schema |
 | `dominio` | domínio sem barra final | base do sitemap, OpenGraph, link canônico |
 | `endereco` | logradouro, bairro, CEP | rodapé, `/a-loja`, schema `LocalBusiness` |
@@ -78,7 +79,9 @@ config é compilado**, e o teste de cidade cruzada pode ser absoluto.
 | `mapa` | `embed` do iframe e `link` do app | `/a-loja` |
 | `googleBusiness` | ficha da loja | referência de conferência do schema |
 | `analytics` | `ga` e `pixel`, ou `null` | scripts de medição |
-| `outraUnidade` | rótulo e URL da outra loja | link cruzado do rodapé |
+| `outraUnidade` | rótulo, cidade, região e URL da outra loja | link cruzado do rodapé, faixa de `/a-loja`, FAQ de área |
+| `textos.descricaoHome` | `meta description` da home | home (e o OpenGraph dela) |
+| `textos.descricaoAmbientes` | `meta description` do hub | `/ambientes` |
 | `navegacao` | as rotas deste site, na ordem | cabeçalho e menu mobile |
 
 ### `marca` — o lockup já contém a cidade
@@ -88,18 +91,35 @@ isso não se renderiza o nome da unidade ao lado: seria duplicata. As duas
 versões (escura e clara) existem de verdade — nada de clarear a preta com
 filtro.
 
-### `whatsapp` — as duas unidades usam o MESMO número
+### `telefone` e `whatsapp` — cada loja com o seu número
 
-Confirmado pelo cliente em 08/09/2026: `5512996049888` atende os dois sites.
+Desde a copy v3 (02/10/2026), **cada unidade tem o próprio número**, e telefone
+e WhatsApp são o mesmo:
 
-Isso cria um problema que o `docs/direcao-site.md` levanta explicitamente — *"o
-lead precisa carregar de qual unidade veio"*. Com um número só, quem atende não
-tem como saber de qual cidade a pessoa chegou.
+| Unidade | Telefone | `whatsapp` |
+|---|---|---|
+| São José dos Campos | (12) 99604-9888 | `5512996049888` |
+| Caraguatatuba | (12) 99602-1234 | `5512996021234` |
 
-A solução está em `linkWhatsApp()`, em `config/derivados.ts`: o link `wa.me`
-leva uma mensagem pré-preenchida com a cidade daquele site. **É o único sinal de
-origem que existe.** Se alguém "simplificar" o link tirando o `?text=`, a
-origem do lead se perde em silêncio.
+Até essa data as duas usavam o número de SJC, e o site de Caraguá mostrava o
+número da outra loja em todo lugar. **Nenhum número é escrito em componente:**
+topo, menu mobile, rodapé, `/a-loja`, `/privacidade` e o link `wa.me` leem do
+config. Verificado: o build de cada unidade só contém o número dela.
+
+O link `wa.me` continua levando uma mensagem pré-preenchida com a cidade daquele
+site (`linkWhatsApp()`, em `config/derivados.ts`). Com números separados isso
+deixou de ser o único sinal de origem do lead, mas ainda ajuda quem atende.
+
+### `regiao` e `textos` — o que a copy diz diferente por unidade
+
+- **`regiao`** (e `outraUnidade.regiao`) entra nos textos compartilhados como
+  `{{regiao}}` e `{{outraRegiao}}` — ver `lib/texto.ts`. É o que deixa a
+  pergunta de área do FAQ ser UMA frase para os dois sites: *"Atendemos
+  {{cidade}} e o {{regiao}}. No {{outraRegiao}}, quem atende é a loja de
+  {{outraCidade}}."*
+- **`textos`** guarda o que não é simétrico: a description da home (Caraguá diz
+  "e no litoral norte"; SJC não diz "e no Vale do Paraíba") e a do hub, que
+  lista os ambientes de cada loja.
 
 ### `whatsapp: null` — a ação fica desabilitada, nunca link morto
 

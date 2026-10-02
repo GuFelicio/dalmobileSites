@@ -76,7 +76,7 @@ Mesma superfície, sem quebra. Lista tipográfica, **sem foto**: nome do edifíc
 Rizzuti          São José dos Campos          6
 Kikute           São José dos Campos          1
 Monte Carlo      São José dos Campos          1
-Calabassas       São José dos Campos          1
+Calabassas       Caraguatatuba                1
 Golf             São José dos Campos          1
 ```
 

@@ -23,10 +23,9 @@ import { ambientesDaUnidade } from "../../lib/ambientes-da-unidade.ts";
 import estilos from "./ambientes.module.css";
 
 export const metadata: Metadata = metadataDaPagina({
-  titulo: `Ambientes — Móveis planejados em ${unidade.cidade} | Dalmóbile`,
-  descricao:
-    `Cozinha, quartos, sala, home office, closet, banheiro e espaço gourmet ` +
-    `planejados pela Dalmóbile em ${unidade.cidade}. Fotos de projetos executados.`,
+  titulo: `Ambientes · móveis planejados em ${unidade.cidade} | Dalmóbile`,
+  // Lista os ambientes de cada unidade (copy v3, C4): vem do config.
+  descricao: unidade.textos.descricaoAmbientes,
   caminho: "/ambientes",
   foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
 });
@@ -53,10 +52,13 @@ export default function HubDeAmbientes() {
   // (Caraguá) não há destaque: no desktop a linha fecha exata e nada muda; no
   // tablet (3 colunas) o último card estica até a borda, para não sobrar vão.
   const destaque = ambientes.length > 4;
+  // No desktop são 4 colunas; com MENOS de 4 ambientes, uma coluna por
+  // ambiente — Caraguá, com 3 (copy v3), fica em 3 colunas iguais, sem vão.
+  const colunasDesktop = destaque ? 4 : Math.min(4, ambientes.length);
   const grade = {
     celular: colunasPorItem(ambientes.length, 2, destaque ? 2 : 1),
     tablet: colunasPorItem(ambientes.length, 3, destaque ? 3 : 1),
-    desktop: colunasPorItem(ambientes.length, 4, destaque ? 2 : 1),
+    desktop: colunasPorItem(ambientes.length, colunasDesktop, destaque ? 2 : 1),
   };
 
   return (
@@ -68,12 +70,15 @@ export default function HubDeAmbientes() {
         {/* Dizer que NÃO há render é mais forte do que dizer que as fotos são
             de projetos executados: nomeia o que a concorrência faz. */}
         <p className={estilos.intro}>
-          Cada ambiente resolve um problema diferente de marcenaria. As fotos abaixo são de
-          projetos que a Dalmóbile desenhou, fabricou e instalou — nenhum render, nenhuma
-          imagem de banco.
+          Cada ambiente pede uma decisão de projeto diferente. As fotos abaixo são de
+          projetos que a Dalmóbile projetou, fabricou e montou em {unidade.cidade}. Nenhum
+          render, nenhuma imagem de banco.
         </p>
 
-        <ul className={estilos.grade}>
+        <ul
+          className={estilos.grade}
+          style={{ "--colunas-grade-desktop": colunasDesktop } as React.CSSProperties}
+        >
           {ambientes.map((ambiente, i) => (
             <li
               key={ambiente.slug}

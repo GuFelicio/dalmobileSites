@@ -22,9 +22,8 @@ import "./globals.css";
 // Fase 8. Aqui fica só o que impede o erro de cidade.
 export const metadata: Metadata = metadataDaPagina({
   titulo: `Móveis Planejados em ${unidade.cidade} | Dalmóbile`,
-  descricao:
-    `Móveis planejados projetados e fabricados pela Dalmóbile em ${unidade.cidade}. ` +
-    `Fábrica própria há quase cinco décadas.`,
+  // Não é simétrica entre as unidades (copy v3, B1 e C1): vem do config.
+  descricao: unidade.textos.descricaoHome,
   caminho: "/",
   foto: "/fotos/comum/capa/casa-completa.webp",
 });

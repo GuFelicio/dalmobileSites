@@ -9,9 +9,23 @@ chamada: Cabeceira, luz e guarda-roupa saem da mesma peça.
 # gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
 # botão é interface, não texto.
 chamadaFinal: Quer um quarto resolvido assim?
+
+# O <title> desta página diz "Quartos e dormitórios": o cliente busca
+# "quarto", a fábrica chama de "dormitório" (docs/vocabulario.md, 1.5).
+nomeNoTitulo: Quartos e dormitórios
+
+# Caraguatatuba tem texto PRÓPRIO (copy v3, C4): as fotos de lá mostram outra
+# solução. O que não estiver aqui vem do padrão acima.
+porUnidade:
+  caragua:
+    chamada: Cabeceira, luz e apoio na mesma peça.
+    texto: >-
+      A cabeceira é baixa e corre a parede inteira: recebe a fita de LED por
+      trás, vira apoio dos dois lados da cama e deixa a parede livre para o
+      quadro. Um móvel só faz o trabalho da cabeceira e dos dois criados.
 fotos:
   - src: /fotos/sjc/quartos/27062023-riz4900.webp
-    titulo: Arco colorido feito de marcenaria
+    titulo: Cabeceira em arco no quarto infantil
     alt: Quarto infantil com cabeceira arredondada colorida, prateleiras em madeira rosada e cama baixa
     edificio:
     arquiteto:
@@ -26,7 +40,7 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/sjc/quartos/64.webp
-    titulo: Duas camas, uma marcenaria só
+    titulo: Duas camas, uma cabeceira só
     alt: Quarto de duas camas de solteiro com cabeceira contínua em madeira, gavetas embutidas e escrivaninha
     edificio:
     arquiteto:
@@ -41,12 +55,12 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/sjc/quartos/debora-toledo-jardim-das-industrias-114.webp
-    titulo: Boiserie e madeira na mesma parede
+    titulo: Boiserie e painel amadeirado na mesma parede
     alt: Suíte com painel de madeira e boiserie clara, arandelas esféricas e cama de casal
     edificio:
     arquiteto:
   - src: /fotos/sjc/quartos/debora-toledo-jardim-das-industrias-166.webp
-    titulo: Couro na cabeceira
+    titulo: Cabeceira estofada em tom caramelo
     alt: Detalhe de cabeceira estofada em couro caramelo, com criado-mudo redondo e luminária de vidro
     edificio:
     arquiteto:
@@ -66,13 +80,13 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/caragua/quartos/dalmobile-calabasasapto93-0718.webp
-    titulo: Fibra natural e azul de praia
+    titulo: Cabeceira baixa que deixa a parede para a arte
     alt: Quarto claro visto de lado, com pendentes de fibra natural, quadro azul e cesto de palha
     edificio:
     arquiteto:
 ---
 
-Quando a marcenaria assume a parede inteira, o quarto para de parecer montado
-por partes. A cabeceira recebe a iluminação, o criado deixa de ser móvel solto e
-o guarda-roupa encosta no teto — que é onde ele deixa de juntar poeira em cima.
-O que se vê é uma parede, não quatro móveis.
+Quando o projeto assume a parede inteira, o quarto para de parecer montado por
+partes. A cabeceira recebe a iluminação, o criado deixa de ser móvel solto e o
+guarda-roupa vai até o teto, onde deixa de juntar poeira em cima. O que se vê é
+uma parede, não quatro móveis.

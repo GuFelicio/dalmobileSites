@@ -32,13 +32,21 @@ import estilos from "./arquitetos.module.css";
 const pagina = institucional("arquitetos");
 
 export const metadata: Metadata = metadataDaPagina({
-  titulo: `Para arquitetos — Dalmóbile ${unidade.cidade}`,
+  titulo: `Para arquitetos · Dalmóbile ${unidade.cidade}`,
   descricao:
-    `Detalhamento técnico de marcenaria, visita à fábrica e fila separada para ` +
-    `orçamento de escritório. Parceria com escritórios de arquitetura.`,
+    `Detalhamento técnico, edição milimétrica e orçamento de escritório. ` +
+    `Parceria com arquitetos e designers de interiores em ${unidade.cidade}.`,
   caminho: "/arquitetos",
   foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
 });
+
+/**
+ * Trecho entre *asteriscos* no conteúdo sai em itálico — é o formato de
+ * crédito da fábrica no bloco "Crédito no projeto" (copy v3, A8).
+ */
+function comEnfase(texto: string) {
+  return texto.split(/\*([^*]+)\*/).map((parte, i) => (i % 2 === 1 ? <em key={i}>{parte}</em> : parte));
+}
 
 export default function Arquitetos() {
   const d = pagina.dados;
@@ -64,7 +72,7 @@ export default function Arquitetos() {
           {parceria.map((bloco) => (
             <li key={bloco.titulo} className={estilos.bloco}>
               <h3 className={estilos.blocoTitulo}>{bloco.titulo}</h3>
-              <p className={estilos.blocoTexto}>{comCidade(bloco.texto)}</p>
+              <p className={estilos.blocoTexto}>{comEnfase(comCidade(bloco.texto))}</p>
               {/* Prazo de resposta é compromisso com um escritório. Sem
                   confirmação da loja, não vai ao ar. */}
               {bloco.prazo && !ehPendente(bloco.prazo) ? (

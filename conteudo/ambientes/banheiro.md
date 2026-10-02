@@ -2,7 +2,12 @@
 nome: Banheiro
 slug: banheiro
 unidades: [sjc, caragua]
-chamada: Marcenaria que convive com água todo dia.
+# Caraguá está em `unidades`, mas está SEM foto desde a copy v3 (02/10/2026): a
+# do lavabo de pedra saiu, porque não mostra móvel Dalmóbile. Sem foto, o
+# ambiente não aparece no site de Caraguá, e /ambientes/banheiro de lá
+# redireciona para /ambientes (worker/index.ts). Chegando foto com gabinete
+# Dalmóbile, é só listá-la abaixo: a página volta sozinha.
+chamada: Móvel que convive com vapor todo dia.
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
 # mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
@@ -16,28 +21,18 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/sjc/banheiro/27062023-riz4885.webp
-    titulo: Gabinete terracota contra o mármore
+    titulo: Gabinete suspenso, longe do piso molhado
     alt: Banheiro com gabinete suspenso terracota, cuba redonda branca, box de vidro e revestimento marmorizado
     edificio:
     arquiteto:
-  - src: /fotos/sjc/banheiro/debora-toledo-jardim-das-industrias-122.webp
-    titulo: Nicho embutido no revestimento
-    alt: Banheiro em mármore branco com veios dourados, nicho horizontal embutido no box e banheira de alvenaria
-    edificio:
-    arquiteto:
   - src: /fotos/sjc/banheiro/debora-toledo-jardim-das-industrias-137.webp
-    titulo: Banheira encaixada na marcenaria
+    titulo: Armário espelhado sobre a bancada
     alt: Banheiro claro com banheira embutida, box de vidro, nicho iluminado e armário espelhado acima da bancada
-    edificio:
-    arquiteto:
-  - src: /fotos/caragua/banheiro/dalmobile-calabasasapto93-0848.webp
-    titulo: Espelho redondo sobre bancada de pedra
-    alt: Lavabo com bancada de pedra rústica, cuba esculpida, espelho redondo e revestimento ondulado bege
     edificio:
     arquiteto:
 ---
 
-É o ambiente que mais castiga o material: vapor, respingo e produto de limpeza.
-Por isso a decisão aqui está no acabamento e na ferragem — borda selada,
-corrediça que não enferruja, gabinete suspenso para não apoiar no piso molhado.
-O desenho vem depois disso, não antes.
+É o ambiente que mais exige do material: vapor, respingo e produto de limpeza.
+Por isso a decisão começa pela construção do móvel. A borda é colada com cola
+PUR, que não solta com calor e umidade, e o fundo recebe proteção antimofo. O
+gabinete suspenso tira o móvel do piso molhado e deixa a limpeza mais fácil.

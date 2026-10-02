@@ -10,7 +10,7 @@
  * POR QUE TEM `confirmado`: estes textos foram escritos SEM entrevista com a
  * loja, a partir só do que o CLAUDE.md afirma. São rascunho. O documento é
  * explícito: nenhum número vai ao ar sem confirmação — anos de fábrica,
- * garantia, prazo, quantidade de projetos. Enquanto `confirmado` for false, a
+ * prazo, quantidade de projetos. (Garantia saiu do site na copy v3.) Enquanto `confirmado` for false, a
  * trava de deploy recusa publicar.
  */
 import { readFileSync } from "node:fs";
@@ -26,7 +26,12 @@ const PASTA = path.join(process.cwd(), "conteudo/institucional");
 
 export type EtapaDoProcesso = { etapa: string; texto: string; prazo?: string };
 export type NumeroDaFaixa = { valor: string; rotulo: string };
-export type PerguntaFrequente = { pergunta: string; resposta: string };
+export type PerguntaFrequente = {
+  pergunta: string;
+  resposta: string;
+  /** Se presente, a pergunta só aparece no site destas unidades. */
+  unidades?: ("sjc" | "caragua")[];
+};
 export type BlocoDeParceria = { titulo: string; texto: string; prazo?: string };
 export type ArquitetoParceiro = {
   nome: string;
@@ -38,8 +43,8 @@ export type DadosDalmobile = {
   abertura: string;
   fabrica: { titulo: string; texto: string; foto?: string };
   processo: EtapaDoProcesso[];
-  materiais: { titulo: string; texto: string };
-  garantia: { anos?: string; certificado?: string; texto: string };
+  /** `fecho`: a frase em itálico logo abaixo do parágrafo. */
+  materiais: { titulo: string; texto: string; fecho?: string };
   numeros: NumeroDaFaixa[];
   faq: PerguntaFrequente[];
 };

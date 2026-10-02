@@ -38,6 +38,6 @@ fotos:
 ---
 
 Deixou de ser um canto emprestado da sala. Hoje pede fiação por dentro do móvel,
-luz de tarefa sobre a bancada e porta que fecha na frente do que não deve
-aparecer na chamada de vídeo. Às seis da tarde o escritório desaparece e o
-cômodo volta a ser o que era.
+tomada e carregador na altura da bancada, luz de tarefa e porta que fecha na
+frente do que não deve aparecer na chamada de vídeo. Às seis da tarde o
+escritório desaparece e o cômodo volta a ser o que era.

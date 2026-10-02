@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const descricao = `${ambiente.chamada} ${ambiente.nome} ${ambiente.planejado} pela Dalmóbile em ${unidade.cidade}, em projetos executados.`;
 
   return metadataDaPagina({
-    titulo: `${ambiente.nome} ${ambiente.planejado} em ${unidade.cidade} | Dalmóbile`,
+    titulo: `${ambiente.nomeNoTitulo ?? ambiente.nome} ${ambiente.planejado} em ${unidade.cidade} | Dalmóbile`,
     descricao,
     caminho: `/ambientes/${ambiente.slug}`,
     foto: ambiente.fotos[0].src,

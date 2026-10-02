@@ -8,6 +8,63 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-02 · copy v3
+
+Os dois sites com o texto da copy v3 (`docs/copy-v3.md`). Só texto, metadata,
+dados de config e duas fotos a menos. Regras de palavra: `docs/vocabulario.md`.
+A copy de 09/09 (`docs/copy/sjc.md`) virou histórico.
+
+### Texto
+- **Home:** dek da abertura, parágrafo de "Como projetamos", selo (FÁBRICA
+  PRÓPRIA · 100% MDF · EDIÇÃO MILIMÉTRICA), e a seção da fábrica inteira — novo
+  título, novo texto, link "Conheça a Dalmóbile" para `/a-dalmobile`, rótulo da
+  foto "O QUE VEM DA FÁBRICA" e a faixa de números 1977 · 2 · 100%.
+- **Ambientes:** textos novos de cozinha, home office, banheiro, espaço gourmet,
+  quartos e sala; Caraguatatuba com texto **próprio** em quartos e sala (novo
+  campo `porUnidade`). 19 legendas trocadas (14 de SJC, 5 de Caraguá).
+- **/a-dalmobile:** abertura, fábrica, processo, materiais (com "Personalizar não
+  é adaptar."), números e FAQ na ordem da copy; pergunta de área própria de
+  cada site; Caraguá ganha "Não moro em Caraguatatuba…".
+- **/arquitetos:** abertura e blocos novos ("O que dá para especificar", "A
+  fábrica", crédito no formato do Dalmóbile Reconhece); saiu "Visita à fábrica".
+- **/a-loja:** texto novo, endereço no formato da copy, uma linha de WhatsApp
+  com o número (telefone e WhatsApp são o mesmo), faixa da outra loja com a
+  região.
+- **Metadata:** title e description de home, hub, ambientes, `/a-dalmobile`,
+  `/arquitetos` e `/a-loja` conforme a copy.
+
+### Saiu do site inteiro
+Garantia (seção, pergunta, número "6 anos", selo e meta descriptions), prazo, a
+pergunta "O projeto tem custo?" e o texto sobre marca do grupo. Varredura nos
+dois builds: zero ocorrência de garantia, certificado, maresia, "mar", sob
+medida, madeira maciça, transform, sonho, exclusiv, sofistica, alto padrão,
+grátis, gratuito, "6 anos", [CONFIRMAR e [CIDADE.
+
+### Dados e fotos
+- **Caraguatatuba com o próprio número:** (12) 99602-1234, `wa.me/5512996021234`.
+  Cada build só contém o número da sua unidade.
+- **Fotos sem móvel Dalmóbile, fora:** o nicho de mármore (SJC, banheiro) e o
+  lavabo de pedra (Caraguá, banheiro). Os arquivos continuam em `public/fotos/`.
+- **Caraguá sem banheiro:** sai do hub, de "Outros ambientes", de "Antes de vir"
+  e do sitemap; `/ambientes/banheiro` responde 301 para `/ambientes`. O hub de
+  Caraguá fica em 3 colunas iguais no desktop.
+- **Pendências com a loja:** de 4 para 1 (só a foto da fábrica).
+- `docs/direcao-site.md`: o edifício Calabassas é em Caraguatatuba.
+
+### Código
+`config/tipos.ts` ganhou `regiao`, `outraUnidade.regiao` e `textos`;
+`lib/texto.ts`, `{{regiao}}` e `{{outraRegiao}}`; o conteúdo de ambiente,
+`porUnidade` e `nomeNoTitulo`; o FAQ, `unidades`. Redirect 301 no Worker para
+ambiente que a unidade não publica. A allowlist do teste de cidade cruzada foi
+atualizada para as frases novas.
+
+### Verificado
+57/57 testes nas duas unidades; build dos dois alvos; `workerd` com todas as
+rotas em 200 (e o 301); seis larguras sem rolagem horizontal nas páginas que
+mudaram; maior linha 66 caracteres.
+
+---
+
 ## [não publicado] — 2026-10-02 · sem endereços de preview
 
 - `preview_urls: false` na configuração do Worker (`vite.config.ts`). Os

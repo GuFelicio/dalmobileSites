@@ -3,6 +3,20 @@
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
 
+import { AMBIENTES } from "../lib/ambientes.ts";
+import { ambientesDaUnidade } from "../lib/ambientes-da-unidade.ts";
+
+/**
+ * Ambientes da lista oficial (lib/ambientes.ts) que ESTA unidade não publica —
+ * hoje, o banheiro em Caraguatatuba, que ficou sem foto na copy v3. O endereço
+ * deles redireciona com 301 para o hub, em vez de dar 404: o Google e quem
+ * tinha o link vão para a página certa. Calculado dos dados, não escrito à
+ * mão: quando o ambiente voltar a ter foto, o redirecionamento some sozinho.
+ */
+const AMBIENTES_FORA_DO_SITE = new Set(
+  AMBIENTES.map((a) => a.slug).filter((slug) => !ambientesDaUnidade().some((a) => a.slug === slug)),
+);
+
 interface Env {
   ASSETS: Fetcher;
   IMAGES: {
@@ -38,6 +52,11 @@ const worker = {
           return result.response();
         },
       }, allowedWidths);
+    }
+
+    const ambiente = url.pathname.match(/^\/ambientes\/([^/]+)\/?$/);
+    if (ambiente && AMBIENTES_FORA_DO_SITE.has(ambiente[1])) {
+      return Response.redirect(new URL("/ambientes", url).toString(), 301);
     }
 
     return handler.fetch(request, env, ctx);

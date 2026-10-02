@@ -61,6 +61,17 @@ export type PaginaDeAmbiente = {
   chamadaFinal: string;
   /** O parágrafo do corpo. */
   texto: string;
+  /**
+   * Como o ambiente se chama no <title>, quando é diferente do nome
+   * ("Quartos e dormitórios"). Sem ele, vale `nome`.
+   */
+  nomeNoTitulo: string | null;
+  /**
+   * Texto próprio de uma unidade (copy v3: quartos e sala de Caraguá). O que
+   * estiver aqui substitui o padrão SÓ no site daquela unidade; o que faltar
+   * vem do padrão. Fica no mesmo arquivo para o texto não ser duplicado.
+   */
+  porUnidade: Partial<Record<UnidadeId, { chamada?: string; texto?: string; chamadaFinal?: string }>>;
   unidades: UnidadeId[];
   fotos: FotoDeAmbiente[];
 };
@@ -136,6 +147,23 @@ function lerArquivo(arquivo: string): PaginaDeAmbiente {
     };
   });
 
+  const porUnidade = (data.porUnidade ?? {}) as PaginaDeAmbiente["porUnidade"];
+  for (const [id, variante] of Object.entries(porUnidade)) {
+    if (id !== "sjc" && id !== "caragua") {
+      throw new Error(
+        `conteudo/ambientes/${arquivo}: porUnidade.${id} não é uma unidade (use sjc ou caragua).`,
+      );
+    }
+    for (const campo of Object.keys(variante ?? {})) {
+      if (!["chamada", "texto", "chamadaFinal"].includes(campo)) {
+        throw new Error(
+          `conteudo/ambientes/${arquivo}: porUnidade.${id}.${campo} não existe. ` +
+            `Só chamada, texto e chamadaFinal podem ser próprios de uma unidade.`,
+        );
+      }
+    }
+  }
+
   return {
     nome: exigir(data.nome, "nome", arquivo),
     slug,
@@ -145,6 +173,8 @@ function lerArquivo(arquivo: string): PaginaDeAmbiente {
     chamada: exigir(data.chamada, "chamada", arquivo),
     chamadaFinal: exigir(data.chamadaFinal, "chamadaFinal", arquivo),
     texto: exigir(content.trim() || null, "texto do corpo", arquivo),
+    nomeNoTitulo: data.nomeNoTitulo ?? null,
+    porUnidade,
     unidades,
     fotos,
   };
@@ -173,7 +203,7 @@ export function ambientesDe(id: UnidadeId): PaginaDeAmbiente[] {
   const ordem = AMBIENTES.map((a) => a.slug);
   return todosOsAmbientes()
     .filter((a) => a.unidades.includes(id))
-    .map((a) => ({ ...a, fotos: a.fotos.filter((f) => f.unidade === id) }))
+    .map((a) => ({ ...a, ...a.porUnidade[id], fotos: a.fotos.filter((f) => f.unidade === id) }))
     .filter((a) => a.fotos.length > 0)
     // A ORDEM É A DE lib/ambientes.ts, não a alfabética do sistema de
     // arquivos. É decisão editorial: cozinha e quartos são o que a loja tem

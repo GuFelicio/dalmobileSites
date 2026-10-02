@@ -43,10 +43,17 @@ const PAGINAS = [
 const MENCOES_DECLARADAS = [
   // O rótulo do link cruzado, que vem do config. Rodapé e página da loja.
   "Ver a loja de {outra}",
-  // Faixa da página da loja: nomear a região ajuda quem chegou na cidade errada.
-  "A Dalmóbile também atende a partir de {outra}",
-  // FAQ de /a-dalmobile: "Vocês atendem fora de <cidade>?"
-  "a loja de {outra} pode atender melhor",
+  // Faixa da página da loja (copy v3, B5 e C6): "No <região>, a Dalmóbile
+  // atende pela loja de <outra>." Nomear a região ajuda quem chegou na cidade
+  // errada.
+  "a Dalmóbile atende pela loja de {outra}",
+  // FAQ de /a-dalmobile, "Vocês atendem fora de <cidade>?" (copy v3, B4 e C5).
+  "quem atende é a loja de {outra}",
+  // Fecho de /a-dalmobile (copy v3, A7): a mesma frase nos dois sites, que
+  // nomeia as duas lojas. NÃO está na lista de menções que o roteiro da copy
+  // v3 permite — entrou porque a copy pede o texto literal. Decisão pendente
+  // do cliente: ver docs/decisoes.md, 02/10/2026.
+  "As lojas Dalmóbile de São José dos Campos e Caraguatatuba atendem o Vale do Paraíba e o litoral norte.",
 ];
 
 async function renderizar(rota) {

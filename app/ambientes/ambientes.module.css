@@ -42,8 +42,10 @@
 }
 
 @media (min-width: 1025px) {
+  /* 4 colunas; com menos de 4 ambientes, uma por ambiente (o page.tsx manda
+     o número em --colunas-grade-desktop). */
   .grade {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--colunas-grade-desktop, 4), 1fr);
   }
   .card { grid-column: span var(--colunas-desktop, 1); }
 }
