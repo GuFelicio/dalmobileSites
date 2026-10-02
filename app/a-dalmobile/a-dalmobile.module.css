@@ -1,25 +1,7 @@
 /* Institucional. Texto longo, medida curta, muito respiro.
    Ver app/a-dalmobile/page.tsx e a seção 7 do docs/direcao-site.md. */
 
-.titulo {
-  font-size: var(--fs-display-l);
-  font-weight: var(--peso-leve);
-  letter-spacing: var(--tr-display-l);
-  line-height: var(--lh-display-l);
-  margin: 0;
-}
-
-/* Dek de página: menor que o Subtítulo e na cor de apoio, para título, dek e
-   corpo não lerem como uma parede só (V2, direção de layout, seção 4.3). */
-.chamada {
-  font-size: var(--fs-dek);
-  font-weight: var(--peso-normal);
-  letter-spacing: var(--tr-subtitulo);
-  line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
-  max-width: var(--medida);
-  margin: var(--e-2) 0 0;
-}
+/* Título, dek e introdução: components/layout/PageHeader (V2, fase 3). */
 
 .secao {
   font-size: var(--fs-secao);
@@ -50,18 +32,22 @@
 
 /* ---- Processo -------------------------------------------------------- */
 
+/* A lista inteira na largura da coluna de texto: as réguas entre etapas
+   param onde o texto para (V2, direção de layout, 6.2). 2.5em a mais que a
+   medida é a coluna do número. */
 .processo {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   gap: var(--e-4);
-  counter-reset: etapa;
+  max-width: calc(var(--medida) + 2.5em);
 }
 
 .etapa {
   display: grid;
-  grid-template-columns: auto 1fr;
+  /* Coluna fixa para o número: 01 a 05 alinhados entre si. */
+  grid-template-columns: 2.5em 1fr;
   gap: var(--e-2);
   align-items: start;
   /* Escuro sobre o cinza claro da V2. Até a V1 eram fio e texto BRANCOS
@@ -70,14 +56,15 @@
   padding-top: var(--e-2);
 }
 
+/* 01–05 em 24px peso 300, na cor de apoio, com a mesma altura de linha do
+   título da etapa: o topo dos dois fica alinhado. Até a fase 2 eram rótulos
+   minúsculos flutuando acima da linha do título (direção de layout, 6.5). */
 .numero {
-  font-size: var(--fs-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: var(--tr-rotulo);
+  font-size: var(--fs-numero-etapa);
+  font-weight: var(--peso-leve);
+  line-height: var(--lh-subtitulo);
   color: var(--cinza-texto);
   font-variant-numeric: tabular-nums;
-  /* Alinha o número com a primeira linha do título, não com o topo da caixa. */
-  padding-top: 4px;
 }
 
 .etapaTitulo {
@@ -127,6 +114,12 @@
   .numeros {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* Número ímpar de itens em duas colunas: o último ocupa a linha toda, para
+     a grade não terminar com vão (V2, fase 3). */
+  .numeros li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -134,6 +127,9 @@
     grid-auto-flow: column;
     grid-template-columns: none;
   }
+
+  /* Em linha não há segunda linha para preencher. */
+  .numeros li:last-child:nth-child(odd) { grid-column: auto; }
 }
 
 .numeroValor {
@@ -158,10 +154,13 @@
 
 /* Aberta, não em acordeão: é seção indexável, e quem procura resposta não
    deve precisar clicar para achá-la. */
+/* Na largura da coluna de texto: as réguas entre perguntas param onde a
+   resposta para. */
 .faq {
   margin: 0;
   display: grid;
   gap: var(--e-3);
+  max-width: var(--medida);
 }
 
 .item {

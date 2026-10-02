@@ -236,6 +236,8 @@ e trocam sozinhos no mobile (até 600px):
 ```
 
 - `--e-secao` — nome antigo, hoje igual a `--respiro`. Não usar em código novo.
+- Duas `Section` seguidas na **mesma** superfície dividem o respiro (a segunda
+  perde o padding de cima): entre elas fica 120px, não 240.
 - `--e-margem` — margem lateral do texto no mobile: **20px**. A foto sangra até a borda; o texto mantém a margem.
 - `--pad-lateral` — margem lateral da **página**: `clamp(20px, 5vw, 80px)`. Cresce com a tela e nunca desce abaixo dos 20px do mobile. É o que `Section`, `Header`, `Footer` e `MobileMenu` usam para alinhar tudo na mesma calha vertical. Não invente outro recuo lateral: use este.
 - `--alt-cabecalho` — altura do cabeçalho: **88px**. Vale como offset de âncora e como altura da barra do `MobileMenu`, para o painel abrir alinhado ao cabeçalho que o cobre.
@@ -250,6 +252,25 @@ e trocam sozinhos no mobile (até 600px):
 - `--toque` (44px) é o alvo de toque mínimo, com espaço entre alvos vizinhos.
 - `--toque-menu` (48px) é o botão que abre e fecha o menu mobile: a única porta
   para a navegação no celular.
+
+### Cabeçalho de página
+
+`components/layout/PageHeader.tsx` — o gabarito de toda página interna:
+caminho de navegação → título em Display L → dek → introdução → régua de 1px
+na largura da coluna de texto. Vai como primeiro conteúdo de uma `Section`
+papel; depois dela vem o respiro normal.
+
+```tsx
+<Section superficie="papel">
+  <PageHeader caminho={[{ rotulo: "Ambientes", href: "/ambientes" }]} titulo="Cozinha" dek={chamada}>
+    <p>{texto}</p>
+  </PageHeader>
+</Section>
+```
+
+**Régua nunca mais larga que o texto que separa.** Lista com fio entre itens
+ganha `max-width` da coluna de texto; bloco de duas colunas para onde o texto
+para.
 
 ### Grade editorial
 

@@ -19,6 +19,7 @@ import { notFound } from "next/navigation";
 
 import { Footer } from "../../../components/layout/Footer";
 import { Header } from "../../../components/layout/Header";
+import { PageHeader } from "../../../components/layout/PageHeader";
 import { Section } from "../../../components/layout/Section";
 import Foto from "../../../components/midia/Foto";
 import { unidade } from "../../../config/derivados.ts";
@@ -61,20 +62,13 @@ export default async function PaginaDeAmbiente({ params }: Props) {
       <Header superficie="papel" />
 
       <Section superficie="papel">
-        <nav aria-label="Caminho de navegação" className={estilos.caminho}>
-          <ol>
-            <li>
-              <Link href="/ambientes">Ambientes</Link>
-            </li>
-            <li aria-current="page">{ambiente.nome}</li>
-          </ol>
-        </nav>
-
-        <h1 className={estilos.titulo}>{ambiente.nome}</h1>
-        <p className={estilos.chamada}>{ambiente.chamada}</p>
-        <div className={estilos.texto}>
+        <PageHeader
+          caminho={[{ rotulo: "Ambientes", href: "/ambientes" }]}
+          titulo={ambiente.nome}
+          dek={ambiente.chamada}
+        >
           <p>{ambiente.texto}</p>
-        </div>
+        </PageHeader>
       </Section>
 
       {/* Galeria: uma foto por bloco, grande, com o título abaixo.

@@ -1,12 +1,20 @@
 /* Página do showroom. Superfície papel: o texto manda.
    Ver app/a-loja/page.tsx e a seção 9 do docs/direcao-site.md. */
 
-.titulo {
-  font-size: var(--fs-display-l);
-  font-weight: var(--peso-leve);
-  letter-spacing: var(--tr-display-l);
-  line-height: var(--lh-display-l);
-  margin: 0;
+/* Título, dek e introdução: components/layout/PageHeader (V2, fase 3). */
+
+/* A foto que sangra entre o cabeçalho e os dados. 21:9: faixa baixa, para o
+   endereço continuar perto do topo. */
+.faixa {
+  display: block;
+  margin-top: var(--respiro-curto);
+  aspect-ratio: 21 / 9;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .faixa { aspect-ratio: 4 / 3; }
 }
 
 .subtitulo {
@@ -16,32 +24,12 @@
   margin: 0 0 var(--e-3);
 }
 
-/* Dek de página: menor que o Subtítulo e na cor de apoio, para título, dek e
-   corpo não lerem como uma parede só (V2, direção de layout, seção 4.3). */
-.chamada {
-  font-size: var(--fs-dek);
-  font-weight: var(--peso-normal);
-  letter-spacing: var(--tr-subtitulo);
-  line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
-  max-width: var(--medida);
-  margin: var(--e-2) 0 0;
-}
-
-.intro {
-  font-size: var(--fs-texto);
-  line-height: var(--lh-texto);
-  max-width: var(--medida); /* 62 a 66 caracteres */
-  margin: var(--e-2) 0 0;
-  color: var(--cinza-texto);
-}
-
 /* Duas colunas no desktop. Empilhado abaixo disso, com os DADOS primeiro:
    quem abre esta página no telefone quer o endereço, não o mapa. */
 .colunas {
   display: grid;
   gap: var(--e-4);
-  margin-top: var(--e-4);
+  margin-top: var(--respiro-curto);
 }
 
 @media (min-width: 1025px) {

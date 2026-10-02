@@ -15,6 +15,7 @@ import Link from "next/link";
 
 import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
+import { PageHeader } from "../../components/layout/PageHeader";
 import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
 import { unidade } from "../../config/derivados.ts";
@@ -31,45 +32,90 @@ export const metadata: Metadata = metadataDaPagina({
   foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
 });
 
+/**
+ * Quantas colunas cada item ocupa, para a grade NUNCA terminar com vão
+ * (V2, direção de layout, 6.3). O primeiro item ocupa `primeiro` colunas; se a
+ * conta não fechar a última linha, o último item estica até a borda.
+ * Feito por conta, e não por CSS fixo, para continuar sem vão quando a loja
+ * ganhar ou perder um ambiente.
+ */
+function colunasPorItem(total: number, colunas: number, primeiro: number): number[] {
+  if (total === 1) return [colunas];
+  const spans = Array.from({ length: total }, (_, i) => (i === 0 ? primeiro : 1));
+  const resto = (primeiro + total - 1) % colunas;
+  if (resto !== 0) spans[total - 1] += colunas - resto;
+  return spans;
+}
+
 export default function HubDeAmbientes() {
   const ambientes = ambientesDaUnidade();
+
+  // Muito acervo (SJC, 7): grade assimétrica, o primeiro em destaque 16:9 e os
+  // outros em 4:3 — 2 colunas no celular, 3 no tablet, 4 no desktop, como o
+  // CLAUDE.md manda. Pouco acervo (Caraguá, 4): duas colunas de fotos grandes
+  // em toda largura — menos acervo pede foto maior, não grade mais vazia.
+  const poucos = ambientes.length <= 4;
+  const grade = poucos
+    ? { celular: colunasPorItem(ambientes.length, 2, 1), tablet: colunasPorItem(ambientes.length, 2, 1), desktop: colunasPorItem(ambientes.length, 2, 1) }
+    : { celular: colunasPorItem(ambientes.length, 2, 2), tablet: colunasPorItem(ambientes.length, 3, 3), desktop: colunasPorItem(ambientes.length, 4, 2) };
 
   return (
     <>
       <Header superficie="papel" />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>Ambientes</h1>
         {/* Dizer que NÃO há render é mais forte do que dizer que as fotos são
             de projetos executados: nomeia o que a concorrência faz. */}
-        <p className={estilos.intro}>
-          Cada ambiente resolve um problema diferente de marcenaria. As fotos abaixo são de
-          projetos que a Dalmóbile desenhou, fabricou e instalou — nenhum render, nenhuma
-          imagem de banco.
-        </p>
+        <PageHeader titulo="Ambientes">
+          <p>
+            Cada ambiente resolve um problema diferente de marcenaria. As fotos abaixo são de
+            projetos que a Dalmóbile desenhou, fabricou e instalou — nenhum render, nenhuma
+            imagem de banco.
+          </p>
+        </PageHeader>
+      </Section>
 
-        <ul className={estilos.grade}>
-          {ambientes.map((ambiente, i) => (
-            <li key={ambiente.slug} className={estilos.card}>
-              <Link href={`/ambientes/${ambiente.slug}`} className={estilos.cardLink}>
-                <div className={estilos.cardFoto}>
-                  <Foto
-                    src={ambiente.fotos[0].src}
-                    alt={ambiente.fotos[0].alt}
-                    /* Grade 2/3/4 colunas: a foto ocupa ~metade, ~um terço e
-                       ~um quarto da largura em cada faixa. */
-                    sizes="(max-width: 600px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    prioridade={i < 4}
-                    className={estilos.cardImg}
-                  />
-                </div>
-                <span className={estilos.cardNome}>{ambiente.nome}</span>
-                <span className={estilos.cardContagem}>
-                  {ambiente.fotos.length === 1 ? "1 foto" : `${ambiente.fotos.length} fotos`}
-                </span>
-              </Link>
-            </li>
-          ))}
+      <Section superficie="papel">
+        <ul className={`${estilos.grade} ${poucos ? estilos.poucos : estilos.destaque}`}>
+          {ambientes.map((ambiente, i) => {
+            const emDestaque = !poucos && i === 0;
+            return (
+              <li
+                key={ambiente.slug}
+                className={`${estilos.card} ${emDestaque ? estilos.cardDestaque : ""}`}
+                // As colunas de cada item, por faixa de largura. O CSS lê
+                // estas variáveis nas media queries de ambientes.module.css.
+                style={
+                  {
+                    "--colunas-celular": grade.celular[i],
+                    "--colunas-tablet": grade.tablet[i],
+                    "--colunas-desktop": grade.desktop[i],
+                  } as React.CSSProperties
+                }
+              >
+                <Link href={`/ambientes/${ambiente.slug}`} className={estilos.cardLink}>
+                  <div className={estilos.cardFoto}>
+                    <Foto
+                      src={ambiente.fotos[0].src}
+                      alt={ambiente.fotos[0].alt}
+                      sizes={
+                        poucos
+                          ? "50vw"
+                          : emDestaque
+                            ? "(max-width: 1024px) 100vw, 50vw"
+                            : "(max-width: 600px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      }
+                      prioridade={i < 4}
+                      className={estilos.cardImg}
+                    />
+                  </div>
+                  {/* Só o nome. A contagem de fotos ("3 FOTOS") saiu na V2: lia
+                      como inventário, não como portfólio. */}
+                  <span className={estilos.cardNome}>{ambiente.nome}</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </Section>
 

@@ -8,6 +8,48 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [V2 · fase 3] — 2026-10-02 · páginas internas
+
+Branch `v2-layout`. `/ambientes`, `/ambientes/[slug]`, `/a-dalmobile`,
+`/arquitetos`, `/a-loja`, `/privacidade`. **Nenhuma frase da copy mudou**
+(diff do texto renderizado das 7 páginas, nas duas unidades): entrou o
+caminho de navegação ("Início / …") e saiu a contagem de fotos do hub.
+
+### O gabarito
+
+- **`PageHeader`** (novo, `components/layout/`): caminho de navegação → título
+  em Display L → dek na cor de apoio → introdução → régua de 1px **da largura
+  da coluna de texto**. Substitui o título, o dek e a introdução que estavam
+  copiados em seis páginas, cada uma com o próprio CSS.
+- **O buraco entre seções não era só de `/arquitetos`.** Duas `Section` seguidas
+  na mesma superfície somavam os paddings (240px). Agora dividem: 120px. A
+  correção está em `Section`, e vale para toda página.
+
+### Por página
+
+- **`/ambientes`:** grade sem vão em nenhuma largura. As colunas de cada item
+  saem de uma conta no `page.tsx` — o primeiro em destaque, o último estica se
+  a linha não fechar —, então continua sem vão quando a loja ganhar ou perder
+  um ambiente. SJC (7): destaque 16:9 em duas colunas, 2/3/4 colunas por
+  largura. Caraguá (4): duas colunas de fotos grandes. Saiu "3 fotos".
+- **`/arquitetos`:** a grade 2×2 com fio em volta virou lista editorial — quatro
+  blocos empilhados, título à esquerda, texto à direita, régua entre eles até o
+  fim do texto. Ganhou uma foto do acervo sangrando.
+- **`/a-dalmobile`:** números de "O processo" em 24px peso 300, alinhados ao
+  topo do título da etapa; réguas do processo e do FAQ na largura do texto; a
+  faixa de três números sem vão no tablet.
+- **`/a-loja`:** foto 21:9 sangrando entre o cabeçalho e os dados.
+- **`/privacidade`:** a data de atualização virou o dek do cabeçalho.
+
+### Verificado, por medição no navegador
+
+Nas duas unidades, 6 páginas × 6 larguras: nenhuma régua mais larga que o
+texto que separa, nenhuma grade terminando com vão, nenhuma rolagem
+horizontal, maior linha 66 caracteres, menor contraste de cabeçalho 15,2:1.
+58/58 testes; lint e `tsc` limpos; `workerd` com todas as rotas em 200.
+
+---
+
 ## [V2] — 2026-10-02 · tracking e paleta do `CLAUDE.md`
 
 - **Tracking afrouxado:** Display XL −0.045em (era −0.065), Display L −0.03em

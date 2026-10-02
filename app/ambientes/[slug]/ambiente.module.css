@@ -1,55 +1,7 @@
 /* Página do ambiente. Ver app/ambientes/[slug]/page.tsx e a seção 6.2
    do docs/direcao-site.md. */
 
-.caminho ol {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--e-1);
-  list-style: none;
-  margin: 0 0 var(--e-3);
-  padding: 0;
-  font-size: var(--fs-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: var(--tr-rotulo);
-  text-transform: uppercase;
-  color: var(--cinza-texto);
-}
-
-.caminho li + li::before {
-  content: "/";
-  margin-right: var(--e-1);
-  color: var(--cinza-clr);
-}
-
-.caminho a:hover { color: var(--preto); }
-
-.titulo {
-  font-size: var(--fs-display-l);
-  font-weight: var(--peso-leve);
-  letter-spacing: var(--tr-display-l);
-  line-height: var(--lh-display-l);
-  margin: 0;
-}
-
-/* Dek de página: menor que o Subtítulo e na cor de apoio, para título, dek e
-   corpo não lerem como uma parede só (V2, direção de layout, seção 4.3). */
-.chamada {
-  font-size: var(--fs-dek);
-  font-weight: var(--peso-normal);
-  letter-spacing: var(--tr-subtitulo);
-  line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
-  max-width: var(--medida);
-  margin: var(--e-2) 0 0;
-}
-
-.texto p {
-  font-size: var(--fs-texto);
-  line-height: var(--lh-texto);
-  max-width: var(--medida); /* 62 a 66 caracteres */
-  margin: var(--e-3) 0 0;
-  color: var(--cinza-texto);
-}
+/* Caminho, título, dek e texto: components/layout/PageHeader (V2, fase 3). */
 
 /* ---- Galeria -------------------------------------------------------- */
 

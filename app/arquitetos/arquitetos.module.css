@@ -1,25 +1,7 @@
 /* Página de parceria com arquitetos. Superfície papel.
    Ver app/arquitetos/page.tsx e a seção 8 do docs/direcao-site.md. */
 
-.titulo {
-  font-size: var(--fs-display-l);
-  font-weight: var(--peso-leve);
-  letter-spacing: var(--tr-display-l);
-  line-height: var(--lh-display-l);
-  margin: 0;
-}
-
-/* Dek de página: menor que o Subtítulo e na cor de apoio, para título, dek e
-   corpo não lerem como uma parede só (V2, direção de layout, seção 4.3). */
-.chamada {
-  font-size: var(--fs-dek);
-  font-weight: var(--peso-normal);
-  letter-spacing: var(--tr-subtitulo);
-  line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
-  max-width: var(--medida);
-  margin: var(--e-2) 0 0;
-}
+/* Título, dek e introdução: components/layout/PageHeader (V2, fase 3). */
 
 .secao {
   font-size: var(--fs-secao);
@@ -28,44 +10,60 @@
   margin: 0 0 var(--e-3);
 }
 
-.texto {
-  max-width: var(--medida); /* 62 a 66 caracteres */
+/* A foto que sangra (.bleed): entre a introdução e a parceria. */
+.foto {
+  display: block;
+  margin-top: var(--respiro-curto);
+  aspect-ratio: 21 / 9;
+  height: auto;
+  object-fit: cover;
 }
 
-.texto p {
-  font-size: var(--fs-texto);
-  line-height: var(--lh-texto);
-  margin: var(--e-2) 0 0;
+/* No celular, 21:9 viraria uma tira de 167px. */
+@media (max-width: 600px) {
+  .foto { aspect-ratio: 4 / 3; }
 }
 
 /* ---- Blocos da parceria ---------------------------------------------- */
 
+/* Quatro blocos empilhados, régua de 1px entre eles. Era uma grade 2×2 com
+   fio em volta — o molecular mais genérico que existe (direção, 6.4). */
 .blocos {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: var(--e-4);
-}
-
-/* Dois por linha a partir do tablet: são blocos curtos, e uma coluna só
-   deixaria a página comprida demais para o pouco texto que cada um tem. */
-@media (min-width: 601px) {
-  .blocos {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--e-4) var(--e-3);
-  }
 }
 
 .bloco {
-  border-top: var(--fio) solid var(--cinza-clr);
-  padding-top: var(--e-2);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e-1);
+  padding-block: var(--e-4);
+}
+
+/* Régua ENTRE os blocos, não em volta. */
+.bloco + .bloco { border-top: var(--fio) solid var(--cinza-clr); }
+
+.bloco:first-child { padding-top: 0; }
+
+/* A partir de 821px: o bloco ocupa 9 das 12 colunas da página — título em 3,
+   texto em 6 — e a régua vai até o fim do texto, não da página. */
+@media (min-width: 821px) {
+  .bloco {
+    /* 9 de 12 colunas, mas nunca mais largo que o texto: a coluna do texto
+       para na medida de leitura, e o bloco (com a régua) para junto. Sem o
+       min(), em 1920px a régua passava 275px do fim do texto. */
+    max-width: min(75%, calc(var(--medida) * 1.5 + var(--e-4)));
+    grid-template-columns: 1fr 2fr; /* 3 colunas : 6 colunas */
+    gap: var(--e-4);
+  }
 }
 
 .blocoTitulo {
   font-size: var(--fs-subtitulo);
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
   margin: 0;
 }
 
@@ -73,7 +71,7 @@
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
   max-width: var(--medida);
-  margin: var(--e-1) 0 0;
+  margin: 0;
   color: var(--cinza-texto);
 }
 

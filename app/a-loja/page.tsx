@@ -22,6 +22,7 @@ import Link from "next/link";
 
 import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
+import { PageHeader } from "../../components/layout/PageHeader";
 import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
 import {
@@ -52,6 +53,9 @@ export default function ALoja() {
   const ambientes = ambientesDaUnidade();
   // Sem foto de fachada no acervo, a abertura usa a melhor foto de ambiente.
   const foto = escolherFoto(ambientes, ["sala-de-estar", "cozinha"], 0);
+  // A foto que sangra entre o cabeçalho e os dados (V2, fase 3). Outra foto,
+  // para não repetir a que entra no lugar do mapa quando ele falta.
+  const fotoFaixa = escolherFoto(ambientes, ["quartos", "cozinha"], 2);
 
   return (
     <>
@@ -65,16 +69,29 @@ export default function ALoja() {
       />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>Showroom {unidade.cidade}</h1>
         {/* A versão anterior estava certa na ideia e vaga na execução. Esta
             LISTA o que só o showroom resolve: quem é do ramo reconhece os
             quatro, quem não é entende na hora por que vale a visita. */}
-        <p className={estilos.chamada}>Venha ver de perto o que a foto não resolve.</p>
-        <p className={estilos.intro}>
-          Acabamento se decide na mão: a cor sob a luz do ambiente, a textura da borda, o peso
-          da ferragem, o ruído da corrediça ao fechar. No showroom tudo isso está montado. Se
-          puder, traga a planta do imóvel — a conversa anda muito mais rápido.
-        </p>
+        <PageHeader
+          titulo={`Showroom ${unidade.cidade}`}
+          rotuloNoCaminho="A loja"
+          dek="Venha ver de perto o que a foto não resolve."
+        >
+          <p>
+            Acabamento se decide na mão: a cor sob a luz do ambiente, a textura da borda, o peso
+            da ferragem, o ruído da corrediça ao fechar. No showroom tudo isso está montado. Se
+            puder, traga a planta do imóvel — a conversa anda muito mais rápido.
+          </p>
+        </PageHeader>
+
+        {fotoFaixa ? (
+          <Foto
+            src={fotoFaixa.src}
+            alt={fotoFaixa.alt}
+            sizes="100vw"
+            className={`${estilos.faixa} bleed`}
+          />
+        ) : null}
 
         <div className={estilos.colunas}>
           {/* Duas colunas no desktop, empilhadas abaixo — a direção pede foto

@@ -152,6 +152,33 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · V2, fase 3: gabarito de página e grade por conta
+
+**Decisões.**
+- **Um componente de cabeçalho de página (`PageHeader`)** para toda interna, em
+  vez de título, dek e introdução copiados em seis arquivos. A régua fecha o
+  cabeçalho, na largura da coluna de texto. A introdução fica ANTES da régua:
+  ela é parte da abertura, e separá-la do título por 120px a deixaria órfã.
+- **"Início" no começo do caminho de navegação.** A direção pede o caminho como
+  rótulo; o primeiro passo precisa de um nome, e "Início" é o que o leitor
+  reconhece. É a única palavra nova nas internas.
+- **Seções seguidas na mesma superfície dividem o respiro** (regra em
+  `Section`). O "buraco de ~200px" de `/arquitetos` era isso, e estava em toda
+  interna.
+- **A grade de `/ambientes` é calculada**, não fixa no CSS: o primeiro item em
+  destaque, o último esticando quando a linha não fecha. Com CSS fixo, a grade
+  de 7 sem vão abriria vão no dia em que a loja tivesse 8 ambientes. Até 4
+  ambientes, vira duas colunas de fotos grandes.
+- **Régua encolhe até o texto** (opção b da direção, 6.2) em vez de pôr
+  conteúdo na coluna da direita. A direção admite as duas; a (a) exigiria
+  "frase destacada puxada do texto", que repete copy.
+
+**Descartado.** Grade de `/ambientes` em CSS fixo (abre vão com outro número de
+ambientes) e `subgrid` na lista de `/arquitetos` (mesmo resultado com 3:6
+dentro do bloco, com menos risco em navegador antigo).
+
+---
+
 ## 2026-10-02 · Tracking afrouxado; a paleta do `CLAUDE.md` passa a ser a da V1
 
 **Tracking.** Display XL de −0.065em para **−0.045em**, Display L de −0.055em

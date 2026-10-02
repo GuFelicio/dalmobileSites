@@ -139,6 +139,10 @@
   --fs-numero: 40px;
   --fs-numero-legenda: 12.5px;
 
+  /* Número da etapa em "O processo" (/a-dalmobile): 24px peso 300.
+     Direção de layout, seção 6.5. */
+  --fs-numero-etapa: 24px;
+
   /* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em
      largura total.
      34em e não 64ch: `ch` é a largura do algarismo 0, mais largo que a letra

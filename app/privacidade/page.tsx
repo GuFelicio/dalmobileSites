@@ -17,6 +17,7 @@ import Link from "next/link";
 
 import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
+import { PageHeader } from "../../components/layout/PageHeader";
 import { Section } from "../../components/layout/Section";
 import { enderecoEmLinha, linkTelefone, unidade } from "../../config/derivados.ts";
 import { metadataDaPagina } from "../../lib/seo.ts";
@@ -39,11 +40,14 @@ export default function Privacidade() {
       <Header superficie="papel" />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>Política de privacidade</h1>
         {/* Data FIXA, da última alteração real do texto. Não usar a data de hoje:
             a página se atualizaria sozinha todo dia e perderia a função.
             Mudou o texto? mude esta data junto. */}
-        <p className={estilos.atualizado}>Atualizada em 9 de setembro de 2026.</p>
+        <PageHeader
+          titulo="Política de privacidade"
+          rotuloNoCaminho="Privacidade"
+          dek="Atualizada em 9 de setembro de 2026."
+        />
 
         <div className={estilos.texto}>
           <h2>Quem somos</h2>

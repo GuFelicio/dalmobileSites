@@ -10,6 +10,17 @@
   padding-inline: var(--pad-lateral);
 }
 
+/* Duas seções seguidas na MESMA superfície dividem o respiro, não somam: sem
+   isto, o padding de baixo de uma e o de cima da outra davam 240px — o
+   "buraco de ~200px" de /arquitetos (direção de layout, seção 6), que na
+   verdade estava em toda página interna. Entre seções da mesma superfície
+   fica o respiro normal, 120px. */
+.preto + .preto,
+.papel + .papel,
+.cinza + .cinza {
+  padding-top: 0;
+}
+
 /* Respiro longo (180px / 96px) embaixo da seção: antes de uma troca de
    superfície, ou antes da seção mais importante da página. Nunca em duas
    seções seguidas. */

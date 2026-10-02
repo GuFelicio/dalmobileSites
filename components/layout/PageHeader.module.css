@@ -1,0 +1,82 @@
+/* Cabeçalho de página das internas. Ver components/layout/PageHeader.tsx.
+   Tudo à esquerda, na coluna de texto. */
+
+.cabecalho {
+  /* As medidas em em abaixo (a régua, a medida de leitura) contam a partir
+     do corpo de texto, não do título. */
+  font-size: var(--fs-texto);
+}
+
+/* Caminho de navegação em Rótulo: Início / Ambientes / Cozinha. */
+.caminho ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-1);
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  text-transform: uppercase;
+  color: var(--cinza-texto);
+}
+
+.caminho li + li::before {
+  content: "/";
+  margin-right: var(--e-1);
+  color: var(--cinza-clr);
+}
+
+/* Alvo de toque: o caminho é link, e no celular fica colado ao título. */
+.caminho a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+  border-bottom: var(--fio) solid transparent;
+  transition: border-color var(--mov-fio) ease, color var(--mov-fio) ease;
+}
+
+.caminho a:hover {
+  color: var(--preto);
+  border-bottom-color: currentColor;
+}
+
+.caminho li[aria-current] {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+}
+
+.titulo {
+  margin-top: var(--e-2);
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+}
+
+/* Dek: menor que o Subtítulo e na cor de apoio (V2, fase 1). */
+.dek {
+  margin-top: var(--e-2);
+  max-width: var(--medida);
+  font-size: var(--fs-dek);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  color: var(--cinza-texto);
+}
+
+.intro {
+  margin-top: var(--e-3);
+  max-width: var(--medida);
+  color: var(--cinza-texto);
+}
+
+.intro p + p { margin-top: var(--e-2); }
+
+/* A régua da largura da coluna de texto, nunca da página. */
+.regua {
+  margin: var(--e-4) 0 0;
+  max-width: var(--medida);
+  border: 0;
+  border-top: var(--fio) solid var(--cinza-clr);
+}

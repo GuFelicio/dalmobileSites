@@ -20,9 +20,11 @@ import Link from "next/link";
 
 import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
+import { PageHeader } from "../../components/layout/PageHeader";
 import { Section } from "../../components/layout/Section";
+import Foto from "../../components/midia/Foto";
 import { linkWhatsApp, unidade } from "../../config/derivados.ts";
-import { ambientesDaUnidade } from "../../lib/ambientes-da-unidade.ts";
+import { ambientesDaUnidade, escolherFoto } from "../../lib/ambientes-da-unidade.ts";
 import { metadataDaPagina } from "../../lib/seo.ts";
 import { ehPendente } from "../../config/pendente.ts";
 import { institucional } from "../../lib/conteudo.ts";
@@ -45,31 +47,41 @@ export default function Arquitetos() {
   const parceria = d.parceria ?? [];
   const parceiros = d.parceiros ?? [];
   const whatsapp = linkWhatsApp();
+  // Uma foto de projeto executado, sangrando de ponta a ponta. Arquiteto lê
+  // marcenaria pela foto antes de ler o texto. A lista cai para o que a
+  // unidade tiver: Caraguá não tem home office.
+  const foto = escolherFoto(ambientesDaUnidade(), ["home-office", "sala-de-estar", "cozinha"], 1);
 
   return (
     <>
       <Header superficie="papel" />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>{comCidade(pagina.titulo)}</h1>
-        <p className={estilos.chamada}>{comCidade(pagina.chamada)}</p>
-        <div className={estilos.texto}>
+        <PageHeader titulo={comCidade(pagina.titulo)} dek={comCidade(pagina.chamada)}>
           <p>{comCidade(d.abertura)}</p>
-        </div>
+        </PageHeader>
+        {foto ? (
+          <Foto src={foto.src} alt={foto.alt} sizes="100vw" className={`${estilos.foto} bleed`} />
+        ) : null}
       </Section>
 
       <Section superficie="papel">
         <h2 className={estilos.secao}>Como funciona a parceria</h2>
+        {/* Lista editorial, não grade de cards: quatro blocos empilhados em
+            largura cheia, régua entre eles, título à esquerda e texto à
+            direita (V2, direção de layout, 6.4). */}
         <ul className={estilos.blocos}>
           {parceria.map((bloco) => (
             <li key={bloco.titulo} className={estilos.bloco}>
               <h3 className={estilos.blocoTitulo}>{bloco.titulo}</h3>
-              <p className={estilos.blocoTexto}>{comCidade(bloco.texto)}</p>
-              {/* Prazo de resposta é compromisso com um escritório. Sem
-                  confirmação da loja, não vai ao ar. */}
-              {bloco.prazo && !ehPendente(bloco.prazo) ? (
-                <p className={estilos.prazo}>{bloco.prazo}</p>
-              ) : null}
+              <div className={estilos.blocoCorpo}>
+                <p className={estilos.blocoTexto}>{comCidade(bloco.texto)}</p>
+                {/* Prazo de resposta é compromisso com um escritório. Sem
+                    confirmação da loja, não vai ao ar. */}
+                {bloco.prazo && !ehPendente(bloco.prazo) ? (
+                  <p className={estilos.prazo}>{bloco.prazo}</p>
+                ) : null}
+              </div>
             </li>
           ))}
         </ul>

@@ -1,26 +1,12 @@
 /* Política de privacidade. Texto corrido em superfície papel. */
 
-.titulo {
-  font-size: var(--fs-display-l);
-  font-weight: var(--peso-leve);
-  letter-spacing: var(--tr-display-l);
-  line-height: var(--lh-display-l);
-  margin: 0;
-}
-
-.atualizado {
-  font-size: var(--fs-rotulo);
-  font-weight: var(--peso-forte);
-  letter-spacing: var(--tr-rotulo);
-  text-transform: uppercase;
-  color: var(--cinza-texto);
-  margin: var(--e-2) 0 0;
-}
+/* Título e data: components/layout/PageHeader (V2, fase 3). */
 
 /* Texto corrido nunca em largura total: medida de 62 a 66 caracteres. */
 .texto {
   max-width: var(--medida);
-  margin-top: var(--e-4);
+  /* Depois da régua do cabeçalho, o respiro normal (direção de layout, 6.1). */
+  margin-top: var(--respiro);
 }
 
 .texto h2 {

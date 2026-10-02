@@ -20,6 +20,7 @@ import Link from "next/link";
 
 import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
+import { PageHeader } from "../../components/layout/PageHeader";
 import { Section } from "../../components/layout/Section";
 import Foto from "../../components/midia/Foto";
 import { unidade } from "../../config/derivados.ts";
@@ -56,11 +57,9 @@ export default function ADalmobile() {
       <Header superficie="papel" />
 
       <Section superficie="papel">
-        <h1 className={estilos.titulo}>{comCidade(pagina.titulo)}</h1>
-        <p className={estilos.chamada}>{comCidade(pagina.chamada)}</p>
-        <div className={estilos.texto}>
+        <PageHeader titulo={comCidade(pagina.titulo)} dek={comCidade(pagina.chamada)}>
           <p>{comCidade(d.abertura)}</p>
-        </div>
+        </PageHeader>
       </Section>
 
       <Section superficie="papel">

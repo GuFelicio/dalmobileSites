@@ -1,56 +1,65 @@
 /* Hub de ambientes. Superfície papel: o texto manda.
-   Ver app/ambientes/page.tsx e a seção 6.1 do docs/direcao-site.md. */
+   Ver app/ambientes/page.tsx e a seção 6.3 da direção de layout.
+   Título e introdução: components/layout/PageHeader (V2, fase 3). */
 
-.titulo {
-  font-size: var(--fs-display-l);
-  font-weight: var(--peso-leve);
-  letter-spacing: var(--tr-display-l);
-  line-height: var(--lh-display-l);
-  margin: 0;
-}
-
-.intro {
-  font-size: var(--fs-texto);
-  line-height: var(--lh-texto);
-  max-width: var(--medida); /* 62 a 66 caracteres */
-  margin: var(--e-2) 0 0;
-  color: var(--cinza-texto);
-}
-
-/* Grade 2/3/4 colunas. Card pequeno funciona aqui: são rótulos com foto de
-   apoio, não peças de portfólio — por isso não vale a regra de 2 colunas
-   dos projetos. */
+/* A grade. Quantas colunas cada item ocupa vem do page.tsx, em variáveis
+   (--colunas-celular, --colunas-tablet, --colunas-desktop): é a conta que
+   garante que nenhuma linha termina com vão. */
 .grade {
   list-style: none;
-  margin: var(--e-4) 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--e-3) var(--e-2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--e-4) var(--e-2);
 }
 
+.card { grid-column: span var(--colunas-celular, 1); }
+
+/* Muito acervo (SJC): 2 colunas no celular, 3 no tablet, 4 no desktop — a
+   tabela de responsividade do CLAUDE.md. O primeiro ocupa a linha toda no
+   celular e no tablet, e duas colunas no desktop. */
 @media (min-width: 601px) {
-  .grade {
-    grid-template-columns: repeat(3, 1fr);
+  .destaque {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--e-4) var(--e-3);
   }
+  .destaque .card { grid-column: span var(--colunas-tablet, 1); }
 }
 
 @media (min-width: 1025px) {
-  .grade {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .destaque { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .destaque .card { grid-column: span var(--colunas-desktop, 1); }
 }
 
-.cardLink {
-  display: block;
+/* Pouco acervo (Caraguá): duas colunas de fotos grandes em toda largura. */
+@media (min-width: 601px) {
+  .poucos { gap: var(--respiro-curto) var(--e-4); }
 }
 
-/* 4:3, conforme a direção. */
+.cardLink { display: block; }
+
+/* 4:3 em todos; o destaque em 16:9 a partir do desktop, onde ele ocupa duas
+   colunas e a foto 4:3 ficaria alta demais ao lado das vizinhas. */
 .cardFoto {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--c-papel-baixo);
+}
+
+@media (min-width: 1025px) {
+  .cardDestaque .cardFoto { aspect-ratio: 16 / 9; }
+}
+
+/* Desktop: a foto de cada card cresce até a altura da linha. Na primeira
+   linha, as vizinhas do destaque (16:9 em duas colunas, mais alto que um
+   4:3) esticam até a altura dele, num recorte um pouco mais vertical — sem
+   isso sobrava um bloco vazio acima delas. Nas outras linhas, todas têm a
+   mesma altura e o 4:3 vale. */
+@media (min-width: 1025px) {
+  .destaque .card { display: flex; }
+  .destaque .cardLink { display: flex; flex-direction: column; width: 100%; }
+  .destaque .cardFoto { flex: 1 0 auto; }
 }
 
 .cardImg {
@@ -61,9 +70,7 @@
   transition: transform var(--mov-hover) var(--mov-ease);
 }
 
-.cardLink:hover .cardImg {
-  transform: scale(1.02);
-}
+.cardLink:hover .cardImg { transform: scale(1.02); }
 
 .cardNome {
   display: block;
@@ -74,13 +81,13 @@
   margin-top: var(--e-2);
 }
 
-.cardContagem {
-  display: block;
-  font-size: var(--fs-rotulo);
-  letter-spacing: var(--tr-rotulo);
-  text-transform: uppercase;
-  color: var(--cinza-texto);
-  margin-top: 4px; /* meia unidade: a contagem é apoio do nome, não item novo */
+/* Com fotos grandes, o nome sobe para Subtítulo: rótulo de 10.5px embaixo de
+   uma foto de 600px some. */
+.poucos .cardNome {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  text-transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
