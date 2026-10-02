@@ -21,6 +21,13 @@
   color: var(--cinza-clr);
 }
 
+/* Alvo de toque de 44px: o link do caminho tinha 14px de altura. */
+.caminho a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque);
+}
+
 .caminho a:hover { color: var(--preto); }
 
 .titulo {

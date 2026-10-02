@@ -8,6 +8,30 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-02 · ajustes de layout, fase 1: defeitos
+
+Sobre a V1. Nenhuma mudança de layout, nenhuma cor da paleta alterada (o diff
+de `tokens.css` só acrescenta os dois fios do cabeçalho, que são cores da
+paleta com transparência), nenhum texto alterado.
+
+- **Cabeçalho:** sobre papel, fundo da própria superfície da página e fio da
+  tinta a 12%; sobre preto, texto em papel `#F9F8F5` e fio do papel a 14%.
+  Transparente só sobre a abertura da home, até 80px. Menor contraste medido
+  nas internas: 14,7:1 (era 1,16:1).
+- **Menu mobile:** botão de abrir e de fechar com 48px; itens em 32px peso 300.
+- **Alvos de toque:** nenhum abaixo de 44px. Os links de texto da home ganharam
+  área de toque invisível de 44px (o desenho do link e do fio não mudou); o
+  "A loja" do rodapé ganhou largura mínima; o caminho de navegação da página
+  de ambiente, altura mínima.
+- **Foco visível:** 935 focos percorridos por Tab, todos com contorno. O mapa
+  de `/a-loja` saiu da ordem do Tab — o foco entrava no Google Maps sem
+  contorno nenhum; o link "Abrir no mapa", logo acima, leva ao mesmo lugar.
+
+Verificado nas duas unidades, nas seis larguras, sem rolagem horizontal.
+57/57 testes.
+
+---
+
 ## [não publicado] — 2026-10-02 · ajustes na V1
 
 A V2 de layout foi descartada pelo cliente (fica só a tag `v2-arquivo`, fora

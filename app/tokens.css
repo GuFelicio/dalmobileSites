@@ -83,6 +83,13 @@
   --sobre-escuro-fio:    rgb(255 255 255 / .24);  /* fio de 1px           */
   --sobre-escuro-fio-fr: rgb(255 255 255 / .16);  /* fio quase apagado    */
 
+  /* Cabeçalho sobre cada superfície (ajustes de layout, 02/10/2026). O texto
+     claro é o papel #f9f8f5, não branco puro; os fios são a tinta e o papel
+     em transparência. Nenhuma cor nova: são valores da paleta com alfa. */
+  --cab-texto-sobre-preto: var(--c-papel-alto);
+  --cab-fio-sobre-preto:   rgb(249 248 245 / .14);
+  --cab-fio-sobre-papel:   rgb(32 33 31 / .12);
+
   /* ------------------------------------------------------------------
      4. VÉU SOBRE FOTO — TEMPORÁRIO, MORRE NA FASE 2
      O CLAUDE.md e a seção 13 da direção proíbem escurecer foto. Estes
@@ -121,6 +128,9 @@
   --fs-subtitulo:  22px;    --tr-subtitulo:  -0.01em;   --lh-subtitulo:  1.35;
   --fs-texto:      17px;    --tr-texto:      0;         --lh-texto:      1.62;
   --fs-rotulo:     10.5px;  --tr-rotulo:     0.24em;    --lh-rotulo:     1.4;
+
+  /* Itens do painel de menu mobile: 32px peso 300 (ajustes de layout). */
+  --fs-menu: 32px;
 
   /* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em
      largura total.
@@ -169,6 +179,9 @@
 
   /* Alvo de toque mínimo, para não repetir o botão de 30px do estudo. */
   --toque: 44px;
+  /* Botão que abre e fecha o menu mobile: 48px, acima do mínimo, porque é a
+     única porta para a navegação no celular. */
+  --toque-menu: 48px;
 }
 
 /* ------------------------------------------------------------------

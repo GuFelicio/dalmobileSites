@@ -130,6 +130,12 @@ export default function ALoja() {
                 title={`Mapa do showroom da Dalmóbile em ${unidade.cidade}`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                // Fora da ordem do Tab. O foco entraria no Google Maps, que é de
+                // outro domínio: o contorno de foco não aparece (o iframe não
+                // conta como focado por fora) e o teclado se perde nos
+                // controles do mapa. Quem usa teclado tem o "Abrir no mapa"
+                // logo acima, com o mesmo destino. Toque e mouse seguem iguais.
+                tabIndex={-1}
               />
             ) : foto ? (
               // Sem mapa, a foto ocupa o lugar. Melhor uma foto de verdade

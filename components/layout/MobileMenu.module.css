@@ -17,7 +17,7 @@
 
 /* Fundo sólido, herdado da superfície do cabeçalho que abriu o painel.
    Nunca translúcido: o texto atrás competiria com o menu. */
-.preto { background: var(--c-preto); color: var(--sobre-escuro); }
+.preto { background: var(--c-preto); color: var(--cab-texto-sobre-preto); }
 .cinza { background: var(--cinza); color: var(--preto); }
 .papel { background: var(--papel); color: var(--preto); }
 
@@ -33,9 +33,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--e-1);
-  /* Alvo de toque de 44px, com a área maior que o desenho. */
-  min-width: var(--toque);
-  min-height: var(--toque);
+  /* O mesmo alvo do botão que abriu o painel, 48px: o dedo fecha onde abriu. */
+  min-width: var(--toque-menu);
+  min-height: var(--toque-menu);
   padding: 0;
   border: 0;
   background: transparent;
@@ -70,8 +70,8 @@
 
 .nav a {
   display: block;
-  /* Escala de seção: o menu é a página inteira, o item tem peso de título. */
-  font-size: var(--fs-secao);
+  /* 32px peso 300: o menu é a página inteira, o item tem peso de título. */
+  font-size: var(--fs-menu);
   letter-spacing: var(--tr-secao);
   line-height: var(--lh-secao);
   font-weight: var(--peso-leve);

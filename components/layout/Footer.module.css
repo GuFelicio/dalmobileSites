@@ -53,6 +53,8 @@
   /* Alvo de toque com espaço entre alvos vizinhos: no rodapé os links ficam
      empilhados e colados, que é onde o dedo erra. */
   min-height: var(--toque);
+  /* Palavra curta ("A loja") ficava com 42px de largura. */
+  min-width: var(--toque);
   border-bottom: var(--fio) solid transparent;
   transition: border-color var(--mov-fio) ease;
 }

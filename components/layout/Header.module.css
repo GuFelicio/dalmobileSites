@@ -15,8 +15,9 @@
   border-bottom: var(--fio) solid transparent;
 }
 
-/* Cor do texto pela superfície em que o cabeçalho está pousado. */
-.preto { color: var(--sobre-escuro); }
+/* Cor do texto pela superfície em que o cabeçalho está pousado. Sobre preto,
+   o papel #f9f8f5, não branco puro (ajustes de layout, 02/10/2026). */
+.preto { color: var(--cab-texto-sobre-preto); }
 .cinza { color: var(--preto); }
 .papel { color: var(--preto); }
 
@@ -25,9 +26,12 @@
    texto escuro ficava sobre o body preto (1,16:1). A única exceção é a
    abertura da home (.sobreAbertura), antes de rolar. Sólido e não
    translúcido — nada de backdrop-filter deixando a foto vazar. */
-.fixado.preto { background: var(--c-preto); border-bottom-color: var(--sobre-escuro-fio); }
-.fixado.cinza { background: var(--cinza); border-bottom-color: var(--preto); }
-.fixado.papel { background: var(--papel); border-bottom-color: var(--cinza-clr); }
+/* O fundo é o da PRÓPRIA superfície da página — nas internas, o papel delas —,
+   para o cabeçalho emendar sem corte. Os fios: papel a 14% sobre preto, tinta
+   a 12% sobre papel. */
+.fixado.preto { background: var(--c-preto); border-bottom-color: var(--cab-fio-sobre-preto); }
+.fixado.cinza { background: var(--cinza); border-bottom-color: var(--cab-fio-sobre-papel); }
+.fixado.papel { background: var(--papel); border-bottom-color: var(--cab-fio-sobre-papel); }
 
 /* Home: o vídeo da abertura passa POR BAIXO do cabeçalho. A margem negativa
    puxa a capa para cima exatamente a altura dele, e a altura é fixa para a
@@ -98,8 +102,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--e-1);
-  min-width: var(--toque);
-  min-height: var(--toque);
+  /* 48px: é a única porta para a navegação no celular. */
+  min-width: var(--toque-menu);
+  min-height: var(--toque-menu);
   padding: 0;
   border: 0;
   background: transparent;

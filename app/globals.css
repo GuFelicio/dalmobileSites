@@ -45,6 +45,29 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 img { display: block; max-width: 100%; }
 
+/* Alvo de toque de 44px nos links de texto da home, SEM mudar o desenho: o
+   link continua do tamanho do texto, com o fio colado embaixo, e uma área
+   invisível de 44px de altura em volta dele recebe o toque. Aumentar a altura
+   do próprio link afastaria o fio do texto. */
+.synthesis-hero-panel > a,
+.synthesis-manifesto-content > a,
+.synthesis-section-heading > a,
+.synthesis-project div > a {
+  position: relative;
+}
+.synthesis-hero-panel > a::before,
+.synthesis-manifesto-content > a::before,
+.synthesis-section-heading > a::before,
+.synthesis-project div > a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: max(100%, var(--toque));
+  transform: translateY(-50%);
+}
+
 /* Baseline de foco. A Fase 2 refina por componente; o mínimo é nunca
    deixar elemento focável sem indicação visível. */
 :focus-visible {
