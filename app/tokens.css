@@ -25,7 +25,6 @@
   --c-papel-baixo:  #e8e6e0;  /* SUPERFÍCIE CINZA (a de costura)           */
   --c-linha:        #d3d0c9;  /* fio sobre claro, estado desativado        */
   --c-cinza:        #e8e6e0;  /* cinza de costura — era #9e9b95 até a V1   */
-  --c-cinza-painel: #97958f;  /* painel do hero — SAI na fase 2 da V2      */
   --c-cinza-texto:  #5d5d58;  /* texto de apoio sobre papel                */
   --c-tinta:        #20211f;  /* texto principal, tarja                    */
   --c-preto:        #111211;  /* SUPERFÍCIE PRETA; fundo do documento      */
@@ -86,30 +85,19 @@
   --sobre-escuro-fio:    rgb(255 255 255 / .24);  /* fio de 1px           */
   --sobre-escuro-fio-fr: rgb(255 255 255 / .16);  /* fio quase apagado    */
 
-  /* ------------------------------------------------------------------
-     4. VÉU SOBRE FOTO — TEMPORÁRIO, MORRE NA FASE 2
-     O CLAUDE.md e a seção 13 da direção proíbem escurecer foto. Estes
-     tokens existem só para a página de estudos, que é descartada na
-     Fase 2. NÃO usar em componente novo.
-     ------------------------------------------------------------------ */
-  --veu-62: rgb(0 0 0 / .62);
-  --veu-46: rgb(0 0 0 / .46);
-  --veu-40: rgb(0 0 0 / .40);
-  --veu-32: rgb(0 0 0 / .32);
-  --veu-20: rgb(0 0 0 / .20);
-  --veu-12: rgb(0 0 0 / .12);
-
-  /* Cabeçalho sobre cada superfície (V2, fase 1). O texto claro é o próprio
-     papel, não branco puro; os fios têm a opacidade da direção de layout,
-     seção 3.1. */
+  /* Cabeçalho, rodapé e faixas sobre o preto (V2, fase 1). O texto claro é
+     o próprio papel, não branco puro; os fios têm a opacidade da direção de
+     layout, seção 3.1. */
   --cab-texto-sobre-preto: var(--c-papel-alto);
   --cab-fio-sobre-preto:   rgb(249 248 245 / .14);
   --cab-fio-sobre-papel:   rgb(32 33 31 / .12);
 
-  /* Gradiente do topo da capa em vídeo, para o cabeçalho branco ficar
-     legível. NÃO é véu: cobre só a faixa do cabeçalho, de cima para baixo
-     até sumir. Ver .synthesis-hero-top e docs/decisoes.md, 2026-10-01. */
-  --degrade-cabecalho: rgb(0 0 0 / .35);
+  /* ------------------------------------------------------------------
+     4. VÉU SOBRE FOTO — removido na V2, fase 2
+     Os --veu-* e o --degrade-cabecalho existiam para escurecer a foto e o
+     vídeo da capa. Escurecer imagem é proibido pelo CLAUDE.md; com a capa
+     da V2 (vídeo inteiro, título numa faixa abaixo) nada mais os usa.
+     ------------------------------------------------------------------ */
 
   /* ------------------------------------------------------------------
      5. TIPOGRAFIA
@@ -139,6 +127,15 @@
 
   /* Itens do painel de menu mobile — direção de layout, seção 3.2. */
   --fs-menu: 32px;
+
+  /* Frase-manifesto da home: a única frase sozinha na página. 30px desktop,
+     24px mobile, −0.02em. Direção de layout, seção 4.3. */
+  --fs-manifesto: 30px;  --tr-manifesto: -0.02em;
+
+  /* Os três números da seção da fábrica: número em 40px, legenda em 12.5px.
+     Direção de layout, seção 5.4. */
+  --fs-numero: 40px;
+  --fs-numero-legenda: 12.5px;
 
   /* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em
      largura total.
@@ -191,7 +188,8 @@
      ------------------------------------------------------------------ */
   --mov-fade:  400ms;  /* fade partindo de visível                       */
   --mov-hover: 600ms;  /* hover em card: scale(1.02)                     */
-  --mov-fio:   200ms;  /* fio de 1px sob o item de navegação             */
+  --mov-fio:   150ms;  /* fio de 1px sob o link e o item de navegação —
+                          150ms pela direção de layout, seção 8          */
   --mov-ease:  cubic-bezier(.2, .8, .2, 1);
 
   /* Alvo de toque mínimo, para não repetir o botão de 30px do estudo. */
@@ -214,7 +212,6 @@
   /* Uma cor só para toda a família: painel do hero, faixas, rodapé e tiras
      de chamada. 14,93:1 com a tinta por cima.                              */
   --c-cinza:        #fff4eb;
-  --c-cinza-painel: #fff4eb;
 
   --c-cinza-texto:  #5f5847;  /* texto de apoio sobre papel — 6,42:1        */
   --c-linha:        #e7d8c9;  /* fio sobre claro, estado desativado         */
@@ -241,6 +238,7 @@
     /* --fs-rotulo não muda: 10.5px em toda largura. */
 
     --fs-dek: 19px;
+    --fs-manifesto: 24px;
 
     --respiro-curto: 40px;
     --respiro:       72px;

@@ -1,14 +1,14 @@
 "use client";
 
 /**
- * VideoEmLoop — o vídeo de fundo da capa da home.
+ * VideoEmLoop — o vídeo da abertura da home.
  *
  * O que é: vídeo decorativo em loop, sem som e sem controle, que preenche a
  * área que o contém. Não tem estilo próprio: o enquadramento (posição,
  * tamanho, object-fit) vem de `className`, de quem o usa.
  *
- * Onde é usado: app/page.tsx, no fundo da `.synthesis-hero`, no lugar da foto
- * de abertura.
+ * Onde é usado: app/page.tsx, na abertura da home — inteiro, 16:9, sem nada
+ * por cima.
  *
  * Props:
  *   webm       fonte principal (VP9, mais leve)

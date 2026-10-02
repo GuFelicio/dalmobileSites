@@ -8,6 +8,62 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [V2 · fase 2] — 2026-10-02 · a home
+
+Branch `v2-layout`. Cada seção com forma própria — nenhuma repete a silhueta
+da anterior. **Nenhuma frase da copy mudou** (conferido por diff do texto
+renderizado da home, nas duas unidades).
+
+| Seção | Superfície | Forma |
+|---|---|---|
+| Abertura | preto | o vídeo inteiro, 16:9, até 78svh, sem nada por cima; rótulo, título (2 linhas), dek e botão sólido numa faixa preta abaixo |
+| Manifesto | papel | só tipografia: a frase em 30px, o parágrafo, um link discreto; respiro longo acima e abaixo |
+| Projetos | cinza | `GradeEditorial`: ciclo A-B-C (A sangra 16:9 · B duas 3:2 · C a 2/3 à direita, legenda à esquerda), legenda sempre fora da foto |
+| Fábrica | preto | o único split 50/50; números em linha de fios verticais, sem caixa |
+| A loja | papel | foto 21:9 sangrando e três colunas: endereço, horário, contato |
+| Rodapé | preto | — |
+
+### Saiu
+
+- Os rótulos numerados (`01 —`, `02 —`, `03 —`) e os `01 / COZINHA` dos cards.
+- O carrossel (`SliderDeFotos`), com setas e contador. A vitrine mostra **12
+  fotos** (três ciclos de quatro) em SJC; antes o carrossel passava as 45.
+  Caraguá mostra as 9 que tem. As outras continuam nas páginas de ambiente.
+- O cartão sobre o vídeo, o véu de topo e a legenda "O QUE VEM POR ESCRITO",
+  que ficava **sobre** a foto da fábrica.
+- A foto do manifesto e a legenda dela.
+- As setas ↗ dos links internos. Ficou uma: "Falar no WhatsApp", o único link
+  que sai do site. Os outros ganham sublinhado no hover, em 150ms.
+- Todo o CSS do estudo 03 Síntese em `globals.css` (de 438 para 84 linhas), os
+  tokens de véu e o modo transparente do cabeçalho.
+
+### Entrou
+
+- `app/home.module.css` e `components/midia/GradeEditorial.tsx`.
+- **A home tem rodapé**, como toda página deve ter. O rodapé passou a ser
+  **preto em todas as páginas**.
+- Os rótulos de coluna da loja (Endereço, Horário, Contato) e o telefone, que
+  já existiam no config.
+- Tokens `--fs-manifesto`, `--tr-manifesto`, `--fs-numero`,
+  `--fs-numero-legenda`; `--mov-fio` de 200 para 150ms.
+- **Teste novo: todo token usado num `var()` precisa estar definido.** Ver
+  abaixo por quê. A suíte passa de 57 para 58 testes.
+
+### Pego no caminho
+
+Remover o bloco de véu de `tokens.css` levou junto os tokens `--cab-*` do
+cabeçalho, criados na fase 1 dentro dele. Token indefinido falha calado: o
+cabeçalho da home ficou com texto escuro sobre preto (1,16:1) **com os 57
+testes verdes**. Foi achado na medição do navegador, corrigido, e virou teste.
+
+### Verificado
+
+58/58 nas duas unidades; lint e `tsc` limpos; `workerd` com todas as rotas em
+200; seis larguras sem rolagem horizontal; menor contraste de cabeçalho 15,2:1;
+maior linha 66 caracteres; título da abertura em 2 linhas em toda largura.
+
+---
+
 ## [V2 · fase 1] — 2026-10-01 · defeitos e tokens
 
 Branch `v2-layout`. Nenhuma seção redesenhada; nenhum texto mudou.

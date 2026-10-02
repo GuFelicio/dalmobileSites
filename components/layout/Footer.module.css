@@ -1,12 +1,10 @@
-/* Superfície cinza — o rodapé é costura. */
+/* Superfície preta: a página abre e fecha escura (V2). O texto claro é o
+   papel, como no cabeçalho sobre preto. */
 .footer {
-  background: var(--cinza);
-  color: var(--preto);
+  background: var(--c-preto);
+  color: var(--cab-texto-sobre-preto);
   padding: var(--respiro) var(--pad-lateral) var(--e-4);
-  /* Fio de separação — ver .cinza em Section.module.css e --fio-sup em
-     app/tokens.css. Sem ele, o rodapé da paleta palha encosta no papel sem
-     nenhuma borda visível. */
-  border-top: var(--fio) solid var(--fio-sup);
+  border-top: var(--fio) solid var(--cab-fio-sobre-preto);
 }
 
 /* Mobile: colunas empilhadas, uma sempre. */
@@ -95,7 +93,7 @@
 .assinatura {
   margin-top: var(--e-5);
   padding-top: var(--e-3);
-  border-top: var(--fio) solid var(--preto);
+  border-top: var(--fio) solid var(--sobre-escuro-fio);
   font-size: var(--fs-rotulo);
   letter-spacing: var(--tr-rotulo);
   font-weight: var(--peso-forte);

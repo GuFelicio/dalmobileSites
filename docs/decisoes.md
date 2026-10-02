@@ -152,6 +152,34 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · V2, fase 2: as leituras feitas onde a direção se contradiz
+
+A home seguiu `docs/direcao-layout-sites-dalmobile.md`, seção 5. Em quatro
+pontos o texto se contradiz ou não fecha; a escolha feita foi:
+
+1. **O cabeçalho fica ACIMA do vídeo, sólido, não por cima.** A direção pede a
+   abertura "sem nada por cima" e permite cabeçalho transparente sobre ela. Os
+   dois juntos exigiriam um véu para o texto branco ler sobre o vídeo claro — e
+   escurecer imagem é proibido. Saíram o modo `sobreAbertura` do `Header`, o
+   gradiente do topo e o token `--degrade-cabecalho`.
+2. **"12 fotos = 4 ciclos A-B-C" não fecha:** um ciclo usa quatro fotos
+   (A 1 + B 2 + C 1). Ficaram três ciclos, 12 fotos. Sobrando uma foto para o B,
+   ela entra como C.
+3. **"Respiro longo acima e abaixo do manifesto" × "nunca dois longos
+   seguidos":** vale o item específico. O manifesto é a única seção com respiro
+   longo; o silêncio em volta da frase é a forma dela. As vizinhas usam o normal.
+4. **"Seta só em link que sai da página":** lido como link que sai do SITE. A
+   única seta da home é a do WhatsApp; links internos têm sublinhado no hover.
+
+**Rodapé preto em todas as páginas.** A sequência da home termina em "rodapé
+preto", e o rodapé é um componente só. Ficou preto em toda página, como a tabela
+de superfícies da direção (4.1) já previa.
+
+**Descartado.** Manter o cabeçalho transparente com o véu de topo (escurece o
+vídeo) e quatro ciclos com 16 fotos (contradiz o número de fotos pedido).
+
+---
+
 ## 2026-10-01 · V2, fase 1: medida em `em`, cabeçalho sólido, menu sempre preto
 
 **Decisões.**

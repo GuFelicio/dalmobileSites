@@ -6,7 +6,8 @@
  * políticas. O CLAUDE.md exige endereço, telefone, WhatsApp e horário no
  * rodapé de toda página, porque é o que sustenta a busca local.
  *
- * Onde é usado: em TODA página, sempre na superfície cinza.
+ * Onde é usado: em TODA página, sempre na superfície PRETA. Até a V1 era
+ * cinza; na V2 o site abre e fecha escuro (direção de layout, 4.1 e 5.6).
  *
  * Props: nenhuma. Tudo vem do config da unidade, via config/derivados.ts
  * da unidade. Nenhum dado de loja escrito direto aqui.
@@ -31,7 +32,7 @@ export function Footer() {
       <div className={estilos.colunas}>
         {/* 1 — marca e endereço */}
         <div className={estilos.coluna}>
-          <Brand />
+          <Brand claro />
           <address className={estilos.endereco}>{enderecoEmLinha()}</address>
         </div>
 

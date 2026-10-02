@@ -113,12 +113,13 @@ texto escuro ficava sobre o body preto, a 1,16:1.
 | preto | `--c-preto` | `--cab-texto-sobre-preto` (`#f9f8f5`) | `--cab-fio-sobre-preto` (`.14`) |
 | papel | `--papel` | `--preto` | `--cab-fio-sobre-papel` (`.12`) |
 
-A única exceção é a abertura da home (`sobreAbertura`): transparente sobre o
-vídeo até 80px de rolagem, depois preto sólido.
+Sem exceção: na home ele fica **acima** do vídeo, em preto sólido, e não por
+cima dele — a abertura não leva nada sobre a imagem (ver `docs/decisoes.md`,
+2026-10-02). O rodapé (`Footer`) é preto em todas as páginas.
 
 ```tsx
-<Header superficie="papel" />            {/* página interna */}
-<Header superficie="preto" sobreAbertura /> {/* só na home */}
+<Header superficie="papel" />  {/* página interna */}
+<Header superficie="preto" />  {/* home */}
 ```
 
 ### Véu sobre foto — temporário
@@ -250,6 +251,23 @@ e trocam sozinhos no mobile (até 600px):
 - `--toque-menu` (48px) é o botão que abre e fecha o menu mobile: a única porta
   para a navegação no celular.
 
+### Grade editorial
+
+`components/midia/GradeEditorial.tsx` — a vitrine de projetos, sem carrossel.
+Ciclo de três ritmos: **A** foto sangrando 16:9 · **B** duas fotos 3:2 lado a
+lado · **C** foto a 2/3 à direita, legenda na coluna vazia à esquerda. Legenda
+sempre fora da foto: nome em Subtítulo, ambiente em Rótulo. Uma coluna até
+820px, com toda foto sangrando.
+
+```tsx
+<GradeEditorial fotos={vitrine.slice(0, 12)} />
+```
+
+### Link discreto e seta
+
+Seta ↗ no máximo uma por seção, e só em link que sai do site. Link interno:
+sublinhado de 1px que aparece no hover, em `--mov-fio` (150ms).
+
 ### Sangria
 
 `.bleed` (em `app/globals.css`) leva uma foto de ponta a ponta da tela, mesmo
@@ -281,20 +299,20 @@ Mínimo e lento.
 |---|---|---|
 | `--mov-fade` | 400ms | fade **partindo de visível** |
 | `--mov-hover` | 600ms | hover em card, `scale(1.02)` |
-| `--mov-fio` | 200ms | fio de 1px sob o item de navegação |
+| `--mov-fio` | 150ms | fio de 1px sob o link e o item de navegação |
 | `--mov-ease` | `cubic-bezier(.2,.8,.2,1)` | curva única do projeto |
 
 **Proibido:** parallax, scroll sequestrado, carrossel automático, contador animado.
 
-**Vídeo em loop** (`components/midia/VideoEmLoop.tsx`, só no fundo da capa da
-home): `autoplay`, sem som, sem controle; pausa quando sai da tela. Com
+**Vídeo em loop** (`components/midia/VideoEmLoop.tsx`, só na abertura da home):
+`autoplay`, sem som, sem controle; pausa quando sai da tela. Com
 `prefers-reduced-motion` mostra só o poster. Não tem estilo próprio: o
-enquadramento vem de `className`. Nunca escurecido — só o gradiente do topo
-(`--degrade-cabecalho`) para o cabeçalho. Ver `docs/decisoes.md` (2026-10-01).
+enquadramento vem de `className`. Inteiro, 16:9, **sem nada por cima e nunca
+escurecido**. Ver `docs/decisoes.md` (2026-10-02).
 
 ```tsx
 <VideoEmLoop
-  className="synthesis-hero-video"
+  className={estilos.aberturaVideo}
   webm="/videos/hero-loop.webm"
   mp4="/videos/hero-loop.mp4"
   poster="/videos/hero-loop-poster.jpg"

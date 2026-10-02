@@ -1,0 +1,287 @@
+/* A home da V2. Ver app/page.tsx e docs/direcao-layout-sites-dalmobile.md,
+   seção 5. Cada bloco abaixo é uma seção, na ordem da página.
+   Superfícies: preto → papel → cinza → preto → papel → rodapé preto. */
+
+/* ---- Peças comuns ------------------------------------------------------ */
+
+.rotulo {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  text-transform: uppercase;
+}
+
+.secaoTitulo {
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  line-height: var(--lh-secao);
+}
+
+/* Link interno: sem seta. O sublinhado de 1px aparece no hover, em 150ms
+   (direção de layout, 4.5). A seta fica só no link que sai do site. */
+.linkDiscreto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-1);
+  min-height: var(--toque);
+  border-bottom: var(--fio) solid transparent;
+  transition: border-color var(--mov-fio) ease;
+}
+
+.linkDiscreto:hover { border-bottom-color: currentColor; }
+
+/* ---- 1. Abertura · preto ----------------------------------------------- */
+
+.abertura {
+  background: var(--c-preto);
+  color: var(--cab-texto-sobre-preto);
+}
+
+/* O vídeo inteiro, 16:9, de ponta a ponta. max-height de 78svh (svh, nunca
+   vh — a barra do navegador móvel quebra vh): num monitor largo e baixo o
+   vídeo não empurra o título para fora da tela; o cover corta as bordas. */
+.aberturaMidia {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 78svh;
+  overflow: hidden;
+}
+
+.aberturaVideo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* A faixa preta abaixo do vídeo: é aqui que o título vive. */
+.aberturaFaixa {
+  padding: var(--respiro-curto) var(--pad-lateral) var(--respiro);
+}
+
+.aberturaTitulo {
+  margin-top: var(--e-3);
+  /* No máximo 20 caracteres de largura: o título quebra em duas ou três
+     linhas curtas, em vez de uma faixa comprida. Direção de layout, 5.1.
+     11em e não 20ch: na Krub o `ch` (largura do 0) é largo, e 20ch deixava
+     o título inteiro numa linha de ~790px. 11em ≈ 20 letras na Krub 300. */
+  max-width: 11em;
+  font-size: var(--fs-display-xl);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-xl);
+  line-height: var(--lh-display-xl);
+}
+
+/* Dek em duas linhas no desktop: 24em de medida para um texto de ~90
+   caracteres em 20px. */
+.aberturaDek {
+  margin-top: var(--e-3);
+  max-width: 24em;
+  font-size: var(--fs-dek);
+  line-height: var(--lh-subtitulo);
+  letter-spacing: var(--tr-subtitulo);
+  color: var(--sobre-escuro-70);
+}
+
+/* Botão sólido: o papel sobre o preto. Sem seta — é link interno. */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--e-4);
+  min-height: var(--toque-menu);
+  padding: 0 var(--e-3);
+  background: var(--c-papel-alto);
+  color: var(--c-preto);
+  font-size: var(--fs-texto);
+  transition: transform var(--mov-fio) ease;
+}
+
+/* Direção de layout, seção 8: botão encolhe 3% no clique, e só. */
+.botao:active { transform: scale(0.97); }
+
+.botao:focus-visible { outline-color: var(--c-papel-alto); }
+
+/* ---- 2. Manifesto · papel — só tipografia ------------------------------ */
+
+/* O respiro longo acima e abaixo é a forma desta seção: é a única sem
+   imagem, e o silêncio em volta da frase é o que ela tem. */
+.manifesto {
+  background: var(--papel);
+  color: var(--preto);
+  padding: var(--respiro-longo) var(--pad-lateral);
+}
+
+.manifestoFrase {
+  /* Medida de 24em: a frase cabe em uma ou duas linhas, nunca numa faixa
+     de página inteira. */
+  max-width: 24em;
+  font-size: var(--fs-manifesto);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-manifesto);
+  line-height: var(--lh-secao);
+}
+
+.manifestoTexto {
+  margin-top: var(--e-4);
+  max-width: var(--medida);
+  color: var(--cinza-texto);
+}
+
+.manifesto .linkDiscreto { margin-top: var(--e-3); }
+
+/* ---- 3. Projetos · cinza — grade editorial ----------------------------- */
+
+.projetos {
+  background: var(--cinza);
+  color: var(--preto);
+  padding: var(--respiro) var(--pad-lateral);
+  /* Fio de separação: o cinza claro separa do papel em 1,13:1. */
+  border-block: var(--fio) solid var(--fio-sup);
+}
+
+.projetos .secaoTitulo { margin-bottom: var(--respiro-curto); }
+
+.projetosFim { margin-top: var(--respiro-curto); }
+
+/* ---- 4. Fábrica · preto — o único split -------------------------------- */
+
+.fabrica {
+  background: var(--c-preto);
+  color: var(--cab-texto-sobre-preto);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* Mobile e tablet: foto primeiro, empilhada (tabela de responsividade do
+   CLAUDE.md, "destaque alternado"). 4:3 para não virar uma tira. */
+.fabricaFoto {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.fabricaFoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fabricaTexto {
+  padding: var(--respiro) var(--pad-lateral);
+}
+
+.fabricaTitulo {
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+}
+
+.fabricaCorpo {
+  margin-top: var(--e-4);
+  max-width: var(--medida);
+  color: var(--sobre-escuro-70);
+}
+
+/* Os três números: fios verticais de 1px, alinhados à esquerda com o texto,
+   sem fundo. Um por linha no mobile, dois no tablet, em linha no desktop —
+   tabela de responsividade do CLAUDE.md, "faixa de números". */
+.numeros {
+  margin-top: var(--respiro-curto);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e-4);
+}
+
+.numeros li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+  padding-left: var(--e-3);
+  border-left: var(--fio) solid var(--sobre-escuro-fio);
+}
+
+.numeros strong {
+  font-size: var(--fs-numero);
+  font-weight: var(--peso-leve);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.numeros span {
+  font-size: var(--fs-numero-legenda);
+  line-height: var(--lh-rotulo);
+  color: var(--sobre-escuro-70);
+}
+
+@media (min-width: 601px) {
+  .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Desktop: o split 50/50. A foto ocupa a altura toda do texto. */
+@media (min-width: 1025px) {
+  .fabrica { grid-template-columns: 1fr 1fr; }
+
+  .fabricaFoto {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .fabricaTexto { align-self: center; }
+
+  .numeros {
+    grid-template-columns: repeat(3, max-content);
+    gap: var(--e-5);
+  }
+}
+
+/* ---- 5. A loja · papel — faixa baixa ----------------------------------- */
+
+.loja {
+  background: var(--papel);
+  color: var(--preto);
+  padding: var(--respiro) var(--pad-lateral);
+}
+
+.loja .secaoTitulo { margin-top: var(--e-2); }
+
+/* Faixa 21:9 sangrando: baixa e larga, para a seção não virar outro split. */
+.lojaFoto {
+  margin-top: var(--respiro-curto);
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+}
+
+.lojaFoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Três colunas estreitas: endereço, horário, contato. Uma por linha no
+   celular; três a partir do tablet, onde cada uma ainda tem ~220px. */
+.lojaColunas {
+  margin-top: var(--respiro-curto);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e-4);
+}
+
+.lojaColunas .rotulo { margin-bottom: var(--e-2); }
+
+.lojaColunas p { max-width: var(--medida); }
+
+@media (min-width: 601px) {
+  .lojaColunas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* No celular a faixa 21:9 viraria uma tira de 167px: 4:3, ainda sangrando. */
+@media (max-width: 600px) {
+  .lojaFoto { aspect-ratio: 4 / 3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .botao:active { transform: none; }
+}

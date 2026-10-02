@@ -33,21 +33,6 @@
   border-bottom-color: var(--cab-fio-sobre-papel);
 }
 
-/* Home: a mídia de abertura passa POR BAIXO do cabeçalho. A margem negativa
-   puxa a capa para cima exatamente a altura dele, e a altura é fixa para a
-   conta fechar. */
-.sobreAbertura {
-  height: var(--alt-cabecalho);
-  margin-bottom: calc(-1 * var(--alt-cabecalho));
-}
-
-/* Antes dos 80px de rolagem, sobre a abertura: transparente, texto claro.
-   O gradiente do topo da capa (.synthesis-hero-top) garante a leitura. */
-.transparente {
-  background: transparent;
-  color: var(--cab-texto-sobre-preto);
-  border-bottom-color: var(--cab-fio-sobre-preto);
-}
 
 .marca {
   display: inline-flex;
