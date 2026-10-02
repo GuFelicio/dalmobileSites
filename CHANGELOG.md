@@ -8,6 +8,15 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-02 · o fim da home
+
+- A home termina numa **barra preta só com a marca da unidade**, logo depois da
+  seção da loja (endereço, horário e WhatsApp). Antes ela terminava sem rodapé
+  nenhum. Decisão do cliente: os dados já estão na seção da loja, e um rodapé
+  completo os repetiria. As páginas internas seguem com o rodapé completo.
+
+---
+
 ## [não publicado] — 2026-10-02 · ajustes de layout, fase 2: subtrações e ritmo
 
 Sobre a V1. Estrutura, splits, carrossel, tipografia e cores ficam como estão.

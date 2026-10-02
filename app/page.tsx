@@ -17,6 +17,7 @@
 // o teste de cidade cruzada vasculha tudo.
 import Link from "next/link";
 
+import { Brand } from "../components/layout/Brand";
 import { Header } from "../components/layout/Header";
 import Foto from "../components/midia/Foto";
 import SliderDeFotos, { type FotoDoSlider } from "../components/midia/SliderDeFotos";
@@ -196,6 +197,14 @@ export default function Home() {
           <div className="synthesis-contact-image"><Foto src={fotoContato.src} alt={fotoContato.alt} sizes="(max-width: 1024px) 100vw, 50vw" /></div>
         </section>
       </main>
+
+      {/* O fim da home: uma barra preta só com a marca. Endereço, horário e
+          WhatsApp já estão na seção da loja logo acima — repeti-los num rodapé
+          completo seria a mesma informação duas vezes (decisão do cliente,
+          02/10/2026). As páginas internas seguem com o rodapé completo. */}
+      <footer className="synthesis-footer">
+        <Brand claro />
+      </footer>
     </div>
   );
 }

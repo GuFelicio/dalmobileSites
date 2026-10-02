@@ -380,6 +380,13 @@ img { display: block; max-width: 100%; }
   .synthesis-contact-image { height: 380px; }
 }
 
+/* A barra final da home: preta, só a marca, alinhada à esquerda na margem da
+   grade. Respiro curto em cima e embaixo — é uma assinatura, não uma seção. */
+.synthesis-footer {
+  background: var(--c-preto);
+  padding: var(--respiro-curto) var(--synthesis-gutter);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

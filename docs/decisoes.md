@@ -152,6 +152,21 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · A home termina numa barra preta com a marca, não no rodapé completo
+
+**Decisão do cliente.** Depois da seção da loja — que já mostra endereço,
+horário e WhatsApp —, a home fecha com uma barra preta só com a marca da
+unidade. As páginas internas continuam com o rodapé completo (`Footer`).
+
+**Por quê.** Na home o rodapé completo repetiria, logo abaixo, os mesmos dados
+da seção da loja. O `CLAUDE.md` pede endereço, telefone, WhatsApp e horário no
+rodapé de toda página; na home eles estão na última seção, a um palmo da barra.
+
+**Descartado.** O rodapé completo também na home (a mesma informação duas
+vezes seguidas).
+
+---
+
 ## 2026-10-02 · Ajustes de layout na V1: o que foi decidido no caminho
 
 O roteiro "Ajustes de layout na V1" foi seguido. Onde ele deixava espaço ou se
