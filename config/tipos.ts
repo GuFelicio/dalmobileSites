@@ -25,6 +25,22 @@ export type Horario = {
   confirmado?: boolean;
 };
 
+/** Um vídeo em loop: webm (principal), mp4 (fallback) e o primeiro quadro. */
+export type Video = {
+  webm: string;
+  mp4: string;
+  poster: string;
+};
+
+/**
+ * Qual foto do acervo vai num lugar fixo da página: a primeira da lista de
+ * ambientes que a unidade tiver, na posição `indice` (cai para o que existir).
+ */
+export type EscolhaDeFoto = {
+  ambientes: string[];
+  indice: number;
+};
+
 /** Uma rota do menu principal. */
 export type ItemDeNavegacao = {
   rotulo: string;
@@ -136,4 +152,32 @@ export type Unidade = {
    * o seu: Caraguá pode não ter as mesmas seções que SJC.
    */
   navegacao: ItemDeNavegacao[];
+  /**
+   * A composição da home desta unidade. A ESTRUTURA é a mesma nos dois sites
+   * (app/page.tsx); o que muda é a prova — a mídia e as fotos. Nada disto pode
+   * ser escrito no componente: foi assim que o site anterior acabou com a
+   * cidade errada. Ver docs/unidades.md.
+   */
+  home: {
+    /**
+     * O vídeo da abertura. Hoje é o mesmo nos dois sites, por decisão do
+     * cliente (02/10/2026); ter um por unidade é só trocar estes caminhos.
+     */
+    abertura: Video;
+    /** Quantas fotos a vitrine mostra. 12 = três ciclos A-B-C de quatro. */
+    fotosNaVitrine: number;
+    /** A foto do split da fábrica. */
+    fotoFabrica: EscolhaDeFoto;
+    /** A faixa 21:9 da seção da loja. */
+    fotoLoja: EscolhaDeFoto;
+  };
+  /**
+   * O desenho da grade de /ambientes, que depende do tamanho do acervo:
+   *   "destaque"   o primeiro em 16:9 ocupando duas colunas, os outros em 4:3,
+   *                2/3/4 colunas por largura — para acervo grande (SJC, 7)
+   *   "duasColunas" duas colunas de fotos grandes em toda largura — para
+   *                acervo pequeno (Caraguá, 4): menos acervo pede foto maior
+   * Nos dois casos a grade nunca termina com vão (conta em app/ambientes).
+   */
+  gradeDeAmbientes: "destaque" | "duasColunas";
 };

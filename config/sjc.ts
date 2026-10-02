@@ -88,4 +88,21 @@ export const unidade: Unidade = {
     { rotulo: "Para arquitetos", href: "/arquitetos" },
     { rotulo: "A loja", href: "/a-loja" },
   ],
+
+  // A composição da home. A abertura é o MESMO vídeo nos dois sites, por
+  // decisão do cliente (02/10/2026): o que muda na abertura é o texto, que
+  // já sai do config (a cidade). Ver docs/unidades.md.
+  home: {
+    abertura: {
+      webm: "/videos/hero-loop.webm",
+      mp4: "/videos/hero-loop.mp4",
+      poster: "/videos/hero-loop-poster.jpg",
+    },
+    fotosNaVitrine: 12,
+    fotoFabrica: { ambientes: ["cozinha", "banheiro"], indice: 7 },
+    fotoLoja: { ambientes: ["quartos", "sala-de-estar"], indice: 5 },
+  },
+
+  // Sete ambientes: grade assimétrica, o primeiro em destaque.
+  gradeDeAmbientes: "destaque",
 };

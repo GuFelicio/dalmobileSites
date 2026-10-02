@@ -13,8 +13,10 @@
  *   a loja    · papel · faixa 21:9 sangrando e três colunas de serviço
  *   rodapé    · preto
  *
- * Onde é usado: rota `/`, nos dois sites. Tudo o que difere entre as unidades
- * — cidade, endereço, horário, acervo — vem do config e do conteúdo.
+ * Onde é usado: rota `/`, nos dois sites. A ESTRUTURA é uma só; tudo o que
+ * difere entre as unidades — o vídeo, as fotos, a cidade, o endereço, o
+ * horário, o acervo — vem de `unidade.home` e dos outros campos do config.
+ * Nenhum caminho de mídia ou escolha de foto é escrito aqui.
  *
  * A COPY FOI APROVADA EM SETEMBRO. A V2 mudou só a forma: os textos são os
  * mesmos da V1. Saíram os rótulos numerados (01 —, 02 —, 03 —), a legenda que
@@ -32,19 +34,17 @@ import { enderecoEmLinha, linkTelefone, linkWhatsApp, unidade } from "../config/
 import { ambientesDaUnidade, escolherFoto } from "../lib/ambientes-da-unidade.ts";
 import estilos from "./home.module.css";
 
-/** Quantas fotos a vitrine mostra: três ciclos A-B-C de quatro fotos. */
-const FOTOS_NA_VITRINE = 12;
-
 export default function Home() {
   // A vitrine sai do acervo real desta unidade. Como vem do config, o site de
   // Caraguá mostra os ambientes de Caraguá sozinho.
   const ambientes = ambientesDaUnidade();
   const whatsapp = linkWhatsApp();
 
-  // Fotos de apoio. A lista de preferência cai para o que a unidade tiver:
-  // Caraguá não tem home office nem closet.
-  const fotoFabrica = escolherFoto(ambientes, ["cozinha", "banheiro"], 7);
-  const fotoLoja = escolherFoto(ambientes, ["quartos", "sala-de-estar"], 5);
+  // A composição desta unidade, do config. A lista de preferência de cada foto
+  // cai para o que a unidade tiver: Caraguá não tem home office nem closet.
+  const { abertura, fotosNaVitrine } = unidade.home;
+  const fotoFabrica = escolherFoto(ambientes, unidade.home.fotoFabrica.ambientes, unidade.home.fotoFabrica.indice);
+  const fotoLoja = escolherFoto(ambientes, unidade.home.fotoLoja.ambientes, unidade.home.fotoLoja.indice);
 
   // As fotos do acervo INTERCALADAS entre os ambientes: agrupadas, os
   // primeiros ciclos seriam só cozinha. A ordem de entrada é a editorial de
@@ -78,9 +78,9 @@ export default function Home() {
           <div className={estilos.aberturaMidia}>
             <VideoEmLoop
               className={estilos.aberturaVideo}
-              webm="/videos/hero-loop.webm"
-              mp4="/videos/hero-loop.mp4"
-              poster="/videos/hero-loop-poster.jpg"
+              webm={abertura.webm}
+              mp4={abertura.mp4}
+              poster={abertura.poster}
             />
           </div>
           <div className={estilos.aberturaFaixa}>
@@ -117,7 +117,7 @@ export default function Home() {
           <h2 id="titulo-vitrine" className={estilos.secaoTitulo}>
             Fotografado depois da montagem.
           </h2>
-          <GradeEditorial fotos={vitrine.slice(0, FOTOS_NA_VITRINE)} />
+          <GradeEditorial fotos={vitrine.slice(0, fotosNaVitrine)} />
           <Link href="/ambientes" className={`${estilos.linkDiscreto} ${estilos.projetosFim}`}>
             Ver todos os ambientes
           </Link>

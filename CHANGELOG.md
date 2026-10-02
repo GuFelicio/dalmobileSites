@@ -8,6 +8,28 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [V2 · fase 4] — 2026-10-02 · as duas unidades
+
+Branch `v2-layout`. Estrutura idêntica, prova diferente: tudo o que pode mudar
+entre os dois sites saiu dos componentes e foi para o config.
+
+- **`config/<unidade>.ts` ganhou `home`** — o vídeo da abertura, quantas fotos a
+  vitrine mostra e a escolha da foto da fábrica e da loja — e
+  **`gradeDeAmbientes`** (`"destaque"` em SJC, `"duasColunas"` em Caraguá), que
+  antes era uma regra de "até 4 ambientes" escrita no componente.
+- **A abertura é o mesmo vídeo nos dois sites**, por decisão do cliente; o que
+  muda nela é o texto (a cidade, do config). Ter um vídeo por unidade passou a
+  ser troca de caminho no config, sem tocar em componente.
+- **Teste novo:** caminho de vídeo, escolha de foto ou tamanho de vitrine escrito
+  direto em `app/page.tsx` quebra a suíte (59 testes).
+- **Cidade cruzada, conferida nos dois builds, 13 rotas cada:** zero ocorrência
+  da outra cidade em SEO, sitemap e robots. No corpo, só as três menções
+  declaradas (rodapé, faixa de `/a-loja`, FAQ de `/a-dalmobile`).
+- `docs/unidades.md` atualizado: os campos novos, a regra de cidade cruzada como
+  ela é hoje e a lista de pendências trocada por `npm run pendencias`.
+
+---
+
 ## [V2 · fase 3] — 2026-10-02 · páginas internas
 
 Branch `v2-layout`. `/ambientes`, `/ambientes/[slug]`, `/a-dalmobile`,

@@ -152,6 +152,30 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · V2, fase 4: a mesma abertura nos dois sites; composição no config
+
+**Decisões.**
+- **A abertura é o mesmo vídeo em SJC e em Caraguá** (decisão do cliente). A
+  direção de layout (seção 7) pedia uma abertura própria por unidade; o
+  cliente preferiu o mesmo vídeo, com o texto diferente. O texto que muda já
+  vem do config: a cidade no rótulo da faixa.
+- **O vídeo e as fotos da home saíram do componente para o config** (`home`), e
+  a regra da grade de `/ambientes` também (`gradeDeAmbientes`). Assim, um vídeo
+  por unidade, se vier, é troca de caminho num arquivo de config — e um teste
+  impede que voltem a ser escritos em `app/page.tsx`.
+- **A cidade da outra unidade continua nas três menções declaradas.** O roteiro
+  da fase 4 diz que o build de Caraguá "não pode conter São José dos Campos em
+  lugar nenhum". A regra em vigor desde 14/09/2026 é outra, e mais precisa:
+  zero em SEO e sitemap, e no corpo só onde a copy aprovada nomeia a loja irmã
+  para quem chegou na cidade errada. Mudar isso seria mudar texto aprovado, o
+  que a V2 não faz. Conferido nos dois builds.
+
+**Descartado.** Escrever "mesmo vídeo" direto no componente (voltaria a ser uma
+decisão escondida no código) e apagar as menções à loja irmã (muda copy
+aprovada e tira informação útil de quem está na cidade errada).
+
+---
+
 ## 2026-10-02 · V2, fase 3: gabarito de página e grade por conta
 
 **Decisões.**

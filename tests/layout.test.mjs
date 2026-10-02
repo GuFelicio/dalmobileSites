@@ -228,3 +228,16 @@ test("nenhuma rota de teste no build", async () => {
     assert.equal(resposta.status, 404, `a rota de teste ${rota} está no ar`);
   }
 });
+
+test("a composição da home vem do config, não do componente", async () => {
+  // Estrutura igual, prova diferente: o que muda entre as unidades — a mídia
+  // da abertura, as fotos de cada seção, o tamanho da vitrine — mora em
+  // config/<unidade>.ts (campo `home`). Escrito no componente, vale para os
+  // dois sites sem ninguém ver. Ver docs/unidades.md.
+  const home = await readFile(path.join(root, "app", "page.tsx"), "utf8");
+  const infratores = [];
+  if (/["'`]\/videos\//.test(home)) infratores.push("caminho de vídeo escrito em app/page.tsx");
+  if (/escolherFoto\([^)]*\[/.test(home)) infratores.push("escolha de foto escrita em app/page.tsx");
+  if (/vitrine\.slice\(0,\s*\d/.test(home)) infratores.push("tamanho da vitrine escrito em app/page.tsx");
+  assert.deepEqual(infratores, [], infratores.join("\n"));
+});

@@ -80,6 +80,39 @@ config é compilado**, e o teste de cidade cruzada pode ser absoluto.
 | `analytics` | `ga` e `pixel`, ou `null` | scripts de medição |
 | `outraUnidade` | rótulo e URL da outra loja | link cruzado do rodapé |
 | `navegacao` | as rotas deste site, na ordem | cabeçalho e menu mobile |
+| `home.abertura` | o vídeo da abertura: `webm`, `mp4`, `poster` | abertura da home |
+| `home.fotosNaVitrine` | quantas fotos a vitrine mostra (12 = três ciclos A-B-C) | seção de projetos da home |
+| `home.fotoFabrica` | a foto do split da fábrica: lista de ambientes e posição | seção da fábrica da home |
+| `home.fotoLoja` | a faixa 21:9 da seção da loja | seção "a loja" da home |
+| `gradeDeAmbientes` | `"destaque"` ou `"duasColunas"` | grade de `/ambientes` |
+
+### `home` — estrutura igual, prova diferente
+
+A home é **um componente só** (`app/page.tsx`) para os dois sites. O que muda
+entre eles — a mídia e as fotos de cada seção — mora em `home`, e um teste
+(`tests/layout.test.mjs`) quebra se alguém escrever caminho de vídeo, escolha de
+foto ou tamanho de vitrine direto no componente.
+
+**A abertura é o mesmo vídeo nos dois sites**, por decisão do cliente
+(02/10/2026): o que muda na abertura é o **texto** — a cidade no rótulo, que vem
+de `cidade`. Para um vídeo por unidade, basta trocar os caminhos de
+`home.abertura` no config daquela unidade e pôr os arquivos em
+`public/videos/`. Nenhum componente muda.
+
+A escolha de foto (`fotoFabrica`, `fotoLoja`) é uma **lista de preferência**: a
+primeira foto que existir, entre os ambientes listados, na posição `indice`.
+Caraguá não tem home office nem closet; a lista cai para o que houver.
+
+### `gradeDeAmbientes` — depende do tamanho do acervo
+
+- `"destaque"` (SJC, 7 ambientes): o primeiro em 16:9 ocupando duas colunas,
+  os demais em 4:3; 2, 3 e 4 colunas por largura.
+- `"duasColunas"` (Caraguá, 4): duas colunas de fotos grandes em toda largura —
+  menos acervo pede foto maior, não grade mais vazia.
+
+Nos dois casos a grade **nunca termina com vão**: as colunas de cada item são
+calculadas em `app/ambientes/page.tsx`. Se o acervo de uma unidade mudar muito
+de tamanho, reveja este campo.
 
 ### `marca` — o lockup já contém a cidade
 
@@ -123,12 +156,22 @@ Profile daquela loja: divergência derruba a busca local e invalida o schema
 
 ## O que garante que uma cidade não vaze para o site da outra
 
-`tests/unidade-cruzada.test.mjs` **constrói as duas unidades de verdade** e
-vasculha todo o texto de `dist/` — JS, CSS, HTML, JSON. Se o nome de uma cidade
-aparecer no build da outra, a suíte quebra.
+`npm test` **constrói as duas unidades** e roda a suíte inteira sobre cada uma
+(`test:sjc` e `test:caragua`). Os testes descobrem de qual unidade é o build pelo
+canônico da home (`tests/unidade-do-build.mjs`) — até 01/10/2026 eles liam o
+config de SJC fixo, e o build de Caraguá nunca era testado de verdade.
 
-A única exceção é a **URL do link cruzado do rodapé**, porque a cidade está no
-domínio. Qualquer outra ocorrência é o bug.
+`tests/unidade-cruzada.test.mjs` aplica a regra de 14/09/2026:
+
+- **Nos campos de SEO** — `<title>`, description, OpenGraph, canônico, `<h1>`,
+  schema — e no **sitemap**: a cidade da outra unidade **nunca**. Zero exceção.
+- **No corpo visível**: só nas três menções declaradas, que a copy aprovada
+  faz de propósito para quem chegou na loja errada — o link "Ver a loja de …"
+  do rodapé, a faixa "A Dalmóbile também atende a partir de …" de `/a-loja` e a
+  resposta do FAQ de `/a-dalmobile`. Menção nova quebra a suíte.
+
+Conferido em 02/10/2026 nos dois builds, 13 rotas cada: zero ocorrência em SEO,
+sitemap e robots; no corpo, só as três declaradas.
 
 Ele já pegou dois de verdade na Fase 3: o `meta description` do `app/layout.tsx`
 com a cidade escrita à mão, e — mais sutil — um **comentário** dos arquivos de
@@ -151,11 +194,7 @@ config que citava a cidade proibida e sobrevivia no bundle do servidor.
 
 ## O que ainda falta
 
-Confirmar com as lojas — `npm run pendencias` lista sempre o estado atual:
-
-- **SJC**: WhatsApp, horário de sábado, mapa e ficha do Google Business
-- **Caraguá**: horários, mapa, ficha do Google Business, e se o telefone
-  `(12) 98270-3186` é também o WhatsApp
-- **As duas**: identificadores de GA e pixel
-- **Caraguá**: a curadoria do acervo do litoral define o conjunto de ambientes,
-  e portanto pode mudar `navegacao`
+`npm run pendencias` lista sempre o estado atual — confie nele, não numa lista
+copiada aqui, que envelhece. Em 02/10/2026 eram quatro itens, todos de
+`/a-dalmobile` (foto da fábrica, prazo do processo, certificado de garantia e
+uma resposta do FAQ que depende do prazo).

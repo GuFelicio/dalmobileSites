@@ -50,11 +50,12 @@ function colunasPorItem(total: number, colunas: number, primeiro: number): numbe
 export default function HubDeAmbientes() {
   const ambientes = ambientesDaUnidade();
 
-  // Muito acervo (SJC, 7): grade assimétrica, o primeiro em destaque 16:9 e os
+  // O desenho da grade vem do config (`gradeDeAmbientes`), porque depende do
+  // acervo de cada unidade. "destaque" (SJC, 7): o primeiro em 16:9 e os
   // outros em 4:3 — 2 colunas no celular, 3 no tablet, 4 no desktop, como o
-  // CLAUDE.md manda. Pouco acervo (Caraguá, 4): duas colunas de fotos grandes
-  // em toda largura — menos acervo pede foto maior, não grade mais vazia.
-  const poucos = ambientes.length <= 4;
+  // CLAUDE.md manda. "duasColunas" (Caraguá, 4): fotos grandes em toda
+  // largura — menos acervo pede foto maior, não grade mais vazia.
+  const poucos = unidade.gradeDeAmbientes === "duasColunas";
   const grade = poucos
     ? { celular: colunasPorItem(ambientes.length, 2, 1), tablet: colunasPorItem(ambientes.length, 2, 1), desktop: colunasPorItem(ambientes.length, 2, 1) }
     : { celular: colunasPorItem(ambientes.length, 2, 2), tablet: colunasPorItem(ambientes.length, 3, 3), desktop: colunasPorItem(ambientes.length, 4, 2) };
