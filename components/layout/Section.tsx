@@ -12,6 +12,8 @@
  *               escolha da superfície é decisão de composição, não default.
  *   semRespiro  remove o respiro vertical, para faixas finas de pontuação.
  *   sangra      remove a margem lateral, para foto de ponta a ponta.
+ *   respiro     "normal" (padrão, 120px) ou "longo" (180px embaixo), para
+ *               antes de troca de superfície. Nunca dois longos seguidos.
  *   as          a tag renderizada. Padrão "section".
  *   id, className, children
  *
@@ -28,6 +30,7 @@ type SectionProps = {
   superficie: Superficie;
   semRespiro?: boolean;
   sangra?: boolean;
+  respiro?: "normal" | "longo";
   as?: ElementType;
   id?: string;
   className?: string;
@@ -38,6 +41,7 @@ export function Section({
   superficie,
   semRespiro = false,
   sangra = false,
+  respiro = "normal",
   as: Tag = "section",
   id,
   className,
@@ -48,6 +52,7 @@ export function Section({
     estilos[superficie],
     semRespiro ? estilos.semRespiro : "",
     sangra ? estilos.sangra : "",
+    respiro === "longo" ? estilos.respiroLongo : "",
     className ?? "",
   ]
     .filter(Boolean)

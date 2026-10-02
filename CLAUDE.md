@@ -78,6 +78,19 @@ que nunca chegou ao código.
 --c-branco       #FFFFFF   superfície elevada, reverso do wordmark
 ```
 
+**As superfícies em uso** — cinco, com nome em `app/tokens.css`:
+
+| Token | Valor | Onde |
+|---|---|---|
+| `--sup-preto` | `#111211` | galerias, cases, índice de projetos |
+| `--sup-papel` | `#F9F8F5` | faixa do título da abertura, manifesto da home |
+| `--sup-papel-baixo` | `#E8E6E0` | faixa de projetos da home |
+| `--sup-oliva` | `#484B45` | seção da fábrica da home |
+| `--sup-cinza` | `#9E9B95` | costura: faixas de transição, rodapé |
+
+As páginas internas usam ainda o papel `#F5F4F0` (`--papel`). A decisão é
+**manter o que está construído**: nenhum valor é trocado no código.
+
 No componente, use os **nomes semânticos** de `app/tokens.css` (`--preto`,
 `--cinza`, `--cinza-clr`, `--papel`, `--branco`, `--cinza-texto`). Atenção:
 ali `--preto` é a **tinta do texto** (`#20211F`); a superfície preta é
@@ -129,7 +142,7 @@ Medida de leitura **62 a 66 caracteres**. Nunca texto corrido em largura total.
 
 ### Foto
 - **Nunca escurecida, nunca com filtro, nunca dentro de card com sombra.**
-- Na abertura, a foto entra inteira e o título vive numa faixa preta **abaixo** dela. A imagem é o produto; escurecer para caber texto joga fora o ativo.
+- Na abertura, a imagem (hoje, o vídeo em loop) entra inteira e o título vive numa faixa em **papel** **abaixo** dela — papel, e não preto, para a abertura emendar na seção seguinte sem mais uma troca de superfície (decisão de 02/10/2026). A imagem é o produto; escurecer para caber texto joga fora o ativo.
 - Se um dia precisar de texto sobre imagem, use painel sólido ancorado, não overlay na foto inteira.
 
 ### Movimento

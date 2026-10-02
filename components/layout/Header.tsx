@@ -5,10 +5,9 @@
  *
  * O que é: o lockup da marca com o nome da unidade, os cinco itens do menu e
  * a ação de contato. Fica no topo, sticky, com o fundo SÓLIDO da superfície em
- * que está. A única exceção é a abertura da home (`sobreAbertura`): ali ele é
- * transparente sobre o vídeo e ganha o fundo sólido depois de 80px de
- * rolagem. Abaixo de 1025px o menu vira um painel de tela cheia
- * (components/layout/MobileMenu.tsx).
+ * que está — em toda página, inclusive na home, onde fica ACIMA do vídeo da
+ * abertura, nunca por cima dele. Abaixo de 1025px o menu vira um painel de
+ * tela cheia (components/layout/MobileMenu.tsx).
  *
  * Até 02/10/2026 ele era transparente em TODA página até rolar, e nas
  * internas o texto escuro ficava sobre o body preto: contraste de 1,16:1,
@@ -18,13 +17,11 @@
  * uma — a pessoa chega por qualquer porta, e nenhuma página é a segunda.
  *
  * Props:
- *   superficie     a superfície em que o cabeçalho está pousado. Decide a cor
- *                  do texto e o fundo sólido. Obrigatória.
- *   sobreAbertura  só na home: transparente sobre o vídeo da abertura, que
- *                  passa por baixo dele, até 80px de rolagem.
+ *   superficie  a superfície em que o cabeçalho está pousado. Decide a cor do
+ *               texto e o fundo sólido. Obrigatória.
  */
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { navegacao, linkWhatsApp, unidade } from "../../config/derivados";
 import { Menu, WhatsApp } from "../icons";
 import { Brand } from "./Brand";
@@ -32,24 +29,12 @@ import { MobileMenu } from "./MobileMenu";
 import type { Superficie } from "./Section";
 import estilos from "./Header.module.css";
 
-/** Rolagem a partir da qual o cabeçalho ganha fundo sólido. */
-const ROLAGEM_PARA_FIXAR = 80;
-
 type HeaderProps = {
   superficie: Superficie;
-  sobreAbertura?: boolean;
 };
 
-export function Header({ superficie, sobreAbertura = false }: HeaderProps) {
-  const [fixado, setFixado] = useState(false);
+export function Header({ superficie }: HeaderProps) {
   const [menuAberto, setMenuAberto] = useState(false);
-
-  useEffect(() => {
-    const aoRolar = () => setFixado(window.scrollY > ROLAGEM_PARA_FIXAR);
-    aoRolar(); // o navegador pode restaurar a posição de rolagem ao voltar
-    window.addEventListener("scroll", aoRolar, { passive: true });
-    return () => window.removeEventListener("scroll", aoRolar);
-  }, []);
 
   // Identidade estável: o MobileMenu usa isto como dependência de efeito.
   const fecharMenu = useCallback(() => setMenuAberto(false), []);
@@ -57,14 +42,7 @@ export function Header({ superficie, sobreAbertura = false }: HeaderProps) {
 
   const whatsapp = linkWhatsApp();
 
-  // Sólido sempre; transparente só sobre a abertura da home, antes de rolar.
-  const transparente = sobreAbertura && !fixado;
-  const classes = [
-    estilos.header,
-    estilos[superficie],
-    sobreAbertura ? estilos.sobreAbertura : "",
-    transparente ? "" : estilos.fixado,
-  ]
+  const classes = [estilos.header, estilos[superficie], estilos.fixado]
     .filter(Boolean)
     .join(" ");
 

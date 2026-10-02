@@ -80,8 +80,10 @@ function Cartao({
       <div>
         <span>{rotulo}</span>
         <h3>{foto.titulo}</h3>
+        {/* Sem seta: a seção já tem a sua, no "Ver todos os ambientes". O fio
+            de 1px embaixo do link continua. */}
         <Link href={`/ambientes/${foto.ambienteSlug}`}>
-          Ver {foto.ambienteNome.toLowerCase()} <span aria-hidden="true">↗</span>
+          Ver {foto.ambienteNome.toLowerCase()}
         </Link>
       </div>
     </article>

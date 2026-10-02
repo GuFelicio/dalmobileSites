@@ -63,7 +63,8 @@ export default function ADalmobile() {
         </div>
       </Section>
 
-      <Section superficie="papel">
+      {/* Respiro longo: vem uma troca de superfície (papel → cinza). */}
+      <Section superficie="papel" respiro="longo">
         <h2 className={estilos.secao}>{d.fabrica?.titulo}</h2>
         <div className={estilos.texto}>
           <p>{comCidade(d.fabrica?.texto ?? "")}</p>

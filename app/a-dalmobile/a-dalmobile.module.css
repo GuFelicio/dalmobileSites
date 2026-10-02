@@ -9,11 +9,14 @@
   margin: 0;
 }
 
+/* Dek de página: 20px na cor de apoio, não no preto do título — título, dek
+   e corpo liam como uma parede só (ajustes de layout, 02/10/2026). */
 .chamada {
-  font-size: var(--fs-subtitulo);
+  font-size: var(--fs-dek);
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
+  color: var(--cinza-texto);
   max-width: var(--medida);
   margin: var(--e-2) 0 0;
 }
@@ -47,6 +50,9 @@
 
 /* ---- Processo -------------------------------------------------------- */
 
+/* A lista na largura da coluna de texto: as réguas entre as etapas param
+   onde o texto para, não atravessam a página (ajustes de layout). Os 3em a
+   mais que a medida são a coluna do número. */
 .processo {
   list-style: none;
   margin: 0;
@@ -54,6 +60,7 @@
   display: grid;
   gap: var(--e-4);
   counter-reset: etapa;
+  max-width: calc(var(--medida) + 3em);
 }
 
 .etapa {
@@ -122,6 +129,12 @@
   .numeros {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* Três números em duas colunas: o último ocupa a linha toda, para a grade
+     não terminar com vão (ajustes de layout, 02/10/2026). */
+  .numeros li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -129,6 +142,9 @@
     grid-auto-flow: column;
     grid-template-columns: none;
   }
+
+  /* Em linha não há segunda linha para preencher. */
+  .numeros li:last-child:nth-child(odd) { grid-column: auto; }
 }
 
 .numeroValor {
@@ -153,10 +169,13 @@
 
 /* Aberta, não em acordeão: é seção indexável, e quem procura resposta não
    deve precisar clicar para achá-la. */
+/* Na largura da coluna de texto: as réguas entre perguntas param onde a
+   resposta para. */
 .faq {
   margin: 0;
   display: grid;
   gap: var(--e-3);
+  max-width: var(--medida);
 }
 
 .item {

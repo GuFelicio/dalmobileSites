@@ -66,26 +66,27 @@ export default function Home() {
 
   return (
     <div className="site site-synthesis">
-      {/* O mesmo cabeçalho das outras páginas, transparente sobre o vídeo da
-          abertura até 80px de rolagem. O cabeçalho próprio que a home tinha
-          escondia o menu inteiro no celular — sobrava só o WhatsApp. */}
-      <Header superficie="preto" sobreAbertura />
+      {/* O mesmo cabeçalho das outras páginas, em papel sólido, ACIMA do
+          vídeo e não por cima dele: a abertura não leva nada sobre a imagem.
+          O cabeçalho próprio que a home tinha escondia o menu no celular. */}
+      <Header superficie="papel" />
 
       <main>
         <section className="synthesis-hero">
-          {/* Vídeo de projeto executado no fundo da capa, no lugar da foto. É
-              decorativo (aria-hidden): o título e o texto estão no painel.
-              Ver docs/decisoes.md, 2026-10-01. */}
-          <VideoEmLoop
-            className="synthesis-hero-video"
-            webm="/videos/hero-loop.webm"
-            mp4="/videos/hero-loop.mp4"
-            poster="/videos/hero-loop-poster.jpg"
-          />
-          {/* Só o topo escurece, e pouco: é o que deixa o logo, o menu e o
-              "Falar no WhatsApp" legíveis sobre as partes claras do vídeo. O
-              vídeo em si nunca é escurecido. */}
-          <div className="synthesis-hero-top" aria-hidden="true" />
+          {/* O vídeo de projeto executado entra INTEIRO, de ponta a ponta, sem
+              nada por cima e sem escurecimento. É decorativo (aria-hidden): o
+              título e o texto vivem na faixa logo abaixo. */}
+          <div className="synthesis-hero-media">
+            <VideoEmLoop
+              className="synthesis-hero-video"
+              webm="/videos/hero-loop.webm"
+              mp4="/videos/hero-loop.mp4"
+              poster="/videos/hero-loop-poster.jpg"
+            />
+          </div>
+          {/* A faixa do título, em papel, IMEDIATAMENTE abaixo do vídeo. Era um
+              cartão sobre a imagem; os elementos, os tamanhos e a ordem são os
+              mesmos. Emenda sem corte com a seção seguinte, também papel. */}
           <div className="synthesis-hero-panel">
             {/* "Crie seu mundo" é assinatura de marca e continua no rodapé,
                 onde assinatura fica. Como manchete, não dizia nada que o
@@ -106,7 +107,7 @@ export default function Home() {
             {/* "Liberdade criativa", "escuta", "repertório" e "identidade" são
                 palavras que qualquer marcenaria do país usa. A mesma ideia —
                 o projeto é seu, não é catálogo — dita por um fato de ofício. */}
-            <p className="eyebrow">01 — COMO PROJETAMOS</p>
+            <p className="eyebrow">COMO PROJETAMOS</p>
             <h2>Nenhuma casa é igual à planta.</h2>
             <p>
               A medição é feita no imóvel, com a obra pronta — é de lá que sai o desenho.
@@ -129,7 +130,7 @@ export default function Home() {
               {/* "Fotografado depois da montagem" faz uma afirmação que a
                   concorrência não pode fazer: aqui não tem render, não tem
                   banco de imagem, não tem apartamento de fornecedor. */}
-              <p className="eyebrow">02 — PROJETOS EXECUTADOS</p>
+              <p className="eyebrow">PROJETOS EXECUTADOS</p>
               <h2 id="titulo-vitrine">Fotografado depois da montagem.</h2>
             </div>
             <Link href="/ambientes">Ver todos os ambientes <Arrow /></Link>
@@ -147,7 +148,7 @@ export default function Home() {
             <span>O QUE VEM POR ESCRITO</span>
           </div>
           <div className="synthesis-process-copy">
-            <p className="eyebrow">03 — DA FÁBRICA À MONTAGEM</p>
+            <p className="eyebrow">DA FÁBRICA À MONTAGEM</p>
             <h2>Produção própria, com garantia publicada.</h2>
             <p>
               A marcenaria não é comprada de terceiro: sai da fábrica da própria Dalmóbile,

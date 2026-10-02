@@ -31,8 +31,33 @@ export const metadata: Metadata = metadataDaPagina({
   foto: ambientesDaUnidade()[0]?.fotos[0]?.src,
 });
 
+/**
+ * Quantas colunas cada item ocupa, para a grade NUNCA terminar com vão. O
+ * primeiro ocupa `primeiro` colunas; se a conta não fechar a última linha, o
+ * último estica até a borda. Por conta, e não por CSS fixo, para continuar sem
+ * vão quando a loja ganhar ou perder um ambiente.
+ */
+function colunasPorItem(total: number, colunas: number, primeiro: number): number[] {
+  if (total === 1) return [colunas];
+  const spans = Array.from({ length: total }, (_, i) => (i === 0 ? primeiro : 1));
+  const resto = (primeiro + total - 1) % colunas;
+  if (resto !== 0) spans[total - 1] += colunas - resto;
+  return spans;
+}
+
 export default function HubDeAmbientes() {
   const ambientes = ambientesDaUnidade();
+
+  // Mais de quatro ambientes (SJC, 7): o primeiro em destaque, ocupando duas
+  // colunas com foto 16:9 — 2+1+1 / 1+1+1+1 no desktop, sem vão. Até quatro
+  // (Caraguá) não há destaque: no desktop a linha fecha exata e nada muda; no
+  // tablet (3 colunas) o último card estica até a borda, para não sobrar vão.
+  const destaque = ambientes.length > 4;
+  const grade = {
+    celular: colunasPorItem(ambientes.length, 2, destaque ? 2 : 1),
+    tablet: colunasPorItem(ambientes.length, 3, destaque ? 3 : 1),
+    desktop: colunasPorItem(ambientes.length, 4, destaque ? 2 : 1),
+  };
 
   return (
     <>
@@ -50,7 +75,18 @@ export default function HubDeAmbientes() {
 
         <ul className={estilos.grade}>
           {ambientes.map((ambiente, i) => (
-            <li key={ambiente.slug} className={estilos.card}>
+            <li
+              key={ambiente.slug}
+              className={`${estilos.card} ${destaque && i === 0 ? estilos.cardDestaque : ""}`}
+              // As colunas deste item em cada faixa de largura, lidas pelo CSS.
+              style={
+                {
+                  "--colunas-celular": grade.celular[i],
+                  "--colunas-tablet": grade.tablet[i],
+                  "--colunas-desktop": grade.desktop[i],
+                } as React.CSSProperties
+              }
+            >
               <Link href={`/ambientes/${ambiente.slug}`} className={estilos.cardLink}>
                 <div className={estilos.cardFoto}>
                   <Foto
@@ -58,7 +94,11 @@ export default function HubDeAmbientes() {
                     alt={ambiente.fotos[0].alt}
                     /* Grade 2/3/4 colunas: a foto ocupa ~metade, ~um terço e
                        ~um quarto da largura em cada faixa. */
-                    sizes="(max-width: 600px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    sizes={
+                      destaque && i === 0
+                        ? "(max-width: 1024px) 100vw, 50vw"
+                        : "(max-width: 600px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    }
                     prioridade={i < 4}
                     className={estilos.cardImg}
                   />

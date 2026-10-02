@@ -8,6 +8,61 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-02 · ajustes de layout, fase 2: subtrações e ritmo
+
+Sobre a V1. Estrutura, splits, carrossel, tipografia e cores ficam como estão.
+**Nenhum texto mudou:** o diff do texto renderizado das 8 páginas, nas duas
+unidades, só mostra o número saindo dos rótulos e a seta saindo dos links dos
+cards. **Nenhuma cor mudou de valor:** `tokens.css` só ganhou nomes.
+
+### Saiu
+- Os números dos rótulos de seção da home: "01 — COMO PROJETAMOS" virou
+  "COMO PROJETAMOS", e assim os outros dois. Tamanho, tracking e posição iguais.
+- As setas ↗ dos links dos cards do carrossel. Fica no máximo uma por seção.
+- O cartão sobre o vídeo da abertura e o gradiente do topo. O vídeo entra
+  inteiro (16:9, de ponta a ponta), sem nada por cima; rótulo, título, dek e
+  link passam para uma faixa em papel logo abaixo, com os mesmos tamanhos e a
+  mesma ordem, e emendam na seção seguinte. Saiu junto o fio solto do canto do
+  cartão. O cabeçalho da home fica em papel sólido, acima do vídeo.
+- O título em branco sobre a foto do primeiro card do carrossel, e o véu dele.
+  A legenda fica embaixo, como nos outros cards.
+- A legenda "O que vem por escrito", que ficava sobre a foto da seção da
+  fábrica: foi para baixo da foto, na própria faixa oliva.
+
+### Ajustado
+- **Três respiros** (`--respiro-curto` 56/40, `--respiro` 120/72,
+  `--respiro-longo` 180/96), os três em uso. O 112px e o 122px da home saíram.
+  O longo vem antes da faixa de projetos da home e antes da troca de
+  superfície de `/a-dalmobile`; nunca dois seguidos.
+- **Seções seguidas na mesma superfície dividem o respiro** (`Section`): o vão
+  de ~250px entre a introdução e "Como funciona a parceria" de `/arquitetos`
+  virou 120px, e o mesmo nas outras internas.
+- **Réguas na largura do texto:** processo e FAQ de `/a-dalmobile`; em
+  `/arquitetos`, a grade 2×2 na largura de duas colunas de texto.
+- **`/ambientes` sem vão.** SJC: o primeiro ambiente em duas colunas, 16:9 no
+  desktop — 2+1+1 / 1+1+1+1. Caraguá não muda no desktop; no tablet, o último
+  card estica para fechar a linha (era 3+1 com vão). As colunas são calculadas,
+  e a grade continua sem vão se o número de ambientes mudar.
+- **A faixa de três números de `/a-dalmobile`** sem vão no tablet.
+- **Dek de página** em 20px, na cor de apoio.
+- `--mov-fio` de 200 para 150ms.
+
+### Documentado
+- As cinco superfícies em uso com nome (`--sup-preto`, `--sup-papel`,
+  `--sup-papel-baixo`, `--sup-oliva`, `--sup-cinza`) em `tokens.css`, e a tabela
+  no `CLAUDE.md`. As internas usam ainda o papel `#F5F4F0`.
+
+### Verificado — as duas unidades, 7 páginas, 6 larguras
+Cabeçalho legível (mínimo 14,7:1); menu mobile abre, prende o foco e fecha com
+Esc; nenhum alvo abaixo de 44px; 935 focos com contorno; nenhum rótulo numerado;
+no máximo uma seta por seção; vídeo de abertura inteiro em toda largura;
+nenhum texto sobre foto ou vídeo; três respiros, nenhum longo seguido; maior
+linha 66 caracteres; nenhuma régua mais larga que o texto; nenhuma grade com
+vão; nenhuma rolagem horizontal. 57/57 testes; `workerd` com todas as rotas em
+200. Prints de página inteira: 6 páginas × 6 larguras × 2 unidades.
+
+---
+
 ## [não publicado] — 2026-10-02 · ajustes de layout, fase 1: defeitos
 
 Sobre a V1. Nenhuma mudança de layout, nenhuma cor da paleta alterada (o diff

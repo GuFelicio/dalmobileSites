@@ -38,11 +38,14 @@
   margin: 0;
 }
 
+/* Dek de página: 20px na cor de apoio, não no preto do título — título, dek
+   e corpo liam como uma parede só (ajustes de layout, 02/10/2026). */
 .chamada {
-  font-size: var(--fs-subtitulo);
+  font-size: var(--fs-dek);
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
+  color: var(--cinza-texto);
   max-width: var(--medida);
   margin: var(--e-2) 0 0;
 }

@@ -4,9 +4,25 @@
    inverter dentro dela (um chip ativo, por exemplo) sem saber em qual está. */
 
 .section {
-  /* O respiro entre seções vem da escala: 128px desktop, 72px mobile. */
-  padding-block: var(--e-secao);
+  /* Respiro entre seções: 120px desktop, 72px mobile (--respiro). */
+  padding-block: var(--respiro);
   padding-inline: var(--pad-lateral);
+}
+
+/* Duas seções seguidas na MESMA superfície dividem o respiro, não somam: sem
+   isto, o padding de baixo de uma e o de cima da outra davam ~250px — o vão
+   entre a introdução e "Como funciona a parceria" de /arquitetos, que
+   aparecia em toda página interna. Fica o respiro normal, 120px. */
+.preto + .preto,
+.papel + .papel,
+.cinza + .cinza {
+  padding-top: 0;
+}
+
+/* Respiro longo (180px / 96px) embaixo da seção: antes de uma troca de
+   superfície, ou antes da seção mais importante. Nunca em duas seguidas. */
+.respiroLongo {
+  padding-bottom: var(--respiro-longo);
 }
 
 /* Preto — abertura, faixa de projetos, índice, cases, galerias. A imagem manda. */

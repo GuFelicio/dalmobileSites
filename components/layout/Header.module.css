@@ -23,24 +23,15 @@
 
 /* Fundo SÓLIDO da superfície em que está — em toda página, sempre. Até
    02/10/2026 só entrava depois de 80px de rolagem, e nas páginas internas o
-   texto escuro ficava sobre o body preto (1,16:1). A única exceção é a
-   abertura da home (.sobreAbertura), antes de rolar. Sólido e não
-   translúcido — nada de backdrop-filter deixando a foto vazar. */
+   texto escuro ficava sobre o body preto (1,16:1). Sem exceção: na home ele
+   fica acima do vídeo, não por cima. Sólido e não translúcido — nada de
+   backdrop-filter deixando a foto vazar. */
 /* O fundo é o da PRÓPRIA superfície da página — nas internas, o papel delas —,
    para o cabeçalho emendar sem corte. Os fios: papel a 14% sobre preto, tinta
    a 12% sobre papel. */
 .fixado.preto { background: var(--c-preto); border-bottom-color: var(--cab-fio-sobre-preto); }
 .fixado.cinza { background: var(--cinza); border-bottom-color: var(--cab-fio-sobre-papel); }
 .fixado.papel { background: var(--papel); border-bottom-color: var(--cab-fio-sobre-papel); }
-
-/* Home: o vídeo da abertura passa POR BAIXO do cabeçalho. A margem negativa
-   puxa a capa para cima exatamente a altura dele, e a altura é fixa para a
-   conta fechar. O gradiente do topo da capa (.synthesis-hero-top) garante a
-   leitura enquanto ele está transparente. */
-.sobreAbertura {
-  height: var(--alt-cabecalho);
-  margin-bottom: calc(-1 * var(--alt-cabecalho));
-}
 
 .marca {
   display: inline-flex;

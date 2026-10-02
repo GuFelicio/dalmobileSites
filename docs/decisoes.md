@@ -152,6 +152,38 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-02 · Ajustes de layout na V1: o que foi decidido no caminho
+
+O roteiro "Ajustes de layout na V1" foi seguido. Onde ele deixava espaço ou se
+contradizia, a escolha foi:
+
+1. **Faixa do título da abertura em papel** (o padrão do roteiro), e não preta.
+   O `CLAUDE.md` foi atualizado.
+2. **Cabeçalho da home em papel sólido, ACIMA do vídeo.** O roteiro pede o
+   cabeçalho transparente sobre a abertura e, ao mesmo tempo, a abertura "sem
+   nada por cima e sem escurecimento". Sobre o vídeo claro, o texto do
+   cabeçalho só lia com o gradiente de topo — que escurece a imagem. Papel, e
+   não preto, para não carregar no preto.
+3. **A legenda "O que vem por escrito" foi para baixo da foto da fábrica.** O
+   roteiro só citava o card do carrossel, mas a verificação final pede
+   "nenhuma legenda sobre foto". O texto ficou; mudou o lugar.
+4. **Caraguá em `/ambientes`:** o roteiro diz "não mexer lá" porque no desktop a
+   grade fecha exata. No tablet (3 colunas) ela fechava 3+1, com vão; o último
+   card agora estica. No desktop nada mudou.
+5. **O mapa de `/a-loja` saiu da ordem do Tab.** O foco entrava no Google Maps
+   (outro domínio) sem contorno visível. O "Abrir no mapa" logo acima leva ao
+   mesmo lugar.
+6. **Alvo de toque dos links de texto da home:** uma área invisível de 44px em
+   volta do link, em vez de aumentar o link — aumentar afastaria o fio do texto,
+   e o roteiro não muda desenho.
+7. **"Uma seta por seção"** foi aplicado tirando a seta dos links dos cards do
+   carrossel; cada seção ficou com a seta do seu link principal.
+
+**Descartado.** Cabeçalho transparente com gradiente sobre o vídeo (escurece a
+imagem) e tirar a legenda da fábrica (seria mudar texto).
+
+---
+
 ## 2026-10-02 · A V2 de layout foi descartada; a V1 fica, com três ajustes
 
 **Decisão.** O cliente viu a V2 (fases 0 a 4, construída em `v2-layout` a partir

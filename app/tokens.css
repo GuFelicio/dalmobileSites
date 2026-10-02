@@ -54,6 +54,16 @@
   --papel:      var(--c-papel);
   --branco:     var(--c-branco);
 
+  /* As CINCO superfícies em uso no site, com nome (ajustes de layout,
+     02/10/2026). Só nomes: apontam para valores que já existiam na camada 1,
+     nenhum valor mudou. O CLAUDE.md as lista com estes nomes.
+     As páginas internas usam ainda o papel #f5f4f0 (--papel, acima). */
+  --sup-preto:       var(--c-preto);        /* #111211 abertura, galerias        */
+  --sup-papel:       var(--c-papel-alto);   /* #f9f8f5 faixa do título, manifesto */
+  --sup-papel-baixo: var(--c-papel-baixo);  /* #e8e6e0 faixa de projetos da home  */
+  --sup-oliva:       var(--c-oliva);        /* #484b45 seção da fábrica da home   */
+  --sup-cinza:       var(--c-cinza);        /* #9e9b95 costura: faixas, rodapé     */
+
   /* Texto de apoio sobre papel. NÃO é --cinza: medido, --cinza sobre --papel
      dá 2,52:1 de contraste, e o mínimo do WCAG AA para texto é 4,5:1. Este
      dá 6,02:1. Use --cinza para faixa e superfície, este para texto. */
@@ -129,6 +139,9 @@
   --fs-texto:      17px;    --tr-texto:      0;         --lh-texto:      1.62;
   --fs-rotulo:     10.5px;  --tr-rotulo:     0.24em;    --lh-rotulo:     1.4;
 
+  /* Dek de página: 20px (era o Subtítulo, 22px) — ajustes de layout. */
+  --fs-dek: 20px;
+
   /* Itens do painel de menu mobile: 32px peso 300 (ajustes de layout). */
   --fs-menu: 32px;
 
@@ -150,7 +163,16 @@
   --e-6:  96px;
   --e-7: 128px;
 
-  --e-secao:  var(--e-7);  /* respiro entre seções: 128 desktop, 72 mobile */
+  /* Ritmo vertical: TRÊS intervalos, não um (ajustes de layout, 02/10/2026).
+     Intervalo constante — quase tudo era 112px — é a segunda maior razão de
+     uma página parecer gerada. Regra: nunca dois longos seguidos, nunca três
+     curtos seguidos. Mobile (até 600px) no fim do arquivo: 40 · 72 · 96.  */
+  --respiro-curto:  56px;  /* entre blocos irmãos da mesma seção          */
+  --respiro:       120px;  /* entre seções                                */
+  --respiro-longo: 180px;  /* antes da seção mais importante da página e
+                              antes de troca de superfície               */
+
+  --e-secao:  var(--respiro);  /* nome antigo, hoje igual a --respiro      */
   --e-margem: 20px;        /* margem lateral do texto no mobile            */
 
   /* Margem lateral da página. Cresce com a tela, mas nunca abaixo dos 20px
@@ -174,7 +196,8 @@
      ------------------------------------------------------------------ */
   --mov-fade:  400ms;  /* fade partindo de visível                       */
   --mov-hover: 600ms;  /* hover em card: scale(1.02)                     */
-  --mov-fio:   200ms;  /* fio de 1px sob o item de navegação             */
+  --mov-fio:   150ms;  /* fio de 1px que aparece sob o link no hover —
+                          150ms, ease (ajustes de layout, 02/10/2026)    */
   --mov-ease:  cubic-bezier(.2, .8, .2, 1);
 
   /* Alvo de toque mínimo, para não repetir o botão de 30px do estudo. */
@@ -223,6 +246,8 @@
     --fs-texto:      16.5px;
     /* --fs-rotulo não muda: 10.5px em toda largura. */
 
-    --e-secao: 72px;
+    --respiro-curto: 40px;
+    --respiro:       72px;
+    --respiro-longo: 96px;
   }
 }

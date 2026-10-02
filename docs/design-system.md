@@ -48,6 +48,21 @@ O estudo tinha **37 hex distintos em 46 ocorrências**. Boa parte era papel quas
 igual repetido (`#f6f5f1`, `#f5f4f1`, `#f7f6f3`, `#f8f7f4`…). A Fase 1 colapsou
 esses vizinhos nos doze valores acima.
 
+### As superfícies em uso — cinco, com nome
+
+Formalizadas em 02/10/2026, sem trocar nenhum valor: são nomes para cores que
+já estavam na camada 1.
+
+| Token | Valor | Onde |
+|---|---|---|
+| `--sup-preto` | `#111211` | galerias, cases, índice de projetos |
+| `--sup-papel` | `#F9F8F5` | faixa do título da abertura, manifesto da home |
+| `--sup-papel-baixo` | `#E8E6E0` | faixa de projetos da home |
+| `--sup-oliva` | `#484B45` | seção da fábrica da home |
+| `--sup-cinza` | `#9E9B95` | costura: faixas de transição, rodapé |
+
+As páginas internas usam ainda o papel `#F5F4F0` (`--papel`).
+
 ### Camada 2 — nomes semânticos
 
 São os nomes do `CLAUDE.md`. **Nunca renomear:** a troca de paleta acontece na
@@ -127,6 +142,8 @@ Hierarquia por **escala e tracking**, nunca por engordar peso.
 Os valores mobile trocam sozinhos em `@media (max-width: 600px)`, dentro do
 próprio `tokens.css`. **O componente não precisa de media query para tipografia.**
 
+Dek de página: `--fs-dek` (20px), na cor `--cinza-texto`.
+
 Medida de leitura: `--medida` = **`34em`** (~64 caracteres, dentro da faixa de
 62 a 66 do `CLAUDE.md`). Até 02/10/2026 era `64ch`, que dava **77** caracteres
 por linha: `ch` é a largura do algarismo 0, mais largo que a letra média da
@@ -174,7 +191,19 @@ Escala base 8. Sem valor fora dela em componente novo.
 | `--e-6` | 96px |
 | `--e-7` | 128px |
 
-- `--e-secao` — respiro entre seções: **128px** no desktop, **72px** no mobile (troca sozinho).
+### Ritmo vertical — três intervalos
+
+| Token | Desktop | Mobile | Quando |
+|---|---|---|---|
+| `--respiro-curto` | 56px | 40px | entre blocos irmãos da mesma seção |
+| `--respiro` | 120px | 72px | entre seções |
+| `--respiro-longo` | 180px | 96px | antes da seção mais importante e antes de troca de superfície |
+
+**Nunca dois longos seguidos, nunca três curtos seguidos.** `Section` usa
+`--respiro`; `respiro="longo"` põe 180px embaixo. Duas `Section` seguidas na
+mesma superfície dividem o respiro (120px, não 240).
+
+- `--e-secao` — nome antigo, hoje igual a `--respiro`. Não usar em código novo.
 - `--e-margem` — margem lateral do texto no mobile: **20px**. A foto sangra até a borda; o texto mantém a margem.
 - `--pad-lateral` — margem lateral da **página**: `clamp(20px, 5vw, 80px)`. Cresce com a tela e nunca desce abaixo dos 20px do mobile. É o que `Section`, `Header`, `Footer` e `MobileMenu` usam para alinhar tudo na mesma calha vertical. Não invente outro recuo lateral: use este.
 - `--alt-cabecalho` — altura do cabeçalho: **88px**. Vale como offset de âncora e como altura da barra do `MobileMenu`, para o painel abrir alinhado ao cabeçalho que o cobre.
@@ -187,6 +216,12 @@ Escala base 8. Sem valor fora dela em componente novo.
 - Separação por fio de 1px (`--fio`) e por espaço. **Zero sombra.**
 - Alinhamento **à esquerda** em tudo. Nada centralizado.
 - `--toque` (44px) é o alvo de toque mínimo, com espaço entre alvos vizinhos.
+  Link de texto que não pode crescer sem mudar o desenho ganha uma área de
+  toque invisível de 44px (`::before`), como os links da home em `globals.css`.
+- `--toque-menu` (48px) é o botão de abrir e de fechar o menu mobile.
+- **Seta ↗: no máximo uma por seção**, no link principal dela. Os outros links
+  ficam com o fio de 1px.
+- **Legenda sempre fora da foto.** Nenhum texto sobre imagem ou vídeo.
 
 ```css
 .chip {

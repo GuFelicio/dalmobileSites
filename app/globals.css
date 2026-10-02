@@ -118,7 +118,7 @@ img { display: block; max-width: 100%; }
   /* Medida lateral e respiro vertical do estudo. A Fase 2 troca por
      --e-secao e pela margem da escala base 8. */
   --synthesis-gutter: clamp(28px, 5vw, 80px);
-  --synthesis-section: clamp(78px, 8vw, 112px);
+  --synthesis-section: var(--respiro);
   background: var(--papel);
   color: var(--preto);
 }
@@ -126,16 +126,20 @@ img { display: block; max-width: 100%; }
    celular ele escondia o menu inteiro. A home usa components/layout/Header,
    como as outras páginas. */
 
+/* A abertura: o vídeo inteiro e, abaixo dele, a faixa do título em papel
+   (ajustes de layout, 02/10/2026). Era um cartão cinza sobre o vídeo, com um
+   véu no topo para o cabeçalho; os dois saíram. */
 .synthesis-hero {
-  /* 100svh, e não 100vh: a barra do navegador móvel quebra vh.
-     Os 58px que se subtraíam aqui eram a barra do seletor de estudos. */
-  height: min(900px, 100svh);
-  min-height: 720px;
-  position: relative;
-  background: var(--c-preto);
+  background: var(--c-papel-alto);
 }
-/* O vídeo de fundo. cover: preenche a capa em qualquer proporção, sem barra
-   preta; o que sobra é cortado nas bordas, nunca a imagem achatada. */
+/* O vídeo INTEIRO: 16:9, de ponta a ponta, sem corte e sem nada por cima. O
+   fundo preto só aparece no instante antes de o vídeo carregar. */
+.synthesis-hero-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--c-preto);
+  overflow: hidden;
+}
 .synthesis-hero-video {
   display: block;
   width: 100%;
@@ -143,37 +147,14 @@ img { display: block; max-width: 100%; }
   object-fit: cover;
   object-position: center;
 }
-/* Gradiente SÓ no topo, para o cabeçalho (que é absoluto, por cima da capa)
-   ficar legível. Os 22% cobrem a altura do cabeçalho com folga; daí para
-   baixo o vídeo aparece sem nenhum véu. O antigo .synthesis-shade, que
-   escurecia a foto inteira, saiu — CLAUDE.md, "Foto nunca escurecida". */
-.synthesis-hero-top {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, var(--degrade-cabecalho), transparent 22%);
-}
+/* A faixa do título, imediatamente abaixo do vídeo, sobre o papel da seção
+   seguinte — as duas emendam sem corte. Mesmos elementos, mesmos tamanhos e
+   mesma ordem do cartão; alinhada à esquerda, na margem da grade. */
 .synthesis-hero-panel {
-  position: absolute;
-  left: var(--synthesis-gutter);
-  bottom: 48px;
-  width: min(540px, calc(100% - (var(--synthesis-gutter) * 2)));
-  padding: 48px 52px 46px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* Painel sólido ancorado, não overlay translúcido sobre a foto inteira. */
-  background: var(--c-cinza-painel);
-  animation: synthesis-panel-in .9s var(--mov-ease) both;
-}
-.synthesis-hero-panel::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 48px;
-  width: 1px;
-  height: 48px;
-  background: var(--sobre-escuro-70);
+  padding: var(--respiro-curto) var(--synthesis-gutter) 0;
 }
 .synthesis-hero-panel h1 {
   margin: 24px 0 28px;
@@ -226,10 +207,13 @@ img { display: block; max-width: 100%; }
 .synthesis-manifesto-image figcaption { margin-top: 14px; font-size: 9px; letter-spacing: .18em; }
 
 .synthesis-projects {
-  padding: var(--synthesis-section) var(--synthesis-gutter) calc(var(--synthesis-section) + 10px);
+  /* Respiro LONGO em cima: é a seção mais importante da página e vem depois
+     de uma troca de superfície (papel → cinza). Embaixo, o normal — antes era
+     um 122px (112 + 10) que escapou. */
+  padding: var(--respiro-longo) var(--synthesis-gutter) var(--synthesis-section);
   background: var(--c-papel-baixo);
 }
-.synthesis-section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 54px; }
+.synthesis-section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: var(--respiro-curto); }
 .synthesis-section-heading h2 {
   margin: 18px 0 0;
   max-width: 900px;
@@ -253,29 +237,21 @@ img { display: block; max-width: 100%; }
 }
 .synthesis-project div > a { display: flex; gap: 15px; padding-bottom: 6px; border-bottom: var(--fio) solid; font-size: 11px; }
 
-.synthesis-project-featured { height: clamp(520px, 52vw, 720px); }
-/* Véu sobre foto: proibido pelo CLAUDE.md, mantido só enquanto o estudo existe. */
-.synthesis-project-featured::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, var(--veu-62), transparent 58%);
-  pointer-events: none;
-}
+/* O card em destaque tinha o título em branco SOBRE a foto, com véu; os
+   outros onze, embaixo. Agora todos têm a legenda embaixo da foto. A foto
+   mantém a altura de antes. */
+.synthesis-project-featured { overflow: visible; }
+.synthesis-project-featured > img { height: clamp(520px, 52vw, 720px); }
 .synthesis-project-featured > div {
-  position: absolute;
-  z-index: 2;
-  left: 32px;
-  right: 32px;
-  bottom: 30px;
   display: grid;
   grid-template-columns: .3fr 1fr auto;
   align-items: end;
   gap: 30px;
-  color: var(--sobre-escuro);
+  padding: 18px 0 0;
+  color: var(--preto);
 }
 
-.synthesis-project-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 64px; align-items: start; }
+.synthesis-project-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: var(--respiro-curto); align-items: start; }
 .synthesis-project-pair .synthesis-project { height: auto; margin: 0; overflow: visible; background: transparent; }
 .synthesis-project-pair .synthesis-project > img { height: 500px; }
 .synthesis-project-pair .synthesis-project > div {
@@ -296,9 +272,12 @@ img { display: block; max-width: 100%; }
   background: var(--c-oliva);
   color: var(--papel);
 }
-.synthesis-process-image { position: relative; min-height: 620px; overflow: hidden; }
-.synthesis-process-image img { width: 100%; height: 100%; object-fit: cover; }
-.synthesis-process-image span { position: absolute; left: 28px; bottom: 26px; font-size: 9px; letter-spacing: .2em; }
+/* A legenda "O que vem por escrito" ficava SOBRE a foto. Agora fica abaixo
+   dela, na faixa oliva da própria seção — legenda sempre abaixo da foto
+   (ajustes de layout, 02/10/2026). A foto ocupa o resto da altura. */
+.synthesis-process-image { display: flex; flex-direction: column; min-height: 620px; overflow: hidden; }
+.synthesis-process-image img { flex: 1 1 auto; min-height: 0; width: 100%; height: 100%; object-fit: cover; }
+.synthesis-process-image span { padding: 18px 28px; font-size: 9px; letter-spacing: .2em; }
 .synthesis-process-copy { padding: 72px var(--synthesis-gutter); display: flex; flex-direction: column; justify-content: center; }
 .synthesis-process-copy h2 {
   max-width: 780px;
@@ -313,7 +292,7 @@ img { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-top: 46px;
+  margin-top: var(--respiro-curto);
   padding-top: 24px;
   border-top: var(--fio) solid var(--sobre-escuro-fio);
 }
@@ -325,7 +304,7 @@ img { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: .84fr 1.16fr;
   gap: clamp(42px, 5vw, 78px);
-  padding: 64px var(--synthesis-gutter);
+  padding: var(--respiro-curto) var(--synthesis-gutter);
   background: var(--cinza);
 }
 .synthesis-contact-copy { padding: 0; display: flex; flex-direction: column; justify-content: center; }
@@ -351,16 +330,11 @@ img { display: block; max-width: 100%; }
 .synthesis-contact-image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--mov-hover) ease; }
 .synthesis-contact:hover .synthesis-contact-image img { transform: scale(1.02); }
 
-@keyframes synthesis-panel-in {
-  from { opacity: 0; transform: translateY(34px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
 /* ==========================================================================
    Responsivo — série única, depois da fusão dos dois blocos da Síntese
    ========================================================================== */
 @media (max-width: 980px) {
-  .synthesis-hero-panel { width: min(510px, 58vw); }
   .synthesis-project-note { width: 25vw; }
   .synthesis-manifesto { grid-template-columns: minmax(0, 1fr) minmax(280px, .62fr); gap: 48px; }
   .synthesis-manifesto-image { width: 100%; }
@@ -373,10 +347,7 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 700px) {
-  .site-synthesis { --synthesis-gutter: 20px; --synthesis-section: 72px; }
-  .synthesis-hero { min-height: 700px; }
-  .synthesis-hero-panel { left: 20px; right: 20px; bottom: 20px; width: auto; padding: 40px 24px 36px; }
-  .synthesis-hero-panel::before { right: 30px; height: 34px; }
+  .site-synthesis { --synthesis-gutter: 20px; }
   .synthesis-hero-panel h1 { margin: 20px 0 24px; font-size: 61px; }
   .synthesis-hero-panel > p:not(.eyebrow) { font-size: 15px; }
   .synthesis-project-note { display: none; }
@@ -385,14 +356,14 @@ img { display: block; max-width: 100%; }
   .synthesis-manifesto-image { width: 100%; margin: 0; }
   .synthesis-manifesto-image img { height: 370px; }
   .synthesis-projects { padding: var(--synthesis-section) var(--synthesis-gutter); }
-  .synthesis-section-heading { display: block; margin-bottom: 40px; }
+  .synthesis-section-heading { display: block; }
   .synthesis-section-heading h2 { font-size: 48px; }
   .synthesis-section-heading > a { margin-top: 30px; width: max-content; }
-  .synthesis-project-featured { height: 530px; }
-  .synthesis-project-featured > div { left: 20px; right: 20px; bottom: 20px; grid-template-columns: 1fr; gap: 13px; }
+  .synthesis-project-featured > img { height: 530px; }
+  .synthesis-project-featured > div { grid-template-columns: 1fr; gap: 13px; }
   .synthesis-project-featured div > a { display: none; }
   .synthesis-project h3 { font-size: 45px; }
-  .synthesis-project-pair { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
+  .synthesis-project-pair { grid-template-columns: 1fr; gap: 48px; margin-top: var(--respiro-curto); }
   .synthesis-project-pair .synthesis-project { width: 100%; }
   .synthesis-project-pair .synthesis-project > img { height: 420px; }
   .synthesis-project-pair .synthesis-project > div { grid-template-columns: 1fr; gap: 8px; }
