@@ -410,13 +410,27 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
+  justify-content: space-between;
   gap: var(--e-2) var(--e-4);
 }
+/* O endereço menor que o texto corrido e, do tablet para cima, alinhado à
+   DIREITA, na outra ponta da barra (pedido do cliente, 05/10/2026). É a única
+   exceção à regra de alinhamento à esquerda do CLAUDE.md — ver
+   docs/decisoes.md. 14px: um degrau abaixo dos 16,5–17px do texto, ainda
+   confortável de ler. */
 .synthesis-footer-endereco {
   font-style: normal; /* <address> vem em itálico por padrão */
-  font-size: var(--fs-texto);
+  font-size: 14px;
   line-height: var(--lh-texto);
   max-width: var(--medida);
+}
+@media (min-width: 601px) {
+  .synthesis-footer-endereco { text-align: right; }
+}
+/* Desktop: uma linha só. A medida de leitura não serve aqui — é um dado, não
+   texto corrido — e quebrava "— SP, CEP" sozinho na segunda linha. */
+@media (min-width: 1025px) {
+  .synthesis-footer-endereco { max-width: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

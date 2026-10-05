@@ -255,6 +255,12 @@ na máquina de desenvolvimento.
 > rodapé do site — não mais preta. E, a pedido do cliente, o **endereço da
 > loja saiu da seção de contato e foi para a barra**, ao lado da marca. Horário
 > e WhatsApp continuam na seção de contato.
+>
+> **Exceção ao alinhamento à esquerda (05/10/2026, pedido do cliente):** nessa
+> barra, o endereço fica em 14px e alinhado à **direita**, na ponta oposta à
+> marca, do tablet para cima. No celular, onde ele desce para baixo da marca,
+> continua à esquerda. É a única exceção à regra do `CLAUDE.md`; não estender
+> para outros lugares sem decisão nova.
 
 **Decisão do cliente.** Depois da seção da loja — que já mostra endereço,
 horário e WhatsApp —, a home fecha com uma barra preta só com a marca da

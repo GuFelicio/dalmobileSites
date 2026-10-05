@@ -19,6 +19,10 @@ Aprovada pelo cliente nos prints da fase 3, com dois ajustes:
 - **Endereço da loja no rodapé da home:** saiu da seção de contato (onde ficava
   junto do texto) e foi para a barra final, ao lado da marca (embaixo dela no
   celular). O horário continua na seção de contato.
+- **Endereço do rodapé da home menor e à direita:** 14px, na ponta oposta à
+  marca, em uma linha no desktop; à esquerda no celular, embaixo da marca.
+  Única exceção à regra de alinhamento à esquerda (registrada no `CLAUDE.md` e
+  em `docs/decisoes.md`).
 
 Conferido de novo: contraste (nada abaixo de 4,5:1), matriz sem rolagem nem
 vão acima de 160px, menu (29/29) e 58 testes por unidade.

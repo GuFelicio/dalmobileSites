@@ -148,7 +148,7 @@ Medida de leitura **62 a 66 caracteres**. Nunca texto corrido em largura total.
 ### Forma
 - **`border-radius: 0` em tudo.** Foto, card, botão, campo, chip. Junta precisa, como a marcenaria.
 - Separação por fio de 1px e por espaço. **Zero sombra.**
-- Alinhamento **à esquerda** em tudo. Nada centralizado.
+- Alinhamento **à esquerda** em tudo. Nada centralizado. Única exceção: o endereço na barra do rodapé da home, alinhado à direita do tablet para cima (pedido do cliente, 05/10/2026 — ver `docs/decisoes.md`).
 - Escala de espaço base 8: 8 · 16 · 24 · 40 · 64 · 96 · 128.
 - Ritmo vertical (v4), e só ele: `--respiro` 72→48px (padding-top e -bottom de toda seção) · `--respiro-curto` 40→24px (cabeçalho da seção ao conteúdo; padding do rodapé) · `--entre-itens` 32→24px (itens irmãos). No cabeçalho de seção: rótulo → 12px → título → 16px → apoio; parágrafo → link, 24px. **Nenhum vão vertical maior que 160px** entre dois conteúdos, em nenhuma página.
 
