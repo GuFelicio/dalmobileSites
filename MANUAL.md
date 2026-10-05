@@ -283,8 +283,8 @@ site** por decisão de marca. Ver `docs/vocabulario.md`, 2.3.
   automaticamente (o Maps só monta a ficha com JavaScript)
 - **Prédio e arquiteto de cada foto** — os prédios estão vazios. Arquiteto
   preenchido só nas fotos de Débora Toledo (SJC) e de Flávia e Sérgia Garrido
-  (Caraguá), pela copy v4; **a autorização por escrito das duas ainda precisa
-  ser confirmada** (pendência 1 do `docs/copy-v4.md`)
+  (Caraguá), pela copy v4, com autorização confirmada pelo cliente em
+  05/10/2026
 - **Formulário de contato** — não existe. Quando entrar, **`/privacidade`
   precisa ser reescrita antes**: hoje ela afirma que o site não usa cookie de
   rastreamento

@@ -84,7 +84,7 @@ removida, nenhuma mudança de layout. Vocabulário: `docs/vocabulario.md` v3
 - `PROJETO / NOME` abaixo da legenda, na galeria dos ambientes e no carrossel
   da home, em caixa alta pequena na cor de apoio da superfície. Preenchido pelo
   campo `arquiteto` das fotos: 10 de Débora Toledo (SJC) e 8 de Flávia e Sérgia
-  Garrido (Caraguá). **Pendente:** confirmar a autorização por escrito das duas.
+  Garrido (Caraguá). Autorização das duas confirmada pelo cliente em 05/10/2026.
 
 ### Correção
 - A meta description das páginas de ambiente emendava o subtítulo (agora sem

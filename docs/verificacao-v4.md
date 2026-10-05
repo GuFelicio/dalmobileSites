@@ -114,9 +114,10 @@ cruzada), lint limpo, e cada build com só o WhatsApp da própria unidade.
 
 ## 8. Pendências que não são da v4
 
-- Autorização por escrito de Débora Toledo e de Flávia e Sérgia Garrido para o
-  crédito nas fotos (pendência 1 do `docs/copy-v4.md`).
-- Horário de sábado de SJC e ficha do Google de Caraguá (item 6).
+- ~~Autorização de Débora Toledo e de Flávia e Sérgia Garrido para o crédito
+  nas fotos~~ — confirmada pelo cliente em 05/10/2026.
+- Horário de sábado de SJC e ficha do Google de Caraguá (item 6). A ficha de
+  Caraguá o cliente vai acertar por conta própria.
 - Legendas do carrossel da home no iPad em pé (768px) chegam a 5–6 linhas: a
   coluna do título fica estreita entre o rótulo e o link. Já era assim antes da
   v4; ajuste de layout, se o cliente quiser.
