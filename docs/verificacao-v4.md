@@ -88,9 +88,9 @@ Conferido nos dois builds.
       número novo, e o sábado de SJC (site 08h–14h, catálogos 9h–13h)
 - [x] `sitemap.ts` e `robots.ts` (200 nos dois)
 - [x] Rodapé com endereço, telefone, WhatsApp e horário em toda página interna.
-      **Exceção decidida pelo cliente (02/10/2026):** a home termina na barra só
-      com a marca; endereço, horário e WhatsApp estão na seção de contato logo
-      acima, e o telefone no menu
+      **Exceção decidida pelo cliente (02/10/2026):** a home termina na barra
+      com a marca e o endereço da loja (desde 05/10); horário e WhatsApp estão
+      na seção de contato logo acima, e o telefone no menu
 - [x] `:focus-visible` visível em todo elemento focável (percorrido com Tab)
 - [x] Menu mobile funcionando, com handler, foco preso e Esc (seção 4)
 - [x] `alt` em toda imagem; vazio só no lockup do cabeçalho, cujo nome

@@ -168,8 +168,9 @@ export default function Home() {
               que precisa caber, o que precisa facilitar e que sensação você quer encontrar.
               Traga as respostas, e a planta do imóvel, para a conversa no showroom.
             </p>
-            <p className="synthesis-contact-endereco">{enderecoEmLinha()}</p>
-            <p>
+            {/* O endereço foi para o rodapé (05/10/2026, pedido do cliente);
+                aqui fica o horário, a 16px do texto. */}
+            <p className="synthesis-contact-horario">
               {unidade.horarios
                 .map((h) => `${h.dias}, ${h.abre} às ${h.fecha}`)
                 .join(" · ")}
@@ -188,13 +189,15 @@ export default function Home() {
         </section>
       </main>
 
-      {/* O fim da home: uma barra só com a marca, no cinza do rodapé (v4: o
-          rodapé é cinza em toda página; era preto). Endereço, horário e
-          WhatsApp já estão na seção da loja logo acima — repeti-los num rodapé
-          completo seria a mesma informação duas vezes (decisão do cliente,
-          02/10/2026). As páginas internas seguem com o rodapé completo. */}
+      {/* O fim da home: a marca e o endereço da loja, no cinza do rodapé (v4:
+          o rodapé é cinza em toda página; era preto). O endereço saiu da seção
+          de contato e veio para cá (pedido do cliente, 05/10/2026). Horário e
+          WhatsApp continuam na seção de contato logo acima — o rodapé
+          completo repetiria tudo (decisão do cliente, 02/10/2026). As páginas
+          internas seguem com o rodapé completo. */}
       <footer className="synthesis-footer">
         <Brand />
+        <address className="synthesis-footer-endereco">{enderecoEmLinha()}</address>
       </footer>
     </div>
   );

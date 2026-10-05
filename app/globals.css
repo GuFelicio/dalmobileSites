@@ -325,8 +325,8 @@ img { display: block; max-width: 100%; }
   font-weight: var(--peso-leve);
 }
 .synthesis-contact-copy > p:not(.eyebrow) { max-width: var(--medida); margin: 0; font-size: 16px; line-height: 1.75; color: var(--sup-apoio); }
-/* Endereço e horário: um bloco à parte do texto, a 16px dele. */
-.synthesis-contact-copy > .synthesis-contact-endereco { margin-top: var(--cab-titulo-apoio); }
+/* O horário: um bloco à parte do texto, a 16px dele. */
+.synthesis-contact-copy > .synthesis-contact-horario { margin-top: var(--cab-titulo-apoio); }
 .synthesis-contact-copy > a {
   align-self: flex-start;
   display: flex;
@@ -405,6 +405,18 @@ img { display: block; max-width: 100%; }
   color: var(--tinta);
   padding: var(--respiro-curto) var(--synthesis-gutter);
   border-top: var(--fio) solid var(--fio-sup);
+  /* A marca e, ao lado dela, o endereço da loja (05/10/2026). Alinhados pela
+     base; no celular o endereço desce para baixo da marca. */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--e-2) var(--e-4);
+}
+.synthesis-footer-endereco {
+  font-style: normal; /* <address> vem em itálico por padrão */
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  max-width: var(--medida);
 }
 
 @media (prefers-reduced-motion: reduce) {

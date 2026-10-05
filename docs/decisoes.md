@@ -251,8 +251,10 @@ na máquina de desenvolvimento.
 
 ## 2026-10-02 · A home termina numa barra com a marca, não no rodapé completo
 
-> **Atualizado em 05/10/2026 (v4):** a barra continua só com a marca, mas no
-> cinza do rodapé, como todo rodapé do site — não mais preta.
+> **Atualizado em 05/10/2026 (v4):** a barra fica no cinza do rodapé, como todo
+> rodapé do site — não mais preta. E, a pedido do cliente, o **endereço da
+> loja saiu da seção de contato e foi para a barra**, ao lado da marca. Horário
+> e WhatsApp continuam na seção de contato.
 
 **Decisão do cliente.** Depois da seção da loja — que já mostra endereço,
 horário e WhatsApp —, a home fecha com uma barra preta só com a marca da

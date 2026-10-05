@@ -1,7 +1,9 @@
-/* O lockup traz a cidade numa linha fina abaixo do wordmark. Abaixo de uns
-   180px essa linha fica ilegível, então a largura mínima não é estética: é
-   requisito de leitura. */
+/* O lockup traz a cidade numa linha fina abaixo do wordmark, e é ela que
+   limita o quanto a marca pode encolher.
+   170px no desktop e 144px no celular (05/10/2026, pedido do cliente: a marca
+   do cabeçalho e do rodapé "um pouco menor"; eram 200 e 168). Medido nos
+   prints: a linha da cidade continua legível em 144. Não descer daí. */
 .marca {
-  width: clamp(168px, 44vw, 200px);
+  width: clamp(144px, 38vw, 170px);
   height: auto;
 }

@@ -8,6 +8,23 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-05 · v4 aprovada: ajustes finais
+
+Aprovada pelo cliente nos prints da fase 3, com dois ajustes:
+
+- **Marca menor** no cabeçalho, no menu mobile e nos rodapés:
+  `clamp(144px, 38vw, 170px)` (era `clamp(168px, 44vw, 200px)`). A linha da
+  cidade continua legível; o comentário em `components/layout/Brand.module.css`
+  marca 144px como piso.
+- **Endereço da loja no rodapé da home:** saiu da seção de contato (onde ficava
+  junto do texto) e foi para a barra final, ao lado da marca (embaixo dela no
+  celular). O horário continua na seção de contato.
+
+Conferido de novo: contraste (nada abaixo de 4,5:1), matriz sem rolagem nem
+vão acima de 160px, menu (29/29) e 58 testes por unidade.
+
+---
+
 ## [não publicado] — 2026-10-05 · v4, fase 3: verificação
 
 Sem funcionalidade nova e **sem deploy**: a aprovação é pelos prints. Resultado
