@@ -70,13 +70,16 @@ export default function Home() {
       {/* O mesmo cabeçalho das outras páginas, em papel sólido, ACIMA do
           vídeo e não por cima dele: a abertura não leva nada sobre a imagem.
           O cabeçalho próprio que a home tinha escondia o menu no celular. */}
-      <Header superficie="papel" />
+      <Header />
 
       <main>
+        {/* A abertura é SÓ o vídeo (v4, 05/10/2026): inteiro na largura, sem
+            nada por cima e sem faixa de texto embaixo. A faixa com o rótulo,
+            o título "O projeto começa na medição.", o parágrafo e o botão
+            saiu — empilhava dois títulos gigantes no mesmo papel. O h1 da
+            página passou a ser o título da seção seguinte. O vídeo é
+            decorativo (aria-hidden). */}
         <section className="synthesis-hero">
-          {/* O vídeo de projeto executado entra INTEIRO, de ponta a ponta, sem
-              nada por cima e sem escurecimento. É decorativo (aria-hidden): o
-              título e o texto vivem na faixa logo abaixo. */}
           <div className="synthesis-hero-media">
             <VideoEmLoop
               className="synthesis-hero-video"
@@ -85,31 +88,16 @@ export default function Home() {
               poster="/videos/hero-loop-poster.jpg"
             />
           </div>
-          {/* A faixa do título, em papel, IMEDIATAMENTE abaixo do vídeo. Era um
-              cartão sobre a imagem; os elementos, os tamanhos e a ordem são os
-              mesmos. Emenda sem corte com a seção seguinte, também papel. */}
-          <div className="synthesis-hero-panel">
-            {/* "Crie seu mundo" é assinatura de marca e continua no rodapé,
-                onde assinatura fica. Como manchete, não dizia nada que o
-                concorrente não pudesse dizer. */}
-            <p className="eyebrow">MÓVEIS PLANEJADOS · {unidade.cidade.toUpperCase()}</p>
-            <h1>O projeto começa na medição.</h1>
-            <p>
-              Móveis personalizados, editados milímetro a milímetro para o seu imóvel.
-              Fábrica própria desde 1977.
-            </p>
-            <Link href="/ambientes">Ver os ambientes <Arrow /></Link>
-          </div>
-
         </section>
 
-        <section className="synthesis-manifesto" id="sintese-manifesto">
+        <section className="synthesis-manifesto superficie-papel" id="sintese-manifesto">
           <div className="synthesis-manifesto-content">
             {/* "Liberdade criativa", "escuta", "repertório" e "identidade" são
                 palavras que qualquer marcenaria do país usa. A mesma ideia —
                 o projeto é seu, não é catálogo — dita por um fato de ofício. */}
             <p className="eyebrow">COMO PROJETAMOS</p>
-            <h2>Nenhuma casa é igual à planta.</h2>
+            {/* O h1 da página desde a v4. */}
+            <h1>Nenhuma casa é igual à planta.</h1>
             <p>
               A medição é feita no imóvel, com a obra pronta, e é de lá que sai o desenho:
               o pé-direito real, o vão que ficou dois centímetros fora do projeto, a tomada
@@ -125,7 +113,7 @@ export default function Home() {
           </figure>
         </section>
 
-        <section className="synthesis-projects" id="sintese-projetos">
+        <section className="synthesis-projects superficie-grafite" id="sintese-projetos">
           <div className="synthesis-section-heading">
             <div>
               {/* "Fotografado depois da montagem" faz uma afirmação que a
@@ -143,7 +131,7 @@ export default function Home() {
           <SliderDeFotos fotos={fotosDoSlider} idRotulo="titulo-vitrine" />
         </section>
 
-        <section className="synthesis-process" id="sintese-processo">
+        <section className="synthesis-process superficie-papel" id="sintese-processo">
           <div className="synthesis-process-image">
             <Foto src={fotoProcesso.src} alt={fotoProcesso.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
             <span>O QUE VEM DA FÁBRICA</span>
@@ -168,7 +156,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="synthesis-contact" id="sintese-contato">
+        <section className="synthesis-contact superficie-grafite" id="sintese-contato">
           <div className="synthesis-contact-copy">
             {/* "Seu mundo começa com uma conversa" é o clichê mais comum do
                 setor. "Venha com a planta em mãos" diz o próximo passo
@@ -197,12 +185,13 @@ export default function Home() {
         </section>
       </main>
 
-      {/* O fim da home: uma barra preta só com a marca. Endereço, horário e
+      {/* O fim da home: uma barra só com a marca, no cinza do rodapé (v4: o
+          rodapé é cinza em toda página; era preto). Endereço, horário e
           WhatsApp já estão na seção da loja logo acima — repeti-los num rodapé
           completo seria a mesma informação duas vezes (decisão do cliente,
           02/10/2026). As páginas internas seguem com o rodapé completo. */}
       <footer className="synthesis-footer">
-        <Brand claro />
+        <Brand />
       </footer>
     </div>
   );

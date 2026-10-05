@@ -63,7 +63,7 @@ export default function HubDeAmbientes() {
 
   return (
     <>
-      <Header superficie="papel" />
+      <Header />
 
       <Section superficie="papel">
         <h1 className={estilos.titulo}>Ambientes</h1>

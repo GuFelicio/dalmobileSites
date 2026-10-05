@@ -10,8 +10,8 @@
  * o arquiteto. Os campos existem no conteúdo e ficam vazios até lá — ver
  * docs/decisoes.md sobre por que o crédito não é inventado.
  *
- * Trocas de superfície: papel (texto) → preto (galeria) → cinza (chamada).
- * Três, dentro do máximo de quatro do CLAUDE.md.
+ * Superfícies (v4, 05/10/2026), sem repetir vizinha: cabeçalho papel →
+ * galeria grafite → outros ambientes papel → chamada final grafite → rodapé.
  */
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -58,7 +58,7 @@ export default async function PaginaDeAmbiente({ params }: Props) {
 
   return (
     <>
-      <Header superficie="papel" />
+      <Header />
 
       <Section superficie="papel">
         <nav aria-label="Caminho de navegação" className={estilos.caminho}>
@@ -79,7 +79,7 @@ export default async function PaginaDeAmbiente({ params }: Props) {
 
       {/* Galeria: uma foto por bloco, grande, com o título abaixo.
           Nunca mosaico, nunca miniatura — a foto é o produto. */}
-      <Section superficie="preto" sangra>
+      <Section superficie="grafite" sangra>
         <ul className={estilos.galeria}>
           {ambiente.fotos.map((foto, i) => (
             <li key={foto.src} className={estilos.item}>
@@ -122,7 +122,7 @@ export default async function PaginaDeAmbiente({ params }: Props) {
         </Section>
       ) : null}
 
-      <Section superficie="cinza" semRespiro>
+      <Section superficie="grafite">
         <div className={estilos.chamadaFinal}>
           {/* A pergunta vem do conteúdo, não de uma fôrma. Ver
               conteudo/ambientes/*.md e a régua de voz em

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 export default function Privacidade() {
   return (
     <>
-      <Header superficie="papel" />
+      <Header />
 
       <Section superficie="papel">
         <h1 className={estilos.titulo}>Política de privacidade</h1>

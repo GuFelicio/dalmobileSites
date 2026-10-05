@@ -58,58 +58,69 @@ Navegação sempre com `next/link`. **Âncora só dentro da própria página, nu
 
 ### Paleta — acromática
 
-**As cores corretas são as que estão no ar** (decisão do cliente, 02/10/2026).
-Os valores moram em `app/tokens.css`; esta tabela os espelha. Até essa data o
-documento descrevia outra paleta (`#171614`, `#8B8884`, `#C9C6C1`, `#F2F1EE`)
-que nunca chegou ao código.
+**A paleta é a da v4** (05/10/2026, [`docs/prompt-v4.md`](docs/prompt-v4.md)).
+Os valores moram em `app/tokens.css`; esta tabela os espelha.
 
 ```
---c-preto        #111211   superfície de imagem, fundo do documento
---c-tinta        #20211F   texto principal, tarja
---c-oliva        #484B45   superfície escura da seção de processo da home
---c-cinza        #9E9B95   cinza da marca: faixas de costura, rodapé
---c-cinza-painel #97958F   painel sólido da abertura da home
---c-cinza-texto  #5D5D58   texto de apoio sobre papel
---c-linha        #D3D0C9   fios sobre claro, estados desativados
---c-papel-baixo  #E8E6E0   faixa de projetos da home
---c-papel-fundo  #EFEDE7   papel rebaixado, faixa de apoio
---c-papel        #F5F4F0   fundo das páginas de leitura
---c-papel-alto   #F9F8F5   papel um degrau acima do fundo
---c-branco       #FFFFFF   superfície elevada, reverso do wordmark
+--papel      #F6F4F0   o ÚNICO fundo claro de seção
+--grafite    #262626   o ÚNICO fundo escuro de seção
+--cinza      #9E9C94   SÓ no rodapé
+--areia      #D5C5B1   SÓ em rótulo em caixa alta sobre grafite
+--tinta      #20211F   texto sobre papel e sobre o cinza do rodapé
+--apoio      #5F5D58   texto secundário sobre papel
+sobre grafite: texto --papel; secundário rgba(246,244,240,.72)
+#D3D0C9 (fio sobre papel) e #E8E6E0 (fundo de card) — nunca fundo de seção
 ```
 
-**As superfícies em uso** — cinco, com nome em `app/tokens.css`:
+Saíram na v4, e **não voltam como fundo de seção**: `#F9F8F5`, `#F5F4F0`,
+`#484B45`, `#9E9B95`, `#111211`.
 
-| Token | Valor | Onde |
-|---|---|---|
-| `--sup-preto` | `#111211` | galerias, cases, índice de projetos |
-| `--sup-papel` | `#F9F8F5` | faixa do título da abertura, manifesto da home |
-| `--sup-papel-baixo` | `#E8E6E0` | faixa de projetos da home |
-| `--sup-oliva` | `#484B45` | seção da fábrica da home |
-| `--sup-cinza` | `#9E9B95` | costura: faixas de transição, rodapé |
+**Contraste mínimo de 4,5:1 em todo texto.** Medidos: tinta/papel 14,7 ·
+apoio/papel 6,0 · papel/grafite 13,8 · areia/grafite 9,0 · tinta/rodapé 5,9.
+**Texto claro sobre o cinza do rodapé (2,5:1) é proibido.**
 
-As páginas internas usam ainda o papel `#F5F4F0` (`--papel`). A decisão é
-**manter o que está construído**: nenhum valor é trocado no código.
+No componente, use os **nomes semânticos** — e, dentro de seção, as variáveis da
+superfície (`--sup-fg`, `--sup-apoio`, `--sup-rotulo`, `--sup-fio`, `--sup-bg`),
+que trocam sozinhas entre papel e grafite. Ver `docs/design-system.md`.
+Atenção: o nome antigo `--preto` é a **tinta do texto** (`#20211F`), não uma
+superfície.
 
-No componente, use os **nomes semânticos** de `app/tokens.css` (`--preto`,
-`--cinza`, `--cinza-clr`, `--papel`, `--branco`, `--cinza-texto`). Atenção:
-ali `--preto` é a **tinta do texto** (`#20211F`); a superfície preta é
-`--c-preto`.
-
-Caraguatatuba usa a paleta **"palha"**: a família do cinza troca por areia
-(`#FFF4EB` nas faixas e no painel, `#5F5847` no texto de apoio, `#E7D8C9` e
-`#CDB49A` nos fios). Nada mais muda entre as unidades.
+Caraguatatuba usa a paleta **"palha"**: o rodapé vira `#FFF4EB` (com fio
+`#CDB49A`), o apoio `#5F5847` e o fio `#E7D8C9`. Nada mais muda entre as
+unidades.
 
 **Não existe cor de acento.** Se faltar destaque, a resposta é escala ou troca de superfície — nunca cor nova. Único desvio: verde e vermelho de sistema em erro e sucesso de formulário, no menor tamanho possível.
 
 Todo valor de cor vem de token. **Zero hex literal em componente.**
 
-### Superfícies — três fundos, um por função
-- **Preto** — abertura, faixa de projetos, índice de projetos, cases, galerias. A imagem manda.
-- **Cinza** — faixas de transição, números, rodapé, tiras de chamada. Costura.
-- **Papel** — institucional, arquitetos, a loja, ambientes, FAQ, privacidade, 404. O texto manda.
+### Superfícies — papel e grafite; cinza só no rodapé
 
-Máximo **quatro trocas de superfície por página**.
+**Seções vizinhas NUNCA têm a mesma cor.** A troca de cor é o que marca a
+fronteira da seção. Rodapé cinza em **toda** página, com todo o texto em
+`--tinta`. (A regra antiga de "no máximo quatro trocas por página" saiu na v4.)
+
+```
+Home              abertura (só o vídeo) → "Nenhuma casa…" papel → projetos
+                  grafite → fábrica papel → contato grafite → rodapé cinza
+/ambientes        cabeçalho e grade papel → rodapé
+/ambientes/[slug] cabeçalho papel → galeria grafite → outros ambientes papel
+                  → chamada final grafite → rodapé
+/a-dalmobile      abertura papel → "A produção é própria" grafite (com a faixa
+                  de números dentro) → processo papel → materiais grafite →
+                  perguntas papel → faixa do showroom grafite → rodapé
+/arquitetos       abertura papel → como funciona grafite → chamada final
+                  papel → rodapé
+/a-loja           abertura com dados e mapa papel → a outra loja grafite →
+                  antes de vir papel → rodapé
+/privacidade, 404 papel → rodapé
+/projetos         índice grafite → rodapé
+/projetos/[slug]  abertura grafite → ficha papel → galeria grafite → outros
+                  papel → chamada grafite → rodapé
+```
+
+O cabeçalho é sempre papel. **Some ao rolar para baixo** (depois de 120px) e
+**volta ao rolar para cima** (mais de 8px), com fio de 1px; nunca some com o
+menu mobile aberto nem com foco de teclado dentro dele. Só `transform`, 250ms.
 
 ### Tipografia — Krub, e só Krub
 
@@ -138,15 +149,17 @@ Medida de leitura **62 a 66 caracteres**. Nunca texto corrido em largura total.
 - **`border-radius: 0` em tudo.** Foto, card, botão, campo, chip. Junta precisa, como a marcenaria.
 - Separação por fio de 1px e por espaço. **Zero sombra.**
 - Alinhamento **à esquerda** em tudo. Nada centralizado.
-- Escala de espaço base 8: 8 · 16 · 24 · 40 · 64 · 96 · 128. Entre seções: 128 desktop, 72 mobile.
+- Escala de espaço base 8: 8 · 16 · 24 · 40 · 64 · 96 · 128.
+- Ritmo vertical (v4), e só ele: `--respiro` 72→48px (padding-top e -bottom de toda seção) · `--respiro-curto` 40→24px (cabeçalho da seção ao conteúdo; padding do rodapé) · `--entre-itens` 32→24px (itens irmãos). No cabeçalho de seção: rótulo → 12px → título → 16px → apoio; parágrafo → link, 24px. **Nenhum vão vertical maior que 160px** entre dois conteúdos, em nenhuma página.
 
 ### Foto
 - **Nunca escurecida, nunca com filtro, nunca dentro de card com sombra.**
-- Na abertura, a imagem (hoje, o vídeo em loop) entra inteira e o título vive numa faixa em **papel** **abaixo** dela — papel, e não preto, para a abertura emendar na seção seguinte sem mais uma troca de superfície (decisão de 02/10/2026). A imagem é o produto; escurecer para caber texto joga fora o ativo.
+- A abertura da home é **só a imagem** (hoje, o vídeo em loop): inteira na largura, sem nada por cima e sem faixa de texto embaixo (v4, 05/10/2026). Altura máxima de 72svh no desktop e 60svh no celular, para o título da seção seguinte — o h1 da página — aparecer na primeira tela. A imagem é o produto; escurecer para caber texto joga fora o ativo.
+- Foto de galeria: no máximo 85svh de altura. Passando disso ela encolhe inteira, nunca é cortada.
 - Se um dia precisar de texto sobre imagem, use painel sólido ancorado, não overlay na foto inteira.
 
 ### Movimento
-Mínimo e lento. Fade de 400ms **partindo de visível**. Hover em card: `scale(1.02)` em 600ms. Fio de 1px sob o item de navegação.
+Mínimo e lento. Fade de 400ms **partindo de visível**. Hover em card: `scale(1.02)` em 600ms. Fio de 1px sob o item de navegação. Cabeçalho que some e volta: só `transform`, 250ms, `cubic-bezier(0.25, 1, 0.5, 1)`.
 Proibido: parallax, scroll sequestrado, carrossel automático, contador animado.
 `@media (prefers-reduced-motion: reduce)` obrigatório.
 
@@ -174,7 +187,7 @@ Desktop   1025px +
 | Case: foto + ficha | ficha abaixo da foto | ficha abaixo da foto | ficha em coluna lateral |
 | Destaque alternado | foto e texto empilhados, sempre foto primeiro | empilhado | lado a lado alternando |
 | Faixa de números | 1 por linha | 2 por linha | tudo em linha |
-| Rodapé | acordeão ou colunas empilhadas | 2 colunas | 4 colunas |
+| Rodapé | 2 colunas, menos de 600px de altura | 2 colunas | 4 colunas |
 | Menu | painel de tela cheia | painel de tela cheia | horizontal |
 
 ### Regras duras

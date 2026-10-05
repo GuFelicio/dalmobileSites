@@ -17,92 +17,94 @@ responsividade vêm do `CLAUDE.md`; a composição de cada página vem de
 A cor é declarada em **duas camadas**. O componente nunca fala com a camada de baixo.
 
 ```
-camada 1 — valores    --c-*        onze cores medidas do estudo
-camada 2 — semântica  --preto etc. os nomes que o componente usa
+camada 1 — valores    --c-*                os valores medidos
+camada 2 — semântica  --papel, --grafite…  os nomes que o componente usa
 ```
 
-### Camada 1 — valores brutos
+### Camada 1 — valores brutos (v4, 05/10/2026)
 
-**Definitivos.** São as cores que estão no ar, confirmadas pelo cliente em
-02/10/2026 como as corretas; o `CLAUDE.md` espelha esta tabela. Até essa data
-o `CLAUDE.md` descrevia outra paleta (`#171614`, `#8B8884`, `#F2F1EE`), que
-nunca chegou ao código. Trocar estas linhas troca o site inteiro, sem tocar em
-nenhum componente.
+A paleta da v4 ([`docs/prompt-v4.md`](prompt-v4.md)) substitui a de 02/10. O
+diagnóstico: dois papéis quase iguais (`#F9F8F5` e `#F5F4F0`), a faixa de
+projetos `#E8E6E0` contra o papel com 1,08:1 de diferença, e o cinza `#9E9B95`
+em seção, faixa e rodapé, que se fundiam. O `CLAUDE.md` espelha esta tabela.
 
 | Token | Valor | Papel |
 |---|---|---|
-| `--c-branco` | `#ffffff` | superfície elevada, reverso do wordmark |
-| `--c-papel-alto` | `#f9f8f5` | papel um degrau acima do fundo |
-| `--c-papel` | `#f5f4f0` | fundo das páginas de leitura |
-| `--c-papel-fundo` | `#efede7` | papel rebaixado, faixa de apoio |
-| `--c-papel-baixo` | `#e8e6e0` | papel mais rebaixado, faixa de projetos |
-| `--c-linha` | `#d3d0c9` | fio sobre claro, estado desativado |
-| `--c-cinza` | `#9e9b95` | cinza da marca: costura, faixas |
-| `--c-cinza-painel` | `#97958f` | painel sólido do hero |
-| `--c-cinza-texto` | `#5d5d58` | texto de apoio sobre papel |
-| `--c-oliva` | `#484b45` | superfície escura de processo |
-| `--c-tinta` | `#20211f` | texto principal, tarja |
-| `--c-preto` | `#111211` | fundo do documento, superfície de imagem |
+| `--c-papel` | `#F6F4F0` | o **único** fundo claro de seção |
+| `--c-grafite` | `#262626` | o **único** fundo escuro de seção |
+| `--c-cinza` | `#9E9C94` | **só o rodapé** |
+| `--c-areia` | `#D5C5B1` | **só** rótulo em caixa alta sobre grafite |
+| `--c-tinta` | `#20211F` | texto sobre papel e sobre o rodapé |
+| `--c-apoio` | `#5F5D58` | texto secundário sobre papel |
+| `--c-linha` | `#D3D0C9` | fio sobre papel, estado desativado |
+| `--c-papel-baixo` | `#E8E6E0` | fundo de card antes da foto chegar — **nunca** fundo de seção |
+| `--c-branco` | `#FFFFFF` | reverso do wordmark |
+| `--c-papel-72` | papel a 72% | texto secundário sobre grafite |
+| `--c-papel-fio` | papel a 20% | fio sobre grafite |
+| `--c-tinta-fio` | tinta a 12% | fio do cabeçalho quando ele volta |
 
-O estudo tinha **37 hex distintos em 46 ocorrências**. Boa parte era papel quase
-igual repetido (`#f6f5f1`, `#f5f4f1`, `#f7f6f3`, `#f8f7f4`…). A Fase 1 colapsou
-esses vizinhos nos doze valores acima.
+**Contrastes (WCAG), conferidos por script na entrega da v4:** tinta sobre papel
+14,7:1 · apoio sobre papel 6,0 · papel sobre grafite 13,8 · areia sobre grafite
+9,0 · tinta sobre o cinza do rodapé 5,9. **Texto claro sobre o cinza do rodapé
+dá 2,5:1 e é proibido.** Mínimo de 4,5:1 em todo texto, sem exceção de tamanho.
 
-### As superfícies em uso — cinco, com nome
+Saíram na v4: `#F9F8F5`, `#F5F4F0`, `#EFEDE7`, `#97958F`, `#5D5D58`, `#484B45`,
+`#111211`, a escada `--sobre-escuro-*`, os tokens `--sup-*` de cinco superfícies
+e os `--veu-*`, que não tinham mais uso.
 
-Formalizadas em 02/10/2026, sem trocar nenhum valor: são nomes para cores que
-já estavam na camada 1.
+### Variante "palha" — Caraguatatuba
 
-| Token | Valor | Onde |
-|---|---|---|
-| `--sup-preto` | `#111211` | galerias, cases, índice de projetos |
-| `--sup-papel` | `#F9F8F5` | faixa do título da abertura, manifesto da home |
-| `--sup-papel-baixo` | `#E8E6E0` | faixa de projetos da home |
-| `--sup-oliva` | `#484B45` | seção da fábrica da home |
-| `--sup-cinza` | `#9E9B95` | costura: faixas de transição, rodapé |
-
-As páginas internas usam ainda o papel `#F5F4F0` (`--papel`).
+`data-paleta="palha"` no `<html>`, vindo do config da unidade. Troca só a
+família do cinza: o rodapé vira `#FFF4EB` (com fio `#CDB49A`, porque contra o
+papel ele separa em só 1,02), o apoio vira `#5F5847` e o fio `#E7D8C9`. Papel,
+grafite, tinta e areia são os mesmos nos dois sites.
 
 ### Camada 2 — nomes semânticos
 
-São os nomes do `CLAUDE.md`. **Nunca renomear:** a troca de paleta acontece na
-camada 1, e é isso que mantém a troca barata.
-
 ```css
---preto:     var(--c-tinta);
---cinza:     var(--c-cinza);
---cinza-clr: var(--c-linha);
---papel:     var(--c-papel);
---branco:    var(--c-branco);
+--papel  --grafite  --cinza  --areia  --tinta  --apoio  --branco
+--sobre-grafite  --sobre-grafite-apoio  --sobre-grafite-fio
 ```
+
+Nomes antigos que o código ainda usa, e continuam valendo: `--preto` é a
+**tinta** do texto (não uma superfície), `--cinza-texto` é o apoio, `--cinza-clr`
+é o fio sobre papel.
 
 **Não existe cor de acento.** Se faltar destaque, a resposta é escala ou troca de
 superfície. O único desvio previsto é verde e vermelho de sistema em erro e
-sucesso de formulário, no menor tamanho possível (Fase 7).
+sucesso de formulário, no menor tamanho possível.
 
-> O estudo tinha um acento — `--rust: #a9472f`. Ele só era usado no estudo
-> *ateliê* e no sistema de botões, ambos código morto. Saiu junto com eles: não
-> foi preciso decidir nada.
+### Superfícies — papel e grafite, e o rodapé cinza
 
-### Sobre superfície escura
+**Regra (v4): seções vizinhas nunca têm a mesma cor.** A troca de cor marca a
+fronteira da seção — é por isso que o respiro pôde cair. O rodapé é cinza em
+**toda** página, inclusive a barra da home, com todo o texto em `--tinta`.
 
-Escada de alfa sobre branco, no lugar das quinze opacidades ad hoc que o estudo
-espalhava (`.16 .17 .2 .23 .25 .45 .48 .55 .58 .62 .65 .66 .68 .7 .72`).
+As classes globais `.superficie-papel` e `.superficie-grafite`
+([`app/globals.css`](../app/globals.css)) pintam o fundo e publicam as cores de
+quem vive dentro:
 
-| Token | Uso |
-|---|---|
-| `--sobre-escuro` | texto principal sobre preto |
-| `--sobre-escuro-70` | texto de apoio |
-| `--sobre-escuro-55` | rótulo secundário |
-| `--sobre-escuro-45` | numeração, estado inativo |
-| `--sobre-escuro-fio` | fio de 1px |
-| `--sobre-escuro-fio-fr` | fio quase apagado |
+| Variável | Papel | Grafite |
+|---|---|---|
+| `--sup-bg` | papel | grafite |
+| `--sup-fg` | tinta | papel |
+| `--sup-apoio` | apoio | papel a 72% |
+| `--sup-rotulo` | tinta | areia |
+| `--sup-fio` | linha | papel a 20% |
 
-### Véu sobre foto — temporário
+O componente pede **por estes nomes**, sem saber em que superfície está. É o que
+deixa uma seção trocar de cor sem tocar no CSS dela:
 
-Os tokens `--veu-*` existem **só** para a página de estudos, que sai na Fase 2.
-Escurecer foto é proibido pelo `CLAUDE.md` e pela seção 13 da direção.
-**Não usar em componente novo.**
+```css
+.etapaTexto { color: var(--sup-apoio); }
+.item       { border-top: var(--fio) solid var(--sup-fio); }
+.botao:hover { background: var(--sup-fg); color: var(--sup-bg); }
+```
+
+`<Section superficie="papel" | "grafite">` aplica a classe. As seções da home,
+que ainda usam marcação própria, põem a classe direto no `<section>`.
+
+A sequência de cada página está no `CLAUDE.md`, seção "Superfícies".
 
 ---
 
@@ -191,19 +193,30 @@ Escala base 8. Sem valor fora dela em componente novo.
 | `--e-6` | 96px |
 | `--e-7` | 128px |
 
-### Ritmo vertical — três intervalos
+### Ritmo vertical (v4)
 
-| Token | Desktop | Mobile | Quando |
+Três intervalos, e só eles. O `clamp` faz a passagem do celular ao desktop
+sem media query.
+
+| Token | Valor | Celular → desktop | Quando |
 |---|---|---|---|
-| `--respiro-curto` | 56px | 40px | entre blocos irmãos da mesma seção |
-| `--respiro` | 120px | 72px | entre seções |
-| `--respiro-longo` | 180px | 96px | antes da seção mais importante e antes de troca de superfície |
+| `--respiro` | `clamp(48px, 5vw, 72px)` | 48 → 72 | padding-top **e** -bottom de toda seção |
+| `--respiro-curto` | `clamp(24px, 2.5vw, 40px)` | 24 → 40 | do cabeçalho da seção (rótulo, título, apoio) ao conteúdo; padding do rodapé |
+| `--entre-itens` | `clamp(24px, 2vw, 32px)` | 24 → 32 | entre itens irmãos: etapas, perguntas, blocos, fotos da galeria |
 
-**Nunca dois longos seguidos, nunca três curtos seguidos.** `Section` usa
-`--respiro`; `respiro="longo"` põe 180px embaixo. Duas `Section` seguidas na
-mesma superfície dividem o respiro (120px, não 240).
+Dentro do cabeçalho de seção: rótulo → **12px** (`--cab-rotulo-titulo`) →
+título → **16px** (`--cab-titulo-apoio`) → apoio; parágrafo → link, **24px**
+(`--cab-texto-link`).
 
-- `--e-secao` — nome antigo, hoje igual a `--respiro`. Não usar em código novo.
+Até a v4 eram 56 / 120 / 180px (`--respiro-curto`, `--respiro`,
+`--respiro-longo`): medido em 1440px, havia de 240 a 300px vazios entre o fim
+de uma seção e o título da seguinte. `--respiro-longo`, `--e-secao` e a prop
+`respiro="longo"` da `Section` saíram. Exceção única: o lado de uma foto que
+sangra até a borda pode ter padding 0.
+
+**Verificação:** nenhum vão vertical maior que 160px entre dois conteúdos
+(texto, foto ou caixa com borda), em nenhuma página e largura.
+
 - `--e-margem` — margem lateral do texto no mobile: **20px**. A foto sangra até a borda; o texto mantém a margem.
 - `--pad-lateral` — margem lateral da **página**: `clamp(20px, 5vw, 80px)`. Cresce com a tela e nunca desce abaixo dos 20px do mobile. É o que `Section`, `Header`, `Footer` e `MobileMenu` usam para alinhar tudo na mesma calha vertical. Não invente outro recuo lateral: use este.
 - `--alt-cabecalho` — altura do cabeçalho: **88px**. Vale como offset de âncora e como altura da barra do `MobileMenu`, para o painel abrir alinhado ao cabeçalho que o cobre.
@@ -241,16 +254,33 @@ Mínimo e lento.
 |---|---|---|
 | `--mov-fade` | 400ms | fade **partindo de visível** |
 | `--mov-hover` | 600ms | hover em card, `scale(1.02)` |
-| `--mov-fio` | 200ms | fio de 1px sob o item de navegação |
-| `--mov-ease` | `cubic-bezier(.2,.8,.2,1)` | curva única do projeto |
+| `--mov-fio` | 150ms | fio de 1px sob o item de navegação |
+| `--mov-ease` | `cubic-bezier(.2,.8,.2,1)` | curva do projeto |
+| `--mov-cabecalho` | 250ms | o cabeçalho sumindo e voltando — só `transform` |
+| `--mov-cabecalho-ease` | `cubic-bezier(0.25, 1, 0.5, 1)` | curva só do cabeçalho |
+
+**Cabeçalho que some ao rolar (v4)** — `components/layout/Header.tsx`, sem
+dependência, listener de scroll passivo + `requestAnimationFrame`:
+
+- `scrollY < 120px`: sempre visível, sem fio inferior;
+- rolando para baixo depois de 120px: `translateY(-100%)`;
+- rolando para cima mais de 8px (acumulados): volta, em papel, com fio de 1px
+  (`--cab-fio`);
+- nunca some com o menu mobile aberto nem com **foco de teclado**
+  (`:focus-visible`) dentro dele; Tab até ele com ele escondido o traz de
+  volta. Foco de toque não conta: ao fechar o menu por toque, o foco volta ao
+  botão, e o cabeçalho ficaria preso na tela;
+- é `sticky`: sair do lugar não move a página (sem layout shift);
+- `prefers-reduced-motion`: troca sem transição.
 
 **Proibido:** parallax, scroll sequestrado, carrossel automático, contador animado.
 
 **Vídeo em loop** (`components/midia/VideoEmLoop.tsx`, só no fundo da capa da
 home): `autoplay`, sem som, sem controle; pausa quando sai da tela. Com
 `prefers-reduced-motion` mostra só o poster. Não tem estilo próprio: o
-enquadramento vem de `className`. Nunca escurecido — só o gradiente do topo
-(`--degrade-cabecalho`) para o cabeçalho. Ver `docs/decisoes.md` (2026-10-01).
+enquadramento vem de `className`. Nunca escurecido, e nada por cima dele. Na
+v4 a abertura é só o vídeo, com altura máxima de 72svh no desktop e 60svh no
+celular. Ver `docs/decisoes.md`.
 
 ```tsx
 <VideoEmLoop

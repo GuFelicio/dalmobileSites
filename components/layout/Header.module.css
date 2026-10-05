@@ -8,30 +8,26 @@
   gap: var(--e-3);
   min-height: var(--alt-cabecalho);
   padding-inline: var(--pad-lateral);
-  background: transparent;
-  /* Fundo e fio entram junto ao fixar. Transição só na cor, nunca na
-     posição: cabeçalho que se mexe é interface chamando atenção para si. */
-  transition: background-color var(--mov-fade) ease, border-color var(--mov-fade) ease;
+  /* Papel sólido em toda página (v4). Nada de backdrop-filter deixando a
+     foto vazar. */
+  background: var(--papel);
+  color: var(--tinta);
   border-bottom: var(--fio) solid transparent;
+  /* Só transform anima: sumir e voltar. O fio troca sem transição. */
+  transition: transform var(--mov-cabecalho) var(--mov-cabecalho-ease);
 }
 
-/* Cor do texto pela superfície em que o cabeçalho está pousado. Sobre preto,
-   o papel #f9f8f5, não branco puro (ajustes de layout, 02/10/2026). */
-.preto { color: var(--cab-texto-sobre-preto); }
-.cinza { color: var(--preto); }
-.papel { color: var(--preto); }
+/* Rolando para baixo depois de 120px. Ver a lógica em Header.tsx. */
+.oculto { transform: translateY(-100%); }
 
-/* Fundo SÓLIDO da superfície em que está — em toda página, sempre. Até
-   02/10/2026 só entrava depois de 80px de rolagem, e nas páginas internas o
-   texto escuro ficava sobre o body preto (1,16:1). Sem exceção: na home ele
-   fica acima do vídeo, não por cima. Sólido e não translúcido — nada de
-   backdrop-filter deixando a foto vazar. */
-/* O fundo é o da PRÓPRIA superfície da página — nas internas, o papel delas —,
-   para o cabeçalho emendar sem corte. Os fios: papel a 14% sobre preto, tinta
-   a 12% sobre papel. */
-.fixado.preto { background: var(--c-preto); border-bottom-color: var(--cab-fio-sobre-preto); }
-.fixado.cinza { background: var(--cinza); border-bottom-color: var(--cab-fio-sobre-papel); }
-.fixado.papel { background: var(--papel); border-bottom-color: var(--cab-fio-sobre-papel); }
+/* Voltou rolando para cima: o fio separa o cabeçalho do conteúdo que passa
+   por baixo. Some de novo abaixo de 120px, onde não há nada por baixo. */
+.comFio { border-bottom-color: var(--cab-fio); }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Troca sem transição: some e aparece no lugar. */
+  .header { transition: none; }
+}
 
 .marca {
   display: inline-flex;

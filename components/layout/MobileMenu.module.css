@@ -13,13 +13,11 @@
   height: 100svh;
   overflow-y: auto;
   animation: entrada var(--mov-fade) var(--mov-ease) both;
+  /* Papel sólido, o mesmo do cabeçalho que o abre. Nunca translúcido: o
+     texto atrás competiria com o menu. */
+  background: var(--papel);
+  color: var(--tinta);
 }
-
-/* Fundo sólido, herdado da superfície do cabeçalho que abriu o painel.
-   Nunca translúcido: o texto atrás competiria com o menu. */
-.preto { background: var(--c-preto); color: var(--cab-texto-sobre-preto); }
-.cinza { background: var(--cinza); color: var(--preto); }
-.papel { background: var(--papel); color: var(--preto); }
 
 .topo {
   display: flex;

@@ -152,6 +152,30 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-05 · v4: papel e grafite alternando, cinza só no rodapé, respiro menor
+
+**O quê.** Um papel só (`#F6F4F0`) e um escuro de seção só (grafite `#262626`),
+alternando sem nunca repetir a cor da vizinha; o cinza (`#9E9C94`) ficou só no
+rodapé, que é cinza em toda página. O respiro caiu para 72px por seção no
+desktop (48 no celular). A abertura da home é só o vídeo. O cabeçalho some ao
+rolar para baixo e volta ao rolar para cima. Roteiro: `docs/prompt-v4.md`.
+
+**Por quê.** Medido no site: dois papéis quase iguais (#F9F8F5 e #F5F4F0); a
+faixa de projetos contra o papel com 1,08:1 de diferença, invisível como
+fronteira; o cinza em seção, faixa e rodapé se fundindo; texto branco sobre o
+cinza do processo com 2,8:1; de 240 a 300px vazios entre seções e um rodapé de
+1.106px no celular. Com a troca de cor marcando cada fronteira, o espaço deixou
+de precisar fazer esse trabalho. A faixa de título sob o vídeo empilhava dois
+títulos gigantes no mesmo papel.
+
+**Descartado.** A regra de "no máximo quatro trocas de superfície por página"
+(a v4 troca a cada seção, de propósito); o `--respiro-longo`; o oliva, o preto
+e o papel-baixo como fundo de seção; o rodapé preto da home; esconder o
+cabeçalho também com foco de toque dentro dele (prendia o cabeçalho na tela
+depois de fechar o menu por toque).
+
+---
+
 ## 2026-10-02 · Copy v3: onde o roteiro deixou espaço, o que foi decidido
 
 A copy v3 (`docs/copy-v3.md`) foi aplicada literalmente. Nos pontos abaixo o
@@ -203,7 +227,10 @@ na máquina de desenvolvimento.
 
 ---
 
-## 2026-10-02 · A home termina numa barra preta com a marca, não no rodapé completo
+## 2026-10-02 · A home termina numa barra com a marca, não no rodapé completo
+
+> **Atualizado em 05/10/2026 (v4):** a barra continua só com a marca, mas no
+> cinza do rodapé, como todo rodapé do site — não mais preta.
 
 **Decisão do cliente.** Depois da seção da loja — que já mostra endereço,
 horário e WhatsApp —, a home fecha com uma barra preta só com a marca da

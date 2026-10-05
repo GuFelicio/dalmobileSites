@@ -26,7 +26,7 @@ export default function NaoEncontrada() {
 
   return (
     <>
-      <Header superficie="papel" />
+      <Header />
 
       <Section superficie="papel">
         <p className={estilos.codigo}>404</p>

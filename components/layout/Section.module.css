@@ -1,60 +1,24 @@
-/* As três superfícies. Uma por função, nunca por gosto.
-
-   Cada uma expõe --sup-bg e --sup-fg, para o componente que precisa se
-   inverter dentro dela (um chip ativo, por exemplo) sem saber em qual está. */
+/* O invólucro de seção. A cor vem das classes globais .superficie-papel e
+   .superficie-grafite (app/globals.css); aqui só o respiro e a sangria. */
 
 .section {
-  /* Respiro entre seções: 120px desktop, 72px mobile (--respiro). */
+  /* Toda seção: --respiro em cima e embaixo (72px no desktop, 48 no
+     celular). A fronteira já é marcada pela troca de cor. */
   padding-block: var(--respiro);
   padding-inline: var(--pad-lateral);
 }
 
-/* Duas seções seguidas na MESMA superfície dividem o respiro, não somam: sem
-   isto, o padding de baixo de uma e o de cima da outra davam ~250px — o vão
-   entre a introdução e "Como funciona a parceria" de /arquitetos, que
-   aparecia em toda página interna. Fica o respiro normal, 120px. */
-.preto + .preto,
+/* Duas seções seguidas na MESMA superfície são uma seção só partida em duas
+   no código (o índice de projetos: cabeçalho e grade). Dividem o respiro, não
+   somam. Entre seções de verdade isto não acontece: vizinhas nunca têm a
+   mesma cor. */
 .papel + .papel,
-.cinza + .cinza {
+.grafite + .grafite {
   padding-top: 0;
 }
 
-/* Respiro longo (180px / 96px) embaixo da seção: antes de uma troca de
-   superfície, ou antes da seção mais importante. Nunca em duas seguidas. */
-.respiroLongo {
-  padding-bottom: var(--respiro-longo);
-}
-
-/* Preto — abertura, faixa de projetos, índice, cases, galerias. A imagem manda. */
-.preto {
-  --sup-bg: var(--c-preto);
-  --sup-fg: var(--sobre-escuro);
-  background: var(--sup-bg);
-  color: var(--sup-fg);
-}
-
-/* Cinza — faixas de transição, números, rodapé, tiras de chamada. Costura. */
-.cinza {
-  --sup-bg: var(--cinza);
-  --sup-fg: var(--preto);
-  background: var(--sup-bg);
-  color: var(--sup-fg);
-  /* Fio de separação. Transparente na paleta neutra, onde o próprio cinza já
-     separa do papel; visível na paleta palha, onde a faixa é quase branca e
-     sem ele sumiria dentro da página. Ver --fio-sup em app/tokens.css. */
-  border-block: var(--fio) solid var(--fio-sup);
-}
-
-/* Papel — institucional, arquitetos, a loja, ambientes, FAQ, 404. O texto manda. */
-.papel {
-  --sup-bg: var(--papel);
-  --sup-fg: var(--preto);
-  background: var(--sup-bg);
-  color: var(--sup-fg);
-}
-
-/* Sem respiro vertical: para faixas finas, como a tira de arquitetos da home,
-   que é pontuação entre duas superfícies e não seção. */
+/* Sem respiro vertical: a foto de abertura do case, que encosta nas
+   vizinhas. */
 .semRespiro {
   padding-block: 0;
 }

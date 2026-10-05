@@ -11,8 +11,8 @@
  *
  * Onde é usado: rota própria, destino de todo card do índice.
  *
- * Trocas de superfície: preto (abertura e galeria) → papel (ficha e texto) →
- * preto (outros projetos) → cinza (chamada). Quatro, o máximo do CLAUDE.md.
+ * Superfícies (v4), sem repetir vizinha: grafite (abertura) → papel (ficha
+ * e texto) → grafite (galeria) → papel (outros projetos) → grafite (chamada).
  */
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -67,9 +67,9 @@ export default async function Case({ params }: Props) {
 
   return (
     <>
-      <Header superficie="preto" />
+      <Header />
 
-      <Section superficie="preto">
+      <Section superficie="grafite">
         {/* 1. Caminho de navegação — a pessoa chega por qualquer porta. */}
         <nav aria-label="Caminho de navegação" className={estilos.caminho}>
           <ol>
@@ -94,7 +94,7 @@ export default async function Case({ params }: Props) {
 
       {/* 3. Foto de abertura — sangrando, sem texto por cima. A imagem é o
           produto; escurecer para caber texto joga fora o ativo. */}
-      <Section superficie="preto" sangra semRespiro>
+      <Section superficie="grafite" sangra semRespiro>
         <Foto
           src={projeto.abertura}
           alt={projeto.fotos[0]?.alt ?? projeto.titulo}
@@ -159,7 +159,7 @@ export default async function Case({ params }: Props) {
 
       {/* 6. Galeria — fotos grandes empilhadas, uma por bloco, legenda curta
           abaixo. Nunca mosaico, nunca miniatura. */}
-      <Section superficie="preto" sangra>
+      <Section superficie="grafite" sangra>
         <ul className={estilos.galeria}>
           {projeto.fotos.map((foto) => (
             <li key={foto.src} className={estilos.galeriaItem}>
@@ -175,7 +175,7 @@ export default async function Case({ params }: Props) {
       {/* 8. Outros projetos neste edifício. (7, o depoimento, entra quando a
           loja trouxer depoimentos autorizados — ver docs/adicionar-projeto.md.) */}
       {outros.length > 0 ? (
-        <Section superficie="preto">
+        <Section superficie="papel">
           <h2 className={estilos.outrosTitulo}>Outros projetos no {projeto.edificio}</h2>
           <ul className={estilos.outros}>
             {outros.map((o) => (
@@ -195,8 +195,9 @@ export default async function Case({ params }: Props) {
         </Section>
       ) : null}
 
-      {/* 9. Chamada final, em faixa cinza. */}
-      <Section superficie="cinza" semRespiro>
+      {/* 9. Chamada final. Vizinhas nunca na mesma cor (v4): grafite depois
+          dos outros projetos (papel), papel direto depois da galeria. */}
+      <Section superficie={outros.length > 0 ? "grafite" : "papel"}>
         <div className={estilos.chamada}>
           <p className={estilos.chamadaTexto}>Quer um projeto assim no seu apartamento?</p>
           <Link href="/a-loja" className={estilos.chamadaAcao}>

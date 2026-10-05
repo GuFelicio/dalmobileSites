@@ -1,4 +1,5 @@
-/* Institucional. Texto longo, medida curta, muito respiro.
+/* Institucional. Texto longo, medida curta. Alterna papel e grafite (v4):
+   as cores vêm de --sup-* da superfície (app/globals.css), não de token fixo.
    Ver app/a-dalmobile/page.tsx e a seção 7 do docs/direcao-site.md. */
 
 .titulo {
@@ -16,16 +17,18 @@
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   max-width: var(--medida);
-  margin: var(--e-2) 0 0;
+  margin: var(--cab-titulo-apoio) 0 0;
 }
 
+/* Título de seção. O que vem embaixo decide a distância: texto corrido a
+   16px (.texto p), lista a --respiro-curto (.processo, .faq). */
 .secao {
   font-size: var(--fs-secao);
   font-weight: var(--peso-leve);
   letter-spacing: var(--tr-secao);
-  margin: 0 0 var(--e-2);
+  margin: 0;
 }
 
 /* Medida de leitura de 62 a 66 caracteres. Nunca texto corrido em largura
@@ -38,14 +41,14 @@
 .texto p {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
-  margin: var(--e-2) 0 0;
+  margin: var(--cab-titulo-apoio) 0 0;
 }
 
 .foto {
   display: block;
   width: 100%;
   height: auto;
-  margin-top: var(--e-4);
+  margin-top: var(--respiro-curto);
 }
 
 /* ---- Processo -------------------------------------------------------- */
@@ -58,9 +61,10 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--e-4);
+  gap: var(--entre-itens);
   counter-reset: etapa;
   max-width: calc(var(--medida) + 3em);
+  margin-top: var(--respiro-curto);
 }
 
 .etapa {
@@ -68,7 +72,7 @@
   grid-template-columns: auto 1fr;
   gap: var(--e-2);
   align-items: start;
-  border-top: var(--fio) solid var(--sobre-escuro-fio);
+  border-top: var(--fio) solid var(--sup-fio);
   padding-top: var(--e-2);
 }
 
@@ -76,7 +80,7 @@
   font-size: var(--fs-rotulo);
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
   font-variant-numeric: tabular-nums;
   /* Alinha o número com a primeira linha do título, não com o topo da caixa. */
   padding-top: 4px;
@@ -94,7 +98,7 @@
   line-height: var(--lh-texto);
   max-width: var(--medida);
   margin: var(--e-1) 0 0;
-  color: var(--sobre-escuro-70);
+  color: var(--sup-apoio);
 }
 
 .prazo {
@@ -102,17 +106,20 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
   margin: var(--e-1) 0 0;
 }
 
 /* ---- Números ------------------------------------------------------------ */
 
 
+/* Dentro da seção "A produção é própria" desde a v4, entre o texto e a
+   foto, separada por um fio. */
 .numeros {
   list-style: none;
-  margin: 0;
-  padding: var(--e-4) 0;
+  margin: var(--respiro-curto) 0 0;
+  padding: var(--e-3) 0 0;
+  border-top: var(--fio) solid var(--sup-fio);
   display: grid;
   gap: var(--e-3);
 }
@@ -155,7 +162,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-rotulo);
   margin-top: var(--e-1);
 }
 
@@ -166,14 +173,14 @@
 /* Na largura da coluna de texto: as réguas entre perguntas param onde a
    resposta para. */
 .faq {
-  margin: 0;
+  margin: var(--respiro-curto) 0 0;
   display: grid;
-  gap: var(--e-3);
+  gap: var(--entre-itens);
   max-width: var(--medida);
 }
 
 .item {
-  border-top: var(--fio) solid var(--cinza-clr);
+  border-top: var(--fio) solid var(--sup-fio);
   padding-top: var(--e-2);
 }
 
@@ -188,7 +195,7 @@
   line-height: var(--lh-texto);
   max-width: var(--medida);
   margin: var(--e-1) 0 0;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
 }
 
 /* ---- Chamada final --------------------------------------------------- */
@@ -199,7 +206,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--e-3);
-  padding-block: var(--e-4);
 }
 
 .chamadaTexto {
@@ -215,15 +221,16 @@
   align-items: center;
   min-height: var(--toque);
   padding: 0 var(--e-3);
-  border: var(--fio) solid var(--preto);
+  border: var(--fio) solid var(--sup-fg);
   font-size: var(--fs-texto);
-  color: var(--preto);
+  color: var(--sup-fg);
   transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
 }
 
+/* Hover: o botão se inverte na própria superfície. */
 .chamadaAcao:hover {
-  background: var(--preto);
-  color: var(--branco);
+  background: var(--sup-fg);
+  color: var(--sup-bg);
 }
 
 @media (prefers-reduced-motion: reduce) {

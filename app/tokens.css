@@ -10,113 +10,73 @@
 :root {
   /* ------------------------------------------------------------------
      1. COR — CAMADA BRUTA
-     DEFINITIVA: são as cores que estão no ar, confirmadas pelo cliente em
-     02/10/2026 como as corretas. O CLAUDE.md espelha esta tabela. Trocar
-     SÓ estas linhas troca o site inteiro.
+     Paleta da v4 (05/10/2026, docs/prompt-v4.md). Substitui a de 02/10:
+     dois papéis quase iguais (#f9f8f5 e #f5f4f0) viraram um, e as três
+     superfícies escuras (#111211, #484b45 e o cinza #9e9b95 em seção)
+     viraram uma, o grafite. O CLAUDE.md espelha esta tabela. Trocar SÓ
+     estas linhas troca o site inteiro.
+
+     Contrastes (WCAG), conferidos por script na entrega:
+       tinta sobre papel 14,7 · apoio sobre papel 6,0 · papel sobre grafite
+       13,8 · areia sobre grafite 9,0 · tinta sobre o cinza do rodapé 5,9.
+       Texto claro sobre o cinza do rodapé dá 2,5 e é PROIBIDO.
      ------------------------------------------------------------------ */
-  --c-branco:       #ffffff;  /* superfície elevada, reverso do wordmark   */
-  --c-papel-alto:   #f9f8f5;  /* papel um degrau acima do fundo            */
-  --c-papel:        #f5f4f0;  /* fundo das páginas de leitura              */
-  --c-papel-fundo:  #efede7;  /* papel rebaixado, faixa de apoio           */
-  --c-papel-baixo:  #e8e6e0;  /* papel mais rebaixado, faixa de projetos   */
-  --c-linha:        #d3d0c9;  /* fio sobre claro, estado desativado        */
-  --c-cinza:        #9e9b95;  /* cinza da marca: costura, faixas           */
-  --c-cinza-painel: #97958f;  /* painel sólido do hero da Síntese          */
-  --c-cinza-texto:  #5d5d58;  /* texto de apoio sobre papel                */
-  --c-oliva:        #484b45;  /* superfície escura de processo             */
-  --c-tinta:        #20211f;  /* texto principal, tarja                    */
-  --c-preto:        #111211;  /* fundo do documento, superfície de imagem  */
+  --c-papel:        #f6f4f0;  /* o ÚNICO fundo claro de seção            */
+  --c-grafite:      #262626;  /* o ÚNICO fundo escuro de seção           */
+  --c-cinza:        #9e9c94;  /* SÓ o rodapé                             */
+  --c-areia:        #d5c5b1;  /* SÓ rótulo em caixa alta sobre grafite   */
+  --c-tinta:        #20211f;  /* texto sobre papel e sobre o rodapé      */
+  --c-apoio:        #5f5d58;  /* texto secundário sobre papel            */
+  --c-linha:        #d3d0c9;  /* fio sobre papel, estado desativado      */
+  --c-papel-baixo:  #e8e6e0;  /* fundo de card antes da foto chegar.
+                                 NUNCA fundo de seção (v4)              */
+  --c-branco:       #ffffff;  /* reverso do wordmark                     */
+
+  /* Sobre grafite: o texto é o papel; o secundário, o papel a 72%. */
+  --c-papel-72:     rgb(246 244 240 / .72);
+  /* Fio sobre grafite: o papel a 20%. */
+  --c-papel-fio:    rgb(246 244 240 / .20);
+  /* Fio inferior do cabeçalho quando ele volta ao rolar para cima. */
+  --c-tinta-fio:    rgb(32 33 31 / .12);
 
   /* ------------------------------------------------------------------
      1b. VARIANTE DE PALETA POR UNIDADE — "palha"
      Aplicada por `data-paleta` no <html>, vindo do config da unidade.
-     Ver config/tipos.ts e docs/decisoes.md.
-
-     Troca só a FAMÍLIA DO CINZA por tons de areia, para o site do litoral.
-     Nada mais muda: preto, papel e branco são os mesmos nos dois sites, e o
-     desenho continua sendo um só. A cor NÃO é de acento — é superfície.
-
-     Contraste medido, com --preto (#20211f) por cima:
-       cinza atual #97958f → 5,40:1
-       palha       #fff4eb → 14,93:1
+     Ver o bloco :root[data-paleta="palha"] no fim do arquivo.
      ------------------------------------------------------------------ */
-
-  /* Nada aqui: a camada 1 acima é a paleta neutra, o padrão. */
 
   /* ------------------------------------------------------------------
      2. COR — CAMADA SEMÂNTICA
-     Nomes fixos do CLAUDE.md. É por aqui que o componente pede cor.
-     Nunca renomear: a troca da paleta acontece na camada 1.
+     É por aqui que o componente pede cor. A troca da paleta acontece na
+     camada 1.
      ------------------------------------------------------------------ */
-  --preto:      var(--c-tinta);
-  --cinza:      var(--c-cinza);
-  --cinza-clr:  var(--c-linha);
-  --papel:      var(--c-papel);
-  --branco:     var(--c-branco);
+  --papel:    var(--c-papel);
+  --grafite:  var(--c-grafite);
+  --cinza:    var(--c-cinza);
+  --areia:    var(--c-areia);
+  --tinta:    var(--c-tinta);
+  --apoio:    var(--c-apoio);
+  --branco:   var(--c-branco);
 
-  /* As CINCO superfícies em uso no site, com nome (ajustes de layout,
-     02/10/2026). Só nomes: apontam para valores que já existiam na camada 1,
-     nenhum valor mudou. O CLAUDE.md as lista com estes nomes.
-     As páginas internas usam ainda o papel #f5f4f0 (--papel, acima). */
-  --sup-preto:       var(--c-preto);        /* #111211 abertura, galerias        */
-  --sup-papel:       var(--c-papel-alto);   /* #f9f8f5 faixa do título, manifesto */
-  --sup-papel-baixo: var(--c-papel-baixo);  /* #e8e6e0 faixa de projetos da home  */
-  --sup-oliva:       var(--c-oliva);        /* #484b45 seção da fábrica da home   */
-  --sup-cinza:       var(--c-cinza);        /* #9e9b95 costura: faixas, rodapé     */
+  /* Nomes antigos, mantidos porque o código inteiro fala com eles.
+     ATENÇÃO: --preto é a TINTA do texto, não uma superfície. */
+  --preto:       var(--c-tinta);
+  --cinza-texto: var(--c-apoio);   /* texto de apoio sobre papel        */
+  --cinza-clr:   var(--c-linha);   /* fio sobre papel                   */
 
-  /* Texto de apoio sobre papel. NÃO é --cinza: medido, --cinza sobre --papel
-     dá 2,52:1 de contraste, e o mínimo do WCAG AA para texto é 4,5:1. Este
-     dá 6,02:1. Use --cinza para faixa e superfície, este para texto. */
-  --cinza-texto: var(--c-cinza-texto);
+  /* Sobre grafite. */
+  --sobre-grafite:       var(--c-papel);
+  --sobre-grafite-apoio: var(--c-papel-72);
+  --sobre-grafite-fio:   var(--c-papel-fio);
 
-  /* Fio que separa uma faixa da superfície vizinha.
-     TRANSPARENTE na paleta neutra, de propósito: ali o cinza (#9e9b95) já
-     separa do papel em 2,52 e o fio seria ruído. Na paleta palha a faixa é
-     quase branca e separa em 1,02 — o fio é o que a torna uma faixa.
-     É a separação que o CLAUDE.md prescreve: "por fio de 1px e por espaço,
-     zero sombra". */
+  /* Fio do cabeçalho e da faixa do rodapé na paleta palha. Transparente na
+     paleta neutra: o cinza do rodapé já separa do papel sozinho. */
+  --cab-fio: var(--c-tinta-fio);
   --fio-sup: transparent;
 
   /* Não existe cor de acento. Se faltar destaque, a resposta é escala
      ou troca de superfície. Único desvio previsto: verde e vermelho de
-     sistema em erro e sucesso de formulário (Fase 7).                  */
-
-  /* ------------------------------------------------------------------
-     3. COR SOBRE SUPERFÍCIE ESCURA
-     Escada de alfa sobre branco. Substitui as quinze opacidades ad hoc
-     que o estudo espalhava (.16 .17 .2 .23 .25 .45 .48 .55 .58 .62 …).
-     ------------------------------------------------------------------ */
-  --sobre-escuro:        rgb(255 255 255 / 1);    /* texto principal      */
-  --sobre-escuro-70:     rgb(255 255 255 / .70);  /* texto de apoio       */
-  --sobre-escuro-55:     rgb(255 255 255 / .55);  /* rótulo secundário    */
-  --sobre-escuro-45:     rgb(255 255 255 / .45);  /* numeração, inativo   */
-  --sobre-escuro-fio:    rgb(255 255 255 / .24);  /* fio de 1px           */
-  --sobre-escuro-fio-fr: rgb(255 255 255 / .16);  /* fio quase apagado    */
-
-  /* Cabeçalho sobre cada superfície (ajustes de layout, 02/10/2026). O texto
-     claro é o papel #f9f8f5, não branco puro; os fios são a tinta e o papel
-     em transparência. Nenhuma cor nova: são valores da paleta com alfa. */
-  --cab-texto-sobre-preto: var(--c-papel-alto);
-  --cab-fio-sobre-preto:   rgb(249 248 245 / .14);
-  --cab-fio-sobre-papel:   rgb(32 33 31 / .12);
-
-  /* ------------------------------------------------------------------
-     4. VÉU SOBRE FOTO — TEMPORÁRIO, MORRE NA FASE 2
-     O CLAUDE.md e a seção 13 da direção proíbem escurecer foto. Estes
-     tokens existem só para a página de estudos, que é descartada na
-     Fase 2. NÃO usar em componente novo.
-     ------------------------------------------------------------------ */
-  --veu-62: rgb(0 0 0 / .62);
-  --veu-46: rgb(0 0 0 / .46);
-  --veu-40: rgb(0 0 0 / .40);
-  --veu-32: rgb(0 0 0 / .32);
-  --veu-20: rgb(0 0 0 / .20);
-  --veu-12: rgb(0 0 0 / .12);
-
-  /* Gradiente do topo da capa em vídeo, para o cabeçalho branco ficar
-     legível. NÃO é véu: cobre só a faixa do cabeçalho, de cima para baixo
-     até sumir. Ver .synthesis-hero-top e docs/decisoes.md, 2026-10-01. */
-  --degrade-cabecalho: rgb(0 0 0 / .35);
+     sistema em erro e sucesso de formulário.                           */
 
   /* ------------------------------------------------------------------
      5. TIPOGRAFIA
@@ -163,16 +123,25 @@
   --e-6:  96px;
   --e-7: 128px;
 
-  /* Ritmo vertical: TRÊS intervalos, não um (ajustes de layout, 02/10/2026).
-     Intervalo constante — quase tudo era 112px — é a segunda maior razão de
-     uma página parecer gerada. Regra: nunca dois longos seguidos, nunca três
-     curtos seguidos. Mobile (até 600px) no fim do arquivo: 40 · 72 · 96.  */
-  --respiro-curto:  56px;  /* entre blocos irmãos da mesma seção          */
-  --respiro:       120px;  /* entre seções                                */
-  --respiro-longo: 180px;  /* antes da seção mais importante da página e
-                              antes de troca de superfície               */
+  /* Ritmo vertical da v4 (05/10/2026). Cada fronteira de seção já é marcada
+     pela troca de cor (papel ↔ grafite), então o respiro caiu: medido antes,
+     havia 240 a 300px vazios entre o fim de uma seção e o título da seguinte.
+     Só estes três, e mais nada solto (os antigos 112, 120, 122 e 180 saíram).
+     O clamp faz a passagem do celular ao desktop sem media query.          */
+  --respiro:       clamp(48px, 5vw, 72px);   /* padding-top E -bottom de
+                                                toda seção: 48 → 72      */
+  --respiro-curto: clamp(24px, 2.5vw, 40px); /* do cabeçalho da seção
+                                                (rótulo, título, apoio) ao
+                                                conteúdo: 24 → 40        */
+  --entre-itens:   clamp(24px, 2vw, 32px);   /* entre itens irmãos: etapas,
+                                                perguntas, blocos, fotos */
 
-  --e-secao:  var(--respiro);  /* nome antigo, hoje igual a --respiro      */
+  /* Dentro do cabeçalho de seção: rótulo → 12px → título → 16px → apoio;
+     parágrafo → link, 24px. */
+  --cab-rotulo-titulo: 12px;
+  --cab-titulo-apoio:  16px;
+  --cab-texto-link:    24px;
+
   --e-margem: 20px;        /* margem lateral do texto no mobile            */
 
   /* Margem lateral da página. Cresce com a tela, mas nunca abaixo dos 20px
@@ -200,6 +169,11 @@
                           150ms, ease (ajustes de layout, 02/10/2026)    */
   --mov-ease:  cubic-bezier(.2, .8, .2, 1);
 
+  /* Cabeçalho que some ao rolar para baixo e volta ao rolar para cima (v4):
+     só transform, 250ms, curva de saída rápida e pouso suave. */
+  --mov-cabecalho:      250ms;
+  --mov-cabecalho-ease: cubic-bezier(0.25, 1, 0.5, 1);
+
   /* Alvo de toque mínimo, para não repetir o botão de 30px do estudo. */
   --toque: 44px;
   /* Botão que abre e fecha o menu mobile: 48px, acima do mínimo, porque é a
@@ -210,25 +184,19 @@
 /* ------------------------------------------------------------------
    A PALETA "PALHA", do site de Caraguatatuba.
 
-   Só a família do cinza muda. É o único lugar do projeto com cor literal
-   de variante — o componente continua falando só com os nomes semânticos
-   (--cinza, --cinza-clr, --cinza-texto), que não mudam de nome.
-
-   Trocar estes quatro valores troca o site do litoral inteiro.
+   Muda só o que é da família do cinza: o rodapé, o texto de apoio e os
+   fios. Papel, grafite, tinta e areia são os mesmos nos dois sites, e o
+   desenho continua sendo um só. O componente fala só com os nomes
+   semânticos (--cinza, --cinza-clr, --cinza-texto), que não mudam.
    ------------------------------------------------------------------ */
 :root[data-paleta="palha"] {
-  /* Uma cor só para toda a família: painel do hero, faixas, rodapé e tiras
-     de chamada. 14,93:1 com a tinta por cima.                              */
+  /* O rodapé em areia clara: 14,93:1 com a tinta por cima.               */
   --c-cinza:        #fff4eb;
-  --c-cinza-painel: #fff4eb;
+  --c-apoio:        #5f5847;  /* texto de apoio sobre papel — 6,4:1         */
+  --c-linha:        #e7d8c9;  /* fio sobre papel, estado desativado         */
 
-  --c-cinza-texto:  #5f5847;  /* texto de apoio sobre papel — 6,42:1        */
-  --c-linha:        #e7d8c9;  /* fio sobre claro, estado desativado         */
-
-  /* A faixa é quase branca e separa do papel em apenas 1,02 — sozinha, ela
-     sumiria dentro da página. É ESTE FIO que a torna uma faixa. O peso foi
-     calibrado no fio da paleta neutra, que tem 1,80 contra a sua superfície;
-     este tem 1,83 contra #fff4eb.                                          */
+  /* O rodapé palha é quase branco e separa do papel em apenas 1,02 —
+     sozinho, ele sumiria dentro da página. É ESTE FIO que o separa.        */
   --fio-sup:        #cdb49a;
 }
 
@@ -245,9 +213,6 @@
     --fs-subtitulo:  20px;
     --fs-texto:      16.5px;
     /* --fs-rotulo não muda: 10.5px em toda largura. */
-
-    --respiro-curto: 40px;
-    --respiro:       72px;
-    --respiro-longo: 96px;
+    /* O respiro não muda aqui: é clamp, desce sozinho até 48 / 24. */
   }
 }

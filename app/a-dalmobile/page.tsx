@@ -55,7 +55,7 @@ export default function ADalmobile() {
 
   return (
     <>
-      <Header superficie="papel" />
+      <Header />
 
       <Section superficie="papel">
         <h1 className={estilos.titulo}>{comCidade(pagina.titulo)}</h1>
@@ -65,12 +65,30 @@ export default function ADalmobile() {
         </div>
       </Section>
 
-      {/* Respiro longo: vem uma troca de superfície (papel → cinza). */}
-      <Section superficie="papel" respiro="longo">
+      {/* SEQUÊNCIA DE SUPERFÍCIES (v4, 05/10/2026), sem repetir vizinha:
+          abertura papel → produção grafite → processo papel → materiais
+          grafite → perguntas papel → faixa do showroom grafite → rodapé. */}
+      <Section superficie="grafite">
         <h2 className={estilos.secao}>{d.fabrica?.titulo}</h2>
         <div className={estilos.texto}>
           <p>{comCidade(d.fabrica?.texto ?? "")}</p>
         </div>
+
+        {/* A faixa de números entrou DENTRO desta seção na v4: era uma faixa
+            cinza sozinha, entre materiais e perguntas. Só existe com número
+            confirmado — zero itens seria uma seção vazia; um, uma promessa
+            fraca. */}
+        {numeros.length >= 3 ? (
+          <ul className={estilos.numeros}>
+            {numeros.map((n) => (
+              <li key={n.rotulo}>
+                <span className={estilos.numeroValor}>{n.valor}</span>
+                <span className={estilos.numeroRotulo}>{n.rotulo}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
         {/* A direção pede foto de fábrica e o acervo não tem. Até ter, uma
             foto de projeto executado, que é o ativo que a loja realmente tem. */}
         {foto ? (
@@ -83,7 +101,7 @@ export default function ADalmobile() {
         ) : null}
       </Section>
 
-      <Section superficie="cinza">
+      <Section superficie="papel">
         <h2 className={estilos.secao}>O processo</h2>
         <ol className={estilos.processo}>
           {processo.map((etapa, i) => (
@@ -102,7 +120,7 @@ export default function ADalmobile() {
         </ol>
       </Section>
 
-      <Section superficie="papel">
+      <Section superficie="grafite">
         <h2 className={estilos.secao}>{d.materiais?.titulo}</h2>
         <div className={estilos.texto}>
           <p>{comCidade(d.materiais?.texto ?? "")}</p>
@@ -116,21 +134,6 @@ export default function ADalmobile() {
         {/* A seção Garantia saiu na copy v3: garantia, certificado e prazos
             ficam na conversa de venda, não no site (docs/vocabulario.md). */}
       </Section>
-
-      {/* A faixa de números só existe se houver número confirmado. Faixa com
-          zero itens seria uma seção vazia; com um item, uma promessa fraca. */}
-      {numeros.length >= 3 ? (
-        <Section superficie="cinza" semRespiro>
-          <ul className={estilos.numeros}>
-            {numeros.map((n) => (
-              <li key={n.rotulo}>
-                <span className={estilos.numeroValor}>{n.valor}</span>
-                <span className={estilos.numeroRotulo}>{n.rotulo}</span>
-              </li>
-            ))}
-          </ul>
-        </Section>
-      ) : null}
 
       {faq.length > 0 ? (
         <Section superficie="papel">
@@ -148,7 +151,7 @@ export default function ADalmobile() {
         </Section>
       ) : null}
 
-      <Section superficie="cinza" semRespiro>
+      <Section superficie="grafite">
         <div className={estilos.chamadaFinal}>
           {/* Texto só se o conteúdo tiver: desde a copy v3 o corpo está vazio
               e a faixa fica só com o botão. */}

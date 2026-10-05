@@ -13,8 +13,8 @@
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
   max-width: var(--medida); /* 62 a 66 caracteres */
-  margin: var(--e-2) 0 0;
-  color: var(--cinza-texto);
+  margin: var(--cab-titulo-apoio) 0 0;
+  color: var(--sup-apoio);
 }
 
 /* Grade 2/3/4 colunas. Card pequeno funciona aqui: são rótulos com foto de
@@ -22,7 +22,7 @@
    dos projetos. */
 .grade {
   list-style: none;
-  margin: var(--e-4) 0 0;
+  margin: var(--respiro-curto) 0 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -98,7 +98,7 @@
   font-size: var(--fs-rotulo);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   margin-top: 4px; /* meia unidade: a contagem é apoio do nome, não item novo */
 }
 

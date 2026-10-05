@@ -14,7 +14,7 @@
   /* Medida de leitura de 62 a 66 caracteres. Nunca largura total. */
   max-width: var(--medida);
   margin: var(--e-2) 0 0;
-  color: var(--sobre-escuro-70);
+  color: var(--sup-apoio);
 }
 
 .contagem {
@@ -23,7 +23,7 @@
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
   margin: var(--e-3) 0 0;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
 }
 
 /* ---- Filtros -------------------------------------------------------- */
@@ -48,7 +48,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
   margin: 0 0 var(--e-2);
 }
 
@@ -68,22 +68,22 @@
      (44 - 17 de linha) / 2, arredondado para a escala de 8. */
   min-height: var(--toque);
   padding: 0 var(--e-2);
-  border: var(--fio) solid var(--sobre-escuro-fio);
+  border: var(--fio) solid var(--sup-fio);
   border-radius: 0;
   font-size: var(--fs-texto);
-  color: var(--sobre-escuro-70);
+  color: var(--sup-apoio);
   transition: color var(--mov-fio) var(--mov-ease), border-color var(--mov-fio) var(--mov-ease);
 }
 
 .chip:hover {
-  color: var(--sobre-escuro);
-  border-color: var(--sobre-escuro-fio-fr);
+  color: var(--sup-fg);
+  border-color: var(--sup-fio);
 }
 
 .chip[aria-current="true"] {
-  color: var(--preto);
-  background: var(--sobre-escuro);
-  border-color: var(--sobre-escuro);
+  color: var(--sup-bg);
+  background: var(--sup-fg);
+  border-color: var(--sup-fg);
 }
 
 /* ---- Grade ---------------------------------------------------------- */
@@ -144,13 +144,13 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
   margin: var(--e-1) 0 0;
 }
 
 .cardApoio {
   font-size: var(--fs-texto);
-  color: var(--sobre-escuro-70);
+  color: var(--sup-apoio);
   margin: var(--e-1) 0 0;
 }
 
@@ -165,24 +165,24 @@
   align-items: center;
   min-height: var(--toque);
   padding: 0 var(--e-3);
-  border: var(--fio) solid var(--sobre-escuro-fio);
+  border: var(--fio) solid var(--sup-fio);
   font-size: var(--fs-texto);
-  color: var(--sobre-escuro);
+  color: var(--sup-fg);
 }
 
 .maisLink:hover {
-  border-color: var(--sobre-escuro);
+  border-color: var(--sup-fg);
 }
 
 .vazio {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
   max-width: var(--medida);
-  color: var(--sobre-escuro-70);
+  color: var(--sup-apoio);
   margin: 0;
 }
 
 .vazioLink {
-  color: var(--sobre-escuro);
-  border-bottom: var(--fio) solid var(--sobre-escuro-fio);
+  color: var(--sup-fg);
+  border-bottom: var(--fio) solid var(--sup-fio);
 }

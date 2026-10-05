@@ -1,4 +1,5 @@
-/* Página do showroom. Superfície papel: o texto manda.
+/* Página do showroom. Papel, com a faixa da outra loja em grafite (v4); as
+   cores vêm de --sup-* da superfície (app/globals.css).
    Ver app/a-loja/page.tsx e a seção 9 do docs/direcao-site.md. */
 
 .titulo {
@@ -13,7 +14,7 @@
   font-size: var(--fs-secao);
   font-weight: var(--peso-leve);
   letter-spacing: var(--tr-secao);
-  margin: 0 0 var(--e-3);
+  margin: 0 0 var(--respiro-curto);
 }
 
 /* Dek de página: 20px na cor de apoio, não no preto do título — título, dek
@@ -23,25 +24,25 @@
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   max-width: var(--medida);
-  margin: var(--e-2) 0 0;
+  margin: var(--cab-titulo-apoio) 0 0;
 }
 
 .intro {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
   max-width: var(--medida); /* 62 a 66 caracteres */
-  margin: var(--e-2) 0 0;
-  color: var(--cinza-texto);
+  margin: var(--cab-titulo-apoio) 0 0;
+  color: var(--sup-apoio);
 }
 
 /* Duas colunas no desktop. Empilhado abaixo disso, com os DADOS primeiro:
    quem abre esta página no telefone quer o endereço, não o mapa. */
 .colunas {
   display: grid;
-  gap: var(--e-4);
-  margin-top: var(--e-4);
+  gap: var(--respiro-curto);
+  margin-top: var(--respiro-curto);
 }
 
 @media (min-width: 1025px) {
@@ -63,7 +64,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
 }
 
 .lista dd {
@@ -112,7 +113,7 @@
 }
 
 .dias {
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
 }
 
 /* O mapa e a foto ocupam o mesmo lugar: só um dos dois existe por vez. */
@@ -136,7 +137,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--e-2);
-  padding-block: var(--e-4);
 }
 
 .outraTexto {
@@ -152,15 +152,16 @@
   align-items: center;
   min-height: var(--toque);
   padding: 0 var(--e-3);
-  border: var(--fio) solid var(--preto);
+  border: var(--fio) solid var(--sup-fg);
   font-size: var(--fs-texto);
-  color: var(--preto);
+  color: var(--sup-fg);
   transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
 }
 
+/* Hover: o botão se inverte na própria superfície. */
 .outraAcao:hover {
-  background: var(--preto);
-  color: var(--branco);
+  background: var(--sup-fg);
+  color: var(--sup-bg);
 }
 
 /* ---- Atalhos para os ambientes --------------------------------------- */
@@ -173,6 +174,11 @@
   flex-wrap: wrap;
   gap: var(--e-1);
 }
+
+/* O item vira flex para não somar a linha de texto embaixo do link
+   inline-flex: eram uns 6px a mais por linha, que empurravam o vão até a
+   seção seguinte para além de 160px (v4). */
+.atalhos > li { display: flex; }
 
 .atalho {
   display: inline-flex;

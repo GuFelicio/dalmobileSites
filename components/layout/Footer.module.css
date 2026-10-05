@@ -1,25 +1,46 @@
-/* Superfície cinza — o rodapé é costura. */
+/* Superfície cinza — o ÚNICO lugar do site com ela (v4). Todo texto em
+   --tinta: texto claro sobre este cinza dá 2,5:1 e é proibido. */
 .footer {
   background: var(--cinza);
-  color: var(--preto);
-  padding: var(--e-secao) var(--pad-lateral) var(--e-4);
+  color: var(--tinta);
+  /* --respiro-curto em cima e embaixo (v4): o rodapé é índice, não seção.
+     No celular ele tinha 1.106px de altura; o alvo é menos de 600. */
+  padding: var(--respiro-curto) var(--pad-lateral);
   /* Fio de separação — ver .cinza em Section.module.css e --fio-sup em
      app/tokens.css. Sem ele, o rodapé da paleta palha encosta no papel sem
      nenhuma borda visível. */
   border-top: var(--fio) solid var(--fio-sup);
 }
 
-/* Mobile: colunas empilhadas, uma sempre. */
+/* Mobile: duas colunas (v4). A marca com o endereço ocupa a linha toda; as
+   páginas e o contato ficam lado a lado; a outra loja e a privacidade fecham
+   numa linha só. Empilhado em uma coluna, o rodapé passava de 1.100px. */
 .colunas {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* 16px entre os grupos no celular: com 24 o rodapé passava dos 600px. */
+  gap: var(--e-2);
 }
+
+.colunas > :first-child,
+.colunas > :last-child {
+  grid-column: 1 / -1;
+}
+
+/* A última coluna (a outra loja e a privacidade) em linha no celular: são
+   dois links curtos, empilhados gastariam 100px à toa. */
+.colunas > :last-child {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  column-gap: var(--e-4);
+}
+.colunas > :last-child > .titulo { flex-basis: 100%; }
 
 .coluna {
   display: flex;
   flex-direction: column;
-  gap: var(--e-2);
+  gap: var(--e-1);
   /* Impede que uma coluna estoure a grade e crie rolagem horizontal. */
   min-width: 0;
 }
@@ -39,10 +60,12 @@
   max-width: var(--medida);
 }
 
+/* Sem gap entre os links: cada um já tem 44px de alvo para 27px de texto, e
+   é essa folga que separa um alvo do vizinho. */
 .lista {
   display: flex;
   flex-direction: column;
-  gap: var(--e-1);
+  gap: 0;
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
 }
@@ -95,8 +118,8 @@
 }
 
 .assinatura {
-  margin-top: var(--e-5);
-  padding-top: var(--e-3);
+  margin-top: var(--respiro-curto);
+  padding-top: var(--e-2);
   border-top: var(--fio) solid var(--preto);
   font-size: var(--fs-rotulo);
   letter-spacing: var(--tr-rotulo);
@@ -104,13 +127,22 @@
   text-transform: uppercase;
 }
 
-/* Tablet: duas colunas. Quatro nesta faixa espremeriam o endereço em três
-   linhas quebradas. */
+/* Tablet: duas colunas, cada bloco na sua. Quatro nesta faixa espremeriam
+   o endereço em três linhas quebradas. */
 @media (min-width: 601px) {
   .colunas {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--e-5) var(--e-4);
+    gap: var(--respiro-curto) var(--e-4);
   }
+  .colunas > :first-child,
+  .colunas > :last-child {
+    grid-column: auto;
+  }
+  .colunas > :last-child {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+  .colunas > :last-child > .titulo { flex-basis: auto; }
 }
 
 /* Desktop: as quatro colunas. A primeira é mais larga porque carrega o

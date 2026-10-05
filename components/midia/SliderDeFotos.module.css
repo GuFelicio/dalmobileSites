@@ -1,6 +1,8 @@
 /* Slider da vitrine da home. Ver components/midia/SliderDeFotos.tsx.
    Só o trilho e os controles vivem aqui: a aparência de cada cartão vem das
-   classes `synthesis-project*` do globals.css, que é o desenho aprovado. */
+   classes `synthesis-project*` do globals.css, que é o desenho aprovado.
+   As cores vêm da superfície em que o slider está (--sup-*, ver
+   .superficie-* em app/globals.css): na home, o grafite. */
 
 .moldura {
   position: relative;
@@ -24,7 +26,7 @@
 }
 
 .trilho:focus-visible {
-  outline: 2px solid var(--preto);
+  outline: 2px solid var(--sup-fg);
   outline-offset: 6px;
 }
 
@@ -50,7 +52,7 @@
   display: flex;
   align-items: center;
   gap: var(--e-2);
-  margin-top: var(--e-4);
+  margin-top: var(--respiro-curto);
 }
 
 .botoes {
@@ -64,22 +66,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: var(--fio) solid var(--cinza-clr);
+  border: var(--fio) solid var(--sup-fio);
   border-radius: 0;
   background: transparent;
-  color: var(--preto);
+  color: var(--sup-fg);
   font-size: var(--fs-texto);
   cursor: pointer;
   transition: border-color var(--mov-fio) var(--mov-ease);
 }
 
 .botao:hover:not(:disabled) {
-  border-color: var(--preto);
+  border-color: var(--sup-fg);
 }
 
+/* Desativado: a seta no tom de apoio, sem o fio de hover. Sem opacity: a
+   v4 exige 4,5:1 em todo texto, e a seta a 50% dava 3,07:1 no grafite. */
 .botao:disabled {
-  color: var(--cinza);
-  border-color: var(--cinza-clr);
+  color: var(--sup-apoio);
+  border-color: var(--sup-fio);
   cursor: default;
 }
 
@@ -89,7 +93,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   font-variant-numeric: tabular-nums;
 }
 

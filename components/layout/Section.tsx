@@ -1,36 +1,32 @@
 /**
  * Section — as três superfícies do site.
  *
- * O que é: o invólucro que decide em que fundo um bloco vive. Preto para
- * quando a imagem manda, cinza para costura, papel para quando o texto manda.
- * Fora daqui, nenhum componente escolhe fundo sozinho.
+ * O que é: o invólucro que decide em que fundo um bloco vive: papel ou
+ * grafite. O cinza é só do rodapé. Fora daqui (e das seções da home, que usam
+ * as mesmas classes globais), nenhum componente escolhe fundo sozinho.
  *
  * Onde é usado: em toda página, em volta de cada bloco de conteúdo.
  *
  * Props:
- *   superficie  "preto" | "cinza" | "papel"  — obrigatória, sem padrão: a
- *               escolha da superfície é decisão de composição, não default.
- *   semRespiro  remove o respiro vertical, para faixas finas de pontuação.
+ *   superficie  "papel" | "grafite" — obrigatória, sem padrão: a escolha da
+ *               superfície é decisão de composição, não default.
+ *   semRespiro  remove o respiro vertical (a foto de abertura do case).
  *   sangra      remove a margem lateral, para foto de ponta a ponta.
- *   respiro     "normal" (padrão, 120px) ou "longo" (180px embaixo), para
- *               antes de troca de superfície. Nunca dois longos seguidos.
  *   as          a tag renderizada. Padrão "section".
  *   id, className, children
  *
- * REGRA DE COMPOSIÇÃO: no máximo QUATRO trocas de superfície por página.
- * Não dá para o componente verificar isso sozinho — quem monta a página
- * confere. A sequência da home está na seção 3 do docs/direcao-site.md.
+ * REGRA DE COMPOSIÇÃO (v4): seções vizinhas NUNCA têm a mesma cor, e o
+ * rodapé é sempre cinza. A sequência de cada página está no CLAUDE.md.
  */
 import type { ElementType, ReactNode } from "react";
 import estilos from "./Section.module.css";
 
-export type Superficie = "preto" | "cinza" | "papel";
+export type Superficie = "papel" | "grafite";
 
 type SectionProps = {
   superficie: Superficie;
   semRespiro?: boolean;
   sangra?: boolean;
-  respiro?: "normal" | "longo";
   as?: ElementType;
   id?: string;
   className?: string;
@@ -41,7 +37,6 @@ export function Section({
   superficie,
   semRespiro = false,
   sangra = false,
-  respiro = "normal",
   as: Tag = "section",
   id,
   className,
@@ -50,9 +45,9 @@ export function Section({
   const classes = [
     estilos.section,
     estilos[superficie],
+    `superficie-${superficie}`,
     semRespiro ? estilos.semRespiro : "",
     sangra ? estilos.sangra : "",
-    respiro === "longo" ? estilos.respiroLongo : "",
     className ?? "",
   ]
     .filter(Boolean)

@@ -13,14 +13,14 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
-  margin: var(--e-2) 0 0;
+  color: var(--sup-apoio);
+  margin: var(--cab-titulo-apoio) 0 0;
 }
 
 /* Texto corrido nunca em largura total: medida de 62 a 66 caracteres. */
 .texto {
   max-width: var(--medida);
-  margin-top: var(--e-4);
+  margin-top: var(--respiro-curto);
 }
 
 .texto h2 {
@@ -49,7 +49,7 @@
 }
 
 .volta {
-  margin-top: var(--e-4);
+  margin-top: var(--respiro-curto);
   font-size: var(--fs-texto);
 }
 

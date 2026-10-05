@@ -103,3 +103,22 @@ test("a variante de paleta só existe em app/tokens.css, e o config a escolhe po
     );
   }
 });
+
+test("todo var(--x) usado tem definição em algum lugar", async () => {
+  // Trocar a paleta (v4) apagou tokens que o código ainda usava; sem este
+  // teste, var() sem definição vira cor vazia em silêncio — já deixou o
+  // cabeçalho com 1,16:1 de contraste uma vez. Conta como definição
+  // `--x:` em qualquer CSS ou a chave "--x" de um style inline.
+  const definidos = new Set();
+  const usados = new Map();
+  for (const arquivo of await fontes()) {
+    const conteudo = semComentarios(await readFile(path.join(root, arquivo), "utf8"));
+    for (const m of conteudo.matchAll(/(--[a-z0-9-]+)\s*:/g)) definidos.add(m[1]);
+    for (const m of conteudo.matchAll(/"(--[a-z0-9-]+)"/g)) definidos.add(m[1]);
+    for (const m of conteudo.matchAll(/var\((--[a-z0-9-]+)/g)) {
+      if (!usados.has(m[1])) usados.set(m[1], arquivo);
+    }
+  }
+  const faltam = [...usados].filter(([nome]) => !definidos.has(nome)).map(([n, a]) => `${n} (${a})`);
+  assert.deepEqual(faltam, [], `Token usado sem definição:\n${faltam.join("\n")}`);
+});

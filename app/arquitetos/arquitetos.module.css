@@ -1,4 +1,5 @@
-/* Página de parceria com arquitetos. Superfície papel.
+/* Página de parceria com arquitetos. Papel e grafite alternando (v4); as
+   cores vêm de --sup-* da superfície (app/globals.css).
    Ver app/arquitetos/page.tsx e a seção 8 do docs/direcao-site.md. */
 
 .titulo {
@@ -16,16 +17,16 @@
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   max-width: var(--medida);
-  margin: var(--e-2) 0 0;
+  margin: var(--cab-titulo-apoio) 0 0;
 }
 
 .secao {
   font-size: var(--fs-secao);
   font-weight: var(--peso-leve);
   letter-spacing: var(--tr-secao);
-  margin: 0 0 var(--e-3);
+  margin: 0 0 var(--respiro-curto);
 }
 
 .texto {
@@ -35,7 +36,7 @@
 .texto p {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
-  margin: var(--e-2) 0 0;
+  margin: var(--cab-titulo-apoio) 0 0;
 }
 
 /* ---- Blocos da parceria ---------------------------------------------- */
@@ -45,11 +46,9 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--e-4);
+  gap: var(--entre-itens);
 }
 
-/* Dois por linha a partir do tablet: são blocos curtos, e uma coluna só
-   deixaria a página comprida demais para o pouco texto que cada um tem. */
 /* Uma coluna, em toda largura: com os 5 blocos da copy v3, nenhuma grade de
    duas colunas fecha sem vão (2+2+1) — e esticar o último deixaria a régua
    mais larga que o texto. A lista inteira fica na medida do texto, então
@@ -59,7 +58,7 @@
 }
 
 .bloco {
-  border-top: var(--fio) solid var(--cinza-clr);
+  border-top: var(--fio) solid var(--sup-fio);
   padding-top: var(--e-2);
 }
 
@@ -75,7 +74,7 @@
   line-height: var(--lh-texto);
   max-width: var(--medida);
   margin: var(--e-1) 0 0;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
 }
 
 .prazo {
@@ -83,7 +82,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
+  color: var(--sup-rotulo);
   margin: var(--e-1) 0 0;
 }
 
@@ -94,11 +93,11 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--e-3);
+  gap: var(--entre-itens);
 }
 
 .parceiro {
-  border-top: var(--fio) solid var(--cinza-clr);
+  border-top: var(--fio) solid var(--sup-fio);
   padding-top: var(--e-2);
 }
 
@@ -120,7 +119,7 @@
 }
 
 .parceiroProjetos a {
-  border-bottom: var(--fio) solid var(--cinza-clr);
+  border-bottom: var(--fio) solid var(--sup-fio);
 }
 
 /* ---- Chamada final --------------------------------------------------- */
@@ -131,7 +130,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--e-3);
-  padding-block: var(--e-4);
 }
 
 .chamadaTexto {
@@ -147,15 +145,16 @@
   align-items: center;
   min-height: var(--toque); /* alvo de toque de 44px */
   padding: 0 var(--e-3);
-  border: var(--fio) solid var(--preto);
+  border: var(--fio) solid var(--sup-fg);
   font-size: var(--fs-texto);
-  color: var(--preto);
+  color: var(--sup-fg);
   transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
 }
 
+/* Hover: o botão se inverte na própria superfície. */
 .chamadaAcao:hover {
-  background: var(--preto);
-  color: var(--branco);
+  background: var(--sup-fg);
+  color: var(--sup-bg);
 }
 
 @media (prefers-reduced-motion: reduce) {

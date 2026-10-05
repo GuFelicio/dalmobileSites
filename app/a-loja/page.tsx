@@ -59,7 +59,7 @@ export default function ALoja() {
 
   return (
     <>
-      <Header superficie="papel" />
+      <Header />
 
       {/* O schema é o motivo de esta página existir para o Google. Gerado do
           config, então não há como divergir do que o rodapé mostra. */}
@@ -155,7 +155,9 @@ export default function ALoja() {
         </div>
       </Section>
 
-      <Section superficie="cinza" semRespiro>
+      {/* Superfícies (v4, 05/10/2026): abertura papel → a outra loja grafite
+          → antes de vir papel → rodapé. */}
+      <Section superficie="grafite">
         <div className={estilos.outraLoja}>
           {/* Nomear a região é melhor para busca e para o leitor do que
               "também atende em outra cidade". */}

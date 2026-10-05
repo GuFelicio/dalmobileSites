@@ -15,17 +15,17 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
 }
 
 .caminho li + li::before {
   content: "/";
   margin-right: var(--e-1);
-  color: var(--sobre-escuro-45);
+  color: var(--sup-apoio);
 }
 
 .caminho a:hover {
-  color: var(--sobre-escuro);
+  color: var(--sup-fg);
 }
 
 /* ---- 2. Cabeçalho ---------------------------------------------------- */
@@ -43,7 +43,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
   margin: var(--e-2) 0 0;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .ficha {
-  border-top: var(--fio) solid var(--cinza-clr);
+  border-top: var(--fio) solid var(--sup-fio);
   padding-top: var(--e-3);
 }
 
@@ -102,7 +102,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   margin: 0 0 var(--e-2);
 }
 
@@ -117,7 +117,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
 }
 
 .ficha dd {
@@ -127,7 +127,7 @@
 }
 
 .ficha dd a {
-  border-bottom: var(--fio) solid var(--cinza-clr);
+  border-bottom: var(--fio) solid var(--sup-fio);
 }
 
 .acabamentos {
@@ -139,7 +139,7 @@
 /* O código do acabamento é o que sustenta a comparação de proposta. Fica
    visível, em apoio — não escondido. */
 .codigo {
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   font-variant-numeric: tabular-nums;
 }
 
@@ -150,7 +150,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--e-5);
+  gap: var(--entre-itens); /* entre itens irmãos (v4) */
 }
 
 .galeriaItem figure {
@@ -167,7 +167,7 @@
 .galeriaItem figcaption {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
-  color: var(--sobre-escuro-70);
+  color: var(--sup-apoio);
   margin-top: var(--e-2);
   /* A legenda mantém a margem lateral mesmo com a foto sangrando. */
   padding-inline: var(--pad-lateral);
@@ -232,7 +232,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--e-3);
-  padding-block: var(--e-4);
 }
 
 .chamadaTexto {
@@ -248,15 +247,15 @@
   align-items: center;
   min-height: var(--toque);
   padding: 0 var(--e-3);
-  border: var(--fio) solid var(--preto);
+  border: var(--fio) solid var(--sup-fg);
   font-size: var(--fs-texto);
-  color: var(--preto);
+  color: var(--sup-fg);
   transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
 }
 
 .chamadaAcao:hover {
-  background: var(--preto);
-  color: var(--branco);
+  background: var(--sup-fg);
+  color: var(--sup-bg);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -14,15 +14,12 @@
  * Props:
  *   aberto     se o painel está visível.
  *   aoFechar   chamado no Esc, no botão de fechar e ao seguir um link.
- *   superficie a superfície do cabeçalho que o abriu, para o painel herdar
- *              o mesmo fundo sólido.
  */
 import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
 import { navegacao, linkTelefone, linkWhatsApp, unidade } from "../../config/derivados";
 import { Fechar, WhatsApp } from "../icons";
 import { Brand } from "./Brand";
-import type { Superficie } from "./Section";
 import estilos from "./MobileMenu.module.css";
 
 const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -30,10 +27,9 @@ const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"
 type MobileMenuProps = {
   aberto: boolean;
   aoFechar: () => void;
-  superficie: Superficie;
 };
 
-export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
+export function MobileMenu({ aberto, aoFechar }: MobileMenuProps) {
   const painel = useRef<HTMLDivElement>(null);
   const focoAnterior = useRef<HTMLElement | null>(null);
 
@@ -108,7 +104,7 @@ export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
     <div
       ref={painel}
       id="menu-principal"
-      className={[estilos.painel, estilos[superficie]].join(" ")}
+      className={estilos.painel}
       // hidden mantém o painel fora da ordem de tabulação quando fechado,
       // sem precisar desmontá-lo — a animação de saída precisa dele no DOM.
       hidden={!aberto}
@@ -117,7 +113,7 @@ export function MobileMenu({ aberto, aoFechar, superficie }: MobileMenuProps) {
       aria-label="Navegação principal"
     >
       <div className={estilos.topo}>
-        <Brand claro={superficie === "preto"} />
+        <Brand />
         <button type="button" className={estilos.fechar} onClick={aoFechar}>
           <Fechar />
           <span className={estilos.rotuloFechar}>Fechar</span>

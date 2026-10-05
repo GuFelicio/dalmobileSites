@@ -381,7 +381,7 @@ Detalhe em [`docs/design-system.md`](docs/design-system.md). O essencial:
 |---|---|
 | **Tipografia** | Krub, e só Krub. Pesos 300, 400, 600. Hierarquia por escala e tracking, nunca por engordar peso |
 | **Cor** | acromática. **Não existe cor de acento.** Falta destaque? escala ou troca de superfície |
-| **Superfícies** | preto (a imagem manda) · cinza (costura) · papel (o texto manda). Máximo 4 trocas por página |
+| **Superfícies** | papel e grafite alternando — seções vizinhas nunca na mesma cor; cinza só no rodapé (v4). Sequência por página no `CLAUDE.md` |
 | **Forma** | `border-radius: 0` em tudo. Separação por fio de 1px. **Zero sombra** |
 | **Foto** | **nunca escurecida, nunca com filtro.** Texto sobre foto só em painel sólido ancorado |
 | **Movimento** | mínimo e lento. **Proibido parallax, scroll sequestrado, carrossel automático** |

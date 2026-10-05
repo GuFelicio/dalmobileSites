@@ -56,7 +56,7 @@ export default function Arquitetos() {
 
   return (
     <>
-      <Header superficie="papel" />
+      <Header />
 
       <Section superficie="papel">
         <h1 className={estilos.titulo}>{comCidade(pagina.titulo)}</h1>
@@ -66,7 +66,11 @@ export default function Arquitetos() {
         </div>
       </Section>
 
-      <Section superficie="papel">
+      {/* Superfícies (v4, 05/10/2026), sem repetir vizinha: abertura papel →
+          como funciona grafite → (parceiros papel →) chamada final papel →
+          rodapé. Com parceiros, a chamada vira grafite, para não repetir o
+          papel deles; hoje a lista está vazia e a seção não renderiza. */}
+      <Section superficie="grafite">
         <h2 className={estilos.secao}>Como funciona a parceria</h2>
         <ul className={estilos.blocos}>
           {parceria.map((bloco) => (
@@ -106,7 +110,7 @@ export default function Arquitetos() {
         </Section>
       ) : null}
 
-      <Section superficie="cinza" semRespiro>
+      <Section superficie={parceiros.length > 0 ? "grafite" : "papel"}>
         <div className={estilos.chamadaFinal}>
           <p className={estilos.chamadaTexto}>{comCidade(pagina.texto)}</p>
           {/* O formulário próprio é a seção 11 e ainda não existe. O WhatsApp

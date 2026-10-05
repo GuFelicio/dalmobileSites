@@ -8,6 +8,59 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-05 · v4, fase 1: cores, espaçamento, menu, rodapé e abertura
+
+Roteiro em `docs/prompt-v4.md`. **Nenhum texto mudou** (a copy v4 é a fase 2),
+**nenhuma seção mudou de lugar**, exceto a faixa de números de `/a-dalmobile`,
+que entrou dentro de "A produção é própria". Estado anterior: tag `v4-antes`.
+
+### Cor
+- Paleta nova em `app/tokens.css`: um papel só (`#F6F4F0`), um escuro de seção
+  só (grafite `#262626`), cinza `#9E9C94` só no rodapé, areia `#D5C5B1` só em
+  rótulo sobre grafite, apoio `#5F5D58`. Saíram `#F9F8F5`, `#F5F4F0`, `#EFEDE7`,
+  `#97958F`, `#484B45`, `#111211`, `--sobre-escuro-*`, `--sup-*`, `--veu-*`.
+- Regra nova: **seções vizinhas nunca na mesma cor**; sai a de "no máximo
+  quatro trocas". Classes globais `.superficie-papel` e `.superficie-grafite`
+  publicam `--sup-fg`, `--sup-apoio`, `--sup-rotulo`, `--sup-fio`, `--sup-bg`.
+- `Section` aceita `papel | grafite`; a prop `respiro` saiu.
+- Rodapé cinza em toda página, texto em tinta — inclusive a barra da home, que
+  era preta. Caraguá segue com o rodapé palha.
+- Contraste conferido por script: 0 textos abaixo de 4,5:1 nos dois sites
+  (a seta desativada do slider dava 3,07 e perdeu a opacidade).
+
+### Abertura da home
+- Saiu a faixa de texto abaixo do vídeo (rótulo, "O projeto começa na
+  medição.", parágrafo e botão). A abertura é só o vídeo, com no máximo 72svh
+  (desktop) e 60svh (celular). O h1 passou a ser "Nenhuma casa é igual à
+  planta." — o texto muda na fase 2.
+
+### Espaçamento
+- Escala única: `--respiro` 48→72, `--respiro-curto` 24→40, `--entre-itens`
+  24→32 (clamp). Cabeçalho de seção 12 / 16 / 24px. Saíram 112, 120, 122, 180
+  e `--respiro-longo`.
+- Galeria de ambiente: `--entre-itens` entre as fotos, foto com no máximo 85svh
+  (encolhe inteira, sem corte).
+- Rodapé: padding `--respiro-curto`, duas colunas no celular — de ~1.100 para
+  582px de altura em 390px.
+- Alturas em 1440px, antes → depois: home 6.116 → 5.171 · /a-dalmobile
+  5.458 → 4.945 · cozinha 11.655 → 8.298 · /arquitetos 2.386 → 2.195 ·
+  /a-loja 2.041 → 1.771 · /ambientes 1.755 → 1.507.
+- Nenhum vão vertical acima de 160px nas seis larguras da matriz, nos dois sites.
+
+### Menu
+- O cabeçalho some ao rolar para baixo (depois de 120px) e volta ao rolar para
+  cima (mais de 8px), com fio de 1px; só `transform`, 250ms. Não some com o menu
+  mobile aberto nem com foco de teclado dentro dele; Tab o traz de volta. Sem
+  layout shift, sem dependência, sem transição com movimento reduzido.
+- O cabeçalho e o menu mobile são sempre papel; a prop `superficie` do `Header`
+  saiu.
+
+### Testes
+- Volta o teste "todo var(--x) usado tem definição" (`tests/design-tokens.test.mjs`):
+  58 testes por unidade, todos passando.
+
+---
+
 ## [não publicado] — 2026-10-02 · copy v3
 
 Os dois sites com o texto da copy v3 (`docs/copy-v3.md`). Só texto, metadata,

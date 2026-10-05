@@ -1,18 +1,19 @@
 /* Página do ambiente. Ver app/ambientes/[slug]/page.tsx e a seção 6.2
-   do docs/direcao-site.md. */
+   do docs/direcao-site.md. As cores vêm de --sup-* da superfície em que cada
+   bloco está (app/globals.css). */
 
 .caminho ol {
   display: flex;
   flex-wrap: wrap;
   gap: var(--e-1);
   list-style: none;
-  margin: 0 0 var(--e-3);
+  margin: 0 0 var(--cab-rotulo-titulo);
   padding: 0;
   font-size: var(--fs-rotulo);
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
 }
 
 .caminho li + li::before {
@@ -45,36 +46,45 @@
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
-  color: var(--cinza-texto);
+  color: var(--sup-apoio);
   max-width: var(--medida);
-  margin: var(--e-2) 0 0;
+  margin: var(--cab-titulo-apoio) 0 0;
 }
 
 .texto p {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
   max-width: var(--medida); /* 62 a 66 caracteres */
-  margin: var(--e-3) 0 0;
-  color: var(--cinza-texto);
+  margin: var(--cab-titulo-apoio) 0 0;
+  color: var(--sup-apoio);
 }
 
 /* ---- Galeria -------------------------------------------------------- */
 
+/* --entre-itens entre as fotos (v4): eram 64px mais a legenda, e a galeria
+   da cozinha passava de 10.000px de altura. */
 .galeria {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--e-5);
+  gap: var(--entre-itens);
 }
 
 .item figure { margin: 0; }
 
-/* Uma foto por bloco, sangrando. Nunca mosaico, nunca miniatura. */
+/* Uma foto por bloco. Nunca mosaico, nunca miniatura.
+   Altura máxima de 85svh (v4): a foto inteira cabe na tela, sem rolar dentro
+   dela. Quando a foto bate no teto, ela ENCOLHE inteira — a largura cai junto
+   e ela fica alinhada à esquerda, com o grafite ao lado — em vez de ser
+   cortada: o projeto é o produto, e cortar joga fora parte dele. Abaixo do
+   teto (toda foto deitada no celular, por exemplo) ela sangra até a borda. */
 .foto {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  max-height: 85svh;
 }
 
 /* A legenda mantém a margem lateral mesmo com a foto sangrando até a borda. */
@@ -90,7 +100,7 @@
   font-size: var(--fs-subtitulo);
   font-weight: var(--peso-normal);
   letter-spacing: var(--tr-subtitulo);
-  color: var(--sobre-escuro);
+  color: var(--sup-fg);
 }
 
 .credito {
@@ -99,7 +109,7 @@
   font-weight: var(--peso-forte);
   letter-spacing: var(--tr-rotulo);
   text-transform: uppercase;
-  color: var(--sobre-escuro-55);
+  color: var(--sup-apoio);
   margin-top: var(--e-1);
 }
 
@@ -109,7 +119,7 @@
   font-size: var(--fs-secao);
   font-weight: var(--peso-leve);
   letter-spacing: var(--tr-secao);
-  margin: 0 0 var(--e-3);
+  margin: 0 0 var(--respiro-curto);
 }
 
 .outros {
@@ -121,16 +131,21 @@
   gap: var(--e-1);
 }
 
+/* O item vira flex para não somar a linha de texto embaixo do link
+   inline-flex: eram uns 6px a mais por linha, que empurravam o vão até a
+   seção seguinte para além de 160px (v4). */
+.outros > li { display: flex; }
+
 .outrosLink {
   display: inline-flex;
   align-items: center;
   min-height: var(--toque); /* alvo de toque de 44px */
   padding: 0 var(--e-2);
-  border: var(--fio) solid var(--cinza-clr);
+  border: var(--fio) solid var(--sup-fio);
   font-size: var(--fs-texto);
 }
 
-.outrosLink:hover { border-color: var(--preto); }
+.outrosLink:hover { border-color: var(--sup-fg); }
 
 /* ---- Chamada final --------------------------------------------------- */
 
@@ -140,7 +155,6 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--e-3);
-  padding-block: var(--e-4);
 }
 
 .chamadaTexto {
@@ -156,15 +170,16 @@
   align-items: center;
   min-height: var(--toque);
   padding: 0 var(--e-3);
-  border: var(--fio) solid var(--preto);
+  border: var(--fio) solid var(--sup-fg);
   font-size: var(--fs-texto);
-  color: var(--preto);
+  color: var(--sup-fg);
   transition: background-color var(--mov-fio) var(--mov-ease), color var(--mov-fio) var(--mov-ease);
 }
 
+/* Hover: o botão se inverte na própria superfície. */
 .chamadaAcao:hover {
-  background: var(--preto);
-  color: var(--branco);
+  background: var(--sup-fg);
+  color: var(--sup-bg);
 }
 
 @media (prefers-reduced-motion: reduce) {

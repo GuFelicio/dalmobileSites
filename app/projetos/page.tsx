@@ -126,9 +126,9 @@ export default async function IndiceDeProjetos({
 
   return (
     <>
-      <Header superficie="preto" />
+      <Header />
 
-      <Section superficie="preto">
+      <Section superficie="grafite">
         <h1 className={estilos.titulo}>Projetos</h1>
         <p className={estilos.intro}>
           Cada projeto aqui foi desenhado, fabricado e instalado pela Dalmóbile. As fotos são
@@ -173,7 +173,7 @@ export default async function IndiceDeProjetos({
         </div>
       </Section>
 
-      <Section superficie="preto" semRespiro>
+      <Section superficie="grafite" semRespiro>
         {visiveis.length === 0 ? (
           <p className={estilos.vazio}>
             Nenhum projeto com esse filtro.{" "}
