@@ -8,6 +8,29 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-05 · v4, fase 3: verificação
+
+Sem funcionalidade nova e **sem deploy**: a aprovação é pelos prints. Resultado
+completo em [`docs/verificacao-v4.md`](docs/verificacao-v4.md).
+
+- 72 prints de página inteira (2 sites × 6 larguras × 6 páginas) em
+  `prints-v4/`, fora do git.
+- Sequência de superfícies listada por página: nenhuma cor repetida em seguida.
+- Contraste: nenhum texto abaixo de 4,5:1 (2.502 em SJC, 1.968 em Caraguá).
+- Menu: 29 verificações por site, todas passando.
+- Checklist de deploy do `CLAUDE.md` marcado, com a exceção da home e o que
+  depende do Google Business Profile anotados.
+- `docs/decisoes.md`: a entrada da v4 explica por que papel + grafite, por que
+  a abertura ficou só com a foto e por que o menu some.
+
+### Corrigido
+- `/privacidade` ganhou `og:image` (a capa da home): sem ela, o link
+  compartilhado saía sem preview.
+- O caminho de navegação das páginas de ambiente ficava desalinhado ("COZINHA"
+  acima de "AMBIENTES"); agora centrado.
+
+---
+
 ## [não publicado] — 2026-10-05 · v4, fase 2: copy v4
 
 Os dois sites com o texto de `docs/copy-v4.md` (voz da apresentação

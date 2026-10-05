@@ -160,13 +160,31 @@ rodapé, que é cinza em toda página. O respiro caiu para 72px por seção no
 desktop (48 no celular). A abertura da home é só o vídeo. O cabeçalho some ao
 rolar para baixo e volta ao rolar para cima. Roteiro: `docs/prompt-v4.md`.
 
-**Por quê.** Medido no site: dois papéis quase iguais (#F9F8F5 e #F5F4F0); a
-faixa de projetos contra o papel com 1,08:1 de diferença, invisível como
-fronteira; o cinza em seção, faixa e rodapé se fundindo; texto branco sobre o
-cinza do processo com 2,8:1; de 240 a 300px vazios entre seções e um rodapé de
-1.106px no celular. Com a troca de cor marcando cada fronteira, o espaço deixou
-de precisar fazer esse trabalho. A faixa de título sob o vídeo empilhava dois
-títulos gigantes no mesmo papel.
+**Por que papel + grafite.** Medido no site: dois papéis quase iguais
+(#F9F8F5 e #F5F4F0); a faixa de projetos contra o papel com 1,08:1 de
+diferença, invisível como fronteira; o cinza em seção, faixa e rodapé se
+fundindo; texto branco sobre o cinza do processo com 2,8:1. Duas superfícies
+com contraste alto entre si (papel sobre grafite dá 13,8:1) fazem de cada troca
+uma fronteira legível, e as duas carregam texto acima de 4,5:1 sem exceção.
+Continua acromático: o grafite não é acento, é superfície. Com a cor marcando
+cada fronteira, o espaço deixou de precisar fazer esse trabalho — e o respiro
+caiu de 240–300px vazios entre seções para 144px, e o rodapé do celular de
+1.106 para 582px.
+
+**Por que a abertura ficou só com a foto.** A faixa de título sob o vídeo
+("O projeto começa na medição.") empilhava dois títulos gigantes no mesmo papel,
+um logo acima do outro, e empurrava o primeiro conteúdo para fora da primeira
+tela. Sem ela, a imagem — que é o produto — abre a página inteira e sozinha,
+como a regra de foto do `CLAUDE.md` pede, e o título da seção seguinte vira o
+h1 e aparece na primeira tela (o vídeo tem teto de 72svh no desktop, 60 no
+celular).
+
+**Por que o menu some.** O cabeçalho fixo ocupava 88px de toda tela, o tempo
+todo — no celular, mais de 10% da altura, em cima das fotos. Escondido ao
+descer, a foto ganha a tela inteira na leitura; ao subir (o gesto de quem
+procura a navegação), ele volta na hora. Só `transform`, 250ms, sem layout
+shift; nunca some com o menu aberto nem com foco de teclado dentro dele, e sem
+animação com movimento reduzido. Conferido em teclado e toque (29 verificações).
 
 **Descartado.** A regra de "no máximo quatro trocas de superfície por página"
 (a v4 troca a cada seção, de propósito); o `--respiro-longo`; o oliva, o preto
