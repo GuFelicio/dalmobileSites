@@ -8,6 +8,56 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-05 · v4, fase 2: copy v4
+
+Os dois sites com o texto de `docs/copy-v4.md` (voz da apresentação
+institucional). Só texto, metadata e créditos de foto: nenhuma seção nova ou
+removida, nenhuma mudança de layout. Vocabulário: `docs/vocabulario.md` v3
+("alto padrão" liberado; o `CLAUDE.md` e o `MANUAL.md` deixaram de proibi-lo).
+
+### Texto
+- **Home:** rótulo "MÓVEIS PLANEJADOS · [CIDADE]", h1 "Móveis personalizados
+  para espaços com identidade" e o parágrafo novo; fábrica com "UMA HISTÓRIA
+  EM EVOLUÇÃO" / "Da marcenaria à personalização de alto padrão" e a linha do
+  tempo; contato com "Para quem vai viver o ambiente" e as três perguntas.
+  Meta description nova nos dois configs.
+- **/a-dalmobile:** subtítulo, abertura, produção, a jornada ("Uma jornada
+  guiada por decisões claras": Contexto, Criação, Refinamento, Produção,
+  Instalação, com a frase de fecho) e "O que pode ser construído sob medida".
+  Campos novos no conteúdo: `processoTitulo` e `processoFecho`. Perguntas
+  frequentes sem mudança (copy v3). Meta description nova.
+- **/arquitetos:** "Para arquitetos e designers", subtítulo novo e os cinco
+  blocos com os títulos da apresentação (Autoria preservada, Orçamento de
+  escritório, Suporte à especificação, A fábrica, Projeto creditado). O prazo
+  de resposta passou para dentro do texto do bloco. Title e description novos.
+- **/ambientes:** subtítulo "Qual ambiente você quer explorar agora?" e intro
+  nova; a contagem de fotos dos cards saiu.
+- **Páginas de ambiente:** subtítulo, parágrafo e chamada final novos nos sete
+  ambientes de SJC; Caraguá com texto próprio em cozinha, quartos e sala
+  (`porUnidade`, agora com `chamadaFinal` também).
+- **Títulos sem ponto final** em todo o site, inclusive o 404.
+
+### Créditos
+- `PROJETO / NOME` abaixo da legenda, na galeria dos ambientes e no carrossel
+  da home, em caixa alta pequena na cor de apoio da superfície. Preenchido pelo
+  campo `arquiteto` das fotos: 10 de Débora Toledo (SJC) e 8 de Flávia e Sérgia
+  Garrido (Caraguá). **Pendente:** confirmar a autorização por escrito das duas.
+
+### Correção
+- A meta description das páginas de ambiente emendava o subtítulo (agora sem
+  ponto) na frase seguinte; o gerador põe o ponto quando falta.
+
+### Conferido
+- Varredura do HTML dos dois builds: sem garantia, certificado, maresia,
+  "6 anos", "[CONFIRMAR", "[CIDADE" ou título terminando em ponto.
+- Cada build só com o WhatsApp da própria unidade; teste de cidade cruzada e os
+  58 testes de cada unidade passando.
+- Diff do texto renderizado, página por página, nos dois sites: só conteúdo.
+- Matriz de seis larguras sem rolagem horizontal nem vão acima de 160px;
+  contraste sem nada abaixo de 4,5:1.
+
+---
+
 ## [não publicado] — 2026-10-05 · v4, fase 1: cores, espaçamento, menu, rodapé e abertura
 
 Roteiro em `docs/prompt-v4.md`. **Nenhum texto mudou** (a copy v4 é a fase 2),

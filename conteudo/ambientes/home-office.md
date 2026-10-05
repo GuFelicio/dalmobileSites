@@ -2,7 +2,7 @@
 nome: Home office
 slug: home-office
 unidades: [sjc]
-chamada: Trabalho que some quando o expediente acaba.
+chamada: A casa inteira pode conversar
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
 # mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
@@ -37,7 +37,7 @@ fotos:
     arquiteto:
 ---
 
-Deixou de ser um canto emprestado da sala. Hoje pede fiação por dentro do móvel,
-tomada e carregador na altura da bancada, luz de tarefa e porta que fecha na
-frente do que não deve aparecer na chamada de vídeo. Às seis da tarde o
-escritório desaparece e o cômodo volta a ser o que era.
+Home office e áreas de apoio também recebem soluções desenhadas para a rotina,
+com a mesma atenção aos acabamentos. Fiação por dentro do móvel, tomada na
+altura da bancada e porta que fecha na frente do que não deve aparecer na
+chamada de vídeo. No fim do dia, o escritório some.

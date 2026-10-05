@@ -32,9 +32,10 @@ import estilos from "./arquitetos.module.css";
 const pagina = institucional("arquitetos");
 
 export const metadata: Metadata = metadataDaPagina({
-  titulo: `Para arquitetos · Dalmóbile ${unidade.cidade}`,
+  // Copy v4 (docs/copy-v4.md, "Para arquitetos").
+  titulo: `Para arquitetos e designers · Dalmóbile ${unidade.cidade}`,
   descricao:
-    `Detalhamento técnico, edição milimétrica e orçamento de escritório. ` +
+    `Autoria preservada, suporte à especificação e orçamento de escritório. ` +
     `Parceria com arquitetos e designers de interiores em ${unidade.cidade}.`,
   caminho: "/arquitetos",
   foto: ambientesDaUnidade()[0]?.fotos[0]?.src,

@@ -233,6 +233,17 @@ img { display: block; max-width: 100%; }
   letter-spacing: var(--tr-display-l);
   font-weight: var(--peso-leve);
 }
+/* Crédito "PROJETO / NOME" abaixo da legenda (copy v4): caixa alta pequena,
+   na cor de apoio da superfície. 8px: é apoio da legenda, não item novo. */
+.synthesis-project-credito {
+  margin-top: var(--e-1);
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  text-transform: uppercase;
+  color: var(--sup-apoio);
+}
 .synthesis-project div > a { display: flex; gap: 15px; padding-bottom: 6px; border-bottom: var(--fio) solid; font-size: 11px; }
 
 /* Todos os cards têm a legenda embaixo da foto, na cor da superfície. */
@@ -314,6 +325,8 @@ img { display: block; max-width: 100%; }
   font-weight: var(--peso-leve);
 }
 .synthesis-contact-copy > p:not(.eyebrow) { max-width: var(--medida); margin: 0; font-size: 16px; line-height: 1.75; color: var(--sup-apoio); }
+/* Endereço e horário: um bloco à parte do texto, a 16px dele. */
+.synthesis-contact-copy > .synthesis-contact-endereco { margin-top: var(--cab-titulo-apoio); }
 .synthesis-contact-copy > a {
   align-self: flex-start;
   display: flex;

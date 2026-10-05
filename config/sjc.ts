@@ -75,8 +75,9 @@ export const unidade: Unidade = {
   },
 
   textos: {
+    // Copy v4 (docs/copy-v4.md, home): a mesma frase nos dois sites, com a cidade.
     descricaoHome:
-      "Móveis planejados personalizados em São José dos Campos. Fábrica própria desde 1977, 100% MDF e edição milimétrica. Veja projetos executados.",
+      "Móveis personalizados para espaços com identidade. Fábrica própria em Bento Gonçalves desde 1977 e loja em São José dos Campos. Veja projetos executados.",
     // A copy v3 não muda esta; é a que já estava no ar.
     descricaoAmbientes:
       "Cozinha, quartos, sala, home office, closet, banheiro e espaço gourmet planejados pela Dalmóbile em São José dos Campos. Fotos de projetos executados.",

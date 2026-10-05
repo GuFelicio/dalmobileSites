@@ -85,8 +85,9 @@ export const unidade: Unidade = {
   },
 
   textos: {
+    // Copy v4 (docs/copy-v4.md, home): a mesma frase nos dois sites, com a cidade.
     descricaoHome:
-      "Móveis planejados personalizados em Caraguatatuba e no litoral norte. Fábrica própria desde 1977, 100% MDF e edição milimétrica. Veja projetos executados.",
+      "Móveis personalizados para espaços com identidade. Fábrica própria em Bento Gonçalves desde 1977 e loja em Caraguatatuba. Veja projetos executados.",
     descricaoAmbientes:
       "Cozinha, quartos e sala planejados pela Dalmóbile em Caraguatatuba. Fotos de projetos executados.",
   },

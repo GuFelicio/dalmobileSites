@@ -143,7 +143,7 @@ export type Unidade = {
    * campo, e não `{{cidade}}` num texto compartilhado. Fonte: docs/copy-v3.md.
    */
   textos: {
-    /** meta description da home (copy v3, B1 e C1). */
+    /** meta description da home (copy v4: a mesma frase, com a cidade). */
     descricaoHome: string;
     /** meta description do hub /ambientes (copy v3, C4; SJC mantém a de antes). */
     descricaoAmbientes: string;

@@ -2,7 +2,7 @@
 nome: Quartos
 slug: quartos
 unidades: [sjc, caragua]
-chamada: Cabeceira, luz e guarda-roupa saem da mesma peça.
+chamada: Organização e acolhimento na mesma linguagem
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
 # mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
@@ -14,15 +14,16 @@ chamadaFinal: Quer um quarto resolvido assim?
 # "quarto", a fábrica chama de "dormitório" (docs/vocabulario.md, 1.5).
 nomeNoTitulo: Quartos e dormitórios
 
-# Caraguatatuba tem texto PRÓPRIO (copy v3, C4): as fotos de lá mostram outra
+# Caraguatatuba tem texto PRÓPRIO (copy v4): as fotos de lá mostram outra
 # solução. O que não estiver aqui vem do padrão acima.
 porUnidade:
   caragua:
-    chamada: Cabeceira, luz e apoio na mesma peça.
+    chamada: Cabeceira, luz e apoio na mesma peça
     texto: >-
-      A cabeceira é baixa e corre a parede inteira: recebe a fita de LED por
-      trás, vira apoio dos dois lados da cama e deixa a parede livre para o
-      quadro. Um móvel só faz o trabalho da cabeceira e dos dois criados.
+      A cabeceira é baixa e corre a parede inteira: recebe a fita de LED
+      por trás, vira apoio dos dois lados da cama e deixa a parede livre
+      para o quadro. Organização e acolhimento na mesma linguagem.
+    chamadaFinal: Quer um quarto resolvido assim?
 fotos:
   - src: /fotos/sjc/quartos/27062023-riz4900.webp
     titulo: Cabeceira em arco no quarto infantil
@@ -53,40 +54,39 @@ fotos:
     titulo: Cabeceira iluminada de ponta a ponta
     alt: Suíte com cabeceira estofada em madeira, arandelas circulares e roupa de cama bege
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
   - src: /fotos/sjc/quartos/debora-toledo-jardim-das-industrias-114.webp
     titulo: Boiserie e painel amadeirado na mesma parede
     alt: Suíte com painel de madeira e boiserie clara, arandelas esféricas e cama de casal
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
   - src: /fotos/sjc/quartos/debora-toledo-jardim-das-industrias-166.webp
     titulo: Cabeceira estofada em tom caramelo
     alt: Detalhe de cabeceira estofada em couro caramelo, com criado-mudo redondo e luminária de vidro
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
   - src: /fotos/sjc/quartos/debora-toledo-jardim-das-industrias-85.webp
     titulo: Espelho de corpo inteiro embutido
     alt: Quarto com painel de madeira, espelho oval de corpo inteiro embutido e fita de LED sob a cabeceira
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
   - src: /fotos/caragua/quartos/dalmobile-calabasasapto93-0701.webp
     titulo: Luz indireta atrás da cabeceira
     alt: Quarto claro com cabeceira baixa iluminada por LED, quadro azul e pendente de fibra natural
     edificio:
-    arquiteto:
+    arquiteto: Flávia e Sérgia Garrido
   - src: /fotos/caragua/quartos/dalmobile-calabasasapto93-0703.webp
     titulo: Cabeceira que vira criado-mudo
     alt: Quarto de casal com cabeceira contínua que se estende como bancada lateral, quadro azul e pendentes de fibra
     edificio:
-    arquiteto:
+    arquiteto: Flávia e Sérgia Garrido
   - src: /fotos/caragua/quartos/dalmobile-calabasasapto93-0718.webp
     titulo: Cabeceira baixa que deixa a parede para a arte
     alt: Quarto claro visto de lado, com pendentes de fibra natural, quadro azul e cesto de palha
     edificio:
-    arquiteto:
+    arquiteto: Flávia e Sérgia Garrido
 ---
 
 Quando o projeto assume a parede inteira, o quarto para de parecer montado por
-partes. A cabeceira recebe a iluminação, o criado deixa de ser móvel solto e o
-guarda-roupa vai até o teto, onde deixa de juntar poeira em cima. O que se vê é
-uma parede, não quatro móveis.
+partes. A cabeceira recebe a iluminação, o criado nasce da mesma peça e o
+guarda-roupa vai até o teto, aproveitando cada altura.

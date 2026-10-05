@@ -2,13 +2,24 @@
 nome: Cozinha
 slug: cozinha
 unidades: [sjc, caragua]
-chamada: É onde o móvel mais trabalha e menos aparece.
+chamada: Cozinhas para viver e receber
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
 # mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
 # gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
 # botão é interface, não texto.
-chamadaFinal: Quer resolver a sua cozinha?
+chamadaFinal: Vamos desenhar a sua cozinha?
+# Caraguatatuba tem texto PRÓPRIO (copy v4): as fotos de lá mostram outra
+# solução. O que não estiver aqui vem do padrão acima.
+porUnidade:
+  caragua:
+    chamada: Cada centímetro pode fazer mais
+    texto: >-
+      A personalização aproveita alturas, organiza acessos e preserva a
+      circulação. Cooktop, coifa e cuba têm lugar definido antes de a
+      primeira peça ser cortada, as frentes dispensam puxador e a bancada
+      vira mesa de refeição sem ocupar o caminho.
+    chamadaFinal: Vamos desenhar a sua cozinha?
 fotos:
   - src: /fotos/sjc/cozinha/19052023-riz2690.webp
     titulo: Ilha de jantar que dispensa a mesa
@@ -39,36 +50,35 @@ fotos:
     titulo: Torre de fornos embutida
     alt: Cozinha bege com torre de fornos em inox, coifa de vidro e bancada em pedra clara junto à janela
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
   - src: /fotos/sjc/cozinha/debora-toledo-jardim-das-industrias-19.webp
     titulo: Mesa oval colada na bancada
     alt: Cozinha aberta para a sala, com mesa oval em pedra clara, cadeiras de palhinha e marcenaria bege
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
   - src: /fotos/sjc/cozinha/debora-toledo-jardim-das-industrias-31.webp
     titulo: Frontão em pedra, sem rejunte à vista
     alt: Detalhe de cozinha com frontão em pedra clara contínua, cuba única e armários inferiores em madeira
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
   - src: /fotos/caragua/cozinha/dalmobile-calabasasapto93-0919.webp
     titulo: Bancada amadeirada que vira mesa de refeição
     alt: Cozinha branca integrada à sala de jantar, com bancada de madeira clara, banquetas e porta azul ao fundo
     edificio:
-    arquiteto:
+    arquiteto: Flávia e Sérgia Garrido
   - src: /fotos/caragua/cozinha/dalmobile-calabasasapto93-0953.webp
     titulo: Frentes sem puxador e nicho aberto para a louça
     alt: Cozinha compacta branca com cooktop, cuba e nicho aberto com louças azuis, coifa retrátil embutida
     edificio:
-    arquiteto:
+    arquiteto: Flávia e Sérgia Garrido
   - src: /fotos/caragua/cozinha/dalmobile-calabasasapto93-0965.webp
     titulo: Ilha de cooktop com bancada amadeirada ao lado
     alt: Cozinha branca com ilha de cooktop, coifa de inox suspensa e bancada de madeira clara ao lado
     edificio:
-    arquiteto:
+    arquiteto: Flávia e Sérgia Garrido
 ---
 
-Cooktop, coifa, torre de fornos, adega, lixeira e tomada têm lugar definido
-antes de a primeira peça ser cortada. Depois disso o desenho é consequência: a
-porta abre para o lado que não trava a passagem, a bancada fica na altura de
-quem cozinha e o que é feio fica atrás de uma porta. Com a edição milimétrica, o
-último armário fecha o vão na medida exata da parede.
+O preparo permanece conectado ao convívio. Cooktop, coifa, torre de fornos,
+adega, lixeira e tomada têm lugar definido antes de a primeira peça ser cortada,
+e o desenho acompanha a sequência de uso: quem cozinha continua presente na
+conversa, e cada acesso responde à rotina sem pesar no ambiente.

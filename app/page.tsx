@@ -92,17 +92,15 @@ export default function Home() {
 
         <section className="synthesis-manifesto superficie-papel" id="sintese-manifesto">
           <div className="synthesis-manifesto-content">
-            {/* "Liberdade criativa", "escuta", "repertório" e "identidade" são
-                palavras que qualquer marcenaria do país usa. A mesma ideia —
-                o projeto é seu, não é catálogo — dita por um fato de ofício. */}
-            <p className="eyebrow">COMO PROJETAMOS</p>
-            {/* O h1 da página desde a v4. */}
-            <h1>Nenhuma casa é igual à planta.</h1>
+            {/* Copy v4 (docs/copy-v4.md, home, seção 1): a frase de abertura da
+                apresentação institucional, e o h1 da página desde a v4. */}
+            <p className="eyebrow">MÓVEIS PLANEJADOS · {unidade.cidade.toUpperCase()}</p>
+            <h1>Móveis personalizados para espaços com identidade</h1>
             <p>
-              A medição é feita no imóvel, com a obra pronta, e é de lá que sai o desenho:
-              o pé-direito real, o vão que ficou dois centímetros fora do projeto, a tomada
-              que ninguém previu. Na Dalmóbile não existe módulo padrão. Cada peça é editada
-              milímetro a milímetro para caber no que a obra entregou.
+              Com origem em Bento Gonçalves, a Dalmóbile reúne design, precisão industrial e
+              cuidado com os acabamentos para desenvolver ambientes de alto padrão. O desenho
+              acompanha o espaço e a intenção do projeto: a medição é feita no imóvel, com a
+              obra pronta, e cada peça é editada milímetro a milímetro.
             </p>
             <Link href="/a-dalmobile">Como trabalhamos <Arrow /></Link>
           </div>
@@ -120,7 +118,7 @@ export default function Home() {
                   concorrência não pode fazer: aqui não tem render, não tem
                   banco de imagem, não tem apartamento de fornecedor. */}
               <p className="eyebrow">PROJETOS EXECUTADOS</p>
-              <h2 id="titulo-vitrine">Fotografado depois da montagem.</h2>
+              <h2 id="titulo-vitrine">Fotografado depois da montagem</h2>
             </div>
             <Link href="/ambientes">Ver todos os ambientes <Arrow /></Link>
           </div>
@@ -137,13 +135,14 @@ export default function Home() {
             <span>O QUE VEM DA FÁBRICA</span>
           </div>
           <div className="synthesis-process-copy">
-            <p className="eyebrow">DA FÁBRICA À MONTAGEM</p>
-            <h2>Do MDF ao vidro, tudo sai da mesma fábrica.</h2>
+            {/* Copy v4 (home, seção 3): a linha do tempo da apresentação. */}
+            <p className="eyebrow">UMA HISTÓRIA EM EVOLUÇÃO</p>
+            <h2>Da marcenaria à personalização de alto padrão</h2>
             <p>
-              Os móveis saem das duas fábricas da Dalmóbile em Bento Gonçalves, na Serra
-              Gaúcha, que produzem a linha inteira: MDF, laca, vidro e alumínio. A borda é
-              colada com cola PUR, que não solta com calor e umidade, o fundo recebe proteção
-              antimofo e todo móvel leva o selo de origem impresso na chapa.
+              A Dalmóbile nasceu em 1977, em Bento Gonçalves, como Esquadrias Cladeju.
+              Assumiu o nome atual em 2000, ganhou nova sede de 10.000 m² em 2012 e, desde
+              2025, tem foco em móveis personalizados, flexíveis e de alto padrão. As duas
+              fábricas produzem a linha inteira: MDF, laca, vidro e alumínio.
             </p>
             <Link href="/a-dalmobile">Conheça a Dalmóbile <Arrow /></Link>
             {/* Três números verificados (copy v3, A4). "6 anos de garantia" saiu:
@@ -158,14 +157,18 @@ export default function Home() {
 
         <section className="synthesis-contact superficie-grafite" id="sintese-contato">
           <div className="synthesis-contact-copy">
-            {/* "Seu mundo começa com uma conversa" é o clichê mais comum do
-                setor. "Venha com a planta em mãos" diz o próximo passo
-                concreto, sinaliza que ali se fala de projeto e qualifica quem
-                chega. E publicar o horário é vantagem direta: o concorrente
-                mais forte da cidade não publica o dele. */}
+            {/* Publicar endereço e horário aqui é vantagem direta: o
+                concorrente mais forte da cidade não publica o dele. */}
             <p className="eyebrow">SHOWROOM {unidade.cidade.toUpperCase()}</p>
-            <h2>Venha com a planta em mãos.</h2>
-            <p>{enderecoEmLinha()}</p>
+            {/* Copy v4 (home, seção 4): "Para quem vai viver o ambiente" e as
+                três perguntas da apresentação. */}
+            <h2>Para quem vai viver o ambiente</h2>
+            <p>
+              Três perguntas ajudam a transformar preferências em prioridades de projeto: o
+              que precisa caber, o que precisa facilitar e que sensação você quer encontrar.
+              Traga as respostas, e a planta do imóvel, para a conversa no showroom.
+            </p>
+            <p className="synthesis-contact-endereco">{enderecoEmLinha()}</p>
             <p>
               {unidade.horarios
                 .map((h) => `${h.dias}, ${h.abre} às ${h.fecha}`)

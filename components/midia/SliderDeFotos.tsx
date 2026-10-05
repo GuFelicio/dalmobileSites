@@ -77,7 +77,14 @@ function Cartao({
       />
       <div>
         <span>{rotulo}</span>
-        <h3>{foto.titulo}</h3>
+        {/* Legenda e, abaixo dela, o crédito "PROJETO / NOME" (copy v4) quando
+            a foto tem autoria registrada no conteúdo. */}
+        <div className="synthesis-project-legenda">
+          <h3>{foto.titulo}</h3>
+          {foto.arquiteto ? (
+            <p className="synthesis-project-credito">Projeto / {foto.arquiteto}</p>
+          ) : null}
+        </div>
         {/* Sem seta: a seção já tem a sua, no "Ver todos os ambientes". O fio
             de 1px embaixo do link continua. */}
         <Link href={`/ambientes/${foto.ambienteSlug}`}>

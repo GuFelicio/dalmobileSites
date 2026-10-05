@@ -1,6 +1,7 @@
 ---
-# Copy v3 (docs/copy-v3.md, A7, B4 e C5), 02/10/2026. Substitui o texto de
-# 09/09 (docs/copy/sjc.md, agora histórico).
+# Copy v4 (docs/copy-v4.md, "A Dalmóbile"), 05/10/2026: abertura, produção,
+# processo e materiais. As perguntas frequentes continuam as da copy v3
+# (docs/copy-v3.md, A7, B4 e C5).
 #
 # Por decisão de marca, saíram do site: a garantia (seção, pergunta e número),
 # os prazos e a pergunta "O projeto tem custo?". Ver docs/vocabulario.md, 2.3.
@@ -10,58 +11,64 @@ titulo: A Dalmóbile
 # {{cidade}}, {{outraCidade}}, {{regiao}} e {{outraRegiao}} são substituídos
 # por unidade — ver lib/texto.ts. Este arquivo serve aos DOIS sites; cidade
 # escrita à mão aqui iria ao ar errada no outro.
-chamada: Fábrica própria em Bento Gonçalves desde 1977. Loja em {{cidade}}.
+chamada: Da marcenaria à personalização de alto padrão
 
 abertura: >-
-  A Dalmóbile fabrica móveis planejados personalizados. A loja de {{cidade}}
-  projeta, mede, acompanha o pedido e monta. Quem fez a medição responde pelo
-  projeto até a revisão final da montagem.
+  Com origem em Bento Gonçalves, no polo moveleiro da Serra Gaúcha, a Dalmóbile
+  reúne design, precisão industrial e cuidado com os acabamentos. Desde 2025, o
+  foco é o móvel personalizado: flexível nas medidas, nos materiais e na
+  linguagem de cada projeto. A loja de {{cidade}} projeta, acompanha e instala.
 
 fabrica:
   titulo: A produção é própria
   texto: >-
-    Os móveis saem das duas fábricas da Dalmóbile em Bento Gonçalves, na Serra
-    Gaúcha, que processam cerca de 54 mil metros quadrados de MDF por mês. A
-    fábrica produz a própria linha inteira: MDF, laca, vidro e alumínio. No seu
-    projeto, isso quer dizer três coisas: não existe módulo padrão, cada peça é
-    editada milímetro a milímetro, e todo móvel leva o selo de origem impresso
-    no fundo.
+    Os móveis saem das duas fábricas da Dalmóbile em Bento Gonçalves, que
+    processam cerca de 54 mil metros quadrados de MDF por mês. A fábrica produz
+    a própria linha inteira: MDF, laca, vidro e alumínio. Na prática, não existe
+    módulo padrão, cada peça é editada milímetro a milímetro, e todo móvel leva
+    o selo de origem impresso no fundo.
   # PENDENTE: a direção aponta que nenhum concorrente do Vale mostra a fábrica
   # em imagem. Não temos foto da planta de Bento Gonçalves no acervo.
   foto: PENDENTE
 
+# O processo: as mesmas cinco etapas, com os nomes da jornada da apresentação
+# institucional (docs/vocabulario.md, seção 0). A numeração é legítima: é
+# sequência de verdade, não escada de venda. Prazo não entra (decisão de marca).
+processoTitulo: Uma jornada guiada por decisões claras
 processo:
-  # A numeração é legítima: é sequência de verdade, não escada de venda.
-  # Prazo não entra (decisão de marca): o cliente acompanha o pedido pelo site.
-  - etapa: Conversa
+  - etapa: Contexto
     texto: >-
-      Você traz a planta ou as fotos do imóvel e conta como usa a casa.
-      Acabamento é o último assunto, não o primeiro.
-  - etapa: Medição no local
+      Rotina, desejos e prioridades. Você traz a planta ou as fotos do imóvel e
+      conta como usa a casa.
+  - etapa: Criação
     texto: >-
-      Medimos no imóvel, com a obra pronta. Obra e planta sempre divergem em
-      algum ponto, e é na medição que o milímetro aparece.
-  - etapa: Projeto
+      Layout, linguagem e materiais. O projeto ganha forma, e cada acabamento é
+      identificado na proposta.
+  - etapa: Refinamento
     texto: >-
-      Você recebe o projeto e a proposta detalhada, com cada acabamento
-      identificado. Ajustamos junto até fechar.
-  - etapa: Fabricação
+      Medidas, detalhes e soluções. A medição é feita no imóvel, com a obra
+      pronta: obra e planta sempre divergem em algum ponto, e é ali que o
+      milímetro aparece.
+  - etapa: Produção
     texto: >-
-      Depois do aceite e da conferência final de medidas, o pedido entra na
-      fábrica. A partir daí você acompanha cada etapa pelo site da Dalmóbile.
-  - etapa: Montagem
+      Processos integrados na fábrica. Depois do aceite, o pedido entra na
+      produção e você acompanha cada etapa pelo site da Dalmóbile.
+  - etapa: Instalação
     texto: >-
-      A equipe da loja monta e faz a revisão com você presente, item por item.
-      O que não passar na revisão volta.
+      Montagem e experiência de uso. A equipe da loja monta e revisa com você
+      presente, item por item.
+# A frase que fecha a jornada, logo abaixo da última etapa.
+processoFecho: A qualidade da conversa inicial orienta todas as decisões seguintes.
 
 materiais:
-  titulo: Materiais e acabamentos
+  titulo: O que pode ser construído sob medida
   texto: >-
-    Toda a linha é 100% MDF, com ação antimicrobiana. A borda é colada com cola
-    PUR, que não solta com calor e umidade, e o fundo dos móveis recebe proteção
-    antimofo. No acabamento, a escolha vai de laca, vidro e alumínio produzidos
-    pela própria fábrica até o padrão de MDF que você especificar: com a linha
-    One, a Dalmóbile produz no padrão de qualquer grande fornecedor do país.
+    Dimensões e proporções, cores e acabamentos, organização interna, frentes,
+    bordas e encontros. O acabamento vai de BP, laca, vidro, alumínio, lâmina de
+    madeira e tecidos até o padrão de MDF que você especificar: com a linha One,
+    a fábrica produz no padrão de qualquer grande fornecedor do país. Toda a
+    linha é 100% MDF, com ação antimicrobiana, borda colada com cola PUR, que
+    não solta com calor e umidade, e fundo com proteção antimofo.
   # Frase oficial da fábrica, em itálico, logo abaixo do parágrafo.
   fecho: Personalizar não é adaptar.
 

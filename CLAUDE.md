@@ -230,7 +230,7 @@ Direta, sem linguagem de funil.
 - Confirmação: "Recebemos. Respondemos em até um dia útil."
 - Erro: diz o que fazer, não pede desculpa — "Falta o telefone com DDD"
 
-**Proibido:** "Quero meu projeto", "Solicite seu orçamento grátis", "Transforme seu lar", "alto padrão", selo inventado, contador de urgência.
+**Proibido:** "Quero meu projeto", "Solicite seu orçamento grátis", "Transforme seu lar", selo inventado, contador de urgência. A lista completa de palavras está em [`docs/vocabulario.md`](docs/vocabulario.md). "Alto padrão" foi liberado em 05/10/2026 (vocabulário v3): é voz da apresentação institucional da loja, e entra só nas frases que vêm dela.
 
 ---
 

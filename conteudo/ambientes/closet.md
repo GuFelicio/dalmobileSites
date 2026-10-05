@@ -2,7 +2,7 @@
 nome: Closet
 slug: closet
 unidades: [sjc]
-chamada: Dimensionado por contagem, não por metro quadrado.
+chamada: Dimensionado por contagem, não por metro quadrado
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
 # mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
@@ -27,7 +27,7 @@ fotos:
     arquiteto:
 ---
 
-Antes de desenhar, a gente conta: quantos cabides longos, quantos curtos, quantos
-pares, quantas gavetas. O que sai todo dia fica na altura do olho, o que amassa
-ganha gaveta rasa, o que é de estação vai para cima. A medida sai do que você tem
-hoje, com folga para o que vem.
+Antes de desenhar, a gente conta: quantos cabides longos, quantos curtos,
+quantos pares, quantas gavetas. O que sai todo dia fica na altura do olho, o que
+amassa ganha gaveta rasa, o que é de estação vai para cima. Organização e
+acolhimento na mesma linguagem do quarto.

@@ -7,7 +7,7 @@ unidades: [sjc, caragua]
 # ambiente não aparece no site de Caraguá, e /ambientes/banheiro de lá
 # redireciona para /ambientes (worker/index.ts). Chegando foto com gabinete
 # Dalmóbile, é só listá-la abaixo: a página volta sozinha.
-chamada: Móvel que convive com vapor todo dia.
+chamada: Móvel que convive com vapor todo dia
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
 # mesma fôrma ("Quer um X assim no seu apartamento?") é padrão de texto
@@ -29,10 +29,10 @@ fotos:
     titulo: Armário espelhado sobre a bancada
     alt: Banheiro claro com banheira embutida, box de vidro, nicho iluminado e armário espelhado acima da bancada
     edificio:
-    arquiteto:
+    arquiteto: Débora Toledo
 ---
 
 É o ambiente que mais exige do material: vapor, respingo e produto de limpeza.
-Por isso a decisão começa pela construção do móvel. A borda é colada com cola
-PUR, que não solta com calor e umidade, e o fundo recebe proteção antimofo. O
-gabinete suspenso tira o móvel do piso molhado e deixa a limpeza mais fácil.
+Por isso a decisão começa pela construção do móvel: borda colada com cola PUR,
+que não solta com calor e umidade, fundo com proteção antimofo e gabinete
+suspenso, longe do piso molhado.

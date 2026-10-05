@@ -9,6 +9,17 @@
   margin: 0;
 }
 
+/* Dek de página: 20px na cor de apoio, como nas outras páginas internas. */
+.chamada {
+  font-size: var(--fs-dek);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  color: var(--sup-apoio);
+  max-width: var(--medida);
+  margin: var(--cab-titulo-apoio) 0 0;
+}
+
 .intro {
   font-size: var(--fs-texto);
   line-height: var(--lh-texto);
@@ -93,14 +104,6 @@
   margin-top: var(--e-2);
 }
 
-.cardContagem {
-  display: block;
-  font-size: var(--fs-rotulo);
-  letter-spacing: var(--tr-rotulo);
-  text-transform: uppercase;
-  color: var(--sup-apoio);
-  margin-top: 4px; /* meia unidade: a contagem é apoio do nome, não item novo */
-}
 
 @media (prefers-reduced-motion: reduce) {
   .cardImg { transition: none; }

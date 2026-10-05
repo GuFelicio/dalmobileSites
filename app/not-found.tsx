@@ -30,7 +30,7 @@ export default function NaoEncontrada() {
 
       <Section superficie="papel">
         <p className={estilos.codigo}>404</p>
-        <h1 className={estilos.titulo}>Esta página não existe mais.</h1>
+        <h1 className={estilos.titulo}>Esta página não existe mais</h1>
         <p className={estilos.texto}>
           Pode ter mudado de endereço, ou o link veio quebrado. Estes são os caminhos mais
           úteis daqui:

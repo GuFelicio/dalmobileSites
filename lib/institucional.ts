@@ -42,7 +42,11 @@ export type ArquitetoParceiro = {
 export type DadosDalmobile = {
   abertura: string;
   fabrica: { titulo: string; texto: string; foto?: string };
+  /** Título da seção do processo (copy v4: "Uma jornada guiada por decisões claras"). */
+  processoTitulo?: string;
   processo: EtapaDoProcesso[];
+  /** A frase que fecha a jornada, logo abaixo da última etapa. */
+  processoFecho?: string;
   /** `fecho`: a frase em itálico logo abaixo do parágrafo. */
   materiais: { titulo: string; texto: string; fecho?: string };
   numeros: NumeroDaFaixa[];

@@ -110,6 +110,17 @@
   margin: var(--e-1) 0 0;
 }
 
+/* A frase que fecha a jornada: depois das etapas, na distância de cabeçalho
+   para conteúdo, no tamanho do subtítulo — fecha a seção, não é mais um item. */
+.processoFecho {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+  max-width: var(--medida);
+  margin: var(--respiro-curto) 0 0;
+}
+
 /* ---- Números ------------------------------------------------------------ */
 
 

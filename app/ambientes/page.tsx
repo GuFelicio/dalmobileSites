@@ -67,12 +67,12 @@ export default function HubDeAmbientes() {
 
       <Section superficie="papel">
         <h1 className={estilos.titulo}>Ambientes</h1>
-        {/* Dizer que NÃO há render é mais forte do que dizer que as fotos são
-            de projetos executados: nomeia o que a concorrência faz. */}
+        {/* Copy v4 (docs/copy-v4.md, hub): a pergunta da apresentação como
+            subtítulo, e a intro. */}
+        <p className={estilos.chamada}>Qual ambiente você quer explorar agora?</p>
         <p className={estilos.intro}>
-          Cada ambiente pede uma decisão de projeto diferente. As fotos abaixo são de
-          projetos que a Dalmóbile projetou, fabricou e montou em {unidade.cidade}. Nenhum
-          render, nenhuma imagem de banco.
+          Cada ambiente pede decisões diferentes. As fotos são de projetos que a Dalmóbile
+          projetou, fabricou e instalou em {unidade.cidade}.
         </p>
 
         <ul
@@ -108,10 +108,8 @@ export default function HubDeAmbientes() {
                     className={estilos.cardImg}
                   />
                 </div>
+                {/* A contagem de fotos ("8 fotos") saiu na copy v4. */}
                 <span className={estilos.cardNome}>{ambiente.nome}</span>
-                <span className={estilos.cardContagem}>
-                  {ambiente.fotos.length === 1 ? "1 foto" : `${ambiente.fotos.length} fotos`}
-                </span>
               </Link>
             </li>
           ))}

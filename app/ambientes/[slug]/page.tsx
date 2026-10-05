@@ -38,7 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ambiente = ambientePorSlugDaUnidade(slug);
   if (!ambiente) return {};
 
-  const descricao = `${ambiente.chamada} ${ambiente.nome} ${ambiente.planejado} pela Dalmóbile em ${unidade.cidade}, em projetos executados.`;
+  // O subtítulo é título e, desde a copy v4, não tem ponto final. Na frase da
+  // descrição ele precisa de um, ou emenda na frase seguinte.
+  const subtitulo = /[.!?]$/.test(ambiente.chamada) ? ambiente.chamada : `${ambiente.chamada}.`;
+  const descricao = `${subtitulo} ${ambiente.nome} ${ambiente.planejado} pela Dalmóbile em ${unidade.cidade}, em projetos executados.`;
 
   return metadataDaPagina({
     titulo: `${ambiente.nomeNoTitulo ?? ambiente.nome} ${ambiente.planejado} em ${unidade.cidade} | Dalmóbile`,
@@ -93,11 +96,15 @@ export default async function PaginaDeAmbiente({ params }: Props) {
                 />
                 <figcaption className={estilos.legenda}>
                   <span className={estilos.legendaTitulo}>{foto.titulo}</span>
-                  {/* Crédito só quando o dado existe. Sem prédio confirmado e
-                      sem autorização do arquiteto, a linha não aparece. */}
+                  {/* Crédito abaixo da legenda, no formato da apresentação
+                      (copy v4): "PROJETO / NOME" — a caixa alta vem do CSS.
+                      Só quando o dado existe: sem autorização do arquiteto, o
+                      campo fica vazio e a linha não aparece. */}
                   {foto.edificio || foto.arquiteto ? (
                     <span className={estilos.credito}>
-                      {[foto.edificio, foto.arquiteto].filter(Boolean).join(" · ")}
+                      {[foto.arquiteto ? `Projeto / ${foto.arquiteto}` : null, foto.edificio]
+                        .filter(Boolean)
+                        .join(" · ")}
                     </span>
                   ) : null}
                 </figcaption>

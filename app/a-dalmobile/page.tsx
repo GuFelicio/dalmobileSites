@@ -34,9 +34,10 @@ const pagina = institucional("a-dalmobile");
 
 export const metadata: Metadata = metadataDaPagina({
   titulo: `A Dalmóbile · móveis planejados em ${unidade.cidade}`,
+  // Copy v4 (docs/copy-v4.md, "A Dalmóbile").
   descricao:
-    `Móveis personalizados com fábrica própria em Bento Gonçalves desde 1977. ` +
-    `Como a Dalmóbile projeta, fabrica e monta em ${unidade.cidade}.`,
+    `Da marcenaria à personalização de alto padrão. Fábrica própria em Bento ` +
+    `Gonçalves desde 1977 e loja em ${unidade.cidade}.`,
   caminho: "/a-dalmobile",
   foto: escolherFoto(ambientesDaUnidade(), ["cozinha", "sala-de-estar"], 2)?.src,
 });
@@ -102,7 +103,7 @@ export default function ADalmobile() {
       </Section>
 
       <Section superficie="papel">
-        <h2 className={estilos.secao}>O processo</h2>
+        <h2 className={estilos.secao}>{d.processoTitulo ?? "O processo"}</h2>
         <ol className={estilos.processo}>
           {processo.map((etapa, i) => (
             <li key={etapa.etapa} className={estilos.etapa}>
@@ -118,6 +119,8 @@ export default function ADalmobile() {
             </li>
           ))}
         </ol>
+        {/* A frase que fecha a jornada (copy v4). */}
+        {d.processoFecho ? <p className={estilos.processoFecho}>{d.processoFecho}</p> : null}
       </Section>
 
       <Section superficie="grafite">

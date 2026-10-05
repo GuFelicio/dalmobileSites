@@ -71,7 +71,17 @@ cega ouve e o que o Google lê. **Um teste falha se o alt for igual ao título.*
 ```
 
 Enquanto vazios, **a linha de crédito não aparece na página**. Quando preencher,
-ela nasce sozinha sob o título da foto.
+ela nasce sozinha sob o título da foto, na galeria do ambiente e no carrossel da
+home, no formato da apresentação da loja (copy v4): **`PROJETO / NOME`**, em
+caixa alta pequena. Escreva só o nome, em caixa normal — o "Projeto /" e a
+caixa alta vêm do código:
+
+```yaml
+    arquiteto: Débora Toledo     # sai "PROJETO / DÉBORA TOLEDO"
+```
+
+Em 05/10/2026 estão creditadas as fotos `debora-toledo-*` (SJC, Débora Toledo)
+e `calabasasapto93-*` (Caraguá, Flávia e Sérgia Garrido).
 
 > **Nome de arquiteto só entra com autorização por escrito.** É exigência do
 > `CLAUDE.md`, e vale para cada projeto, não uma vez só.

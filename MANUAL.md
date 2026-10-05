@@ -182,7 +182,7 @@ Em `conteudo/ambientes/<ambiente>.md`, acrescente um bloco em `fotos:`:
 | `titulo` | a chamada de impacto: **o que a foto resolve**, não o que ela mostra |
 | `alt` | o que se vê, para quem não vê a imagem. **Não pode repetir o título** — um teste falha |
 | `edificio` | prédio ou condomínio. Vazio = a linha de crédito não aparece |
-| `arquiteto` | **só com autorização por escrito**, e ela vale por projeto |
+| `arquiteto` | **só com autorização por escrito**, e ela vale por projeto. Sai como `PROJETO / NOME` sob o título da foto |
 
 ### 5.3 Confira
 
@@ -231,8 +231,9 @@ Três regras, de [`docs/copy/sjc.md`](docs/copy/sjc.md):
 Quando um bloco parecer fraco, seja **mais específico** — nunca mais adjetivo.
 
 **Proibido:** "Quero meu projeto", "Solicite seu orçamento grátis", "Transforme
-seu lar", "alto padrão", "sonho", "aconchego", contador de urgência, selo
-inventado.
+seu lar", "sonho", "aconchego", contador de urgência, selo inventado. A lista
+completa está em `docs/vocabulario.md` ("alto padrão" foi liberado na v3 do
+vocabulário, como voz da apresentação da loja).
 
 ---
 
@@ -280,7 +281,10 @@ site** por decisão de marca. Ver `docs/vocabulario.md`, 2.3.
 
 - **Horário contra o Google Meu Negócio** — não foi possível conferir
   automaticamente (o Maps só monta a ficha com JavaScript)
-- **Prédio e arquiteto de cada foto** — os campos existem e estão vazios
+- **Prédio e arquiteto de cada foto** — os prédios estão vazios. Arquiteto
+  preenchido só nas fotos de Débora Toledo (SJC) e de Flávia e Sérgia Garrido
+  (Caraguá), pela copy v4; **a autorização por escrito das duas ainda precisa
+  ser confirmada** (pendência 1 do `docs/copy-v4.md`)
 - **Formulário de contato** — não existe. Quando entrar, **`/privacidade`
   precisa ser reescrita antes**: hoje ela afirma que o site não usa cookie de
   rastreamento
