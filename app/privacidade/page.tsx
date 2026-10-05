@@ -43,7 +43,7 @@ export default function Privacidade() {
         {/* Data FIXA, da última alteração real do texto. Não usar a data de hoje:
             a página se atualizaria sozinha todo dia e perderia a função.
             Mudou o texto? mude esta data junto. */}
-        <p className={estilos.atualizado}>Atualizada em 9 de setembro de 2026.</p>
+        <p className={estilos.atualizado}>Atualizada em 5 de outubro de 2026.</p>
 
         <div className={estilos.texto}>
           <h2>Quem somos</h2>
@@ -74,8 +74,7 @@ export default function Privacidade() {
           <h2>Seus direitos</h2>
           <p>
             A LGPD garante a você pedir acesso, correção ou exclusão dos seus dados a qualquer
-            momento. Basta falar com a loja pelo telefone acima — respondemos em até um dia
-            útil.
+            momento. Basta falar com a loja pelo telefone acima.
           </p>
 
           <h2>Quando isto mudar</h2>

@@ -227,7 +227,7 @@ Desktop   1025px +
 ### Microcópia
 Direta, sem linguagem de funil.
 - Ações: `Ver projetos` · `Ver projeto` · `Falar sobre um projeto assim` · `Falar no WhatsApp` · `Enviar`
-- Confirmação: "Recebemos. Respondemos em até um dia útil."
+- Confirmação: "Recebemos." — **sem prazo de resposta**: o "respondemos em até um dia útil" não é compromisso da loja e saiu do site em 05/10/2026
 - Erro: diz o que fazer, não pede desculpa — "Falta o telefone com DDD"
 
 **Proibido:** "Quero meu projeto", "Solicite seu orçamento grátis", "Transforme seu lar", selo inventado, contador de urgência. A lista completa de palavras está em [`docs/vocabulario.md`](docs/vocabulario.md). "Alto padrão" foi liberado em 05/10/2026 (vocabulário v3): é voz da apresentação institucional da loja, e entra só nas frases que vêm dela.

@@ -195,6 +195,10 @@ roteiro (`docs/prompt-copy-v3.md`) não dizia, ou se contradizia:
    horário segue com o desenho de antes (dia de um lado, hora do outro).
 4. **"Respondemos em até um dia útil."** continua no lugar e no desenho de
    antes (rótulo sob o bloco de orçamento), por decisão do cliente.
+   **Desfeito em 05/10/2026:** o cliente informou que esse prazo não existe na
+   loja. A frase saiu de `/arquitetos` e de `/privacidade`, e o `CLAUDE.md`
+   deixou de prescrevê-la na confirmação de formulário. Não recolocar prazo de
+   resposta sem a loja confirmar.
 5. **Redirect 301 por regra, não por endereço:** todo ambiente da lista oficial
    que a unidade não publica responde 301 para o hub. Em Caraguá isso vale para
    o banheiro (pedido) e também para home office, closet e espaço gourmet, que

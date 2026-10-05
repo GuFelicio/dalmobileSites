@@ -26,11 +26,10 @@ parceria:
       entrega o projeto e nós detalhamos a marcenaria: encaixes, ferragens,
       espessuras e folgas de obra. Nada entra na fábrica sem a sua aprovação.
   - titulo: Orçamento de escritório
-    # O prazo de resposta é compromisso mantido por decisão do cliente (copy
-    # v3, decisão 1). Na v4 ele está dentro do texto, como na copy.
+    # Sem prazo de resposta: "Respondemos em até um dia útil" saiu em
+    # 05/10/2026 a pedido do cliente — o compromisso não existe na loja.
     texto: >-
-      Entra numa fila própria, separada do balcão. Respondemos em até um dia
-      útil.
+      Entra numa fila própria, separada do balcão.
   - titulo: Suporte à especificação
     texto: >-
       Materiais, acabamentos e soluções construtivas entram na conversa desde

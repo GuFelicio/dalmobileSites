@@ -28,8 +28,11 @@ removida, nenhuma mudança de layout. Vocabulário: `docs/vocabulario.md` v3
   frequentes sem mudança (copy v3). Meta description nova.
 - **/arquitetos:** "Para arquitetos e designers", subtítulo novo e os cinco
   blocos com os títulos da apresentação (Autoria preservada, Orçamento de
-  escritório, Suporte à especificação, A fábrica, Projeto creditado). O prazo
-  de resposta passou para dentro do texto do bloco. Title e description novos.
+  escritório, Suporte à especificação, A fábrica, Projeto creditado). Title e
+  description novos.
+- **Prazo de resposta fora do site:** "Respondemos em até um dia útil" saiu do
+  bloco de orçamento de `/arquitetos` e da `/privacidade` (que ganhou nova
+  data de atualização) — o cliente informou que o compromisso não existe.
 - **/ambientes:** subtítulo "Qual ambiente você quer explorar agora?" e intro
   nova; a contagem de fotos dos cards saiu.
 - **Páginas de ambiente:** subtítulo, parágrafo e chamada final novos nos sete
