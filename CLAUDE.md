@@ -61,7 +61,8 @@ Seções da home e os ids que o menu usa:
 #projetos     projetos executados (carrossel)
 #a-dalmobile  fábrica
 #arquitetos   para arquitetos
-#a-loja       showroom: endereço, mapa, horário, WhatsApp, a outra loja
+#a-loja       showroom: "Abrir no mapa", WhatsApp, a outra loja (o endereço
+              fica no rodapé)
 ```
 
 **Menu:** Projetos · A Dalmóbile · Para arquitetos · A loja, sempre como
@@ -158,7 +159,7 @@ Medida de leitura **62 a 66 caracteres**. Nunca texto corrido em largura total.
 ### Forma
 - **`border-radius: 0` em tudo.** Foto, card, botão, campo, chip. Junta precisa, como a marcenaria.
 - Separação por fio de 1px e por espaço. **Zero sombra.**
-- Alinhamento **à esquerda** em tudo. Nada centralizado. Única exceção: endereço e links no rodapé, alinhados à direita do tablet para cima (pedido do cliente, 05/10/2026 — ver `docs/decisoes.md`).
+- Alinhamento **à esquerda** em tudo. Nada centralizado. Duas exceções, ambas pedidas pelo cliente e registradas em `docs/decisoes.md`: endereço e links do rodapé, alinhados à direita do tablet para cima (05/10/2026); e a frase final da seção "Para arquitetos", centralizada na largura da seção (06/10/2026). Nenhuma outra.
 - Escala de espaço base 8: 8 · 16 · 24 · 40 · 64 · 96 · 128.
 - Ritmo vertical (v4), e só ele: `--respiro` 72→48px (padding-top e -bottom de toda seção) · `--respiro-curto` 40→24px (cabeçalho da seção ao conteúdo; padding do rodapé) · `--entre-itens` 32→24px (itens irmãos). No cabeçalho de seção: rótulo → 12px → título → 16px → apoio; parágrafo → link, 24px. **Nenhum vão vertical maior que 160px** entre dois conteúdos, em nenhuma página.
 
@@ -314,7 +315,7 @@ Mantém: o runtime Cloudflare. O site é 90% imagem, e toda foto de conteúdo pa
 - [ ] OpenGraph por página — o vendedor manda o link do case no WhatsApp; o preview é o produto naquele momento
 - [ ] Schema `LocalBusiness` por unidade, gerado do config. Endereço, telefone e horário batendo exatamente com o Google Business Profile
 - [ ] `sitemap.ts` e `robots.ts`
-- [ ] Rodapé com endereço, telefone e WhatsApp (o número do WhatsApp é o telefone); horário no showroom da home
+- [ ] Rodapé com endereço, telefone e WhatsApp (o número do WhatsApp é o telefone). O horário não aparece na página desde 06/10/2026 (pedido do cliente) e vai ao Google pelo schema `LocalBusiness`
 - [ ] `:focus-visible` visível em todo elemento focável
 - [ ] Menu mobile funcionando — nada de botão hambúrguer sem handler
 - [ ] `alt` descritivo em toda imagem

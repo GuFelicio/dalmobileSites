@@ -50,11 +50,12 @@ async function componentes() {
   return encontrados;
 }
 
-test("o rodapé traz endereço e telefone, e a página traz o horário", async () => {
+test("o rodapé traz endereço e telefone", async () => {
   // Desde a v5 o rodapé é a marca, o endereço, o WhatsApp com o número (que é
-  // o telefone) e a privacidade; o horário fica no showroom da home, e o menu
-  // mobile o repete em toda página. Do CONFIG, nunca literal: o teste travava
-  // o número antigo e quebrou no dia em que a loja unificou o telefone.
+  // o telefone) e a privacidade. O horário saiu da página (06/10/2026, pedido
+  // do cliente) e vai ao Google pelo schema — ver o teste do sábado, abaixo.
+  // Do CONFIG, nunca literal: o teste travava o número antigo e quebrou no dia
+  // em que a loja unificou o telefone.
   for (const rota of ["/", PAGINA_COM_LAYOUT]) {
     const { resposta, html } = await renderizar(rota);
     assert.equal(resposta.status, 200);
@@ -62,11 +63,6 @@ test("o rodapé traz endereço e telefone, e a página traz o horário", async (
     assert.ok(rodape.includes(unidade.endereco.logradouro), `${rota}: falta o logradouro no rodapé`);
     assert.ok(rodape.includes(unidade.endereco.bairro), `${rota}: falta o bairro no rodapé`);
     assert.ok(rodape.includes(unidade.telefone), `${rota}: falta o telefone no rodapé`);
-  }
-  const { html } = await renderizar("/");
-  for (const horario of unidade.horarios) {
-    assert.ok(html.includes(horario.dias), `falta "${horario.dias}" na home`);
-    assert.ok(html.includes(horario.abre), `falta a abertura de ${horario.dias}`);
   }
 });
 
@@ -117,14 +113,18 @@ test("o link de WhatsApp identifica de qual unidade veio o lead", async () => {
 });
 
 test("o sábado está registrado", async () => {
-  // Na seção do showroom da home (v5: o horário saiu do rodapé).
+  // No schema LocalBusiness da home: é por ele que o horário chega ao Google
+  // desde que saiu do texto da página (06/10/2026, pedido do cliente).
   const { html } = await renderizar("/");
   const sabado = unidade.horarios.find((h) => h.dias.toLowerCase().includes("sábado"));
   assert.ok(sabado, "o config não declara horário de sábado");
-  assert.ok(html.includes(sabado.dias), "falta o sábado na home");
-  assert.ok(html.includes(sabado.fecha), "falta o fechamento de sábado na home");
+  const bruto = html.match(/application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(bruto, "a home sem schema LocalBusiness");
+  const schema = JSON.parse(bruto);
+  const noSchema = schema.openingHoursSpecification.find((h) => h.description === sabado.dias);
+  assert.ok(noSchema, "falta o sábado no schema");
+  assert.equal(noSchema.closes, sabado.fecha.replace("h", ":"), "fechamento de sábado errado no schema");
 });
-
 test("nenhum dado de unidade escrito direto em componente", async () => {
   // Tudo tem que vir de app/dados-unidade.ts — na Fase 3, do config. Foi
   // assim que o site anterior acabou indexado com a cidade errada.

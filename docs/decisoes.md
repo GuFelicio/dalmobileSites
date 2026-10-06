@@ -152,6 +152,33 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-06 · Ajustes de diagramação da home, depois da v5
+
+**O quê** (pedidos do cliente, todos na home):
+1. **Quebra de linha nos títulos.** "Móveis personalizados" numa linha só no
+   desktop (de 1025px para cima), e o resto embaixo; "de alto padrão" sempre
+   inteiro, numa linha própria, no título da fábrica. Feito com
+   `.synthesis-linha` e `.synthesis-inteira` (`app/globals.css`), não com
+   `<br>`: no celular "Móveis personalizados" não cabe numa linha no tamanho do
+   h1, e as duas palavras quebram entre si.
+2. **"Para arquitetos" ganhou uma foto** embaixo do título, com o crédito — de
+   projeto assinado (Débora Toledo em SJC, Flávia e Sérgia Garrido em Caraguá),
+   escolhida no código entre as que têm `arquiteto` e não aparecem em outra
+   seção. A coluna da esquerda ficava vazia ao lado dos três itens.
+3. **A frase final de "Para arquitetos" ficou centralizada** na largura da
+   seção, embaixo das duas colunas, com um fio em cima. É a **segunda exceção**
+   à regra de alinhamento à esquerda do `CLAUDE.md` (a primeira é o rodapé).
+4. **Endereço e horário saíram do showroom** ("ficou muito poluído"). O
+   endereço fica só no rodapé; o horário **não aparece mais na página** e
+   continua indo ao Google pelo schema `LocalBusiness`, gerado do config. Fica
+   o "Abrir no mapa".
+
+**Descartado.** `<br>` fixo nos títulos (quebraria errado no celular); tirar
+também o "Abrir no mapa" (sem endereço na seção, é o único caminho até a loja
+ali).
+
+---
+
 ## 2026-10-06 · v5: site de uma página
 
 **O quê.** Os dois sites passaram a ser só a home, mais `/privacidade`. Saíram

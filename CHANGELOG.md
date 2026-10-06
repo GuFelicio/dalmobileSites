@@ -8,6 +8,21 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-06 · v5: ajustes de diagramação da home
+
+- "Móveis personalizados" numa linha só no desktop, e o resto do h1 embaixo
+  (o bloco do manifesto foi de 780 para 900px para caber em 1920).
+- "de alto padrão" sempre inteiro, numa linha própria, no título da fábrica.
+- "Para arquitetos": foto de projeto assinado embaixo do título, com o crédito
+  "PROJETO / NOME"; a frase final centralizada na largura da seção, com um fio
+  em cima (exceção registrada no `CLAUDE.md` e em `docs/decisoes.md`).
+- Showroom sem endereço e sem horário: o endereço fica só no rodapé; o horário
+  segue no schema `LocalBusiness`. Fica o "Abrir no mapa".
+- Testes: o do sábado passou a conferir o schema; o do rodapé, só endereço e
+  telefone. 62 por unidade, todos passando.
+
+---
+
 ## [não publicado] — 2026-10-06 · v5: site de uma página
 
 Roteiro e texto: `docs/copy-home-v5.md`. Estado anterior: tag `v4-multipagina`.

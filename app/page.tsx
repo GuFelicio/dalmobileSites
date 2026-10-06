@@ -28,7 +28,6 @@ import Foto from "../components/midia/Foto";
 import SliderDeFotos, { type FotoDoSlider } from "../components/midia/SliderDeFotos";
 import VideoEmLoop from "../components/midia/VideoEmLoop";
 import {
-  enderecoEmLinha,
   linkWhatsApp,
   mapaDaUnidade,
   schemaLocalBusiness,
@@ -49,6 +48,14 @@ export default function Home() {
   const fotoManifesto = escolherFoto(ambientes, ["sala-de-estar", "cozinha"], 3);
   const fotoProcesso = escolherFoto(ambientes, ["cozinha", "banheiro"], 7);
   const fotoContato = escolherFoto(ambientes, ["quartos", "sala-de-estar"], 5);
+
+  // A foto da seção de arquitetos: de projeto COM arquiteto creditado (Débora
+  // Toledo em SJC, Flávia e Sérgia Garrido em Caraguá), e nenhuma das três
+  // acima. Sala primeiro, por mostrar mais marcenaria num quadro só.
+  const usadas = new Set([fotoManifesto.src, fotoProcesso.src, fotoContato.src]);
+  const fotoArquitetos = ["sala-de-estar", "cozinha", "quartos", "banheiro"]
+    .flatMap((slug) => ambientes.find((a) => a.slug === slug)?.fotos ?? [])
+    .find((f) => f.arquiteto && !usadas.has(f.src));
 
   // TODAS as fotos do acervo desta unidade, INTERCALADAS entre os ambientes.
   //
@@ -107,7 +114,14 @@ export default function Home() {
         <section className="synthesis-manifesto superficie-papel" id="inicio">
           <div className="synthesis-manifesto-content">
             <p className="eyebrow">MÓVEIS PLANEJADOS · {unidade.cidade.toUpperCase()}</p>
-            <h1>Móveis personalizados para espaços com identidade</h1>
+            {/* Quebra de linha depois de "Móveis personalizados", pedida pelo
+                cliente (06/10/2026): no desktop o par fica numa linha só e o
+                resto embaixo. No celular as duas palavras não cabem juntas no
+                tamanho do h1, e cada uma ocupa a sua linha. */}
+            <h1>
+              <span className="synthesis-linha">Móveis personalizados</span> para espaços com
+              identidade
+            </h1>
             <p>
               Com origem em Bento Gonçalves, a Dalmóbile fabrica móveis personalizados de alto
               padrão. O desenho acompanha o espaço e a intenção do projeto: medimos no imóvel,
@@ -142,7 +156,12 @@ export default function Home() {
           </div>
           <div className="synthesis-process-copy">
             <p className="eyebrow">UMA HISTÓRIA EM EVOLUÇÃO</p>
-            <h2>Da marcenaria à personalização de alto padrão</h2>
+            {/* "de alto padrão" sempre junto, numa linha própria (pedido do
+                cliente, 06/10/2026): partido, lia "alto / padrão". */}
+            <h2>
+              Da marcenaria à personalização{" "}
+              <span className="synthesis-linha synthesis-inteira">de alto padrão</span>
+            </h2>
             <p>
               A Dalmóbile nasceu em 1977, em Bento Gonçalves, como Esquadrias Cladeju. Assumiu o
               nome atual em 2000, ganhou nova sede de 10.000 m² em 2012 e, desde 2025, tem foco
@@ -166,6 +185,15 @@ export default function Home() {
           <div className="synthesis-architects-heading">
             <p className="eyebrow">PARA ARQUITETOS E DESIGNERS</p>
             <h2>Detalhamento, especificação e orçamento de escritório com quem fabrica a peça</h2>
+            {/* Uma foto de projeto assinado por arquiteto, com o crédito, embaixo
+                do título (pedido do cliente, 06/10/2026: a coluna ficava vazia
+                ao lado dos itens). É a prova do que a seção promete. */}
+            {fotoArquitetos ? (
+              <figure className="synthesis-architects-image">
+                <Foto src={fotoArquitetos.src} alt={fotoArquitetos.alt} sizes="(max-width: 1024px) 100vw, 45vw" />
+                <figcaption>Projeto / {fotoArquitetos.arquiteto}</figcaption>
+              </figure>
+            ) : null}
           </div>
           <div className="synthesis-architects-body">
             <ul className="synthesis-architects-items">
@@ -190,10 +218,13 @@ export default function Home() {
                 <p>O orçamento de escritório entra numa fila própria, separada do balcão.</p>
               </li>
             </ul>
-            <p className="synthesis-architects-closing">
-              Se você projeta e quer conhecer os acabamentos ou a fábrica, fale com a loja.
-            </p>
           </div>
+          {/* A frase final, centralizada na largura da seção, embaixo das duas
+              colunas (pedido do cliente, 06/10/2026). Exceção ao alinhamento à
+              esquerda do CLAUDE.md — ver docs/decisoes.md. */}
+          <p className="synthesis-architects-closing">
+            Se você projeta e quer conhecer os acabamentos ou a fábrica, fale com a loja.
+          </p>
         </section>
 
         {/* O showroom passou de grafite para PAPEL na v5, para a alternância
@@ -207,14 +238,14 @@ export default function Home() {
               caber, o que precisa facilitar e que sensação você quer encontrar. Traga as
               respostas, e a planta do imóvel, para a conversa no showroom.
             </p>
-            {/* Endereço, mapa e horário: o bloco de dados, a 16px do texto. */}
-            <div className="synthesis-contact-dados">
-              <address>{enderecoEmLinha()}</address>
-              {mapa ? <a href={mapa.link}>Abrir no mapa</a> : null}
-              <p>
-                {unidade.horarios.map((h) => `${h.dias}, ${h.abre} às ${h.fecha}`).join(" · ")}
-              </p>
-            </div>
+            {/* Endereço e horário saíram daqui (pedido do cliente, 06/10/2026:
+                a seção ficava poluída); o endereço fica no rodapé, logo abaixo.
+                Fica o "Abrir no mapa", a 16px do texto. */}
+            {mapa ? (
+              <div className="synthesis-contact-dados">
+                <a href={mapa.link}>Abrir no mapa</a>
+              </div>
+            ) : null}
             {whatsapp ? (
               <a className="synthesis-contact-acao" href={whatsapp}>
                 Falar no WhatsApp <Arrow />

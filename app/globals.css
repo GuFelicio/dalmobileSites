@@ -190,7 +190,19 @@ section[id] { scroll-margin-top: var(--alt-cabecalho); }
   gap: clamp(48px, 7vw, 110px);
   align-items: center;
 }
-.synthesis-manifesto-content { max-width: 780px; }
+/* 900px (era 780): no desktop largo, "Móveis personalizados" cabe numa linha
+   só no tamanho do h1 (86px), como o cliente pediu. */
+.synthesis-manifesto-content { max-width: 900px; }
+/* Quebra pedida pelo cliente (06/10/2026): o trecho marcado ocupa a própria
+   linha. Ver os títulos do manifesto e da fábrica em app/page.tsx. */
+.synthesis-linha { display: block; }
+/* Trecho que nunca parte no meio ("de alto padrão"). */
+.synthesis-inteira { white-space: nowrap; }
+@media (min-width: 1025px) {
+  /* No desktop, "Móveis personalizados" numa linha só. Abaixo disso as duas
+     palavras não cabem juntas no tamanho do h1 e quebram entre si. */
+  .synthesis-manifesto-content h1 .synthesis-linha { white-space: nowrap; }
+}
 /* O h1 da home desde a v4 (era h2: o h1 vivia na faixa da abertura). */
 .synthesis-manifesto-content h1 {
   margin: var(--cab-rotulo-titulo) 0 var(--cab-titulo-apoio);
@@ -344,9 +356,35 @@ section[id] { scroll-margin-top: var(--alt-cabecalho); }
   line-height: 1.75;
   color: var(--sup-apoio);
 }
+/* A foto de projeto assinado, embaixo do título (06/10/2026: a coluna da
+   esquerda ficava vazia ao lado dos itens). 4:3, como os cards de ambiente;
+   o crédito embaixo, no formato das legendas do carrossel. */
+.synthesis-architects-image { margin: var(--respiro-curto) 0 0; }
+.synthesis-architects-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+}
+.synthesis-architects-image figcaption {
+  margin-top: var(--e-1);
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  text-transform: uppercase;
+  color: var(--sup-apoio);
+}
+/* A frase final CENTRALIZADA na largura da seção, embaixo das duas colunas
+   (pedido do cliente, 06/10/2026). É exceção à regra de alinhamento à
+   esquerda do CLAUDE.md, registrada em docs/decisoes.md. Um fio em cima a
+   separa dos itens. */
 .synthesis-architects-closing {
-  max-width: var(--medida);
-  margin-top: var(--respiro-curto);
+  grid-column: 1 / -1;
+  max-width: none;
+  padding-top: var(--respiro-curto);
+  border-top: var(--fio) solid var(--sup-fio);
+  text-align: center;
   font-size: var(--fs-subtitulo);
   letter-spacing: var(--tr-subtitulo);
   line-height: var(--lh-subtitulo);
@@ -354,7 +392,7 @@ section[id] { scroll-margin-top: var(--alt-cabecalho); }
 @media (min-width: 1025px) {
   .synthesis-architects {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(48px, 7vw, 110px);
+    gap: var(--respiro-curto) clamp(48px, 7vw, 110px);
     align-items: start;
   }
 }
