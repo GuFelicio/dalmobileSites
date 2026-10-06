@@ -16,13 +16,18 @@
      viraram uma, o grafite. O CLAUDE.md espelha esta tabela. Trocar SÓ
      estas linhas troca o site inteiro.
 
+     v5 (06/10/2026): o grafite clareou de #262626 para #363838 — o anterior
+     ficou escuro demais, quase preto ao lado das fotos.
+
      Contrastes (WCAG), conferidos por script na entrega:
        tinta sobre papel 14,7 · apoio sobre papel 6,0 · papel sobre grafite
-       13,8 · areia sobre grafite 9,0 · tinta sobre o cinza do rodapé 5,9.
+       10,7 · papel a 72% sobre grafite 6,4 · areia sobre grafite 7,0 ·
+       tinta sobre o cinza do rodapé 5,9.
        Texto claro sobre o cinza do rodapé dá 2,5 e é PROIBIDO.
      ------------------------------------------------------------------ */
   --c-papel:        #f6f4f0;  /* o ÚNICO fundo claro de seção            */
-  --c-grafite:      #262626;  /* o ÚNICO fundo escuro de seção           */
+  --c-grafite:      #363838;  /* o ÚNICO fundo escuro de seção (v5; era
+                                 #262626)                                */
   --c-cinza:        #9e9c94;  /* SÓ o rodapé                             */
   --c-areia:        #d5c5b1;  /* SÓ rótulo em caixa alta sobre grafite   */
   --c-tinta:        #20211f;  /* texto sobre papel e sobre o rodapé      */
@@ -69,8 +74,8 @@
   --sobre-grafite-apoio: var(--c-papel-72);
   --sobre-grafite-fio:   var(--c-papel-fio);
 
-  /* Fio do cabeçalho e da faixa do rodapé na paleta palha. Transparente na
-     paleta neutra: o cinza do rodapé já separa do papel sozinho. */
+  /* Fio do cabeçalho; e o fio do rodapé, transparente: o cinza já separa
+     do papel e do grafite sozinho. */
   --cab-fio: var(--c-tinta-fio);
   --fio-sup: transparent;
 
@@ -184,20 +189,14 @@
 /* ------------------------------------------------------------------
    A PALETA "PALHA", do site de Caraguatatuba.
 
-   Muda só o que é da família do cinza: o rodapé, o texto de apoio e os
-   fios. Papel, grafite, tinta e areia são os mesmos nos dois sites, e o
-   desenho continua sendo um só. O componente fala só com os nomes
-   semânticos (--cinza, --cinza-clr, --cinza-texto), que não mudam.
+   Desde a v5 (06/10/2026) o rodapé de Caraguá é o MESMO cinza #9E9C94 do de
+   SJC — o areia claro #FFF4EB que ele tinha saiu. A variante ficou só com o
+   texto de apoio e o fio sobre papel, em tons de areia. Papel, grafite, tinta,
+   areia e o cinza do rodapé são os mesmos nos dois sites.
    ------------------------------------------------------------------ */
 :root[data-paleta="palha"] {
-  /* O rodapé em areia clara: 14,93:1 com a tinta por cima.               */
-  --c-cinza:        #fff4eb;
   --c-apoio:        #5f5847;  /* texto de apoio sobre papel — 6,4:1         */
   --c-linha:        #e7d8c9;  /* fio sobre papel, estado desativado         */
-
-  /* O rodapé palha é quase branco e separa do papel em apenas 1,02 —
-     sozinho, ele sumiria dentro da página. É ESTE FIO que o separa.        */
-  --fio-sup:        #cdb49a;
 }
 
 /* ====================================================================

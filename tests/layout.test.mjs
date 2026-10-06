@@ -16,9 +16,10 @@ const { esta: unidade } = await unidadeDoBuild();
  * Era `/teste-layout`, o andaime da Fase 2 — que ficou no ar respondendo 200
  * mesmo sem estar linkada em lugar nenhum. O checklist "Obrigatório antes de
  * qualquer deploy" do CLAUDE.md proíbe rota de teste no build, então a rota
- * saiu e os testes passaram a usar uma página de verdade.
+ * saiu e os testes passaram a usar uma página de verdade — desde a v5,
+ * /privacidade, a única além da home.
  */
-const PAGINA_COM_LAYOUT = "/ambientes";
+const PAGINA_COM_LAYOUT = "/privacidade";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
@@ -49,17 +50,22 @@ async function componentes() {
   return encontrados;
 }
 
-test("o rodapé traz endereço, telefone e horário", async () => {
-  const { resposta, html } = await renderizar(PAGINA_COM_LAYOUT);
-  assert.equal(resposta.status, 200);
-
-  // Do CONFIG, nunca literal: o teste travava o número antigo e quebrou no
-  // dia em que a loja unificou o telefone — ou seja, por estar certo.
-  assert.ok(html.includes(unidade.endereco.logradouro), "falta o logradouro no rodapé");
-  assert.ok(html.includes(unidade.endereco.bairro), "falta o bairro no rodapé");
-  assert.ok(html.includes(unidade.telefone), "falta o telefone no rodapé");
+test("o rodapé traz endereço e telefone, e a página traz o horário", async () => {
+  // Desde a v5 o rodapé é a marca, o endereço, o WhatsApp com o número (que é
+  // o telefone) e a privacidade; o horário fica no showroom da home, e o menu
+  // mobile o repete em toda página. Do CONFIG, nunca literal: o teste travava
+  // o número antigo e quebrou no dia em que a loja unificou o telefone.
+  for (const rota of ["/", PAGINA_COM_LAYOUT]) {
+    const { resposta, html } = await renderizar(rota);
+    assert.equal(resposta.status, 200);
+    const rodape = html.slice(html.indexOf("<footer"), html.indexOf("</footer>"));
+    assert.ok(rodape.includes(unidade.endereco.logradouro), `${rota}: falta o logradouro no rodapé`);
+    assert.ok(rodape.includes(unidade.endereco.bairro), `${rota}: falta o bairro no rodapé`);
+    assert.ok(rodape.includes(unidade.telefone), `${rota}: falta o telefone no rodapé`);
+  }
+  const { html } = await renderizar("/");
   for (const horario of unidade.horarios) {
-    assert.ok(html.includes(horario.dias), `falta "${horario.dias}" no rodapé`);
+    assert.ok(html.includes(horario.dias), `falta "${horario.dias}" na home`);
     assert.ok(html.includes(horario.abre), `falta a abertura de ${horario.dias}`);
   }
 });
@@ -111,11 +117,12 @@ test("o link de WhatsApp identifica de qual unidade veio o lead", async () => {
 });
 
 test("o sábado está registrado", async () => {
-  const { html } = await renderizar(PAGINA_COM_LAYOUT);
+  // Na seção do showroom da home (v5: o horário saiu do rodapé).
+  const { html } = await renderizar("/");
   const sabado = unidade.horarios.find((h) => h.dias.toLowerCase().includes("sábado"));
   assert.ok(sabado, "o config não declara horário de sábado");
-  assert.ok(html.includes(sabado.dias), "falta o sábado no rodapé");
-  assert.ok(html.includes(sabado.fecha), "falta o fechamento de sábado no rodapé");
+  assert.ok(html.includes(sabado.dias), "falta o sábado na home");
+  assert.ok(html.includes(sabado.fecha), "falta o fechamento de sábado na home");
 });
 
 test("nenhum dado de unidade escrito direto em componente", async () => {
@@ -178,7 +185,7 @@ test("todo link interno leva a uma rota que existe", async () => {
   // Varre VÁRIAS páginas, e não só a home: a home é o andaime do estudo e tem
   // rodapé próprio, então os links do componente Footer — que é justamente
   // onde estavam as rotas quebradas — não apareciam nela.
-  const paginas = ["/", "/ambientes", "/ambientes/cozinha", "/a-loja", "/privacidade"];
+  const paginas = ["/", "/privacidade"];
   const internos = new Set();
   for (const pagina of paginas) {
     const { html } = await renderizar(pagina);

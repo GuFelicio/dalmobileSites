@@ -1,5 +1,11 @@
 # Adicionar um projeto ao portfólio
 
+> **Histórico desde a v5 (06/10/2026).** O site virou uma página só e as rotas
+> `/projetos` e `/projetos/[slug]` saíram (estão na tag `v4-multipagina`; os
+> endereços respondem 301 para `/#projetos`). A camada `lib/projetos.ts` e os
+> testes continuam no código. Para publicar foto nova hoje, o caminho é o
+> carrossel da home: ver [`adicionar-ambiente.md`](adicionar-ambiente.md).
+
 Esta é a tarefa que mais se repete no site. Dá para fazer sem saber programar.
 
 **Tempo:** uns 20 minutos, quase todo em escolher e nomear as fotos.

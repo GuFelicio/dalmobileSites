@@ -125,14 +125,11 @@ export type Unidade = {
     pixel: string | null;
   };
 
-  /** A outra loja, para o link cruzado do rodapé e da página da loja. */
+  /** A outra loja, para a linha do showroom da home que leva ao outro site (v5). */
   outraUnidade: {
     /** O rótulo do link, como ele aparece escrito. */
     nome: string;
-    /**
-     * A cidade da outra loja. Usada para substituir {{outraCidade}} nos
-     * textos compartilhados — ver lib/texto.ts.
-     */
+    /** A cidade da outra loja, na linha "No <região>, a Dalmóbile atende pela loja de <cidade>." */
     cidade: string;
     /** A região que a outra loja atende. Ver `regiao`. */
     regiao: string;
@@ -145,8 +142,6 @@ export type Unidade = {
   textos: {
     /** meta description da home (copy v4: a mesma frase, com a cidade). */
     descricaoHome: string;
-    /** meta description do hub /ambientes (copy v3, C4; SJC mantém a de antes). */
-    descricaoAmbientes: string;
   };
 
   /**

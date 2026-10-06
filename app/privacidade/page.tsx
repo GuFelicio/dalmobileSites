@@ -18,7 +18,7 @@ import Link from "next/link";
 import { Footer } from "../../components/layout/Footer";
 import { Header } from "../../components/layout/Header";
 import { Section } from "../../components/layout/Section";
-import { enderecoEmLinha, linkTelefone, unidade } from "../../config/derivados.ts";
+import { enderecoEmLinha, linkTelefone, linkWhatsApp, unidade } from "../../config/derivados.ts";
 import { metadataDaPagina } from "../../lib/seo.ts";
 import estilos from "./privacidade.module.css";
 
@@ -46,13 +46,15 @@ export default function Privacidade() {
         {/* Data FIXA, da última alteração real do texto. Não usar a data de hoje:
             a página se atualizaria sozinha todo dia e perderia a função.
             Mudou o texto? mude esta data junto. */}
-        <p className={estilos.atualizado}>Atualizada em 5 de outubro de 2026.</p>
+        <p className={estilos.atualizado}>Atualizada em 6 de outubro de 2026.</p>
 
         <div className={estilos.texto}>
           <h2>Quem somos</h2>
           <p>
+            {/* Endereço com vírgulas, sem travessão, e o número abrindo o
+                WhatsApp da unidade (docs/copy-home-v5.md). */}
             Dalmóbile {unidade.nome}, com showroom em {enderecoEmLinha()}. Telefone{" "}
-            <a href={linkTelefone()}>{unidade.telefone}</a>.
+            <a href={linkWhatsApp() ?? linkTelefone()}>{unidade.telefone}</a>.
           </p>
 
           <h2>Que dados este site coleta</h2>
@@ -63,7 +65,7 @@ export default function Privacidade() {
           <p>
             <strong>Nenhum.</strong> Este site não tem formulário, não pede cadastro e não usa
             cookie de rastreamento. Se você falar com a gente pelo WhatsApp ou pelo telefone,
-            aí sim ficam registrados o seu contato e o que você contou sobre o projeto —
+            aí sim ficam registrados o seu contato e o que você contou sobre o projeto,
             usados só para responder e tocar o seu projeto, e por mais ninguém.
           </p>
 

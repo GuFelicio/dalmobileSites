@@ -1,24 +1,19 @@
 /**
  * Footer — o rodapé do site.
  *
- * O que é: mapa do site, não assinatura. Quatro colunas no desktop: a marca
- * com o endereço, as páginas, o contato com horário, e a outra loja mais as
- * políticas. O CLAUDE.md exige endereço, telefone, WhatsApp e horário no
- * rodapé de toda página, porque é o que sustenta a busca local.
+ * O que é: a barra cinza do fim da página, com a marca, o endereço da loja, o
+ * WhatsApp (com o número, que é também o telefone), o link da política de
+ * privacidade e a assinatura. Desde a v5 (06/10/2026), quando o site virou uma
+ * página só, é o MESMO rodapé na home e em /privacidade; o mapa do site com
+ * quatro colunas saiu junto com as páginas internas. O horário fica na seção
+ * do showroom, logo acima.
  *
- * Onde é usado: em TODA página, sempre na superfície cinza.
+ * Onde é usado: na home, em /privacidade e no 404.
  *
- * Props: nenhuma. Tudo vem do config da unidade, via config/derivados.ts
- * da unidade. Nenhum dado de loja escrito direto aqui.
+ * Props: nenhuma. Tudo vem do config da unidade, via config/derivados.ts.
  */
 import Link from "next/link";
-import {
-  enderecoEmLinha,
-  linkTelefone,
-  linkWhatsApp,
-  navegacao,
-  unidade,
-} from "../../config/derivados";
+import { enderecoEmLinha, linkTelefone, linkWhatsApp, unidade } from "../../config/derivados";
 import { WhatsApp } from "../icons";
 import { Brand } from "./Brand";
 import estilos from "./Footer.module.css";
@@ -28,70 +23,20 @@ export function Footer() {
 
   return (
     <footer className={estilos.footer}>
-      <div className={estilos.colunas}>
-        {/* 1 — marca e endereço */}
-        <div className={estilos.coluna}>
-          <Brand />
+      <div className={estilos.linha}>
+        <Brand />
+        <div className={estilos.dados}>
           <address className={estilos.endereco}>{enderecoEmLinha()}</address>
-        </div>
-
-        {/* 2 — páginas do site */}
-        <nav className={estilos.coluna} aria-label="Páginas do site">
-          <h2 className={estilos.titulo}>O site</h2>
-          <ul className={estilos.lista}>
-            {navegacao.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>{item.rotulo}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* 3 — contato e horário */}
-        <div className={estilos.coluna}>
-          <h2 className={estilos.titulo}>Contato</h2>
-          <ul className={estilos.lista}>
+          <ul className={estilos.links}>
             <li>
-              <a href={linkTelefone()}>{unidade.telefone}</a>
+              {/* O número, e não "Falar no WhatsApp": é o mesmo número do
+                  telefone, e assim o rodapé traz os dois (checklist do
+                  CLAUDE.md). Sem WhatsApp, vira link de telefone. */}
+              <a href={whatsapp ?? linkTelefone()}>
+                {whatsapp ? <WhatsApp /> : null}
+                {unidade.telefone}
+              </a>
             </li>
-            <li>
-              {whatsapp ? (
-                <a className={estilos.comIcone} href={whatsapp}>
-                  <WhatsApp />
-                  Falar no WhatsApp
-                </a>
-              ) : (
-                <span className={`${estilos.comIcone} ${estilos.pendente}`} aria-disabled="true">
-                  <WhatsApp />
-                  WhatsApp em breve
-                </span>
-              )}
-            </li>
-          </ul>
-
-          {/* Publicar o horário é detalhe pequeno com retorno alto: o
-              concorrente mais forte de SJC não publica o dele. */}
-          <ul className={estilos.horarios}>
-            {unidade.horarios.map((horario) => (
-              <li key={horario.dias}>
-                <span className={estilos.dias}>{horario.dias}</span>
-                <span>
-                  {horario.abre} às {horario.fecha}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* 4 — a outra loja e as políticas */}
-        <div className={estilos.coluna}>
-          <h2 className={estilos.titulo}>A outra loja</h2>
-          <ul className={estilos.lista}>
-            <li>
-              <a href={unidade.outraUnidade.url}>{unidade.outraUnidade.nome}</a>
-            </li>
-          </ul>
-          <ul className={estilos.lista}>
             <li>
               <Link href="/privacidade">Privacidade</Link>
             </li>
@@ -99,9 +44,7 @@ export function Footer() {
         </div>
       </div>
 
-      <p className={estilos.assinatura}>
-        Dalmóbile {unidade.nome} · Crie seu mundo
-      </p>
+      <p className={estilos.assinatura}>Dalmóbile {unidade.nome} · Crie seu mundo</p>
     </footer>
   );
 }

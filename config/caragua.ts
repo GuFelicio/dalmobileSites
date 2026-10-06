@@ -88,20 +88,15 @@ export const unidade: Unidade = {
     // Copy v4 (docs/copy-v4.md, home): a mesma frase nos dois sites, com a cidade.
     descricaoHome:
       "Móveis personalizados para espaços com identidade. Fábrica própria em Bento Gonçalves desde 1977 e loja em Caraguatatuba. Veja projetos executados.",
-    descricaoAmbientes:
-      "Cozinha, quartos e sala planejados pela Dalmóbile em Caraguatatuba. Fotos de projetos executados.",
   },
 
-  // PENDENTE de curadoria: a direção diz que o conjunto de ambientes de
-  // Caraguá sai do acervo do litoral, e pode não ser o mesmo de SJC. Este
-  // menu é o de SJC até a curadoria definir.
+  // v5 (06/10/2026): o site é uma página só, e o menu rola até as seções da
+  // home. Sempre "/#id", com a barra, para funcionar também a partir de
+  // /privacidade. "Ambientes" virou "Projetos" (docs/copy-home-v5.md).
   navegacao: [
-    // "Projetos" sai do menu enquanto não houver case publicado: falta a
-    // informação de prédio e de arquiteto. A rota e a camada continuam no
-    // código, prontas. Ver docs/decisoes.md.
-    { rotulo: "Ambientes", href: "/ambientes" },
-    { rotulo: "A Dalmóbile", href: "/a-dalmobile" },
-    { rotulo: "Para arquitetos", href: "/arquitetos" },
-    { rotulo: "A loja", href: "/a-loja" },
+    { rotulo: "Projetos", href: "/#projetos" },
+    { rotulo: "A Dalmóbile", href: "/#a-dalmobile" },
+    { rotulo: "Para arquitetos", href: "/#arquitetos" },
+    { rotulo: "A loja", href: "/#a-loja" },
   ],
 };

@@ -26,6 +26,10 @@ config/caragua.ts  →  build  →  dalmobilecaraguatatuba.com.br
 Não são dois projetos. É um código só, com dois alvos de build. **O que difere
 entre as duas lojas vive em `config/`** — e em nenhum outro lugar.
 
+**Desde a v5 (06/10/2026) cada site é uma página só** — a home, com seis
+seções — mais `/privacidade`. As páginas internas antigas saíram (o código
+está na tag `v4-multipagina`) e respondem 301 para a seção equivalente.
+
 ### A regra que explica quase todas as decisões
 
 O site anterior de Caraguatatuba foi ao ar indexado como *"Móveis Planejados em
@@ -81,18 +85,17 @@ verdes. Ver [`tests/README-workerd.md`](tests/README-workerd.md).
 
 | Rota | O que é |
 |---|---|
-| `/` | home — capa com vídeo em loop, manifesto, vitrine de fotos, fábrica, contato |
-| `/ambientes` | hub: grade dos ambientes daquela unidade |
-| `/ambientes/[slug]` | página do ambiente: texto + galeria |
-| `/a-loja` | endereço, telefone, WhatsApp, horário, mapa, schema `LocalBusiness` |
-| `/a-dalmobile` | institucional: fábrica, processo, materiais, FAQ |
-| `/arquitetos` | proposta de parceria com escritórios |
-| `/privacidade` | LGPD |
-| `/sitemap.xml` · `/robots.txt` | gerados do config, um por unidade |
+| `/` | o site: abertura em vídeo, manifesto, projetos executados (carrossel), fábrica, para arquitetos, showroom |
+| `/privacidade` | LGPD — link só no rodapé |
+| `/sitemap.xml` · `/robots.txt` | gerados do config, um por unidade; o sitemap tem só `/` e `/privacidade` |
+| `/ambientes`, `/ambientes/*`, `/projetos`, `/projetos/*` | **301** para `/#projetos` |
+| `/a-dalmobile` · `/arquitetos` · `/a-loja` | **301** para `/#a-dalmobile` · `/#arquitetos` · `/#a-loja` |
 | qualquer outra | 404 com os caminhos úteis |
 
-**`/projetos` e `/projetos/[slug]` existem no código mas estão sem conteúdo**, e
-por isso ficam fora do menu, do sitemap e do robots. Ver a seção 8.
+O menu (Projetos · A Dalmóbile · Para arquitetos · A loja) **rola até as
+seções da home**: cada item é um link `"/#id"`. Os ids e a ordem estão no
+`CLAUDE.md`, "Mapa de rotas", e no `docs/copy-home-v5.md`. Os redirecionamentos
+ficam em `worker/index.ts`.
 
 ### Os sete ambientes
 
@@ -107,27 +110,32 @@ Cada ambiente traz também a **concordância** (`artigo`, `planejado`,
 `singular`). Sem isso o site escrevia "Cozinha planejado" no `<title>` e "Quer
 um quartos assim" na chamada.
 
+Desde a v5 os ambientes **não têm página própria**: as fotos de todos eles
+aparecem no carrossel da home, intercaladas, com o rótulo do ambiente
+("01 / COZINHA"), a legenda e o crédito. O texto de cada ambiente
+(`chamada`, corpo, `chamadaFinal`) continua no arquivo, sem aparecer no site.
+
 ---
 
 ## 4. Onde fica cada coisa
 
 ```
 config/           o que difere entre as duas lojas
-conteudo/         os textos e a lista de fotos de cada página
+conteudo/         a lista de fotos de cada ambiente (o carrossel da home)
 public/fotos/     as fotos, por unidade e por ambiente
 lib/              leitura e validação do conteúdo
-app/              as rotas
+app/              a home, /privacidade e o 404
 components/       cabeçalho, rodapé, superfícies, foto, slider
 build/            os dois passos que rodam antes do build
-tests/            57 testes
+tests/            62 testes
 docs/             documentação detalhada
 ```
 
 ### As três regras de arquitetura que não podem ser quebradas
 
-**1. Nenhuma página em `app/` pode importar valor de `lib/projetos.ts`,
-`lib/ambientes-conteudo.ts` ou `lib/institucional.ts`.**
-Esses três leem o disco com `readFileSync`, e o Worker da Cloudflare **não tem
+**1. Nenhuma página em `app/` pode importar valor de `lib/projetos.ts` ou
+`lib/ambientes-conteudo.ts`.**
+Esses dois leem o disco com `readFileSync`, e o Worker da Cloudflare **não tem
 sistema de arquivos**. Importar um valor deles — mesmo sem chamar a leitura —
 arrasta o `fs` para o bundle e derruba o deploy. As páginas leem de
 `lib/conteudo.ts`, que importa um JSON gerado no build.
@@ -197,9 +205,8 @@ npm run dev          # e npm run dev:caragua
 
 | Onde está o texto | Arquivo |
 |---|---|
-| Páginas de ambiente | `conteudo/ambientes/<slug>.md` |
-| `/a-dalmobile` e `/arquitetos` | `conteudo/institucional/*.md` |
-| Home, `/a-loja`, `/privacidade`, 404 | direto no `.tsx` da rota, em `app/` |
+| Legendas das fotos do carrossel | `conteudo/ambientes/<slug>.md` |
+| Home, `/privacidade`, 404 | direto no `.tsx` da rota, em `app/`. A fonte da home é `docs/copy-home-v5.md` |
 | Endereço, telefone, horário, menu | `config/sjc.ts` e `config/caragua.ts` |
 
 ### A regra que mais pega quem escreve
@@ -244,7 +251,7 @@ um em [`docs/unidades.md`](docs/unidades.md).
 
 **Endereço, telefone e horário têm que bater exatamente com o Google Business
 Profile** daquela loja. Divergência derruba a busca local e invalida o schema
-`LocalBusiness` de `/a-loja`.
+`LocalBusiness` da home.
 
 ### Dado que a loja ainda não confirmou
 
@@ -263,13 +270,11 @@ alimentar.
 
 ## 8. O estado de hoje, e o que falta
 
-### Pendências com a loja — 1
+### Pendências com a loja — nenhuma
 
-Rode `npm run pendencias` para ver o estado atual. Hoje:
-
-| Campo | O que é |
-|---|---|
-| `a-dalmobile.fabrica.foto` | foto da fábrica de Bento Gonçalves |
+Rode `npm run pendencias` para ver o estado atual. Hoje ele não acusa nada: a
+única pendência, a foto da fábrica de Bento Gonçalves, era da página
+`/a-dalmobile`, que saiu na v5 junto com os textos institucionais.
 
 O prazo de produção, a pergunta "quanto tempo leva" e o certificado de garantia
 deixaram de ser pendência na copy v3 (02/10/2026): **garantia e prazo saíram do
@@ -288,15 +293,17 @@ site** por decisão de marca. Ver `docs/vocabulario.md`, 2.3.
 - **Formulário de contato** — não existe. Quando entrar, **`/privacidade`
   precisa ser reescrita antes**: hoje ela afirma que o site não usa cookie de
   rastreamento
-- **Redirects das URLs antigas** — falta a lista do Search Console
+- **Redirects das URLs do site anterior ao atual** — falta a lista do Search
+  Console (os das páginas internas da v4 já estão em `worker/index.ts`)
 - **Copy de Caraguatatuba** — só a de SJC foi escrita
 
 Lista completa e atualizada em [`docs/pendencias.md`](docs/pendencias.md).
 
 ### A camada de projetos está dormente
 
-`/projetos`, `/projetos/[slug]` e `lib/projetos.ts` existem e funcionam, **sem
-conteúdo**. Montar um case exige ficha técnica: local, ano, acabamentos com
+`lib/projetos.ts` existe e é testada, **sem conteúdo e sem rota**: as páginas
+`/projetos` e `/projetos/[slug]` saíram na v5 (estão na tag `v4-multipagina`), e
+os endereços respondem 301 para `/#projetos`. Montar um case exige ficha técnica: local, ano, acabamentos com
 código e arquiteto — dados que ainda não temos.
 
 Cada foto já guarda de qual apartamento veio (no nome do arquivo:
@@ -338,7 +345,7 @@ mais são esquecidos:
 
 ## 10. Os testes, e o que cada um protege
 
-57 testes, rodados **uma vez para cada unidade**: `npm test` builda SJC e
+62 testes, rodados **uma vez para cada unidade**: `npm test` builda SJC e
 testa, depois builda Caraguá e testa. Eles sempre testam o que seria publicado,
 nos dois sites.
 
@@ -355,7 +362,8 @@ de uma unidade num teste que olha o HTML.
 | `bundle-worker.test.mjs` | que o bundle do Worker não leia disco |
 | `design-tokens.test.mjs` | zero cor literal fora dos tokens, zero `100vh` |
 | `layout.test.mjs` | rodapé, menu mobile, links que resolvem, sem rota de teste |
-| `ambientes.test.mjs` | conteúdo, alt, pasta certa, nenhum `PENDENTE` no HTML |
+| `pagina-unica.test.mjs` | o site de uma página (v5): os 301, o sitemap, o menu apontando para seções que existem, nenhum link para rota que saiu |
+| `ambientes.test.mjs` | as fotos do carrossel: alt, pasta certa, nenhum `PENDENTE` no HTML |
 | `projetos.test.mjs` | a camada dormente continua funcionando |
 | `seo.test.mjs` | title, description, OpenGraph, canônico, sitemap, robots |
 | `rendered-html.test.mjs` | o Worker responde HTML em português |
@@ -385,15 +393,16 @@ Detalhe em [`docs/design-system.md`](docs/design-system.md). O essencial:
 |---|---|
 | **Tipografia** | Krub, e só Krub. Pesos 300, 400, 600. Hierarquia por escala e tracking, nunca por engordar peso |
 | **Cor** | acromática. **Não existe cor de acento.** Falta destaque? escala ou troca de superfície |
-| **Superfícies** | papel e grafite alternando — seções vizinhas nunca na mesma cor; cinza só no rodapé (v4). Sequência por página no `CLAUDE.md` |
+| **Superfícies** | papel e grafite (#363838 desde a v5) alternando — seções vizinhas nunca na mesma cor; cinza só no rodapé. Sequência no `CLAUDE.md` |
 | **Forma** | `border-radius: 0` em tudo. Separação por fio de 1px. **Zero sombra** |
 | **Foto** | **nunca escurecida, nunca com filtro.** Texto sobre foto só em painel sólido ancorado |
 | **Movimento** | mínimo e lento. **Proibido parallax, scroll sequestrado, carrossel automático** |
 | **Medida de leitura** | 62 a 66 caracteres. Nunca texto corrido em largura total |
 
-Caraguatatuba usa a paleta **palha** (`data-paleta="palha"` no `<html>`): só a
-família do cinza muda, para tons de areia. A escolha é um campo do config; os
-valores vivem em `app/tokens.css`.
+Caraguatatuba usa a paleta **palha** (`data-paleta="palha"` no `<html>`): só o
+texto de apoio e o fio sobre papel mudam, para tons de areia; o rodapé é o mesmo
+cinza nos dois sites desde a v5. A escolha é um campo do config; os valores
+vivem em `app/tokens.css`.
 
 ### Peso, que é requisito e não detalhe
 
@@ -412,12 +421,13 @@ peso da home. O registro do porquê está no `CHANGELOG.md`.
 |---|---|
 | [`CLAUDE.md`](CLAUDE.md) | **as regras.** Em conflito com qualquer outro documento, ele vence |
 | [`docs/adicionar-ambiente.md`](docs/adicionar-ambiente.md) | publicar fotos — escrito para quem não programa |
-| [`docs/adicionar-projeto.md`](docs/adicionar-projeto.md) | publicar um case, quando a camada acordar |
+| [`docs/adicionar-projeto.md`](docs/adicionar-projeto.md) | histórico: a camada de cases, sem rota desde a v5 |
 | [`docs/unidades.md`](docs/unidades.md) | o que cada campo do config faz |
 | [`docs/design-system.md`](docs/design-system.md) | tokens, escala, exemplos |
 | [`docs/decisoes.md`](docs/decisoes.md) | **por que as coisas são como são.** Leia antes de desfazer qualquer decisão |
-| [`docs/direcao-site.md`](docs/direcao-site.md) | o que cada página tem e por quê |
-| [`docs/copy/sjc.md`](docs/copy/sjc.md) | o texto aprovado, com o motivo de cada escolha |
+| [`docs/copy-home-v5.md`](docs/copy-home-v5.md) | **o texto do site** (v5), literal |
+| [`docs/direcao-site.md`](docs/direcao-site.md) | histórico: o que cada página tinha e por quê, antes da v5 |
+| [`docs/copy/sjc.md`](docs/copy/sjc.md) | histórico: a primeira copy aprovada |
 | [`docs/pendencias.md`](docs/pendencias.md) | o que falta |
 | [`CHANGELOG.md`](CHANGELOG.md) | o que mudou em cada entrega |
 | [`docs/prompts-construcao.md`](docs/prompts-construcao.md) | histórico: o plano de nove fases, concluído |

@@ -152,6 +152,40 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-06 · v5: site de uma página
+
+**O quê.** Os dois sites passaram a ser só a home, mais `/privacidade`. Saíram
+`/ambientes`, `/ambientes/[slug]`, `/a-dalmobile`, `/arquitetos`, `/a-loja` (e
+`/projetos`, que estava no build sem link). Cada endereço antigo responde **301**
+para a seção equivalente da home (`worker/index.ts`), e o menu — Projetos · A
+Dalmóbile · Para arquitetos · A loja — rola até as seções (`/#projetos`,
+`/#a-dalmobile`, `/#arquitetos`, `/#a-loja`). Entrou a seção "Para arquitetos"
+(o resumo da antiga página); o showroom ganhou endereço, "Abrir no mapa" e a
+linha da outra loja com link para o outro site. O grafite clareou de `#262626`
+para `#363838`, e o rodapé de Caraguá voltou ao cinza de SJC. Texto:
+`docs/copy-home-v5.md`. O código anterior está na tag `v4-multipagina`.
+
+**Por quê.** Decisão do cliente, no roteiro da v5 (06/10/2026). O motivo do
+formato de uma página não foi registrado no roteiro — quem souber, complete
+aqui. O do grafite foi: `#262626` "ficou escuro demais". `#363838` mantém o
+contraste do texto (papel sobre ele dá 10,7:1, o secundário 6,4 e a areia 7,0).
+
+**Como.** 301 e não 404: quem tinha o link num favorito, num cartão ou numa
+conversa cai na seção certa, e o Google transfere a relevância. Os links do
+menu são `<a href="/#id">`, e não `next/link`: na própria home o `<Link>` do
+vinext não rola até a âncora. Cada seção tem `scroll-margin-top` igual à
+altura do cabeçalho. A camada de texto institucional (`conteudo/institucional/`,
+`lib/institucional.ts`, `lib/texto.ts`) saiu junto com as páginas: ficaria no
+bundle sem uso, e a pendência dela (a foto da fábrica) travaria `npm run
+deploy:*` por uma página que não existe mais.
+
+**Descartado.** 404 nas rotas antigas; manter as páginas internas fora do
+menu (seriam páginas órfãs, que ninguém confere); o mapa embutido (`iframe`)
+no showroom — o "Abrir no mapa" leva ao mesmo lugar sem pesar na página; o
+rodapé de quatro colunas com o mapa do site, que não tem mais o que listar.
+
+---
+
 ## 2026-10-05 · v4: papel e grafite alternando, cinza só no rodapé, respiro menor
 
 **O quê.** Um papel só (`#F6F4F0`) e um escuro de seção só (grafite `#262626`),

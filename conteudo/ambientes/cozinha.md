@@ -27,7 +27,7 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/sjc/cozinha/20092023-riz1982.webp
-    titulo: Bancada branca de ponta a ponta
+    titulo: Bancada branca contínua
     alt: Cozinha integrada em branco com ilha ampla, torre de fornos embutida e luminárias circulares sobre a bancada
     edificio:
     arquiteto:

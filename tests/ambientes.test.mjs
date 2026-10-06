@@ -110,7 +110,7 @@ test("nenhum sentinela PENDENTE vaza para o HTML", async () => {
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
-  for (const rota of ["/a-dalmobile", "/arquitetos", "/a-loja", "/", "/ambientes"]) {
+  for (const rota of ["/", "/privacidade"]) {
     const resposta = await worker.fetch(
       new Request(`http://localhost${rota}`, { headers: { accept: "text/html" } }),
       { ASSETS: { fetch: async () => new Response("nf", { status: 404 }) } },

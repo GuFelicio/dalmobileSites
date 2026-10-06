@@ -5,13 +5,14 @@
 > aponta para cá quando a regra importa.
 
 Dois sites (São José dos Campos e Caraguatatuba) gerados de **um repositório só**.
+Desde a v5 (06/10/2026), **cada site é uma página só** — a home — mais `/privacidade`.
 Cliente: Dalmóbile, móveis planejados, fábrica com quase cinco décadas. Marca do grupo Orizon.
 
 ---
 
 ## Regra zero
 
-Este é um **site institucional**, não uma landing page. A pessoa chega por qualquer porta — do Google numa página de ambiente, do WhatsApp num projeto. Toda página se sustenta sozinha, tem cabeçalho completo, caminho de navegação e rodapé com dados da unidade.
+Este é um **site institucional**, não uma landing page — mesmo sendo, desde a v5, uma página só. A pessoa chega por qualquer porta (do Google, de um link no WhatsApp, de um endereço antigo que redireciona para uma seção), e a página se sustenta sozinha: cabeçalho completo, menu que leva a cada seção, e rodapé com dados da unidade.
 
 O ativo do cliente é **projeto executado, fotografado de verdade, com o arquiteto que assinou**. Todo o desenho existe para essas fotos aparecerem grandes e intactas. Interface que chama atenção para si é interface errada.
 
@@ -37,20 +38,38 @@ unidades: [sjc]          # ou [caragua] ou [sjc, caragua]
 
 ## Mapa de rotas
 
+**Desde a v5 (06/10/2026) cada site é uma página só.** As páginas internas saíram;
+o código delas está na tag `v4-multipagina`.
+
 ```
-/                          Home — índice, não funil
-/projetos                  Índice filtrável por ambiente e por edifício
-/projetos/[slug]           Case — o gabarito mais usado do site
-/ambientes                 Hub
-/ambientes/[slug]          Página do ambiente
-/a-dalmobile               Institucional, processo, números, FAQ
-/arquitetos                Parceria
-/a-loja                    Endereço, mapa, horário, contato
-/privacidade
+/                          A home — o site inteiro, em seis blocos (abaixo)
+/privacidade               Única página interna; link só no rodapé
 /404
 ```
 
-Navegação sempre com `next/link`. **Âncora só dentro da própria página, nunca como substituto de rota.**
+As rotas antigas respondem **301** para a seção equivalente da home
+(`worker/index.ts`): `/ambientes` e `/ambientes/*` → `/#projetos` ·
+`/projetos` e `/projetos/*` → `/#projetos` · `/a-dalmobile` → `/#a-dalmobile` ·
+`/arquitetos` → `/#arquitetos` · `/a-loja` → `/#a-loja`. Nenhum link do site pode
+apontar para elas (`tests/pagina-unica.test.mjs`).
+
+Seções da home e os ids que o menu usa:
+
+```
+#topo         abertura, só o vídeo
+#inicio       manifesto (o h1)
+#projetos     projetos executados (carrossel)
+#a-dalmobile  fábrica
+#arquitetos   para arquitetos
+#a-loja       showroom: endereço, mapa, horário, WhatsApp, a outra loja
+```
+
+**Menu:** Projetos · A Dalmóbile · Para arquitetos · A loja, sempre como
+`"/#id"` (com a barra, para funcionar a partir de `/privacidade`), em `<a>` e não
+em `next/link` — o `<Link>` do vinext não rola até a âncora na própria página.
+A rolagem é o `scroll-behavior: smooth` do CSS, desligado com
+`prefers-reduced-motion`; cada seção tem `scroll-margin-top` igual à altura do
+cabeçalho. A marca leva a `/`. Âncora nunca aponta para a própria seção.
 
 ---
 
@@ -58,12 +77,13 @@ Navegação sempre com `next/link`. **Âncora só dentro da própria página, nu
 
 ### Paleta — acromática
 
-**A paleta é a da v4** (05/10/2026, [`docs/prompt-v4.md`](docs/prompt-v4.md)).
-Os valores moram em `app/tokens.css`; esta tabela os espelha.
+**A paleta é a da v4** (05/10/2026, [`docs/prompt-v4.md`](docs/prompt-v4.md)),
+com o grafite clareado na v5 (06/10/2026). Os valores moram em
+`app/tokens.css`; esta tabela os espelha.
 
 ```
 --papel      #F6F4F0   o ÚNICO fundo claro de seção
---grafite    #262626   o ÚNICO fundo escuro de seção
+--grafite    #363838   o ÚNICO fundo escuro (v5; era #262626, escuro demais)
 --cinza      #9E9C94   SÓ no rodapé
 --areia      #D5C5B1   SÓ em rótulo em caixa alta sobre grafite
 --tinta      #20211F   texto sobre papel e sobre o cinza do rodapé
@@ -72,11 +92,13 @@ sobre grafite: texto --papel; secundário rgba(246,244,240,.72)
 #D3D0C9 (fio sobre papel) e #E8E6E0 (fundo de card) — nunca fundo de seção
 ```
 
-Saíram na v4, e **não voltam como fundo de seção**: `#F9F8F5`, `#F5F4F0`,
-`#484B45`, `#9E9B95`, `#111211`.
+Saíram, e **não voltam como fundo**: `#F9F8F5`, `#F5F4F0`, `#484B45`,
+`#9E9B95`, `#111211` (v4) e `#262626` (v5). Todo fundo escuro é o grafite, pelo
+token — inclusive botão e painel.
 
 **Contraste mínimo de 4,5:1 em todo texto.** Medidos: tinta/papel 14,7 ·
-apoio/papel 6,0 · papel/grafite 13,8 · areia/grafite 9,0 · tinta/rodapé 5,9.
+apoio/papel 6,0 · papel/grafite 10,7 · papel a 72%/grafite 6,4 ·
+areia/grafite 7,0 · tinta/rodapé 5,9.
 **Texto claro sobre o cinza do rodapé (2,5:1) é proibido.**
 
 No componente, use os **nomes semânticos** — e, dentro de seção, as variáveis da
@@ -85,9 +107,9 @@ que trocam sozinhas entre papel e grafite. Ver `docs/design-system.md`.
 Atenção: o nome antigo `--preto` é a **tinta do texto** (`#20211F`), não uma
 superfície.
 
-Caraguatatuba usa a paleta **"palha"**: o rodapé vira `#FFF4EB` (com fio
-`#CDB49A`), o apoio `#5F5847` e o fio `#E7D8C9`. Nada mais muda entre as
-unidades.
+Caraguatatuba usa a paleta **"palha"**: o apoio `#5F5847` e o fio `#E7D8C9`.
+O rodapé é o **mesmo cinza `#9E9C94`** nos dois sites (desde a v5; era
+`#FFF4EB` em Caraguá). Nada mais muda entre as unidades.
 
 **Não existe cor de acento.** Se faltar destaque, a resposta é escala ou troca de superfície — nunca cor nova. Único desvio: verde e vermelho de sistema em erro e sucesso de formulário, no menor tamanho possível.
 
@@ -100,22 +122,10 @@ fronteira da seção. Rodapé cinza em **toda** página, com todo o texto em
 `--tinta`. (A regra antiga de "no máximo quatro trocas por página" saiu na v4.)
 
 ```
-Home              abertura (só o vídeo) → "Nenhuma casa…" papel → projetos
-                  grafite → fábrica papel → contato grafite → rodapé cinza
-/ambientes        cabeçalho e grade papel → rodapé
-/ambientes/[slug] cabeçalho papel → galeria grafite → outros ambientes papel
-                  → chamada final grafite → rodapé
-/a-dalmobile      abertura papel → "A produção é própria" grafite (com a faixa
-                  de números dentro) → processo papel → materiais grafite →
-                  perguntas papel → faixa do showroom grafite → rodapé
-/arquitetos       abertura papel → como funciona grafite → chamada final
-                  papel → rodapé
-/a-loja           abertura com dados e mapa papel → a outra loja grafite →
-                  antes de vir papel → rodapé
-/privacidade, 404 papel → rodapé
-/projetos         índice grafite → rodapé
-/projetos/[slug]  abertura grafite → ficha papel → galeria grafite → outros
-                  papel → chamada grafite → rodapé
+Home              abertura (só o vídeo) → manifesto papel → projetos grafite →
+                  fábrica papel → arquitetos grafite → showroom papel →
+                  rodapé cinza
+/privacidade, 404 papel → rodapé cinza
 ```
 
 O cabeçalho é sempre papel. **Some ao rolar para baixo** (depois de 120px) e
@@ -148,7 +158,7 @@ Medida de leitura **62 a 66 caracteres**. Nunca texto corrido em largura total.
 ### Forma
 - **`border-radius: 0` em tudo.** Foto, card, botão, campo, chip. Junta precisa, como a marcenaria.
 - Separação por fio de 1px e por espaço. **Zero sombra.**
-- Alinhamento **à esquerda** em tudo. Nada centralizado. Única exceção: o endereço na barra do rodapé da home, alinhado à direita do tablet para cima (pedido do cliente, 05/10/2026 — ver `docs/decisoes.md`).
+- Alinhamento **à esquerda** em tudo. Nada centralizado. Única exceção: endereço e links no rodapé, alinhados à direita do tablet para cima (pedido do cliente, 05/10/2026 — ver `docs/decisoes.md`).
 - Escala de espaço base 8: 8 · 16 · 24 · 40 · 64 · 96 · 128.
 - Ritmo vertical (v4), e só ele: `--respiro` 72→48px (padding-top e -bottom de toda seção) · `--respiro-curto` 40→24px (cabeçalho da seção ao conteúdo; padding do rodapé) · `--entre-itens` 32→24px (itens irmãos). No cabeçalho de seção: rótulo → 12px → título → 16px → apoio; parágrafo → link, 24px. **Nenhum vão vertical maior que 160px** entre dois conteúdos, em nenhuma página.
 
@@ -182,12 +192,11 @@ Desktop   1025px +
 
 | Componente | Mobile | Tablet | Desktop |
 |---|---|---|---|
-| Grade de projetos | 1 coluna | 1 coluna até 820px, depois 2 | 2 colunas |
-| Grade de ambientes | 2 colunas | 3 colunas | 4 colunas |
-| Case: foto + ficha | ficha abaixo da foto | ficha abaixo da foto | ficha em coluna lateral |
-| Destaque alternado | foto e texto empilhados, sempre foto primeiro | empilhado | lado a lado alternando |
-| Faixa de números | 1 por linha | 2 por linha | tudo em linha |
-| Rodapé | 2 colunas, menos de 600px de altura | 2 colunas | 4 colunas |
+| Carrossel de projetos | foto grande, par empilhado | par lado a lado a partir de 701px | foto grande + par |
+| Foto + texto (fábrica, showroom) | empilhados, foto primeiro na fábrica | empilhado | lado a lado |
+| Para arquitetos | rótulo, título e itens empilhados | empilhado | título à esquerda, itens à direita |
+| Faixa de números | em linha (3) | em linha | em linha |
+| Rodapé | marca, dados embaixo à esquerda | marca à esquerda, dados à direita | idem, endereço em uma linha |
 | Menu | painel de tela cheia | painel de tela cheia | horizontal |
 
 ### Regras duras
@@ -305,7 +314,7 @@ Mantém: o runtime Cloudflare. O site é 90% imagem, e toda foto de conteúdo pa
 - [ ] OpenGraph por página — o vendedor manda o link do case no WhatsApp; o preview é o produto naquele momento
 - [ ] Schema `LocalBusiness` por unidade, gerado do config. Endereço, telefone e horário batendo exatamente com o Google Business Profile
 - [ ] `sitemap.ts` e `robots.ts`
-- [ ] Rodapé com endereço, telefone, WhatsApp e horário
+- [ ] Rodapé com endereço, telefone e WhatsApp (o número do WhatsApp é o telefone); horário no showroom da home
 - [ ] `:focus-visible` visível em todo elemento focável
 - [ ] Menu mobile funcionando — nada de botão hambúrguer sem handler
 - [ ] `alt` descritivo em toda imagem

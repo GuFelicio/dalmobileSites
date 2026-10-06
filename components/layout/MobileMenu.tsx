@@ -15,7 +15,6 @@
  *   aberto     se o painel está visível.
  *   aoFechar   chamado no Esc, no botão de fechar e ao seguir um link.
  */
-import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
 import { navegacao, linkTelefone, linkWhatsApp, unidade } from "../../config/derivados";
 import { Fechar, WhatsApp } from "../icons";
@@ -87,7 +86,10 @@ export function MobileMenu({ aberto, aoFechar }: MobileMenuProps) {
       // antes": no Safari o toque num botão não dá foco a ele, e o foco caía
       // no <body> — quem navega por teclado perdia o lugar.
       const botao = document.querySelector<HTMLElement>('[aria-controls="menu-principal"]');
-      (botao ?? focoAnterior.current)?.focus();
+      // preventScroll: o botão fica no cabeçalho, e focá-lo não pode puxar a
+      // página de volta para o topo depois que um item do menu rolou até a
+      // seção (v5).
+      (botao ?? focoAnterior.current)?.focus({ preventScroll: true });
     };
   }, [aberto]);
 
@@ -124,9 +126,11 @@ export function MobileMenu({ aberto, aoFechar }: MobileMenuProps) {
         <ul>
           {navegacao.map((item) => (
             <li key={item.href}>
-              <Link href={item.href} onClick={aoFechar}>
+              {/* <a>, como no cabeçalho (ver Header.tsx): o clique fecha o
+                  painel e o navegador rola até a seção. */}
+              <a href={item.href} onClick={aoFechar}>
                 {item.rotulo}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>

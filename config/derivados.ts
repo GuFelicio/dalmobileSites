@@ -21,7 +21,9 @@ export const unidade: Unidade = unidadeDoBuild;
 /** Endereço em uma linha, para o rodapé e para o schema LocalBusiness. */
 export function enderecoEmLinha(u: Unidade = unidade): string {
   const { logradouro, bairro, cep } = u.endereco;
-  return `${logradouro} — ${bairro}, ${u.cidade} — ${u.estado}, ${cep}`;
+  // Com vírgulas, sem travessão (v5, docs/copy-home-v5.md):
+  // "Av. Barão do Rio Branco, 736, Jardim Esplanada, São José dos Campos, SP · 12242-800".
+  return `${logradouro}, ${bairro}, ${u.cidade}, ${u.estado} · ${cep}`;
 }
 
 /**

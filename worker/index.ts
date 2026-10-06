@@ -3,19 +3,25 @@
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
 
-import { AMBIENTES } from "../lib/ambientes.ts";
-import { ambientesDaUnidade } from "../lib/ambientes-da-unidade.ts";
-
 /**
- * Ambientes da lista oficial (lib/ambientes.ts) que ESTA unidade não publica —
- * hoje, o banheiro em Caraguatatuba, que ficou sem foto na copy v3. O endereço
- * deles redireciona com 301 para o hub, em vez de dar 404: o Google e quem
- * tinha o link vão para a página certa. Calculado dos dados, não escrito à
- * mão: quando o ambiente voltar a ter foto, o redirecionamento some sozinho.
+ * As páginas internas que saíram na v5 (06/10/2026), quando os dois sites
+ * passaram a ser só a home. Cada endereço antigo responde 301 para a seção da
+ * home que tem o mesmo assunto: o Google transfere a relevância e quem tinha o
+ * link (no WhatsApp, num cartão, num favorito) cai no lugar certo, e não num
+ * 404. O código dessas páginas está na tag v4-multipagina.
+ *
+ *   /ambientes e /ambientes/*  → /#projetos
+ *   /projetos e /projetos/*    → /#projetos  (rota sem link desde a v1)
+ *   /a-dalmobile               → /#a-dalmobile
+ *   /arquitetos                → /#arquitetos
+ *   /a-loja                    → /#a-loja
  */
-const AMBIENTES_FORA_DO_SITE = new Set(
-  AMBIENTES.map((a) => a.slug).filter((slug) => !ambientesDaUnidade().some((a) => a.slug === slug)),
-);
+const REDIRECIONAMENTOS: [RegExp, string][] = [
+  [/^\/(ambientes|projetos)(\/.*)?$/, "/#projetos"],
+  [/^\/a-dalmobile\/?$/, "/#a-dalmobile"],
+  [/^\/arquitetos\/?$/, "/#arquitetos"],
+  [/^\/a-loja\/?$/, "/#a-loja"],
+];
 
 interface Env {
   ASSETS: Fetcher;
@@ -54,9 +60,8 @@ const worker = {
       }, allowedWidths);
     }
 
-    const ambiente = url.pathname.match(/^\/ambientes\/([^/]+)\/?$/);
-    if (ambiente && AMBIENTES_FORA_DO_SITE.has(ambiente[1])) {
-      return Response.redirect(new URL("/ambientes", url).toString(), 301);
+    for (const [rota, destino] of REDIRECIONAMENTOS) {
+      if (rota.test(url.pathname)) return Response.redirect(new URL(destino, url).toString(), 301);
     }
 
     return handler.fetch(request, env, ctx);

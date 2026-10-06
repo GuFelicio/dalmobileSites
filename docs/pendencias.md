@@ -4,6 +4,18 @@ O que falta para o site poder ir ao ar. Atualizado em **09/09/2026**.
 
 Quem resolver um item, apaga daqui e registra no `CHANGELOG.md`.
 
+> **Atualização da v5 (06/10/2026) — o site virou uma página só.** Deixaram de
+> valer, porque as páginas que pediam o dado saíram:
+> - a **foto da fábrica** (`fabrica.foto`, era de `/a-dalmobile`) — `npm run
+>   pendencias` não acusa mais nada;
+> - a **foto da fachada** (item 7, era de `/a-loja`);
+> - a **home provisória** (item 6): a home é o site.
+>
+> Continuam em aberto: o **horário de sábado de SJC** (site 08h–14h, catálogos
+> 9h–13h), a **ficha do Google de Caraguá** com o número novo (o cliente vai
+> acertar) e o **prédio** de cada foto. O crédito dos arquitetos das fotos de
+> Débora Toledo e de Flávia e Sérgia Garrido foi autorizado em 05/10/2026.
+
 ---
 
 ## 1. Quatro dados que a loja ainda precisa confirmar

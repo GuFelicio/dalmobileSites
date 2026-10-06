@@ -1,7 +1,15 @@
 # Adicionar ou atualizar um ambiente
 
-As páginas de ambiente são o conteúdo principal do site. Esta é a tarefa que
+As fotos dos ambientes são o conteúdo principal do site. Esta é a tarefa que
 mais se repete: acrescentar fotos novas a um ambiente que já existe.
+
+> **Desde a v5 (06/10/2026) não existe página de ambiente.** O site é uma página
+> só, e as fotos de todos os ambientes aparecem no **carrossel da home** (seção
+> "Projetos executados"), intercaladas, com o rótulo do ambiente ("01 /
+> COZINHA"), o título da foto e o crédito. Os arquivos de
+> `conteudo/ambientes/` continuam sendo onde as fotos são listadas. Os campos de
+> texto da página (`chamada`, corpo, `chamadaFinal`, `porUnidade`) continuam
+> obrigatórios no arquivo, mas não aparecem no site.
 
 ---
 
@@ -90,7 +98,8 @@ e `calabasasapto93-*` (Caraguá, Flávia e Sérgia Garrido).
 
 ## Texto próprio de uma unidade (`porUnidade`)
 
-O texto de um ambiente é **um só** para os dois sites. Quando uma loja precisa
+*Não aparece no site desde a v5 — fica no arquivo para o dia em que a página de
+ambiente voltar.* O texto de um ambiente é **um só** para os dois sites. Quando uma loja precisa
 de texto próprio — porque as fotos dela mostram outra solução —, ele vai no
 mesmo arquivo, em `porUnidade`, e substitui o padrão **só no site daquela
 unidade**. Só três campos podem ser próprios: `chamada`, `texto` e
@@ -111,11 +120,10 @@ Hoje usam: `quartos` e `sala-de-estar` (Caraguatatuba, copy v3).
 
 ## Ambiente sem foto numa unidade
 
-Se uma unidade fica sem nenhuma foto de um ambiente, **o ambiente some do site
-dela** sozinho: do hub, de "Outros ambientes", de "Antes de vir" e do sitemap. O
-endereço antigo (`/ambientes/<slug>`) responde **301 para `/ambientes`**
-(`worker/index.ts`). Chegando foto, basta listá-la: a página volta. É o caso do
-banheiro em Caraguatatuba desde a copy v3.
+Se uma unidade fica sem nenhuma foto de um ambiente, **o ambiente some do
+carrossel dela** sozinho. Chegando foto, basta listá-la: ela entra no carrossel.
+É o caso do banheiro em Caraguatatuba desde a copy v3. (Todo endereço
+`/ambientes/...` responde 301 para `/#projetos` desde a v5 — `worker/index.ts`.)
 
 ## Passo 3 — Se o ambiente ainda não existe
 
@@ -140,7 +148,7 @@ npm run dev            # São José dos Campos
 npm run dev:caragua    # Caraguatatuba
 ```
 
-- [ ] A foto aparece no ambiente certo, **do site certo**
+- [ ] A foto aparece no carrossel da home, com o ambiente certo, **do site certo**
 - [ ] O título diz o que a foto resolve
 - [ ] O `alt` descreve a imagem, e é diferente do título
 - [ ] O crédito só aparece se você tiver o dado e a autorização

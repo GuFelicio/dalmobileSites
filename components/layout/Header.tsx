@@ -132,7 +132,11 @@ export function Header() {
           <ul>
             {navegacao.map((item) => (
               <li key={item.href}>
-                <Link href={item.href}>{item.rotulo}</Link>
+                {/* <a> e não <Link>: os itens são âncoras da home ("/#id", v5),
+                    e o <Link> do vinext, na própria home, não rola até a
+                    seção. Com <a>, o navegador rola, com a rolagem suave do
+                    CSS; a partir de /privacidade, carrega a home já na seção. */}
+                <a href={item.href}>{item.rotulo}</a>
               </li>
             ))}
           </ul>

@@ -78,19 +78,15 @@ export const unidade: Unidade = {
     // Copy v4 (docs/copy-v4.md, home): a mesma frase nos dois sites, com a cidade.
     descricaoHome:
       "Móveis personalizados para espaços com identidade. Fábrica própria em Bento Gonçalves desde 1977 e loja em São José dos Campos. Veja projetos executados.",
-    // A copy v3 não muda esta; é a que já estava no ar.
-    descricaoAmbientes:
-      "Cozinha, quartos, sala, home office, closet, banheiro e espaço gourmet planejados pela Dalmóbile em São José dos Campos. Fotos de projetos executados.",
   },
 
-  // Cinco itens, conforme o mapa de rotas do CLAUDE.md.
+  // v5 (06/10/2026): o site é uma página só, e o menu rola até as seções da
+  // home. Sempre "/#id", com a barra, para funcionar também a partir de
+  // /privacidade. "Ambientes" virou "Projetos" (docs/copy-home-v5.md).
   navegacao: [
-    // "Projetos" sai do menu enquanto não houver case publicado: falta a
-    // informação de prédio e de arquiteto. A rota e a camada continuam no
-    // código, prontas. Ver docs/decisoes.md.
-    { rotulo: "Ambientes", href: "/ambientes" },
-    { rotulo: "A Dalmóbile", href: "/a-dalmobile" },
-    { rotulo: "Para arquitetos", href: "/arquitetos" },
-    { rotulo: "A loja", href: "/a-loja" },
+    { rotulo: "Projetos", href: "/#projetos" },
+    { rotulo: "A Dalmóbile", href: "/#a-dalmobile" },
+    { rotulo: "Para arquitetos", href: "/#arquitetos" },
+    { rotulo: "A loja", href: "/#a-loja" },
   ],
 };

@@ -68,21 +68,20 @@ config é compilado**, e o teste de cidade cruzada pode ser absoluto.
 | `id` | `"sjc"` ou `"caragua"`. É o valor de `UNIDADE` | seleção de build, nome do Worker |
 | `nome` | nome curto da unidade | texto acessível do lockup |
 | `cidade` | cidade por extenso | `<title>`, `meta description`, schema, rodapé |
-| `regiao` | a região que a loja atende, em minúscula no meio da frase ("Vale do Paraíba", "litoral norte") | FAQ de área de `/a-dalmobile`, faixa de `/a-loja` |
+| `regiao` | a região que a loja atende ("Vale do Paraíba", "litoral norte") | a linha da outra loja no showroom do OUTRO site (via `outraUnidade.regiao`) |
 | `estado` | UF | endereço, schema |
 | `dominio` | domínio sem barra final | base do sitemap, OpenGraph, link canônico |
-| `endereco` | logradouro, bairro, CEP | rodapé, `/a-loja`, schema `LocalBusiness` |
+| `endereco` | logradouro, bairro, CEP | showroom da home, rodapé, `/privacidade`, schema `LocalBusiness` |
 | `marca` | lockup escuro e claro, com dimensões | cabeçalho, rodapé |
-| `telefone` | como se escreve, com DDD | rodapé, `/a-loja`; vira `tel:` em `derivados` |
-| `whatsapp` | só dígitos, com país; ou `null` | botão do cabeçalho e do rodapé |
-| `horarios` | faixas de dias, com `confirmado` | rodapé, `/a-loja`, schema |
-| `mapa` | `embed` do iframe e `link` do app | `/a-loja` |
+| `telefone` | como se escreve, com DDD | rodapé (como texto do link de WhatsApp), menu mobile, `/privacidade` |
+| `whatsapp` | só dígitos, com país; ou `null` | botão do cabeçalho, do menu, do showroom e link do rodapé |
+| `horarios` | faixas de dias, com `confirmado` | showroom da home, schema |
+| `mapa` | `embed` do iframe e `link` do app | "Abrir no mapa" do showroom (só o `link`; o iframe saiu com `/a-loja`) |
 | `googleBusiness` | ficha da loja | referência de conferência do schema |
 | `analytics` | `ga` e `pixel`, ou `null` | scripts de medição |
-| `outraUnidade` | rótulo, cidade, região e URL da outra loja | link cruzado do rodapé, faixa de `/a-loja`, FAQ de área |
+| `outraUnidade` | rótulo, cidade, região e URL da outra loja | a linha do showroom: "No <região>, a Dalmóbile atende pela loja de <cidade>. Ver a loja de <cidade>", com link para o outro site |
 | `textos.descricaoHome` | `meta description` da home | home (e o OpenGraph dela) |
-| `textos.descricaoAmbientes` | `meta description` do hub | `/ambientes` |
-| `navegacao` | as rotas deste site, na ordem | cabeçalho e menu mobile |
+| `navegacao` | os itens do menu, na ordem, como `"/#id"` (âncoras da home desde a v5) | cabeçalho e menu mobile |
 
 ### `marca` — o lockup já contém a cidade
 
@@ -103,7 +102,7 @@ e WhatsApp são o mesmo:
 
 Até essa data as duas usavam o número de SJC, e o site de Caraguá mostrava o
 número da outra loja em todo lugar. **Nenhum número é escrito em componente:**
-topo, menu mobile, rodapé, `/a-loja`, `/privacidade` e o link `wa.me` leem do
+topo, menu mobile, showroom, rodapé, `/privacidade` e o link `wa.me` leem do
 config. Verificado: o build de cada unidade só contém o número dela.
 
 O link `wa.me` continua levando uma mensagem pré-preenchida com a cidade daquele
@@ -112,14 +111,12 @@ deixou de ser o único sinal de origem do lead, mas ainda ajuda quem atende.
 
 ### `regiao` e `textos` — o que a copy diz diferente por unidade
 
-- **`regiao`** (e `outraUnidade.regiao`) entra nos textos compartilhados como
-  `{{regiao}}` e `{{outraRegiao}}` — ver `lib/texto.ts`. É o que deixa a
-  pergunta de área do FAQ ser UMA frase para os dois sites: *"Atendemos
-  {{cidade}} e o {{regiao}}. No {{outraRegiao}}, quem atende é a loja de
-  {{outraCidade}}."*
-- **`textos`** guarda o que não é simétrico: a description da home (Caraguá diz
-  "e no litoral norte"; SJC não diz "e no Vale do Paraíba") e a do hub, que
-  lista os ambientes de cada loja.
+- **`outraUnidade.regiao`** entra na linha da outra loja no showroom: *"No
+  litoral norte, a Dalmóbile atende pela loja de Caraguatatuba."* (no site de
+  SJC). Os placeholders `{{cidade}}`/`{{regiao}}` e o `lib/texto.ts` saíram na
+  v5, com os textos institucionais.
+- **`textos.descricaoHome`** é a meta description da home. A do hub de
+  ambientes saiu na v5, com a página.
 
 ### `whatsapp: null` — a ação fica desabilitada, nunca link morto
 
@@ -127,11 +124,11 @@ O `CLAUDE.md` proíbe CTA sem destino real. Enquanto o número não existe, o
 botão aparece desabilitado com "em breve". Preencher o campo faz o "em breve"
 sumir e o link nascer, sem tocar em componente.
 
-### `outraUnidade.nome` — não cita a cidade da outra loja
+### `outraUnidade.nome` — o rótulo do link para o outro site
 
-O rótulo é genérico ("Nossa outra loja") de propósito. Só a URL contém a outra
-cidade, e isso é inevitável, porque a cidade está no domínio. Ver
-`docs/decisoes.md`.
+"Ver a loja de Caraguatatuba" / "Ver a loja de São José dos Campos". Junto com
+a frase da região, é a **única** menção permitida à outra cidade no corpo do
+site — declarada em `tests/unidade-cruzada.test.mjs`.
 
 ### `horarios[].confirmado: false` — trava o deploy
 
@@ -147,8 +144,8 @@ Profile daquela loja: divergência derruba a busca local e invalida o schema
 vasculha todo o texto de `dist/` — JS, CSS, HTML, JSON. Se o nome de uma cidade
 aparecer no build da outra, a suíte quebra.
 
-A única exceção é a **URL do link cruzado do rodapé**, porque a cidade está no
-domínio. Qualquer outra ocorrência é o bug.
+A única exceção é a **linha da outra loja no showroom da home** (frase e link
+para o outro site), declarada no teste. Qualquer outra ocorrência é o bug.
 
 Ele já pegou dois de verdade na Fase 3: o `meta description` do `app/layout.tsx`
 com a cidade escrita à mão, e — mais sutil — um **comentário** dos arquivos de

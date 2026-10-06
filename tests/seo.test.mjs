@@ -9,15 +9,8 @@ import { renderizar as buscar, unidadeDoBuild } from "./unidade-do-build.mjs";
 // o site de Caraguá reprovava aqui por ser de Caraguá.
 const { esta: unidade } = await unidadeDoBuild();
 
-const PAGINAS = [
-  "/",
-  "/ambientes",
-  "/ambientes/cozinha",
-  "/a-loja",
-  "/a-dalmobile",
-  "/arquitetos",
-  "/privacidade",
-];
+// Desde a v5 (06/10/2026) o site é a home e a política de privacidade.
+const PAGINAS = ["/", "/privacidade"];
 
 test("toda página tem title e description com a cidade da unidade", async () => {
   for (const rota of PAGINAS) {
@@ -68,22 +61,12 @@ test("o sitemap lista só as páginas desta unidade", async () => {
   assert.equal(resposta.status, 200);
 
   const urls = [...corpo.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  assert.ok(urls.length > 5, "sitemap com poucas URLs");
-  for (const url of urls) {
-    assert.ok(
-      url.startsWith(unidade.dominio),
-      `sitemap com URL de outro domínio: ${url}`,
-    );
-  }
-
-  // A home e o hub de ambientes são o que sustenta a busca orgânica.
-  assert.ok(urls.includes(`${unidade.dominio}/`), "sitemap sem a home");
-  assert.ok(urls.includes(`${unidade.dominio}/ambientes`), "sitemap sem /ambientes");
-
-  // Índice sem conteúdo não entra: ensina o Google que o site tem página fraca.
-  assert.ok(
-    !urls.includes(`${unidade.dominio}/projetos`),
-    "sitemap aponta para /projetos, que está sem conteúdo",
+  // Site de uma página (v5): a home e a privacidade, e nada mais. As páginas
+  // internas antigas respondem 301 e não podem voltar ao sitemap.
+  assert.deepEqual(
+    urls.sort(),
+    [`${unidade.dominio}/`, `${unidade.dominio}/privacidade`].sort(),
+    "o sitemap deve ter só a home e /privacidade",
   );
 });
 
@@ -108,9 +91,10 @@ test("a política de privacidade fica fora do índice", async () => {
 });
 
 test("o schema LocalBusiness sai do config, com os dados da loja", async () => {
-  const { corpo } = await buscar("/a-loja");
+  // Na home desde a v5 (era em /a-loja, que saiu).
+  const { corpo } = await buscar("/");
   const bruto = corpo.match(/application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1];
-  assert.ok(bruto, "/a-loja sem schema LocalBusiness");
+  assert.ok(bruto, "a home sem schema LocalBusiness");
 
   const schema = JSON.parse(bruto);
   assert.equal(schema.address.addressLocality, unidade.cidade);

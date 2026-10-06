@@ -8,6 +8,69 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-06 · v5: site de uma página
+
+Roteiro e texto: `docs/copy-home-v5.md`. Estado anterior: tag `v4-multipagina`.
+
+### Cor
+- `--grafite` de `#262626` para `#363838`, pelo token: seções escuras, a
+  espera do vídeo e o destaque do 404 (que usava a tinta como fundo). Todo
+  fundo escuro computado é `rgb(54, 56, 56)`.
+- Rodapé de Caraguatatuba no cinza `#9E9C94`, igual ao de SJC (era `#FFF4EB`).
+  A paleta palha ficou só com o apoio e o fio sobre papel.
+
+### Rotas
+- Saem `/ambientes`, `/ambientes/[slug]`, `/a-dalmobile`, `/arquitetos`,
+  `/a-loja`, `/projetos` e `/projetos/[slug]`. Ficam `/` e `/privacidade`.
+- 301: `/ambientes` e `/ambientes/*` → `/#projetos` · `/projetos` e
+  `/projetos/*` → `/#projetos` · `/a-dalmobile` → `/#a-dalmobile` ·
+  `/arquitetos` → `/#arquitetos` · `/a-loja` → `/#a-loja`.
+- Sitemap só com `/` (com as fotos do carrossel) e `/privacidade`.
+- O schema `LocalBusiness` foi de `/a-loja` para a home.
+
+### Menu e âncoras
+- Projetos · A Dalmóbile · Para arquitetos · A loja, como `/#id`, em `<a>`
+  (o `<Link>` do vinext não rola até a âncora na própria home). Rolagem suave
+  do CSS, sem ela com movimento reduzido; `scroll-margin-top` de 88px em cada
+  seção. No menu mobile, o item fecha o painel e rola; o foco volta ao botão
+  sem puxar a página (`preventScroll`).
+
+### Home
+- Ordem: abertura → manifesto papel (`#inicio`) → projetos grafite
+  (`#projetos`) → fábrica papel (`#a-dalmobile`) → **para arquitetos grafite
+  (`#arquitetos`, seção nova)** → showroom **papel** (`#a-loja`, era grafite) →
+  rodapé cinza.
+- Texto novo no manifesto, na fábrica e no showroom; três legendas de SJC
+  trocadas ("Bancada branca contínua", "Rack suspenso na parede inteira",
+  "Painel amadeirado na parede inteira").
+- Saem "Como trabalhamos", "Ver todos os ambientes", os "Ver cozinha", "Ver
+  quartos"… de cada foto e "Conheça a Dalmóbile".
+- Showroom: endereço (com vírgulas, sem travessão), "Abrir no mapa", horário,
+  WhatsApp e a linha da outra loja com link para o outro site.
+- O título de "Para arquitetos" usa `clamp(30px, 3.6vw, 52px)`: é uma frase de
+  75 caracteres, e com os tamanhos dos outros títulos passaria de 4 linhas.
+
+### Rodapé e /privacidade
+- Um rodapé só, na home e em `/privacidade`: marca, endereço, WhatsApp com o
+  número, Privacidade e a assinatura.
+- `/privacidade`: endereço com vírgulas e "…sobre o projeto, usados só
+  para…" (sem travessão); o telefone abre o WhatsApp.
+- 404: os caminhos levam a `/#projetos` e `/#a-loja`; "Ver os ambientes" virou
+  "Ver projetos", como o menu; a lista de ambientes saiu.
+
+### Saiu do código
+- As páginas internas, o texto institucional (`conteudo/institucional/`,
+  `lib/institucional.ts`, `lib/texto.ts`) e o campo `textos.descricaoAmbientes`
+  do config. `npm run pendencias` não acusa mais nada.
+
+### Testes
+- `tests/pagina-unica.test.mjs`: os 301, só `/` e `/privacidade` em 200, o
+  menu apontando para seções que existem, nenhum link para rota que saiu.
+- Cidade cruzada: a linha da outra loja no showroom é a única menção permitida.
+- 62 testes por unidade, todos passando.
+
+---
+
 ## 2026-10-05 · v4 aprovada: ajustes finais
 
 Aprovada pelo cliente nos prints da fase 3, com dois ajustes:

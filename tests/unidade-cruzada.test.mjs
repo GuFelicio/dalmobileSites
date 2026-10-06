@@ -26,29 +26,19 @@ import { unidade as caragua } from "../config/caragua.ts";
 import { unidade as sjc } from "../config/sjc.ts";
 import { renderizar as buscar, unidadeDoBuild } from "./unidade-do-build.mjs";
 
-const PAGINAS = [
-  "/",
-  "/ambientes",
-  "/ambientes/cozinha",
-  "/a-loja",
-  "/a-dalmobile",
-  "/arquitetos",
-  "/privacidade",
-];
+// Desde a v5 (06/10/2026) o site é a home e a política de privacidade.
+const PAGINAS = ["/", "/privacidade"];
 
 /**
  * As únicas menções à outra cidade permitidas no corpo, e o porquê de cada uma.
  * `{outra}` é substituído pela cidade da outra unidade.
  */
 const MENCOES_DECLARADAS = [
-  // O rótulo do link cruzado, que vem do config. Rodapé e página da loja.
-  "Ver a loja de {outra}",
-  // Faixa da página da loja (copy v3, B5 e C6): "No <região>, a Dalmóbile
-  // atende pela loja de <outra>." Nomear a região ajuda quem chegou na cidade
-  // errada.
-  "a Dalmóbile atende pela loja de {outra}",
-  // FAQ de /a-dalmobile, "Vocês atendem fora de <cidade>?" (copy v3, B4 e C5).
-  "quem atende é a loja de {outra}",
+  // A ÚNICA desde a v5: a linha da outra loja no showroom da home
+  // (docs/copy-home-v5.md), com o link para o outro site. Nomear a região
+  // ajuda quem chegou na cidade errada. `{regiao}` é a região da outra
+  // unidade, do config.
+  "No {regiao}, a Dalmóbile atende pela loja de {outra}. Ver a loja de {outra}",
 ];
 
 async function renderizar(rota) {
@@ -106,7 +96,9 @@ test("nenhum campo de SEO cita a cidade da outra unidade", async () => {
 
 test("no corpo, a outra cidade só aparece nas menções declaradas", async () => {
   const { esta, outra } = await unidadeDoBuild();
-  const permitidas = MENCOES_DECLARADAS.map((m) => m.replace("{outra}", outra.cidade));
+  const permitidas = MENCOES_DECLARADAS.map((m) =>
+    m.replaceAll("{outra}", outra.cidade).replace("{regiao}", esta.outraUnidade.regiao),
+  );
   const infratores = [];
 
   for (const rota of PAGINAS) {
@@ -117,7 +109,9 @@ test("no corpo, a outra cidade só aparece nas menções declaradas", async () =
     // que já estava declarada.
     html = html.slice(html.indexOf("<body"));
     html = html.replace(/<script[\s\S]*?<\/script>/g, " ");
-    let texto = html.replace(/<!-- -->/g, "").replace(/<[^>]+>/g, " ");
+    // Espaços normalizados: a linha da outra loja tem texto e link em nós
+    // diferentes, e a frase declarada é ela inteira.
+    let texto = html.replace(/<!-- -->/g, "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
 
     texto = texto.split(outra.dominio).join(" ");
     for (const frase of permitidas) texto = texto.split(frase).join(" ");
@@ -153,8 +147,8 @@ test("as duas unidades declaram cidades, domínios e link cruzado coerentes", ()
   assert.notEqual(sjc.id, caragua.id);
   assert.equal(sjc.outraUnidade.url, caragua.dominio);
   assert.equal(caragua.outraUnidade.url, sjc.dominio);
-  // A cidade da outra unidade é dado, e é o que lib/texto.ts usa para
-  // substituir {{outraCidade}} nos textos compartilhados.
+  // A cidade da outra unidade é dado: é ela que entra na linha da outra loja
+  // no showroom da home.
   assert.equal(sjc.outraUnidade.cidade, caragua.cidade);
   assert.equal(caragua.outraUnidade.cidade, sjc.cidade);
 });

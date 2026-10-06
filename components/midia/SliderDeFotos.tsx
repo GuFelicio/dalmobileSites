@@ -23,7 +23,6 @@
  * body. NÃO passa sozinho: carrossel automático é proibido, e rouba a leitura
  * de quem está olhando uma foto.
  */
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import Foto from "./Foto";
@@ -34,7 +33,6 @@ export type FotoDoSlider = {
   titulo: string;
   alt: string;
   ambienteNome: string;
-  ambienteSlug: string;
   edificio: string | null;
   arquiteto: string | null;
 };
@@ -85,11 +83,8 @@ function Cartao({
             <p className="synthesis-project-credito">Projeto / {foto.arquiteto}</p>
           ) : null}
         </div>
-        {/* Sem seta: a seção já tem a sua, no "Ver todos os ambientes". O fio
-            de 1px embaixo do link continua. */}
-        <Link href={`/ambientes/${foto.ambienteSlug}`}>
-          Ver {foto.ambienteNome.toLowerCase()}
-        </Link>
+        {/* O "Ver cozinha", "Ver quartos"… de cada foto saiu na v5, com as
+            páginas de ambiente. Ficam o rótulo, a legenda e o crédito. */}
       </div>
     </article>
   );

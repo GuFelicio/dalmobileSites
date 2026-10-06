@@ -64,13 +64,14 @@ npm run workerd        # em outro terminal, confira as rotas:
 ```
 
 ```bash
-for r in / /ambientes /ambientes/cozinha /a-loja /a-dalmobile /arquitetos \
-         /privacidade /sitemap.xml /robots.txt; do
+for r in / /privacidade /sitemap.xml /robots.txt /ambientes /a-dalmobile \
+         /arquitetos /a-loja; do
   printf "%s %s\n" "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8799$r)" "$r"
 done
 ```
 
-Tudo 200. Qualquer 500 aqui é erro que só apareceria em produção.
+As quatro primeiras em 200; as páginas internas antigas em 301 (o site é uma
+página só desde a v5). Qualquer 500 aqui é erro que só apareceria em produção.
 Ver [`tests/README-workerd.md`](tests/README-workerd.md).
 
 ## Como o conteúdo funciona
@@ -78,8 +79,8 @@ Ver [`tests/README-workerd.md`](tests/README-workerd.md).
 | Onde | O quê |
 |---|---|
 | `public/fotos/<unidade>/<ambiente>/` | as fotos. A pasta é **dado**: o build confere |
-| `conteudo/ambientes/*.md` | título e `alt` de cada foto, texto do ambiente |
-| `conteudo/institucional/*.md` | textos de `/a-dalmobile` e `/arquitetos` |
+| `conteudo/ambientes/*.md` | título, `alt` e crédito de cada foto do carrossel da home |
+| `app/page.tsx` | o texto da home, literal de `docs/copy-home-v5.md` |
 | `conteudo/projetos/*.md` | os cases — **sem conteúdo hoje** |
 | `config/sjc.ts` e `config/caragua.ts` | tudo que difere entre as duas lojas |
 
@@ -131,30 +132,16 @@ docs/           documentação
 
 ## Estado
 
-**Fases 1 a 8 de 9 concluídas.** Existe o design system em `app/tokens.css` e o
-layout base — cabeçalho, rodapé, menu mobile e as três superfícies, em
-`components/layout/`. O `npm test` roda 12 testes que policiam as regras do
-`CLAUDE.md`.
+**v5 no ar (06/10/2026): cada site é uma página só.** A home tem seis seções —
+abertura em vídeo, manifesto, projetos executados (carrossel com as fotos de
+todos os ambientes), fábrica, para arquitetos e showroom — e o menu rola até
+elas. Fica também `/privacidade`. As páginas internas antigas respondem 301 para
+as seções equivalentes (`worker/index.ts`); o código delas está na tag
+`v4-multipagina`. O `npm test` roda 62 testes por unidade.
 
-A camada de config por unidade existe: `UNIDADE=sjc` e `UNIDADE=caragua`
-geram os dois sites do mesmo código, e um teste constrói as duas unidades e
-falha se o nome de uma cidade aparecer no build da outra. Ver
-[`docs/unidades.md`](docs/unidades.md).
-
-O conteúdo principal são as páginas de ambiente: `/ambientes` e
-`/ambientes/[slug]`, com **45 fotos reais** de projetos executados.
-
-`/projetos` e `/projetos/[slug]` existem no código mas estão **sem conteúdo** e
-fora do menu: montar um case exige o prédio e o arquiteto de cada apartamento,
-que ainda não temos. Ver [`docs/decisoes.md`](docs/decisoes.md).
-
-Ainda não existem institucional, arquitetos, a loja, 404 nem home definitiva.
-
-Duas páginas são andaime temporário e saem na Fase 3: `app/page.tsx` (os três
-estudos de layout) e `app/teste-layout/` (a revisão dos componentes nas três
-superfícies).
-
-**Próxima: Fase 9 — verificação cruzada final e publicação.**
+A camada de config por unidade gera os dois sites do mesmo código, e um teste
+falha se o nome de uma cidade aparecer no build da outra fora da única menção
+declarada. Ver [`docs/unidades.md`](docs/unidades.md).
 
 O que trava a publicação hoje não é código: são as 18 pendências de
 [`docs/pendencias.md`](docs/pendencias.md), que dependem da loja. Ver

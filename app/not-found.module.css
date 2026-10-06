@@ -1,5 +1,11 @@
 /* 404. Uma linha honesta e os caminhos mais úteis. Sem piada. */
 
+/* A seção ocupa a tela abaixo do cabeçalho: com pouco conteúdo, o rodapé
+   cinza ficava no meio da tela, com uma faixa vazia embaixo dele (v5). */
+.pagina {
+  min-height: calc(100svh - var(--alt-cabecalho));
+}
+
 .codigo {
   font-size: var(--fs-rotulo);
   font-weight: var(--peso-forte);
@@ -25,15 +31,7 @@
   color: var(--cinza-texto);
 }
 
-.subtitulo {
-  font-size: var(--fs-subtitulo);
-  font-weight: var(--peso-normal);
-  letter-spacing: var(--tr-subtitulo);
-  margin: var(--e-5) 0 var(--e-2);
-}
-
-.caminhos,
-.atalhos {
+.caminhos {
   list-style: none;
   margin: var(--e-3) 0 0;
   padding: 0;
@@ -42,8 +40,7 @@
   gap: var(--e-1);
 }
 
-.caminho,
-.atalho {
+.caminho {
   display: inline-flex;
   align-items: center;
   min-height: var(--toque); /* alvo de toque de 44px */
@@ -53,13 +50,13 @@
 }
 
 /* O primeiro caminho é o mais provável: destaca por superfície, não por cor. */
+/* Fundo escuro = o grafite (v5): nenhum preto quase puro fora do token. */
 .caminhos li:first-child .caminho {
-  background: var(--preto);
-  border-color: var(--preto);
-  color: var(--branco);
+  background: var(--grafite);
+  border-color: var(--grafite);
+  color: var(--sobre-grafite);
 }
 
-.caminho:hover,
-.atalho:hover {
+.caminho:hover {
   border-color: var(--preto);
 }

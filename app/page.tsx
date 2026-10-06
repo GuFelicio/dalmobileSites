@@ -1,28 +1,39 @@
 /**
- * / — a home, provisória.
+ * / — a home, e desde a v5 (06/10/2026) o site inteiro.
  *
- * O que é: o estudo 03 Síntese, que foi o escolhido, promovido a conteúdo
- * direto. Os estudos Editorial e Imersiva e o seletor de layout saíram: eram
- * andaime de protótipo e chegaram a ir ao ar nos dois deploys.
+ * O que é: a página única dos dois sites. Seis blocos, cada um com o id que o
+ * menu usa para rolar até ele (docs/copy-home-v5.md, "Estrutura da home"):
  *
- * PROVISÓRIA: a home de verdade é a Fase 6, que a remonta com Header, Footer e
- * Section, sobre a composição da seção 3 do docs/direcao-site.md. Até lá esta
- * página usa marcação própria e o CSS de `.synthesis-*` do globals.css.
+ *   #topo         abertura, só o vídeo
+ *   #inicio       manifesto                 papel   (o h1 da página)
+ *   #projetos     projetos executados        grafite
+ *   #a-dalmobile  fábrica                    papel
+ *   #arquitetos   para arquitetos            grafite
+ *   #a-loja       showroom                   papel
+ *                 rodapé                     cinza
  *
- * Não copiar nada daqui para uma página nova. O que já está pronto para reuso
- * vive em components/.
+ * As páginas internas (/ambientes, /a-dalmobile, /arquitetos, /a-loja) saíram
+ * na v5 e respondem 301 para estas seções (worker/index.ts). O código delas
+ * está na tag v4-multipagina.
+ *
+ * O texto é o de docs/copy-home-v5.md, literal. A marcação ainda é a do estudo
+ * 03 Síntese, com o CSS de `.synthesis-*` do globals.css.
  */
 
-// A cidade vem do config, nunca escrita à mão: até andaime entra no bundle, e
-// o teste de cidade cruzada vasculha tudo.
-import Link from "next/link";
-
-import { Brand } from "../components/layout/Brand";
+// A cidade vem do config, nunca escrita à mão: o teste de cidade cruzada
+// vasculha o bundle inteiro.
+import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
 import Foto from "../components/midia/Foto";
 import SliderDeFotos, { type FotoDoSlider } from "../components/midia/SliderDeFotos";
 import VideoEmLoop from "../components/midia/VideoEmLoop";
-import { enderecoEmLinha, linkWhatsApp, unidade } from "../config/derivados";
+import {
+  enderecoEmLinha,
+  linkWhatsApp,
+  mapaDaUnidade,
+  schemaLocalBusiness,
+  unidade,
+} from "../config/derivados";
 import { ambientesDaUnidade, escolherFoto } from "../lib/ambientes-da-unidade.ts";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
@@ -52,7 +63,6 @@ export default function Home() {
       titulo: foto.titulo,
       alt: foto.alt,
       ambienteNome: ambiente.nome,
-      ambienteSlug: ambiente.slug,
       edificio: foto.edificio,
       arquiteto: foto.arquiteto,
     })),
@@ -65,21 +75,25 @@ export default function Home() {
     }
   }
 
+  const mapa = mapaDaUnidade();
+
   return (
     <div className="site site-synthesis">
-      {/* O mesmo cabeçalho das outras páginas, em papel sólido, ACIMA do
-          vídeo e não por cima dele: a abertura não leva nada sobre a imagem.
-          O cabeçalho próprio que a home tinha escondia o menu no celular. */}
+      {/* O mesmo cabeçalho de /privacidade, em papel sólido, ACIMA do vídeo e
+          não por cima dele. Os itens do menu rolam até as seções abaixo. */}
       <Header />
 
+      {/* O schema LocalBusiness veio de /a-loja para cá na v5: é a página que
+          o Google indexa. Gerado do config — não há como divergir do rodapé. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaLocalBusiness()) }}
+      />
+
       <main>
-        {/* A abertura é SÓ o vídeo (v4, 05/10/2026): inteiro na largura, sem
-            nada por cima e sem faixa de texto embaixo. A faixa com o rótulo,
-            o título "O projeto começa na medição.", o parágrafo e o botão
-            saiu — empilhava dois títulos gigantes no mesmo papel. O h1 da
-            página passou a ser o título da seção seguinte. O vídeo é
-            decorativo (aria-hidden). */}
-        <section className="synthesis-hero">
+        {/* A abertura é SÓ o vídeo (v4): inteiro na largura, sem nada por cima
+            e sem faixa de texto embaixo. O vídeo é decorativo (aria-hidden). */}
+        <section className="synthesis-hero" id="topo">
           <div className="synthesis-hero-media">
             <VideoEmLoop
               className="synthesis-hero-video"
@@ -90,63 +104,52 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="synthesis-manifesto superficie-papel" id="sintese-manifesto">
+        <section className="synthesis-manifesto superficie-papel" id="inicio">
           <div className="synthesis-manifesto-content">
-            {/* Copy v4 (docs/copy-v4.md, home, seção 1): a frase de abertura da
-                apresentação institucional, e o h1 da página desde a v4. */}
             <p className="eyebrow">MÓVEIS PLANEJADOS · {unidade.cidade.toUpperCase()}</p>
             <h1>Móveis personalizados para espaços com identidade</h1>
             <p>
-              Com origem em Bento Gonçalves, a Dalmóbile reúne design, precisão industrial e
-              cuidado com os acabamentos para desenvolver ambientes de alto padrão. O desenho
-              acompanha o espaço e a intenção do projeto: a medição é feita no imóvel, com a
-              obra pronta, e cada peça é editada milímetro a milímetro.
+              Com origem em Bento Gonçalves, a Dalmóbile fabrica móveis personalizados de alto
+              padrão. O desenho acompanha o espaço e a intenção do projeto: medimos no imóvel,
+              com a obra pronta, e cada peça é editada milímetro a milímetro.
             </p>
-            <Link href="/a-dalmobile">Como trabalhamos <Arrow /></Link>
+            {/* "Como trabalhamos" saiu na v5: levava a /a-dalmobile. */}
           </div>
           <figure className="synthesis-manifesto-image">
             <Foto src={fotoManifesto.src} alt={fotoManifesto.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
-            {/* Três fatos de processo (copy v3, A2). A garantia saiu do site. */}
             <figcaption>FÁBRICA PRÓPRIA · 100% MDF · EDIÇÃO MILIMÉTRICA</figcaption>
           </figure>
         </section>
 
-        <section className="synthesis-projects superficie-grafite" id="sintese-projetos">
+        <section className="synthesis-projects superficie-grafite" id="projetos">
           <div className="synthesis-section-heading">
             <div>
-              {/* "Fotografado depois da montagem" faz uma afirmação que a
-                  concorrência não pode fazer: aqui não tem render, não tem
-                  banco de imagem, não tem apartamento de fornecedor. */}
               <p className="eyebrow">PROJETOS EXECUTADOS</p>
               <h2 id="titulo-vitrine">Fotografado depois da montagem</h2>
             </div>
-            <Link href="/ambientes">Ver todos os ambientes <Arrow /></Link>
+            {/* "Ver todos os ambientes" saiu na v5, com as páginas de ambiente. */}
           </div>
 
-          {/* O acervo inteiro desta unidade, passando para o lado. Antes eram
-              três fotos de estudo com rótulos inventados. O slider rola por
+          {/* O acervo inteiro desta unidade, passando para o lado, por
               scroll-snap nativo: sem biblioteca, e funciona sem JavaScript. */}
           <SliderDeFotos fotos={fotosDoSlider} idRotulo="titulo-vitrine" />
         </section>
 
-        <section className="synthesis-process superficie-papel" id="sintese-processo">
+        <section className="synthesis-process superficie-papel" id="a-dalmobile">
           <div className="synthesis-process-image">
             <Foto src={fotoProcesso.src} alt={fotoProcesso.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
             <span>O QUE VEM DA FÁBRICA</span>
           </div>
           <div className="synthesis-process-copy">
-            {/* Copy v4 (home, seção 3): a linha do tempo da apresentação. */}
             <p className="eyebrow">UMA HISTÓRIA EM EVOLUÇÃO</p>
             <h2>Da marcenaria à personalização de alto padrão</h2>
             <p>
-              A Dalmóbile nasceu em 1977, em Bento Gonçalves, como Esquadrias Cladeju.
-              Assumiu o nome atual em 2000, ganhou nova sede de 10.000 m² em 2012 e, desde
-              2025, tem foco em móveis personalizados, flexíveis e de alto padrão. As duas
-              fábricas produzem a linha inteira: MDF, laca, vidro e alumínio.
+              A Dalmóbile nasceu em 1977, em Bento Gonçalves, como Esquadrias Cladeju. Assumiu o
+              nome atual em 2000, ganhou nova sede de 10.000 m² em 2012 e, desde 2025, tem foco
+              em móveis personalizados e flexíveis. As duas fábricas produzem a linha inteira:
+              MDF, laca, vidro e alumínio.
             </p>
-            <Link href="/a-dalmobile">Conheça a Dalmóbile <Arrow /></Link>
-            {/* Três números verificados (copy v3, A4). "6 anos de garantia" saiu:
-                garantia é conversa de venda, não de site. */}
+            {/* "Conheça a Dalmóbile" saiu na v5: levava a /a-dalmobile. */}
             <div className="synthesis-stats">
               <div><strong>1977</strong><span>ano em que a fábrica começou</span></div>
               <div><strong>2</strong><span>fábricas próprias em Bento Gonçalves</span></div>
@@ -155,50 +158,81 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="synthesis-contact superficie-grafite" id="sintese-contato">
+        {/* Para arquitetos (v5, seção nova): o resumo da antiga /arquitetos.
+            Rótulo e título à esquerda; os três itens à direita, com fio entre
+            eles, e a frase final embaixo. Sem botão: o contato é o showroom,
+            logo abaixo. */}
+        <section className="synthesis-architects superficie-grafite" id="arquitetos">
+          <div className="synthesis-architects-heading">
+            <p className="eyebrow">PARA ARQUITETOS E DESIGNERS</p>
+            <h2>Detalhamento, especificação e orçamento de escritório com quem fabrica a peça</h2>
+          </div>
+          <div className="synthesis-architects-body">
+            <ul className="synthesis-architects-items">
+              <li>
+                <h3>Autoria preservada</h3>
+                <p>
+                  Você entrega o projeto e nós detalhamos a marcenaria: encaixes, ferragens,
+                  espessuras e folgas de obra. Nada entra na fábrica sem a sua aprovação.
+                </p>
+              </li>
+              <li>
+                <h3>Suporte à especificação</h3>
+                <p>
+                  Desde o início do projeto, você pode especificar laca, vidro e alumínio da
+                  própria fábrica, painéis ripados retos ou curvos, cantos curvos, portas que
+                  entram no móvel e tomadas embutidas. Se o padrão de MDF não estiver na
+                  cartela, a linha One produz no padrão de qualquer grande fornecedor.
+                </p>
+              </li>
+              <li>
+                <h3>Orçamento de escritório</h3>
+                <p>O orçamento de escritório entra numa fila própria, separada do balcão.</p>
+              </li>
+            </ul>
+            <p className="synthesis-architects-closing">
+              Se você projeta e quer conhecer os acabamentos ou a fábrica, fale com a loja.
+            </p>
+          </div>
+        </section>
+
+        {/* O showroom passou de grafite para PAPEL na v5, para a alternância
+            continuar depois da seção de arquitetos. */}
+        <section className="synthesis-contact superficie-papel" id="a-loja">
           <div className="synthesis-contact-copy">
-            {/* Publicar endereço e horário aqui é vantagem direta: o
-                concorrente mais forte da cidade não publica o dele. */}
             <p className="eyebrow">SHOWROOM {unidade.cidade.toUpperCase()}</p>
-            {/* Copy v4 (home, seção 4): "Para quem vai viver o ambiente" e as
-                três perguntas da apresentação. */}
             <h2>Para quem vai viver o ambiente</h2>
             <p>
-              Três perguntas ajudam a transformar preferências em prioridades de projeto: o
-              que precisa caber, o que precisa facilitar e que sensação você quer encontrar.
-              Traga as respostas, e a planta do imóvel, para a conversa no showroom.
+              Três perguntas ajudam a definir o que o projeto precisa resolver: o que precisa
+              caber, o que precisa facilitar e que sensação você quer encontrar. Traga as
+              respostas, e a planta do imóvel, para a conversa no showroom.
             </p>
-            {/* O endereço foi para o rodapé (05/10/2026, pedido do cliente);
-                aqui fica o horário, a 16px do texto. */}
-            <p className="synthesis-contact-horario">
-              {unidade.horarios
-                .map((h) => `${h.dias}, ${h.abre} às ${h.fecha}`)
-                .join(" · ")}
-            </p>
-            {/* Destino REAL. Antes apontava para #sintese-contato, que é esta
-                mesma seção — o "link âncora para a própria seção" que o
-                CLAUDE.md proíbe. /a-loja ainda não existe; ver
-                docs/pendencias.md. */}
+            {/* Endereço, mapa e horário: o bloco de dados, a 16px do texto. */}
+            <div className="synthesis-contact-dados">
+              <address>{enderecoEmLinha()}</address>
+              {mapa ? <a href={mapa.link}>Abrir no mapa</a> : null}
+              <p>
+                {unidade.horarios.map((h) => `${h.dias}, ${h.abre} às ${h.fecha}`).join(" · ")}
+              </p>
+            </div>
             {whatsapp ? (
-              <a href={whatsapp}>Falar no WhatsApp <Arrow /></a>
-            ) : (
-              <span aria-disabled="true">Contato em breve</span>
-            )}
+              <a className="synthesis-contact-acao" href={whatsapp}>
+                Falar no WhatsApp <Arrow />
+              </a>
+            ) : null}
+            {/* A outra loja, com link para o OUTRO SITE. É a única menção à
+                outra cidade no corpo (tests/unidade-cruzada.test.mjs). */}
+            <p className="synthesis-contact-outra">
+              No {unidade.outraUnidade.regiao}, a Dalmóbile atende pela loja de{" "}
+              {unidade.outraUnidade.cidade}.{" "}
+              <a href={unidade.outraUnidade.url}>{unidade.outraUnidade.nome}</a>
+            </p>
           </div>
           <div className="synthesis-contact-image"><Foto src={fotoContato.src} alt={fotoContato.alt} sizes="(max-width: 1024px) 100vw, 50vw" /></div>
         </section>
       </main>
 
-      {/* O fim da home: a marca e o endereço da loja, no cinza do rodapé (v4:
-          o rodapé é cinza em toda página; era preto). O endereço saiu da seção
-          de contato e veio para cá (pedido do cliente, 05/10/2026). Horário e
-          WhatsApp continuam na seção de contato logo acima — o rodapé
-          completo repetiria tudo (decisão do cliente, 02/10/2026). As páginas
-          internas seguem com o rodapé completo. */}
-      <footer className="synthesis-footer">
-        <Brand />
-        <address className="synthesis-footer-endereco">{enderecoEmLinha()}</address>
-      </footer>
+      <Footer />
     </div>
   );
 }

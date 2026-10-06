@@ -49,17 +49,14 @@ img { display: block; max-width: 100%; }
 /* Alvo de toque de 44px nos links de texto da home, SEM mudar o desenho: o
    link continua do tamanho do texto, com o fio colado embaixo, e uma área
    invisível de 44px de altura em volta dele recebe o toque. Aumentar a altura
-   do próprio link afastaria o fio do texto. */
-.synthesis-manifesto-content > a,
-.synthesis-section-heading > a,
-.synthesis-project div > a,
-.synthesis-process-copy > a {
+   do próprio link afastaria o fio do texto. Desde a v5 são os dois links do
+   showroom: "Abrir no mapa" e o da outra loja. */
+.synthesis-contact-dados > a,
+.synthesis-contact-outra > a {
   position: relative;
 }
-.synthesis-manifesto-content > a::before,
-.synthesis-section-heading > a::before,
-.synthesis-project div > a::before,
-.synthesis-process-copy > a::before {
+.synthesis-contact-dados > a::before,
+.synthesis-contact-outra > a::before {
   content: "";
   position: absolute;
   left: 0;
@@ -68,6 +65,12 @@ img { display: block; max-width: 100%; }
   height: max(100%, var(--toque));
   transform: translateY(-50%);
 }
+
+/* Rolagem até as seções da home (v5): o menu leva a "/#id". A rolagem suave
+   é o `scroll-behavior: smooth` do html, desligado no fim deste arquivo com
+   prefers-reduced-motion. A margem é a altura do cabeçalho: se ele reaparecer
+   por cima, o título da seção não fica escondido embaixo dele. */
+section[id] { scroll-margin-top: var(--alt-cabecalho); }
 
 /* --------------------------------------------------------------------------
    As duas superfícies de seção (v4, 05/10/2026). Papel e grafite, e só elas;
@@ -203,7 +206,6 @@ img { display: block; max-width: 100%; }
   font-size: 16px;
   line-height: 1.75;
 }
-.synthesis-manifesto-content > a { display: inline-flex; gap: 22px; margin-top: var(--cab-texto-link); padding-bottom: 7px; border-bottom: var(--fio) solid; font-size: 12px; }
 .synthesis-manifesto-image { margin: 0; align-self: center; }
 .synthesis-manifesto-image img { width: 100%; height: 470px; object-fit: cover; }
 .synthesis-manifesto-image figcaption { margin-top: 14px; font-size: 9px; letter-spacing: .18em; }
@@ -220,7 +222,6 @@ img { display: block; max-width: 100%; }
   letter-spacing: var(--tr-display-l);
   font-weight: var(--peso-leve);
 }
-.synthesis-section-heading > a { display: flex; gap: 22px; padding-bottom: 8px; border-bottom: var(--fio) solid; font-size: 12px; }
 
 .synthesis-project { position: relative; overflow: hidden; }
 .synthesis-project > img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--mov-hover) var(--mov-ease); }
@@ -244,7 +245,6 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
   color: var(--sup-apoio);
 }
-.synthesis-project div > a { display: flex; gap: 15px; padding-bottom: 6px; border-bottom: var(--fio) solid; font-size: 11px; }
 
 /* Todos os cards têm a legenda embaixo da foto, na cor da superfície. */
 .synthesis-project-featured { overflow: visible; }
@@ -293,9 +293,6 @@ img { display: block; max-width: 100%; }
   letter-spacing: var(--tr-display-l);
   font-weight: var(--peso-leve);
 }
-/* "Conheça a Dalmóbile" (copy v3, A4): o mesmo desenho dos links das outras
-   seções — fio de 1px embaixo, seta afastada do texto. */
-.synthesis-process-copy > a { align-self: flex-start; display: inline-flex; gap: 22px; margin-top: var(--cab-texto-link); padding-bottom: 7px; border-bottom: var(--fio) solid; font-size: 12px; }
 .synthesis-process-copy > p:not(.eyebrow) { max-width: var(--medida); margin: 0; font-size: 16px; line-height: 1.7; color: var(--sup-apoio); }
 .synthesis-stats {
   display: grid;
@@ -308,6 +305,62 @@ img { display: block; max-width: 100%; }
 .synthesis-stats div { display: flex; flex-direction: column; }
 .synthesis-stats strong { font-size: 39px; line-height: 1; font-weight: var(--peso-leve); }
 .synthesis-stats span { margin-top: 8px; font-size: 11px; color: var(--sup-apoio); }
+
+/* Para arquitetos (v5, seção nova). Rótulo e título à esquerda; os três itens
+   à direita, com fio de 1px entre eles, e a frase final embaixo. Empilhado
+   abaixo de 1025px. */
+.synthesis-architects {
+  padding: var(--respiro) var(--synthesis-gutter);
+  display: grid;
+  gap: var(--respiro-curto);
+}
+.synthesis-architects-heading h2 {
+  margin: var(--cab-rotulo-titulo) 0 0;
+  max-width: 720px;
+  /* Menor que os outros títulos da home (50–90px): é uma frase de 75
+     caracteres, e nesses tamanhos passaria das quatro linhas que o CLAUDE.md
+     permite. Medido: 30px no celular dá 4 linhas até em 360px de largura
+     (com 34px eram 5); no máximo 4 em toda largura da matriz. */
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.02;
+  letter-spacing: var(--tr-display-l);
+  font-weight: var(--peso-leve);
+}
+.synthesis-architects-items li + li {
+  margin-top: var(--entre-itens);
+  padding-top: var(--entre-itens);
+  border-top: var(--fio) solid var(--sup-fio);
+}
+.synthesis-architects-items h3 {
+  font-size: var(--fs-subtitulo);
+  font-weight: var(--peso-normal);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+}
+.synthesis-architects-items p {
+  max-width: var(--medida);
+  margin-top: var(--e-1);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--sup-apoio);
+}
+.synthesis-architects-closing {
+  max-width: var(--medida);
+  margin-top: var(--respiro-curto);
+  font-size: var(--fs-subtitulo);
+  letter-spacing: var(--tr-subtitulo);
+  line-height: var(--lh-subtitulo);
+}
+@media (min-width: 1025px) {
+  .synthesis-architects {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(48px, 7vw, 110px);
+    align-items: start;
+  }
+}
+@media (max-width: 700px) {
+  .site-synthesis .synthesis-architects { padding-inline: var(--synthesis-gutter); }
+}
 
 .synthesis-contact {
   display: grid;
@@ -325,9 +378,28 @@ img { display: block; max-width: 100%; }
   font-weight: var(--peso-leve);
 }
 .synthesis-contact-copy > p:not(.eyebrow) { max-width: var(--medida); margin: 0; font-size: 16px; line-height: 1.75; color: var(--sup-apoio); }
-/* O horário: um bloco à parte do texto, a 16px dele. */
-.synthesis-contact-copy > .synthesis-contact-horario { margin-top: var(--cab-titulo-apoio); }
-.synthesis-contact-copy > a {
+/* Endereço, "Abrir no mapa" e horário (v5): o bloco de dados, a 16px do
+   texto. */
+.synthesis-contact-dados {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--e-1);
+  margin-top: var(--cab-titulo-apoio);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--sup-apoio);
+}
+.synthesis-contact-dados address { font-style: normal; }
+.synthesis-contact-dados > a,
+.synthesis-contact-outra > a {
+  color: var(--sup-fg);
+  border-bottom: var(--fio) solid;
+  /* O link inteiro numa linha: "Ver / a loja de…" partido no meio lia como
+     dois links. */
+  white-space: nowrap;
+}
+.synthesis-contact-acao {
   align-self: flex-start;
   display: flex;
   gap: 30px;
@@ -335,6 +407,17 @@ img { display: block; max-width: 100%; }
   padding: 17px 22px;
   border: var(--fio) solid var(--sup-fg);
   font-size: 12px;
+}
+/* A outra loja: separada do botão por um fio, como nota de rodapé da seção.
+   Com o pai no seletor, para vencer o `margin: 0` dos parágrafos da seção. */
+.synthesis-contact-copy > .synthesis-contact-outra {
+  margin-top: var(--cab-texto-link);
+  padding-top: var(--e-2);
+  border-top: var(--fio) solid var(--sup-fio);
+  max-width: var(--medida);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--sup-apoio);
 }
 .synthesis-contact-image { height: 540px; margin: 0; overflow: hidden; }
 .synthesis-contact-image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--mov-hover) ease; }
@@ -372,16 +455,13 @@ img { display: block; max-width: 100%; }
   .synthesis-manifesto-image img { height: 370px; }
   .synthesis-section-heading { display: block; }
   .synthesis-section-heading h2 { font-size: 48px; }
-  .synthesis-section-heading > a { margin-top: var(--cab-texto-link); width: max-content; }
   .synthesis-project-featured > img { height: 530px; }
   .synthesis-project-featured > div { grid-template-columns: 1fr; gap: 13px; }
-  .synthesis-project-featured div > a { display: none; }
   .synthesis-project h3 { font-size: 45px; }
   .synthesis-project-pair { grid-template-columns: 1fr; gap: var(--entre-itens); margin-top: var(--entre-itens); }
   .synthesis-project-pair .synthesis-project { width: 100%; }
   .synthesis-project-pair .synthesis-project > img { height: 420px; }
   .synthesis-project-pair .synthesis-project > div { grid-template-columns: 1fr; gap: 8px; }
-  .synthesis-project-pair .synthesis-project div > a { display: none; }
   .synthesis-process-image { min-height: 390px; }
   .synthesis-process-copy { padding: var(--respiro-curto) var(--e-margem) var(--respiro); }
   .synthesis-process-copy h2 { font-size: 49px; }
@@ -394,43 +474,6 @@ img { display: block; max-width: 100%; }
   .synthesis-contact-copy { padding: 0 var(--e-margem); }
   .synthesis-contact-copy h2 { font-size: 50px; }
   .synthesis-contact-image { height: 380px; }
-}
-
-/* A barra final da home: só a marca, sobre o cinza do rodapé (v4: rodapé
-   cinza em toda página; era preto). Respiro curto em cima e embaixo — é uma
-   assinatura, não uma seção. Endereço, horário e WhatsApp estão na seção
-   de contato logo acima. */
-.synthesis-footer {
-  background: var(--cinza);
-  color: var(--tinta);
-  padding: var(--respiro-curto) var(--synthesis-gutter);
-  border-top: var(--fio) solid var(--fio-sup);
-  /* A marca e, ao lado dela, o endereço da loja (05/10/2026). Alinhados pela
-     base; no celular o endereço desce para baixo da marca. */
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--e-2) var(--e-4);
-}
-/* O endereço menor que o texto corrido e, do tablet para cima, alinhado à
-   DIREITA, na outra ponta da barra (pedido do cliente, 05/10/2026). É a única
-   exceção à regra de alinhamento à esquerda do CLAUDE.md — ver
-   docs/decisoes.md. 14px: um degrau abaixo dos 16,5–17px do texto, ainda
-   confortável de ler. */
-.synthesis-footer-endereco {
-  font-style: normal; /* <address> vem em itálico por padrão */
-  font-size: 14px;
-  line-height: var(--lh-texto);
-  max-width: var(--medida);
-}
-@media (min-width: 601px) {
-  .synthesis-footer-endereco { text-align: right; }
-}
-/* Desktop: uma linha só. A medida de leitura não serve aqui — é um dado, não
-   texto corrido — e quebrava "— SP, CEP" sozinho na segunda linha. */
-@media (min-width: 1025px) {
-  .synthesis-footer-endereco { max-width: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

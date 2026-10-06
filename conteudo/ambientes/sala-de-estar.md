@@ -29,7 +29,7 @@ fotos:
     edificio:
     arquiteto:
   - src: /fotos/sjc/sala-de-estar/11.webp
-    titulo: Rack suspenso de ponta a ponta
+    titulo: Rack suspenso na parede inteira
     alt: Sala de estar com painel de madeira, rack cinza suspenso, televisão central e sofá branco em primeiro plano
     edificio:
     arquiteto:
@@ -49,7 +49,7 @@ fotos:
     edificio:
     arquiteto: Débora Toledo
   - src: /fotos/sjc/sala-de-estar/debora-toledo-jardim-das-industrias-50.webp
-    titulo: Painel amadeirado do chão ao teto
+    titulo: Painel amadeirado na parede inteira
     alt: Sala de estar com parede inteira revestida em madeira, trilho de spots e mesa de jantar oval clara
     edificio:
     arquiteto: Débora Toledo

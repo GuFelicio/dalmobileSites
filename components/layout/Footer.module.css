@@ -1,154 +1,78 @@
-/* Superfície cinza — o ÚNICO lugar do site com ela (v4). Todo texto em
-   --tinta: texto claro sobre este cinza dá 2,5:1 e é proibido. */
+/* O rodapé: cinza, o ÚNICO lugar do site com ele, nos dois sites (v5: o de
+   Caraguá deixou de ser o areia #FFF4EB). Todo texto em --tinta: texto claro
+   sobre este cinza dá 2,5:1 e é proibido. */
 .footer {
   background: var(--cinza);
   color: var(--tinta);
-  /* --respiro-curto em cima e embaixo (v4): o rodapé é índice, não seção.
-     No celular ele tinha 1.106px de altura; o alvo é menos de 600. */
+  /* --respiro-curto em cima e embaixo: o rodapé é assinatura, não seção. */
   padding: var(--respiro-curto) var(--pad-lateral);
-  /* Fio de separação — ver .cinza em Section.module.css e --fio-sup em
-     app/tokens.css. Sem ele, o rodapé da paleta palha encosta no papel sem
-     nenhuma borda visível. */
-  border-top: var(--fio) solid var(--fio-sup);
 }
 
-/* Mobile: duas colunas (v4). A marca com o endereço ocupa a linha toda; as
-   páginas e o contato ficam lado a lado; a outra loja e a privacidade fecham
-   numa linha só. Empilhado em uma coluna, o rodapé passava de 1.100px. */
-.colunas {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  /* 16px entre os grupos no celular: com 24 o rodapé passava dos 600px. */
-  gap: var(--e-2);
-}
-
-.colunas > :first-child,
-.colunas > :last-child {
-  grid-column: 1 / -1;
-}
-
-/* A última coluna (a outra loja e a privacidade) em linha no celular: são
-   dois links curtos, empilhados gastariam 100px à toa. */
-.colunas > :last-child {
-  flex-direction: row;
+/* A marca de um lado e os dados do outro, alinhados pela base. No celular os
+   dados descem para baixo da marca. */
+.linha {
+  display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  column-gap: var(--e-4);
+  justify-content: space-between;
+  gap: var(--e-2) var(--e-4);
 }
-.colunas > :last-child > .titulo { flex-basis: 100%; }
 
-.coluna {
+/* Do tablet para cima, endereço e links ALINHADOS À DIREITA, na ponta oposta
+   à marca (pedido do cliente, 05/10/2026). É a única exceção à regra de
+   alinhamento à esquerda do CLAUDE.md — ver docs/decisoes.md. */
+.dados {
   display: flex;
   flex-direction: column;
   gap: var(--e-1);
-  /* Impede que uma coluna estoure a grade e crie rolagem horizontal. */
-  min-width: 0;
 }
 
-.titulo {
-  font-size: var(--fs-rotulo);
-  letter-spacing: var(--tr-rotulo);
-  line-height: var(--lh-rotulo);
-  font-weight: var(--peso-forte);
-  text-transform: uppercase;
+@media (min-width: 601px) {
+  .dados {
+    align-items: flex-end;
+    text-align: right;
+  }
 }
 
+/* 14px: um degrau abaixo dos 16,5–17px do texto, ainda confortável de ler. */
 .endereco {
   font-style: normal; /* <address> vem em itálico por padrão */
-  font-size: var(--fs-texto);
+  font-size: 14px;
   line-height: var(--lh-texto);
   max-width: var(--medida);
 }
 
-/* Sem gap entre os links: cada um já tem 44px de alvo para 27px de texto, e
-   é essa folga que separa um alvo do vizinho. */
-.lista {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  font-size: var(--fs-texto);
-  line-height: var(--lh-texto);
+/* Desktop: o endereço em uma linha só. É um dado, não texto corrido, e a
+   medida de leitura quebrava "SP · CEP" sozinho na segunda linha. */
+@media (min-width: 1025px) {
+  .endereco { max-width: none; }
 }
 
-.lista a {
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--e-3);
+  font-size: 14px; /* o mesmo degrau do endereço */
+}
+
+.links a {
   display: inline-flex;
   align-items: center;
-  /* Alvo de toque com espaço entre alvos vizinhos: no rodapé os links ficam
-     empilhados e colados, que é onde o dedo erra. */
+  gap: var(--e-1);
+  /* Alvo de toque de 44px, com o texto do tamanho do endereço. */
   min-height: var(--toque);
-  /* Palavra curta ("A loja") ficava com 42px de largura. */
-  min-width: var(--toque);
   border-bottom: var(--fio) solid transparent;
   transition: border-color var(--mov-fio) ease;
 }
 
-.lista a:hover { border-bottom-color: currentColor; }
-
-.comIcone {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--e-1);
-  min-height: var(--toque);
-}
-
-/* Ação sem destino ainda. Ver o cabeçalho de Header.module.css. */
-.pendente {
-  opacity: .55;
-  cursor: not-allowed;
-}
-
-.horarios {
-  display: flex;
-  flex-direction: column;
-  gap: var(--e-1);
-  font-size: var(--fs-texto);
-  line-height: var(--lh-texto);
-}
-
-.horarios li {
-  display: flex;
-  flex-direction: column;
-}
-
-.dias {
-  font-size: var(--fs-rotulo);
-  letter-spacing: var(--tr-rotulo);
-  font-weight: var(--peso-forte);
-  text-transform: uppercase;
-}
+.links a:hover { border-bottom-color: currentColor; }
 
 .assinatura {
   margin-top: var(--respiro-curto);
   padding-top: var(--e-2);
-  border-top: var(--fio) solid var(--preto);
+  border-top: var(--fio) solid var(--tinta);
   font-size: var(--fs-rotulo);
   letter-spacing: var(--tr-rotulo);
   font-weight: var(--peso-forte);
   text-transform: uppercase;
-}
-
-/* Tablet: duas colunas, cada bloco na sua. Quatro nesta faixa espremeriam
-   o endereço em três linhas quebradas. */
-@media (min-width: 601px) {
-  .colunas {
-    gap: var(--respiro-curto) var(--e-4);
-  }
-  .colunas > :first-child,
-  .colunas > :last-child {
-    grid-column: auto;
-  }
-  .colunas > :last-child {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-  }
-  .colunas > :last-child > .titulo { flex-basis: auto; }
-}
-
-/* Desktop: as quatro colunas. A primeira é mais larga porque carrega o
-   lockup e o endereço inteiro. */
-@media (min-width: 1025px) {
-  .colunas {
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  }
 }

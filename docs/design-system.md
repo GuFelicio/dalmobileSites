@@ -31,7 +31,7 @@ em seção, faixa e rodapé, que se fundiam. O `CLAUDE.md` espelha esta tabela.
 | Token | Valor | Papel |
 |---|---|---|
 | `--c-papel` | `#F6F4F0` | o **único** fundo claro de seção |
-| `--c-grafite` | `#262626` | o **único** fundo escuro de seção |
+| `--c-grafite` | `#363838` | o **único** fundo escuro, de seção ou não (v5; era `#262626`) |
 | `--c-cinza` | `#9E9C94` | **só o rodapé** |
 | `--c-areia` | `#D5C5B1` | **só** rótulo em caixa alta sobre grafite |
 | `--c-tinta` | `#20211F` | texto sobre papel e sobre o rodapé |
@@ -43,21 +43,22 @@ em seção, faixa e rodapé, que se fundiam. O `CLAUDE.md` espelha esta tabela.
 | `--c-papel-fio` | papel a 20% | fio sobre grafite |
 | `--c-tinta-fio` | tinta a 12% | fio do cabeçalho quando ele volta |
 
-**Contrastes (WCAG), conferidos por script na entrega da v4:** tinta sobre papel
-14,7:1 · apoio sobre papel 6,0 · papel sobre grafite 13,8 · areia sobre grafite
-9,0 · tinta sobre o cinza do rodapé 5,9. **Texto claro sobre o cinza do rodapé
+**Contrastes (WCAG), conferidos por script na entrega da v5:** tinta sobre papel
+14,7:1 · apoio sobre papel 6,0 · papel sobre grafite 10,7 · papel a 72% sobre
+grafite 6,4 · areia sobre grafite 7,0 · tinta sobre o cinza do rodapé 5,9. **Texto claro sobre o cinza do rodapé
 dá 2,5:1 e é proibido.** Mínimo de 4,5:1 em todo texto, sem exceção de tamanho.
 
 Saíram na v4: `#F9F8F5`, `#F5F4F0`, `#EFEDE7`, `#97958F`, `#5D5D58`, `#484B45`,
 `#111211`, a escada `--sobre-escuro-*`, os tokens `--sup-*` de cinco superfícies
-e os `--veu-*`, que não tinham mais uso.
+e os `--veu-*`, que não tinham mais uso. Na v5 saiu o `#262626`: o grafite
+anterior ficou escuro demais, quase preto ao lado das fotos.
 
 ### Variante "palha" — Caraguatatuba
 
-`data-paleta="palha"` no `<html>`, vindo do config da unidade. Troca só a
-família do cinza: o rodapé vira `#FFF4EB` (com fio `#CDB49A`, porque contra o
-papel ele separa em só 1,02), o apoio vira `#5F5847` e o fio `#E7D8C9`. Papel,
-grafite, tinta e areia são os mesmos nos dois sites.
+`data-paleta="palha"` no `<html>`, vindo do config da unidade. Troca só o apoio
+(`#5F5847`) e o fio sobre papel (`#E7D8C9`), em tons de areia. Papel, grafite,
+tinta, areia e o **cinza do rodapé** são os mesmos nos dois sites — até a v5 o
+rodapé de Caraguá era `#FFF4EB`.
 
 ### Camada 2 — nomes semânticos
 
@@ -78,7 +79,9 @@ sucesso de formulário, no menor tamanho possível.
 
 **Regra (v4): seções vizinhas nunca têm a mesma cor.** A troca de cor marca a
 fronteira da seção — é por isso que o respiro pôde cair. O rodapé é cinza em
-**toda** página, inclusive a barra da home, com todo o texto em `--tinta`.
+**toda** página, com todo o texto em `--tinta`. Desde a v5 o site é a home e
+`/privacidade`; a sequência da home é foto → papel → grafite → papel → grafite →
+papel → cinza.
 
 As classes globais `.superficie-papel` e `.superficie-grafite`
 ([`app/globals.css`](../app/globals.css)) pintam o fundo e publicam as cores de
@@ -98,11 +101,24 @@ deixa uma seção trocar de cor sem tocar no CSS dela:
 ```css
 .etapaTexto { color: var(--sup-apoio); }
 .item       { border-top: var(--fio) solid var(--sup-fio); }
-.botao:hover { background: var(--sup-fg); color: var(--sup-bg); }
+.botao      { border: var(--fio) solid var(--sup-fg); color: var(--sup-fg); }
 ```
+
+**Fundo escuro é sempre o grafite** (v5): nenhum botão, painel ou destaque com
+fundo em tinta ou em preto quase puro. Se um elemento precisa de fundo escuro,
+é `var(--grafite)`, com o texto em `var(--sobre-grafite)`.
 
 `<Section superficie="papel" | "grafite">` aplica a classe. As seções da home,
 que ainda usam marcação própria, põem a classe direto no `<section>`.
+
+### Âncoras da home (v5)
+
+Cada seção da home tem um id (`#topo`, `#inicio`, `#projetos`, `#a-dalmobile`,
+`#arquitetos`, `#a-loja`), e `section[id]` ganha `scroll-margin-top:
+var(--alt-cabecalho)` em `app/globals.css`: ao rolar até a seção, o título para
+88px abaixo do topo e não fica embaixo do cabeçalho se ele reaparecer. O menu
+usa `<a href="/#id">`; a rolagem suave é o `scroll-behavior: smooth` do html,
+desligado com `prefers-reduced-motion`.
 
 A sequência de cada página está no `CLAUDE.md`, seção "Superfícies".
 
