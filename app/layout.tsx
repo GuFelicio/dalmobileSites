@@ -25,7 +25,8 @@ export const metadata: Metadata = metadataDaPagina({
   // Não é simétrica entre as unidades (copy v3, B1 e C1): vem do config.
   descricao: unidade.textos.descricaoHome,
   caminho: "/",
-  foto: "/fotos/comum/capa/casa-completa.webp",
+  // A foto do preview do link vem do config da unidade (v6).
+  foto: unidade.compartilhamento,
 });
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

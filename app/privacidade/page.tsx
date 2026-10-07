@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     titulo: `Política de privacidade | Dalmóbile ${unidade.cidade}`,
     descricao: `Como a Dalmóbile ${unidade.cidade} trata os dados de quem visita o site.`,
     caminho: "/privacidade",
-    // A capa da home: sem foto, o link compartilhado no WhatsApp saía sem
-    // preview (checklist de deploy do CLAUDE.md, verificado na v4, fase 3).
-    foto: "/fotos/comum/capa/casa-completa.webp",
+    // A mesma foto de preview da home, do config: sem foto, o link
+    // compartilhado no WhatsApp saía sem preview (checklist do CLAUDE.md).
+    foto: unidade.compartilhamento,
   }),
   // Obrigação legal, não conteúdo de busca: fica fora do índice, mas os links
   // dela continuam sendo seguidos.

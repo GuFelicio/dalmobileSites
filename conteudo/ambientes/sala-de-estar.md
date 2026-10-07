@@ -1,7 +1,7 @@
 ---
 nome: Sala de estar
 slug: sala-de-estar
-unidades: [sjc, caragua]
+unidades: [caragua]
 chamada: Living em camadas
 
 # A chamada final é própria de cada ambiente: sete páginas terminando na
@@ -23,36 +23,6 @@ porUnidade:
       acabamentos costuram os três espaços.
     chamadaFinal: Quer uma sala resolvida assim?
 fotos:
-  - src: /fotos/sjc/sala-de-estar/06.webp
-    titulo: Adega espelhada atrás da mesa de jantar
-    alt: Sala de jantar com mesa oval de madeira maciça, cadeiras brancas estofadas, brises verticais e adega espelhada ao fundo
-    edificio:
-    arquiteto:
-  - src: /fotos/sjc/sala-de-estar/11.webp
-    titulo: Rack suspenso na parede inteira
-    alt: Sala de estar com painel de madeira, rack cinza suspenso, televisão central e sofá branco em primeiro plano
-    edificio:
-    arquiteto:
-  - src: /fotos/sjc/sala-de-estar/16.webp
-    titulo: Forro ripado que continua no painel
-    alt: Sala de estar com forro ripado em madeira, painel de TV com prateleiras finas e almofadas laranja no sofá
-    edificio:
-    arquiteto:
-  - src: /fotos/sjc/sala-de-estar/31.webp
-    titulo: Jardim vertical encaixado no painel da TV
-    alt: Sala de estar com jardim vertical junto ao painel de TV, banco baixo estofado e mesa de centro branca
-    edificio:
-    arquiteto:
-  - src: /fotos/sjc/sala-de-estar/debora-toledo-jardim-das-industrias-1.webp
-    titulo: Estante suspensa no teto, sobre a mesa
-    alt: Sala integrada à cozinha, com estante suspensa de metal preto e plantas, mesa de jantar e sofá claro
-    edificio:
-    arquiteto: Débora Toledo
-  - src: /fotos/sjc/sala-de-estar/debora-toledo-jardim-das-industrias-50.webp
-    titulo: Painel amadeirado na parede inteira
-    alt: Sala de estar com parede inteira revestida em madeira, trilho de spots e mesa de jantar oval clara
-    edificio:
-    arquiteto: Débora Toledo
   - src: /fotos/caragua/sala-de-estar/dalmobile-calabasasapto93-0994.webp
     titulo: Armário com palhinha no vão da escada
     alt: Hall e sala de estar claros, com aparador de madeira, espelho oval, tapete redondo de fibra e poltronas de couro

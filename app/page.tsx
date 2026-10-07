@@ -25,7 +25,7 @@
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
 import Foto from "../components/midia/Foto";
-import SliderDeFotos, { type FotoDoSlider } from "../components/midia/SliderDeFotos";
+import SliderDeFotos from "../components/midia/SliderDeFotos";
 import VideoEmLoop from "../components/midia/VideoEmLoop";
 import {
   linkWhatsApp,
@@ -33,54 +33,22 @@ import {
   schemaLocalBusiness,
   unidade,
 } from "../config/derivados";
-import { ambientesDaUnidade, escolherFoto } from "../lib/ambientes-da-unidade.ts";
+import { fotosDaHome, fotosDoCarrossel } from "../lib/acervo.ts";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
 export default function Home() {
-  // A vitrine sai do acervo real desta unidade, não de foto de estudo. Como
-  // vem do config, o site de Caraguá mostra os ambientes de Caraguá sozinho.
-  const ambientes = ambientesDaUnidade();
   const whatsapp = linkWhatsApp();
 
-  // As três fotos de apoio da home. A lista de preferência cai para o que a
-  // unidade tiver: Caraguá não tem home office nem closet.
-  const fotoManifesto = escolherFoto(ambientes, ["sala-de-estar", "cozinha"], 3);
-  const fotoProcesso = escolherFoto(ambientes, ["cozinha", "banheiro"], 7);
-  const fotoContato = escolherFoto(ambientes, ["quartos", "sala-de-estar"], 5);
-
-  // A foto da seção de arquitetos: de projeto COM arquiteto creditado (Débora
-  // Toledo em SJC, Flávia e Sérgia Garrido em Caraguá), e nenhuma das três
-  // acima. Sala primeiro, por mostrar mais marcenaria num quadro só.
-  const usadas = new Set([fotoManifesto.src, fotoProcesso.src, fotoContato.src]);
-  const fotoArquitetos = ["sala-de-estar", "cozinha", "quartos", "banheiro"]
-    .flatMap((slug) => ambientes.find((a) => a.slug === slug)?.fotos ?? [])
-    .find((f) => f.arquiteto && !usadas.has(f.src));
-
-  // TODAS as fotos do acervo desta unidade, INTERCALADAS entre os ambientes.
-  //
-  // Não é enfeite: o slider mostra três fotos por conjunto, e agrupadas por
-  // ambiente os quatro primeiros conjuntos seriam só cozinha. Intercalando,
-  // cada conjunto mostra cozinha, quarto e sala — que é o que faz a pessoa
-  // querer passar para o lado. A ordem de entrada continua sendo a editorial
-  // de lib/ambientes.ts, então a primeira foto do site é sempre a da cozinha.
-  const porAmbiente = ambientes.map((ambiente) =>
-    ambiente.fotos.map((foto) => ({
-      src: foto.src,
-      titulo: foto.titulo,
-      alt: foto.alt,
-      ambienteNome: ambiente.nome,
-      edificio: foto.edificio,
-      arquiteto: foto.arquiteto,
-    })),
-  );
-
-  const fotosDoSlider: FotoDoSlider[] = [];
-  for (let volta = 0; volta < Math.max(0, ...porAmbiente.map((f) => f.length)); volta++) {
-    for (const fotos of porAmbiente) {
-      if (fotos[volta]) fotosDoSlider.push(fotos[volta]);
-    }
-  }
+  // As fotos vêm de lib/acervo.ts: do acervo da unidade no config, quando ela
+  // tem um (sem título, com o crédito), ou de conteudo/ambientes/ (com título).
+  const fotosDoSlider = fotosDoCarrossel();
+  const {
+    manifesto: fotoManifesto,
+    fabrica: fotoProcesso,
+    arquitetos: fotoArquitetos,
+    showroom: fotoContato,
+  } = fotosDaHome();
 
   const mapa = mapaDaUnidade();
 
@@ -140,7 +108,9 @@ export default function Home() {
             {/* "Como trabalhamos" saiu na v5: levava a /a-dalmobile. */}
           </div>
           <figure className="synthesis-manifesto-image">
-            <Foto src={fotoManifesto.src} alt={fotoManifesto.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
+            {fotoManifesto ? (
+              <Foto src={fotoManifesto.src} alt={fotoManifesto.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
+            ) : null}
             <figcaption>FÁBRICA PRÓPRIA · 100% MDF · EDIÇÃO MILIMÉTRICA</figcaption>
           </figure>
         </section>
@@ -161,7 +131,9 @@ export default function Home() {
 
         <section className="synthesis-process superficie-papel" id="a-dalmobile">
           <div className="synthesis-process-image">
-            <Foto src={fotoProcesso.src} alt={fotoProcesso.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
+            {fotoProcesso ? (
+              <Foto src={fotoProcesso.src} alt={fotoProcesso.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
+            ) : null}
             <span>O QUE VEM DA FÁBRICA</span>
           </div>
           <div className="synthesis-process-copy">
@@ -198,7 +170,7 @@ export default function Home() {
             {/* Uma foto de projeto assinado por arquiteto, com o crédito, embaixo
                 do título (pedido do cliente, 06/10/2026: a coluna ficava vazia
                 ao lado dos itens). É a prova do que a seção promete. */}
-            {fotoArquitetos ? (
+            {fotoArquitetos?.arquiteto ? (
               <figure className="synthesis-architects-image">
                 <Foto src={fotoArquitetos.src} alt={fotoArquitetos.alt} sizes="(max-width: 1024px) 100vw, 45vw" />
                 <figcaption>Projeto / {fotoArquitetos.arquiteto}</figcaption>
@@ -269,7 +241,11 @@ export default function Home() {
               <a href={unidade.outraUnidade.url}>{unidade.outraUnidade.nome}</a>
             </p>
           </div>
-          <div className="synthesis-contact-image"><Foto src={fotoContato.src} alt={fotoContato.alt} sizes="(max-width: 1024px) 100vw, 50vw" /></div>
+          <div className="synthesis-contact-image">
+            {fotoContato ? (
+              <Foto src={fotoContato.src} alt={fotoContato.alt} sizes="(max-width: 1024px) 100vw, 50vw" />
+            ) : null}
+          </div>
         </section>
       </main>
 

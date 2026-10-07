@@ -15,7 +15,7 @@
  * É incremental: só regera o que mudou, comparando data de modificação.
  */
 import { createHash } from "node:crypto";
-import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -38,6 +38,15 @@ export const LARGURAS = [440, 880, 1240, 1920];
 
 /** Qualidade do WebP. 82 é onde a diferença deixa de ser visível na foto. */
 const QUALIDADE = 82;
+
+/**
+ * Teto de peso de cada variação servida: 400 KB (v6, 07/10/2026). Foto em pé
+ * de 1920px, com muito detalhe, passava de 600 KB a 82 — e o cliente abre no
+ * celular, por 4G. Acima do teto a variação é refeita com qualidade menor, de
+ * 6 em 6, até caber; nunca abaixo de QUALIDADE_MINIMA.
+ */
+const TETO_BYTES = 400 * 1024;
+const QUALIDADE_MINIMA = 58;
 
 /** Nome do arquivo gerado: `cozinha.webp` + 880 → `cozinha-880.webp`. */
 export function nomeGerado(arquivo, largura) {
@@ -99,9 +108,19 @@ export async function gerar({ silencioso = false } = {}) {
         reaproveitadas++;
         continue;
       }
-      await sharp(origem).resize({ width: largura, withoutEnlargement: true })
-        .webp({ quality: QUALIDADE })
+      let qualidade = QUALIDADE;
+      let info = await sharp(origem).resize({ width: largura, withoutEnlargement: true })
+        .webp({ quality: qualidade })
         .toFile(saida);
+      while (info.size > TETO_BYTES && qualidade - 6 >= QUALIDADE_MINIMA) {
+        qualidade -= 6;
+        info = await sharp(origem).resize({ width: largura, withoutEnlargement: true })
+          .webp({ quality: qualidade })
+          .toFile(saida);
+      }
+      if (info.size > TETO_BYTES && !silencioso) {
+        console.warn(`  ATENÇÃO: ${path.relative(raiz, saida)} ficou com ${Math.round(info.size / 1024)} KB mesmo na qualidade ${qualidade}.`);
+      }
       geradas++;
     }
 
@@ -114,6 +133,24 @@ export async function gerar({ silencioso = false } = {}) {
       hash: createHash("sha1").update(await readFile(origem)).digest("hex").slice(0, 8),
     };
   }
+
+  // Variações órfãs: a foto de origem saiu (ou mudou de nome) e a variação
+  // ficou. Sem esta limpeza, foto apagada de public/fotos/ continuava indo ao
+  // ar pela pasta gerada — foi o caso das fotos antigas de SJC na v6.
+  const esperadas = new Set(
+    Object.entries(manifesto).flatMap(([src, e]) =>
+      e.disponiveis.map((l) => path.join(DESTINO, path.dirname(src.replace("/fotos/", "")), nomeGerado(src, l))),
+    ),
+  );
+  let removidas = 0;
+  for (const gerada of await listarFotos(DESTINO)) {
+    const caminho = path.join(DESTINO, gerada);
+    if (!esperadas.has(caminho)) {
+      await rm(caminho);
+      removidas++;
+    }
+  }
+  if (removidas && !silencioso) console.log(`  Fotos: ${removidas} variação(ões) órfã(s) removida(s).`);
 
   await writeFile(
     path.join(raiz, "public/fotos-geradas/manifesto.json"),

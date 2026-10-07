@@ -127,7 +127,7 @@ lib/              leitura e validação do conteúdo
 app/              a home, /privacidade e o 404
 components/       cabeçalho, rodapé, superfícies, foto, slider
 build/            os dois passos que rodam antes do build
-tests/            62 testes
+tests/            67 testes
 docs/             documentação detalhada
 ```
 
@@ -152,7 +152,15 @@ assim que a paleta de Caraguá foi feita: um campo, não um segundo CSS.
 ## 5. Tarefa: publicar fotos novas
 
 É a tarefa que mais se repete. Passo a passo completo em
-[`docs/adicionar-ambiente.md`](docs/adicionar-ambiente.md); o resumo:
+[`docs/adicionar-ambiente.md`](docs/adicionar-ambiente.md).
+
+> **São José dos Campos usa o acervo do config desde a v6 (07/10/2026).** As
+> fotos de SJC não ficam em `conteudo/ambientes/`: os originais vão para
+> `fotos-originais/sjc/` (fora do git), `node build/processar-acervo.mjs sjc`
+> gera as mestras em `public/fotos/sjc/acervo/`, e a ordem do carrossel, o
+> ambiente e o arquiteto de cada foto ficam no campo `acervo` de
+> `config/sjc.ts`. Sem título: cada foto mostra só "01 / AMBIENTE" e
+> "Projeto / Nome". O resumo abaixo vale para Caraguatatuba.
 
 ### 5.1 A foto vai para a pasta certa
 
@@ -345,7 +353,7 @@ mais são esquecidos:
 
 ## 10. Os testes, e o que cada um protege
 
-62 testes, rodados **uma vez para cada unidade**: `npm test` builda SJC e
+67 testes, rodados **uma vez para cada unidade**: `npm test` builda SJC e
 testa, depois builda Caraguá e testa. Eles sempre testam o que seria publicado,
 nos dois sites.
 
@@ -363,6 +371,7 @@ de uma unidade num teste que olha o HTML.
 | `design-tokens.test.mjs` | zero cor literal fora dos tokens, zero `100vh` |
 | `layout.test.mjs` | rodapé, menu mobile, links que resolvem, sem rota de teste |
 | `pagina-unica.test.mjs` | o site de uma página (v5): os 301, o sitemap, o menu apontando para seções que existem, nenhum link para rota que saiu |
+| `acervo.test.mjs` | o acervo do config (v6): nenhum arquiteto nem ambiente seguido no carrossel, toda foto existe, crédito é nome e não arquivo |
 | `ambientes.test.mjs` | as fotos do carrossel: alt, pasta certa, nenhum `PENDENTE` no HTML |
 | `projetos.test.mjs` | a camada dormente continua funcionando |
 | `seo.test.mjs` | title, description, OpenGraph, canônico, sitemap, robots |

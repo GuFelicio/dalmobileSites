@@ -15,12 +15,12 @@
 import type { MetadataRoute } from "next";
 
 import { unidade } from "../config/derivados.ts";
-import { ambientesDaUnidade } from "../lib/ambientes-da-unidade.ts";
+import { fotosDoCarrossel } from "../lib/acervo.ts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = unidade.dominio;
   const agora = new Date();
-  const fotos = ambientesDaUnidade().flatMap((a) => a.fotos.map((f) => `${base}${f.src}`));
+  const fotos = fotosDoCarrossel().map((f) => `${base}${f.src}`);
 
   return [
     { url: `${base}/`, lastModified: agora, changeFrequency: "monthly", priority: 1, images: fotos },

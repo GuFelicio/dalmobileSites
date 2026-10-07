@@ -1,7 +1,7 @@
 ---
 nome: Banheiro
 slug: banheiro
-unidades: [sjc, caragua]
+unidades: [caragua]
 # Caraguá está em `unidades`, mas está SEM foto desde a copy v3 (02/10/2026): a
 # do lavabo de pedra saiu, porque não mostra móvel Dalmóbile. Sem foto, o
 # ambiente não aparece no site de Caraguá, e /ambientes/banheiro de lá
@@ -14,22 +14,7 @@ chamada: Móvel que convive com vapor todo dia
 # gerado, e o leitor percebe na segunda página. O botão continua o mesmo —
 # botão é interface, não texto.
 chamadaFinal: Quer um banheiro assim?
-fotos:
-  - src: /fotos/sjc/banheiro/20092023-riz1838.webp
-    titulo: Gabinete em L com bancada única
-    alt: Banheiro branco com gabinete em L, bancada cinza contínua, cuba de apoio e espelho de parede inteira
-    edificio:
-    arquiteto:
-  - src: /fotos/sjc/banheiro/27062023-riz4885.webp
-    titulo: Gabinete suspenso, longe do piso molhado
-    alt: Banheiro com gabinete suspenso terracota, cuba redonda branca, box de vidro e revestimento marmorizado
-    edificio:
-    arquiteto:
-  - src: /fotos/sjc/banheiro/debora-toledo-jardim-das-industrias-137.webp
-    titulo: Armário espelhado sobre a bancada
-    alt: Banheiro claro com banheira embutida, box de vidro, nicho iluminado e armário espelhado acima da bancada
-    edificio:
-    arquiteto: Débora Toledo
+fotos: []
 ---
 
 É o ambiente que mais exige do material: vapor, respingo e produto de limpeza.

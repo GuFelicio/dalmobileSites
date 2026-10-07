@@ -8,6 +8,50 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## [não publicado] — 2026-10-07 · v6: novo acervo de fotos SJC
+
+Só o site de São José dos Campos. Caraguatatuba não muda: o HTML da home e de
+`/privacidade` de Caraguá saiu idêntico ao de antes (comparado linha a linha
+com o build da tag `v5-fotos-antigas`).
+
+### Fotos
+- 40 fotos novas, de nove arquitetos, processadas de `fotos-originais/sjc/`
+  (fora do git) por `build/processar-acervo.mjs`: giradas pelo EXIF, sem EXIF,
+  1920px de mestra em `public/fotos/sjc/acervo/`, variações de 440 / 880 /
+  1240 / 1920.
+- Saem todas as fotos antigas de SJC (`riz*`, numeradas, `debora-toledo-*`):
+  estão na tag `v5-fotos-antigas`. O vídeo do topo e a capa dele não mudam.
+- O carrossel tem 39 fotos (a de `Manifesto-RafaelPires.jpg` fica fora: é a da
+  fábrica e a do preview do link). Ordem num array em `config/sjc.ts`
+  (`acervo.carrossel`), com ambientes alternando e nenhum arquiteto seguido.
+- **Sem título nas fotos do carrossel de SJC**: só "01 / AMBIENTE" e
+  "Projeto / Nome", no estilo do crédito de antes. Caraguá mantém os títulos.
+- Alt no formato "Cozinha planejada pela Dalmóbile, projeto de Tati Otta".
+- Fotos avulsas: manifesto `Living-TatiOtta`, fábrica `Manifesto-RafaelPires`,
+  arquitetos `HomeOffice-SertãoArquitetura`, showroom
+  `Cozinha-JulianaGuimarães`; preview do link (og:image)
+  `Manifesto-RafaelPires`.
+
+### Build
+- `build/gerar-imagens.mjs`: teto de 400 KB por variação (baixa a qualidade de
+  6 em 6 até caber; a maior de SJC ficou com 391 KB) e limpeza das variações
+  órfãs, que mantinham foto apagada no ar.
+- `build/podar-fotos.mjs`, no fim de `build:sjc` e `build:caragua`: tira do
+  build as fotos da outra unidade e as de `comum/` que esta não usa. O build
+  de SJC passou a levar só as 40 fotos do acervo.
+- Config: campos `acervo` (só SJC) e `compartilhamento` (a foto do preview,
+  nas duas). `lib/acervo.ts` monta o carrossel e as avulsas para as duas
+  unidades.
+- `conteudo/ambientes/`: saem as fotos de SJC; `closet`, `espaco-gourmet` e
+  `home-office`, que só tinham fotos de SJC, saem inteiros.
+
+### Testes
+- `tests/acervo.test.mjs`: arquiteto e ambiente nunca seguidos, toda foto
+  existe com as variações, crédito é nome. 67 testes por unidade, todos
+  passando.
+
+---
+
 ## 2026-10-07 · Vídeo da abertura novo, com versão vertical no celular
 
 - Vídeo e poster horizontais trocados pelo cliente (1920×1080, 27,2s).

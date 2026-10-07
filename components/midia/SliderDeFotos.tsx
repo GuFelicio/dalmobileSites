@@ -30,7 +30,8 @@ import estilos from "./SliderDeFotos.module.css";
 
 export type FotoDoSlider = {
   src: string;
-  titulo: string;
+  /** Título da foto. Opcional desde a v6: o acervo novo de SJC não tem. */
+  titulo?: string;
   alt: string;
   ambienteNome: string;
   edificio: string | null;
@@ -77,8 +78,10 @@ function Cartao({
         <span>{rotulo}</span>
         {/* Legenda e, abaixo dela, o crédito "PROJETO / NOME" (copy v4) quando
             a foto tem autoria registrada no conteúdo. */}
-        <div className="synthesis-project-legenda">
-          <h3>{foto.titulo}</h3>
+        {/* Sem título (v6, acervo de SJC), a legenda é só o crédito; a classe
+            -sem-titulo tira o vão de onde o título saiu. */}
+        <div className={`synthesis-project-legenda${foto.titulo ? "" : " synthesis-project-legenda-sem-titulo"}`}>
+          {foto.titulo ? <h3>{foto.titulo}</h3> : null}
           {foto.arquiteto ? (
             <p className="synthesis-project-credito">Projeto / {foto.arquiteto}</p>
           ) : null}

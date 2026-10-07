@@ -152,6 +152,32 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-07 · v6: o acervo de SJC mora no config, sem título nas fotos
+
+**O quê.** As fotos de São José dos Campos passaram a vir de um acervo no
+config (`acervo` em `config/sjc.ts`): uma lista com arquivo, ambiente e
+arquiteto de cada foto, na ordem do carrossel. As fotos não têm mais título;
+mostram só o ambiente e o crédito. Caraguatatuba continua com
+`conteudo/ambientes/` e com títulos.
+
+**Por quê.** Decisão do cliente, com o acervo novo da fotografia (40 fotos de
+nove arquitetos). Não há descrição de cada cena — por isso também o alt de
+formato único. A ordem num array do config deixa o cliente reordenar mexendo
+num lugar só; um teste segura a regra de não repetir arquiteto nem ambiente.
+
+**Como.** Os originais (2 a 19 MB) ficam fora do git, em `fotos-originais/`,
+como já era com `imgs/`; o repositório guarda mestras de 1920px. O pipeline
+ganhou teto de 400 KB por variação e passou a apagar variações órfãs. Um passo
+depois do build (`build/podar-fotos.mjs`) tira do site de cada unidade as
+fotos da outra — antes, as de Caraguá iam ao ar no domínio de SJC, sem link.
+
+**Descartado.** Pôr as 40 fotos em `conteudo/ambientes/`: a lista de
+ambientes de lá é fechada e não tem living, sala de TV nem corporativo, e
+exigiria título e alt descritivo que não temos. Escolher sozinho as fotos
+avulsas: o cliente indicou cada uma.
+
+---
+
 ## 2026-10-07 · A abertura tem vídeo vertical no celular
 
 **O quê.** Até 600px a abertura toca a versão vertical do vídeo (720×1280), num

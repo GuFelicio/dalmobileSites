@@ -257,6 +257,9 @@ section[id] { scroll-margin-top: var(--alt-cabecalho); }
   text-transform: uppercase;
   color: var(--sup-apoio);
 }
+/* Sem título (v6, acervo de SJC): o crédito é a legenda inteira, colado no
+   rótulo do ambiente, sem a margem que o separava do título. */
+.synthesis-project-legenda-sem-titulo .synthesis-project-credito { margin-top: 0; }
 
 /* Todos os cards têm a legenda embaixo da foto, na cor da superfície. */
 .synthesis-project-featured { overflow: visible; }

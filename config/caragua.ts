@@ -99,4 +99,8 @@ export const unidade: Unidade = {
     { rotulo: "Para arquitetos", href: "/#arquitetos" },
     { rotulo: "A loja", href: "/#a-loja" },
   ],
+
+  // O preview do link no WhatsApp (og:image), da home e de /privacidade.
+  // Caraguá não tem acervo próprio: as fotos vêm de conteudo/ambientes/*.md.
+  compartilhamento: "/fotos/comum/capa/casa-completa.webp",
 };

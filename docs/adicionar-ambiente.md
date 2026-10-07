@@ -13,6 +13,46 @@ mais se repete: acrescentar fotos novas a um ambiente que já existe.
 
 ---
 
+## São José dos Campos: o acervo (desde a v6, 07/10/2026)
+
+As fotos de SJC **não** ficam em `conteudo/ambientes/`. Elas formam um
+acervo no config, sem título: cada foto do carrossel mostra só o rótulo do
+ambiente ("01 / COZINHA") e o crédito ("Projeto / Tati Otta").
+
+1. **Coloque o original** em `fotos-originais/sjc/`, com o nome no padrão
+   `Ambiente-NomeDoArquiteto.jpg` (com número no fim se houver mais de uma do
+   mesmo projeto: `Living-JulianaGuimarães2.jpg`). Essa pasta **não vai para o
+   git** — guarde os originais no Drive.
+   Prefixos aceitos: `Cozinha`, `Living`, `SalaTV`, `Dormitorio`, `HomeOffice`,
+   `closet`, `banheiro`, `corporativo`.
+2. **Processe:** `node build/processar-acervo.mjs sjc`. Ele gira pela
+   orientação da câmera, tira o EXIF, reduz para 1920px e grava
+   `public/fotos/sjc/acervo/<nome>.webp`, em minúsculas e sem acento:
+   `Living-JulianaGuimarães2.jpg` → `living-juliana-guimaraes-2.webp`.
+3. **Liste a foto em `config/sjc.ts`**, no campo `acervo.carrossel`, na
+   posição em que ela deve aparecer:
+   ```ts
+   { arquivo: "living-juliana-guimaraes-2", ambiente: "living", arquiteto: "Juliana Guimarães" },
+   ```
+   O `arquiteto` é o nome como aparece no site ("Carina e Thiago"), não o do
+   arquivo. Regra da ordem: **nunca duas fotos seguidas do mesmo arquiteto nem
+   do mesmo ambiente** — `tests/acervo.test.mjs` reprova se acontecer.
+4. **Fotos avulsas da home** (manifesto, fábrica, arquitetos, showroom) ficam
+   em `acervo.home`, pelo `arquivo`. Uma foto que não deve entrar no carrossel
+   vai em `acervo.avulsas`. O preview do link no WhatsApp é `compartilhamento`.
+5. **Confira:** `npm run fotos && npm test`. O alt sai sozinho no formato
+   "Cozinha planejada pela Dalmóbile, projeto de Tati Otta" (concordância em
+   `lib/acervo.ts`). Nenhuma variação servida passa de 400 KB: o
+   `build/gerar-imagens.mjs` baixa a qualidade até caber.
+
+> Crédito de arquiteto só com autorização. As nove assinaturas do acervo de
+> 07/10/2026 vieram do cliente junto com as fotos.
+
+O resto deste documento vale para **Caraguatatuba**, que continua usando
+`conteudo/ambientes/`.
+
+---
+
 ## Antes de começar
 
 1. **Fotos de projeto executado pela Dalmóbile.** Nunca render, nunca banco de

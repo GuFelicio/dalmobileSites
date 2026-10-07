@@ -54,7 +54,10 @@ test("o conteúdo empacotado chegou ao bundle", () => {
   // A contraprova: se o JSON não foi embutido, as páginas ficam sem conteúdo.
   assert.match(
     bundle,
-    /Ilha de jantar que dispensa a mesa/,
+    // Um título de foto de conteudo/ambientes/ (v6: as fotos de SJC saíram de
+    // lá para o acervo do config; ficaram as de Caraguá, que vão nos dois
+    // bundles porque o gerado.json é um só).
+    /Bancada amadeirada que vira mesa de refeição/,
     "o conteúdo de conteudo/gerado.json não está no bundle — rodou `npm run conteudo`?",
   );
 });

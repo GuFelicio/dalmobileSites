@@ -79,7 +79,9 @@ Ver [`tests/README-workerd.md`](tests/README-workerd.md).
 | Onde | O quê |
 |---|---|
 | `public/fotos/<unidade>/<ambiente>/` | as fotos. A pasta é **dado**: o build confere |
-| `conteudo/ambientes/*.md` | título, `alt` e crédito de cada foto do carrossel da home |
+| `conteudo/ambientes/*.md` | título, `alt` e crédito das fotos de Caraguatatuba |
+| `config/sjc.ts` → `acervo` | as fotos de São José dos Campos (v6): ordem do carrossel, ambiente, arquiteto e as quatro fotos avulsas |
+| `fotos-originais/<unidade>/` | os JPGs da fotografia, **fora do git**; `node build/processar-acervo.mjs <unidade>` gera as mestras |
 | `app/page.tsx` | o texto da home, literal de `docs/copy-home-v5.md` |
 | `conteudo/projetos/*.md` | os cases — **sem conteúdo hoje** |
 | `config/sjc.ts` e `config/caragua.ts` | tudo que difere entre as duas lojas |
@@ -137,7 +139,7 @@ abertura em vídeo, manifesto, projetos executados (carrossel com as fotos de
 todos os ambientes), fábrica, para arquitetos e showroom — e o menu rola até
 elas. Fica também `/privacidade`. As páginas internas antigas respondem 301 para
 as seções equivalentes (`worker/index.ts`); o código delas está na tag
-`v4-multipagina`. O `npm test` roda 62 testes por unidade.
+`v4-multipagina`. O `npm test` roda 67 testes por unidade.
 
 A camada de config por unidade gera os dois sites do mesmo código, e um teste
 falha se o nome de uma cidade aparecer no build da outra fora da única menção

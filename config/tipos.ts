@@ -31,6 +31,49 @@ export type ItemDeNavegacao = {
   href: string;
 };
 
+/**
+ * Os ambientes do acervo de fotos (v6, 07/10/2026). É a lista do PREFIXO dos
+ * arquivos da fotografia (Cozinha-…, Living-…, SalaTV-…), não a de
+ * lib/ambientes.ts, que é a das antigas páginas de ambiente. O rótulo e a
+ * concordância de cada um estão em lib/acervo.ts.
+ */
+export type AmbienteDoAcervo =
+  | "cozinha"
+  | "living"
+  | "sala-tv"
+  | "dormitorio"
+  | "home-office"
+  | "closet"
+  | "banheiro"
+  | "corporativo";
+
+/** Uma foto do acervo. O arquivo é o nome publicado, sem extensão. */
+export type FotoDoAcervo = {
+  /** Nome em public/fotos/<unidade>/acervo/, sem ".webp". */
+  arquivo: string;
+  ambiente: AmbienteDoAcervo;
+  /** Como o crédito aparece no site: "Projeto / <arquiteto>". */
+  arquiteto: string;
+};
+
+/**
+ * O acervo de fotos de uma unidade, quando ela tem um. Sem ele, a
+ * unidade usa as fotos de conteudo/ambientes/*.md, com título.
+ */
+export type Acervo = {
+  /** O carrossel de projetos, NA ORDEM em que aparece. Reordene aqui. */
+  carrossel: FotoDoAcervo[];
+  /** Fotos do acervo que não entram no carrossel, só nas fotos avulsas. */
+  avulsas: FotoDoAcervo[];
+  /** As quatro fotos avulsas da home, pelo `arquivo`. Podem estar no carrossel. */
+  home: {
+    manifesto: string;
+    fabrica: string;
+    arquitetos: string;
+    showroom: string;
+  };
+};
+
 export type Unidade = {
   /** Identificador. É o valor da variável UNIDADE no build. */
   id: "sjc" | "caragua";
@@ -149,4 +192,13 @@ export type Unidade = {
    * o seu: Caraguá pode não ter as mesmas seções que SJC.
    */
   navegacao: ItemDeNavegacao[];
+
+  /**
+   * A foto de compartilhamento (og:image: o preview do link no WhatsApp), pelo
+   * caminho em public/fotos/. Vale para a home e para /privacidade.
+   */
+  compartilhamento: string;
+
+  /** O acervo de fotos próprio da unidade. Ver o tipo `Acervo`. */
+  acervo?: Acervo;
 };
