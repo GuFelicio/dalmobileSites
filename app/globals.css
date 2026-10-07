@@ -480,9 +480,14 @@ section[id] { scroll-margin-top: var(--alt-cabecalho); }
 }
 
 @media (max-width: 600px) {
-  /* Celular: a abertura no máximo em 60svh (v4). Em 16:9 na largura do
-     telefone ela nem chega lá; o teto vale para telefone deitado. */
-  .synthesis-hero-media { max-height: 60svh; }
+  /* Celular: a abertura passa a ser vertical (07/10/2026), no quadro do
+     vídeo mobile (720×1280, 9:16), e continua com teto de 60svh (v4) para o
+     título da seção seguinte aparecer na primeira tela. Passando do teto, o
+     vídeo é cortado em cima e embaixo (cover), nunca espremido. */
+  .synthesis-hero-media {
+    aspect-ratio: 9 / 16;
+    max-height: 60svh;
+  }
 }
 
 @media (max-width: 700px) {

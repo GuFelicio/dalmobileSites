@@ -152,6 +152,24 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 
 ---
 
+## 2026-10-07 · A abertura tem vídeo vertical no celular
+
+**O quê.** Até 600px a abertura toca a versão vertical do vídeo (720×1280), num
+quadro 9:16 com teto de 60svh; acima, a horizontal, como antes.
+
+**Por quê.** O cliente produziu a versão vertical. Num telefone em pé, o vídeo
+horizontal ocupava uma faixa de ~220px de altura; o vertical usa a tela.
+
+**Como.** `<source media>` com as fontes mobile primeiro, e o poster num
+`<picture>` atrás do vídeo: o navegador baixa só a versão da tela, sem
+JavaScript. 600px e não 768 (como no rascunho parado em `feat/video-mobile`):
+no iPad em pé a abertura é 16:9, e o horizontal cabe nele inteiro.
+
+**Descartado.** Trocar o vídeo por JavaScript (`matchMedia`): baixaria a versão
+errada antes da hidratação. O atributo `poster`: aceita uma imagem só.
+
+---
+
 ## 2026-10-06 · Ajustes de diagramação da home, depois da v5
 
 **O quê** (pedidos do cliente, todos na home):

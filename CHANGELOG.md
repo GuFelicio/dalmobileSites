@@ -8,6 +8,21 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-07 · Vídeo da abertura novo, com versão vertical no celular
+
+- Vídeo e poster horizontais trocados pelo cliente (1920×1080, 27,2s).
+- Versão vertical (720×1280) até 600px: `hero-loop-mobile.mp4` e
+  `hero-loop-mobile-poster.jpg` (renomeados de `…MOBILE…` para o padrão do
+  projeto). `VideoEmLoop` passou a receber `desktop`, `mobile` e `media`: as
+  fontes mobile vêm primeiro com `<source media>`, e o poster virou um
+  `<picture>`, para o celular não baixar a versão horizontal.
+- No celular a abertura é 9:16, com teto de 60svh (o título da seção seguinte
+  continua na primeira tela).
+- A pasta `video/` (vídeos brutos) tinha entrado no commit do cliente: saiu do
+  repositório (continua na máquina) e foi para o `.gitignore`, com `.DS_Store`.
+
+---
+
 ## [não publicado] — 2026-10-06 · v5: ajustes de diagramação da home
 
 - "Móveis personalizados" numa linha só no desktop, e o resto do h1 embaixo

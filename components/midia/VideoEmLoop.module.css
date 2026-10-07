@@ -1,0 +1,29 @@
+/* Camadas do vídeo da abertura. Ver components/midia/VideoEmLoop.tsx.
+   A caixa (posição e tamanho) vem da className de quem usa; aqui só o
+   empilhamento: o poster atrás, o vídeo na frente, os dois do mesmo tamanho. */
+
+.camadas {
+  position: relative;
+  overflow: hidden;
+}
+
+/* cover: preenche a caixa em qualquer proporção, sem barra; o que sobra é
+   cortado nas bordas, nunca a imagem achatada. */
+.poster,
+.video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Com movimento reduzido o vídeo nem aparece: fica o poster do <picture>.
+   O componente também para o download — isto só garante que nada pisque. */
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    display: none;
+  }
+}

@@ -38,3 +38,8 @@ imgs/
 # Conteúdo empacotado para o Worker, gerado por build/gerar-conteudo.mjs.
 # A fonte é conteudo/*/*.md, e ESSA sim é versionada.
 conteudo/gerado.json
+
+# Vídeos brutos de origem: ficam só na máquina. O site usa as versões
+# comprimidas em public/videos/.
+video/
+.DS_Store

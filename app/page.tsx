@@ -102,11 +102,21 @@ export default function Home() {
             e sem faixa de texto embaixo. O vídeo é decorativo (aria-hidden). */}
         <section className="synthesis-hero" id="topo">
           <div className="synthesis-hero-media">
+            {/* Duas versões (07/10/2026): vertical (720×1280) até 600px,
+                horizontal (1920×1080) acima. O navegador baixa só a que serve
+                à tela. */}
             <VideoEmLoop
               className="synthesis-hero-video"
-              webm="/videos/hero-loop.webm"
-              mp4="/videos/hero-loop.mp4"
-              poster="/videos/hero-loop-poster.jpg"
+              media="(max-width: 600px)"
+              mobile={{
+                mp4: "/videos/hero-loop-mobile.mp4",
+                poster: "/videos/hero-loop-mobile-poster.jpg",
+              }}
+              desktop={{
+                webm: "/videos/hero-loop.webm",
+                mp4: "/videos/hero-loop.mp4",
+                poster: "/videos/hero-loop-poster.jpg",
+              }}
             />
           </div>
         </section>

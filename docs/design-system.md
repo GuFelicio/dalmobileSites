@@ -291,19 +291,37 @@ dependência, listener de scroll passivo + `requestAnimationFrame`:
 
 **Proibido:** parallax, scroll sequestrado, carrossel automático, contador animado.
 
-**Vídeo em loop** (`components/midia/VideoEmLoop.tsx`, só no fundo da capa da
+**Vídeo em loop** (`components/midia/VideoEmLoop.tsx`, só na abertura da
 home): `autoplay`, sem som, sem controle; pausa quando sai da tela. Com
-`prefers-reduced-motion` mostra só o poster. Não tem estilo próprio: o
-enquadramento vem de `className`. Nunca escurecido, e nada por cima dele. Na
-v4 a abertura é só o vídeo, com altura máxima de 72svh no desktop e 60svh no
-celular. Ver `docs/decisoes.md`.
+`prefers-reduced-motion` para, deixa de baixar e fica só o poster. Nunca
+escurecido, e nada por cima dele.
+
+**Duas versões** (07/10/2026): vertical (720×1280, só mp4) até 600px e
+horizontal (1920×1080, webm + mp4) acima. As fontes mobile vêm primeiro, com
+`<source media>`, e o poster é um `<picture>` atrás do vídeo — o atributo
+`poster` aceita uma imagem só. O navegador baixa só a versão da tela. No
+celular a caixa da abertura é 9:16, com teto de 60svh; no desktop, 16:9 com
+teto de 72svh.
+
+| Arquivo | Uso |
+|---|---|
+| `public/videos/hero-loop.webm` · `.mp4` | horizontal |
+| `public/videos/hero-loop-poster.jpg` | poster horizontal |
+| `public/videos/hero-loop-mobile.mp4` | vertical |
+| `public/videos/hero-loop-mobile-poster.jpg` | poster vertical |
+
+Os vídeos brutos de origem ficam em `video/`, fora do git (`.gitignore`).
 
 ```tsx
 <VideoEmLoop
   className="synthesis-hero-video"
-  webm="/videos/hero-loop.webm"
-  mp4="/videos/hero-loop.mp4"
-  poster="/videos/hero-loop-poster.jpg"
+  media="(max-width: 600px)"
+  mobile={{ mp4: "/videos/hero-loop-mobile.mp4", poster: "/videos/hero-loop-mobile-poster.jpg" }}
+  desktop={{
+    webm: "/videos/hero-loop.webm",
+    mp4: "/videos/hero-loop.mp4",
+    poster: "/videos/hero-loop-poster.jpg",
+  }}
 />
 ```
 

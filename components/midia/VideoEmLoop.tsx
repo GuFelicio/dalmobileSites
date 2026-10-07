@@ -4,35 +4,50 @@
  * VideoEmLoop — o vídeo de fundo da capa da home.
  *
  * O que é: vídeo decorativo em loop, sem som e sem controle, que preenche a
- * área que o contém. Não tem estilo próprio: o enquadramento (posição,
- * tamanho, object-fit) vem de `className`, de quem o usa.
+ * área que o contém, em duas versões (07/10/2026): vertical no celular,
+ * horizontal acima. O enquadramento da caixa (posição e tamanho) vem de
+ * `className`, de quem o usa; as camadas internas, de VideoEmLoop.module.css.
  *
- * Onde é usado: app/page.tsx, no fundo da `.synthesis-hero`, no lugar da foto
- * de abertura.
+ * Onde é usado: app/page.tsx, na abertura da home (#topo).
  *
  * Props:
- *   webm       fonte principal (VP9, mais leve)
- *   mp4        fallback H.264, para o Safari antigo
- *   poster     primeiro quadro; é o que aparece antes de tocar e com
- *              prefers-reduced-motion
- *   className  classe de enquadramento
+ *   desktop    { webm?, mp4, poster } — a versão horizontal
+ *   mobile     { webm?, mp4, poster } — a versão vertical (opcional)
+ *   media      a media query que escolhe a versão mobile
+ *   className  classe de enquadramento da caixa
+ *
+ * COMO ESCOLHE A VERSÃO, SEM BAIXAR AS DUAS:
+ *   - Vídeo: `<source media>`, com as fontes mobile PRIMEIRO. O navegador usa
+ *     a primeira fonte cuja media bate e cujo formato ele toca. A escolha é
+ *     feita no carregamento: girar o aparelho não troca o vídeo, e está bem.
+ *   - Poster: um `<picture>` atrás do vídeo, e NÃO o atributo `poster`, que
+ *     aceita uma imagem só e faria o celular baixar o poster horizontal. O
+ *     vídeo é transparente até ter o primeiro quadro, então o que aparece
+ *     antes de tocar é o `<picture>`, já na versão certa — sem JavaScript.
  *
  * QUANDO TOCA: `autoplay`, porque é o primeiro conteúdo da página — começa
  * antes mesmo de o JavaScript carregar. Pausa quando a capa sai da tela e
  * volta quando ela reaparece, para não gastar bateria rodando fora de vista.
  *
- * Com prefers-reduced-motion: reduce, para e volta ao poster.
+ * Com prefers-reduced-motion: reduce, o vídeo para, deixa de baixar e some;
+ * fica só o poster do `<picture>`.
  */
 import { useEffect, useRef } from "react";
 
+import estilos from "./VideoEmLoop.module.css";
+
+/** Uma versão do vídeo. webm é opcional: a versão mobile só tem mp4. */
+type Versao = { webm?: string; mp4: string; poster: string };
+
 type Props = {
-  webm: string;
-  mp4: string;
-  poster: string;
+  desktop: Versao;
+  mobile?: Versao;
+  media?: string;
   className?: string;
 };
 
-export default function VideoEmLoop({ webm, mp4, poster, className }: Props) {
+export default function VideoEmLoop({ desktop, mobile, media, className }: Props) {
+  const temMobile = Boolean(mobile && media);
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -53,10 +68,12 @@ export default function VideoEmLoop({ webm, mp4, poster, className }: Props) {
     };
 
     const mostrarSoOPoster = () => {
-      // O `autoplay` do HTML pode ter começado antes da hidratação. load()
-      // devolve o vídeo ao estado inicial, que exibe o poster.
+      // O `autoplay` do HTML pode ter começado antes da hidratação. Sem
+      // autoplay e com preload="none", load() interrompe o download; o CSS
+      // esconde o vídeo e o <picture> de trás aparece.
       video.pause();
       video.removeAttribute("autoplay");
+      video.preload = "none";
       video.load();
     };
 
@@ -71,8 +88,12 @@ export default function VideoEmLoop({ webm, mp4, poster, className }: Props) {
 
     // A pessoa pode mudar o "reduzir movimento" com a página aberta.
     const aoMudarPreferencia = () => {
-      if (movimentoReduzido.matches) mostrarSoOPoster();
-      else tocar();
+      if (movimentoReduzido.matches) {
+        mostrarSoOPoster();
+      } else {
+        video.preload = "auto";
+        tocar();
+      }
     };
     movimentoReduzido.addEventListener("change", aoMudarPreferencia);
 
@@ -83,20 +104,28 @@ export default function VideoEmLoop({ webm, mp4, poster, className }: Props) {
   }, []);
 
   return (
-    <video
-      ref={ref}
-      className={className}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      poster={poster}
-      aria-hidden="true"
-      tabIndex={-1}
-    >
-      <source src={webm} type="video/webm" />
-      <source src={mp4} type="video/mp4" />
-    </video>
+    <div className={`${estilos.camadas} ${className ?? ""}`} aria-hidden="true">
+      {/* O poster, na versão certa para a tela. alt vazio: é decorativo. */}
+      <picture>
+        {temMobile ? <source media={media} srcSet={mobile!.poster} /> : null}
+        <img className={estilos.poster} src={desktop.poster} alt="" fetchPriority="high" />
+      </picture>
+      <video
+        ref={ref}
+        className={estilos.video}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        tabIndex={-1}
+      >
+        {/* Mobile primeiro: vale a primeira fonte que bate. */}
+        {temMobile && mobile!.webm ? <source media={media} src={mobile!.webm} type="video/webm" /> : null}
+        {temMobile ? <source media={media} src={mobile!.mp4} type="video/mp4" /> : null}
+        {desktop.webm ? <source src={desktop.webm} type="video/webm" /> : null}
+        <source src={desktop.mp4} type="video/mp4" />
+      </video>
+    </div>
   );
 }
