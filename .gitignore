@@ -35,6 +35,12 @@ public/fotos-geradas/
 # 2560px em public/fotos/, geradas a partir daqui uma vez só.
 imgs/
 
+# Originais do acervo novo (v6, 07/10/2026): JPGs de 2 a 19 MB, baixados do
+# Drive. NÃO entram no repositório: o site usa as versões processadas em
+# public/fotos/<unidade>/acervo/, geradas a partir daqui por
+# build/processar-acervo.mjs.
+fotos-originais/
+
 # Conteúdo empacotado para o Worker, gerado por build/gerar-conteudo.mjs.
 # A fonte é conteudo/*/*.md, e ESSA sim é versionada.
 conteudo/gerado.json
