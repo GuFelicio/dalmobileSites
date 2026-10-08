@@ -34,7 +34,7 @@ ambiente ("01 / COZINHA") e o crédito ("Projeto / Tati Otta").
    ```ts
    { arquivo: "living-juliana-guimaraes-2", ambiente: "living", arquiteto: "Juliana Guimarães" },
    ```
-   O `arquiteto` é o nome como aparece no site ("Carina e Thiago"), não o do
+   O `arquiteto` é o nome como aparece no site ("Juliana Guimarães", com espaço e acento), não o do
    arquivo. Regra da ordem: **nunca duas fotos seguidas do mesmo arquiteto nem
    do mesmo ambiente** — `tests/acervo.test.mjs` reprova se acontecer.
 4. **Fotos avulsas da home** (manifesto, fábrica, arquitetos, showroom) ficam

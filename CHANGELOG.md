@@ -8,6 +8,14 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-08 · Crédito "Carina Thiago"
+
+- O crédito das cinco fotos de Carina Thiago saía como "Carina e Thiago",
+  como se fossem duas pessoas. É um nome só: corrigido em `config/sjc.ts`
+  (crédito e alt).
+
+---
+
 ## [não publicado] — 2026-10-07 · v6: novo acervo de fotos SJC
 
 Só o site de São José dos Campos. Caraguatatuba não muda: o HTML da home e de
