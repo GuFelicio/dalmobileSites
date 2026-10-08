@@ -49,7 +49,9 @@ ambiente ("01 / COZINHA") e o crédito ("Projeto / Tati Otta").
 > 07/10/2026 vieram do cliente junto com as fotos.
 
 O resto deste documento vale para **Caraguatatuba**, que continua usando
-`conteudo/ambientes/`.
+`conteudo/ambientes/`. Desde 08/10/2026 o carrossel de Caraguá também não
+mostra o `titulo` da foto (só o ambiente e o crédito); o campo continua
+obrigatório no arquivo, mas não vai ao ar.
 
 ---
 

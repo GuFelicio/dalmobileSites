@@ -158,7 +158,8 @@ translúcida sobre a foto (o painel sólido resolve sem tocar na imagem).
 config (`acervo` em `config/sjc.ts`): uma lista com arquivo, ambiente e
 arquiteto de cada foto, na ordem do carrossel. As fotos não têm mais título;
 mostram só o ambiente e o crédito. Caraguatatuba continua com
-`conteudo/ambientes/` e com títulos.
+`conteudo/ambientes/`, e em 08/10/2026 também perdeu os títulos no carrossel
+(pedido do cliente) — a regra "sem título" passou a valer para os dois sites.
 
 **Por quê.** Decisão do cliente, com o acervo novo da fotografia (40 fotos de
 nove arquitetos). Não há descrição de cada cena — por isso também o alt de

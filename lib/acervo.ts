@@ -2,9 +2,10 @@
  * As fotos da home: o carrossel de projetos e as quatro fotos avulsas.
  *
  * O que é: a única porta de foto da home. Se a unidade tem `acervo` no config
- * (v6, 07/10/2026), as fotos vêm dele, na ordem dele, SEM título e com o
- * crédito "Projeto / <arquiteto>". Se não tem, vêm de conteudo/ambientes/*.md,
- * intercaladas entre os ambientes e com o título de cada foto, como antes.
+ * (v6, 07/10/2026), as fotos vêm dele, na ordem dele. Se não tem, vêm de
+ * conteudo/ambientes/*.md, intercaladas entre os ambientes. Nos dois casos o
+ * carrossel mostra só "01 / AMBIENTE" e o crédito "Projeto / <arquiteto>",
+ * sem título (08/10/2026: valia só para o acervo, passou a valer para as duas).
  *
  * Onde é usado: app/page.tsx (carrossel e fotos avulsas) e app/sitemap.ts.
  *
@@ -59,7 +60,9 @@ export function fotosDoCarrossel(): FotoDoSlider[] {
   const porAmbiente = ambientesDaUnidade().map((ambiente) =>
     ambiente.fotos.map((foto) => ({
       src: foto.src,
-      titulo: foto.titulo,
+      // Sem título, como no acervo (08/10/2026, pedido do cliente): o
+      // carrossel mostra só o ambiente e o crédito nos dois sites. O campo
+      // `titulo` continua no conteúdo, mas não vai mais ao ar.
       alt: foto.alt,
       ambienteNome: ambiente.nome,
       edificio: foto.edificio,

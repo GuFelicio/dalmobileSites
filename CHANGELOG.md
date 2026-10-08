@@ -8,6 +8,14 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-08 · Carrossel de Caraguatatuba sem título nas fotos
+
+- O carrossel de Caraguá passou a mostrar só "01 / AMBIENTE" e "Projeto /
+  Flávia e Sérgia Garrido", como o de SJC desde a v6. O `titulo` das fotos
+  continua em `conteudo/ambientes/`, mas não vai ao ar (`lib/acervo.ts`).
+
+---
+
 ## 2026-10-08 · Crédito "Carina Thiago"
 
 - O crédito das cinco fotos de Carina Thiago saía como "Carina e Thiago",
