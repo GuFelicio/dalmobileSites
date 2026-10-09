@@ -29,6 +29,7 @@ import { navegacao, linkWhatsApp, unidade } from "../../config/derivados";
 import { Menu, WhatsApp } from "../icons";
 import { Brand } from "./Brand";
 import { MobileMenu } from "./MobileMenu";
+import { irParaSecao } from "./irParaSecao";
 import estilos from "./Header.module.css";
 
 // Abaixo disto o cabeçalho fica sempre visível e sem fio: é o topo da página.
@@ -136,7 +137,12 @@ export function Header() {
                     e o <Link> do vinext, na própria home, não rola até a
                     seção. Com <a>, o navegador rola, com a rolagem suave do
                     CSS; a partir de /privacidade, carrega a home já na seção. */}
-                <a href={item.href}>{item.rotulo}</a>
+                {/* O clique rola até a seção sem navegação por âncora: no site
+                    estático (Pages), a âncora disparava um laço do roteador que
+                    travava o menu. Ver irParaSecao.ts. */}
+                <a href={item.href} onClick={(e) => irParaSecao(e, item.href)}>
+                  {item.rotulo}
+                </a>
               </li>
             ))}
           </ul>

@@ -68,6 +68,11 @@ Seções da home e os ids que o menu usa:
 **Menu:** Projetos · A Dalmóbile · Para parceiros (leva a #arquitetos) · A loja, sempre como
 `"/#id"` (com a barra, para funcionar a partir de `/privacidade`), em `<a>` e não
 em `next/link` — o `<Link>` do vinext não rola até a âncora na própria página.
+**Todo link de âncora da home passa por `irParaSecao`** (`components/layout/irParaSecao.ts`):
+na própria home ele rola até a seção e troca o endereço com `replaceState`, sem
+navegação por âncora. No site estático (Pages), a navegação por âncora dispara
+`popstate`, o roteador do vinext pede os dados ao servidor que não existe e entra
+num laço que trava o menu (10/10/2026).
 A rolagem é o `scroll-behavior: smooth` do CSS, desligado com
 `prefers-reduced-motion`; cada seção tem `scroll-margin-top` igual à altura do
 cabeçalho. A marca leva a `/`. Âncora nunca aponta para a própria seção.

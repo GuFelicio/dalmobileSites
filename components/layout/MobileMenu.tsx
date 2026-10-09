@@ -19,6 +19,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { navegacao, linkTelefone, linkWhatsApp, unidade } from "../../config/derivados";
 import { Fechar, WhatsApp } from "../icons";
 import { Brand } from "./Brand";
+import { irParaSecao } from "./irParaSecao";
 import estilos from "./MobileMenu.module.css";
 
 const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -128,7 +129,7 @@ export function MobileMenu({ aberto, aoFechar }: MobileMenuProps) {
             <li key={item.href}>
               {/* <a>, como no cabeçalho (ver Header.tsx): o clique fecha o
                   painel e o navegador rola até a seção. */}
-              <a href={item.href} onClick={aoFechar}>
+              <a href={item.href} onClick={(e) => irParaSecao(e, item.href, aoFechar)}>
                 {item.rotulo}
               </a>
             </li>

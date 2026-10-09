@@ -1243,3 +1243,35 @@ redirecionamento para o `www` no provedor de DNS.
 registros da loja) e Cloudflare for SaaS (liga o site da loja à zona da
 agência).
 
+---
+
+## 10/10/2026 · O menu rola até a seção sem navegação por âncora
+
+**O quê.** Os itens do menu (cabeçalho e menu mobile) passam por
+`irParaSecao` (`components/layout/irParaSecao.ts`): na própria home, o clique
+rola até a seção com `scrollIntoView` e troca o endereço com
+`history.replaceState`. Fora da home, o link carrega a home já na seção.
+
+**Por quê.** No site estático do Cloudflare Pages, depois do primeiro clique
+no menu nenhum outro funcionava: a página "travava" na seção. A navegação por
+âncora faz o navegador disparar `popstate`; o roteador do vinext responde a
+`popstate` pedindo os dados da página ao servidor (`index.rsc`), que no Pages
+não responde como ele espera, e entra num laço de `replaceState` — medido:
+~200 navegações por segundo, sem parar — que engole todo clique seguinte. No
+Worker não acontecia porque havia servidor. `replaceState` não dispara
+`popstate`, e o laço não começa.
+
+**Efeito colateral, desejado.** As seções não viram entradas no histórico: o
+"Voltar" do navegador sai da página, em vez de passear pelas seções (e cada
+passeio dispararia o mesmo laço).
+
+**Como conferir.** No emulador do Pages (`npx wrangler pages dev dist/client
+--compatibility-date 2026-05-01`, depois de `npm run build:pages:sjc`): cinco
+cliques seguidos no menu, no desktop e no celular, cada um levando à sua seção;
+nenhuma navegação em laço; Voltar; abrir `/#a-loja` direto; ir e voltar da
+privacidade. O servidor simples do Python não serve: ele não entrega
+`/privacidade` a partir de `privacidade.html`, como o Pages.
+
+**Descartado.** Mexer no vinext em `node_modules` (some no próximo `npm ci`);
+voltar ao `next/link` (não rola na própria página); tirar o `#` do endereço de
+vez (os redirecionamentos das páginas antigas dependem dele).

@@ -8,6 +8,20 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-10 · Menu travado no site estático (Pages)
+
+- **Corrigido:** no Pages, depois do primeiro clique no menu nenhum outro item
+  funcionava. A navegação por âncora disparava um laço do roteador do vinext
+  (ele pede ao servidor os dados da página, e no Pages não há servidor).
+- `components/layout/irParaSecao.ts`: o clique rola até a seção e troca o
+  endereço com `replaceState`, sem navegação por âncora. Usado no cabeçalho e
+  no menu mobile. O "Voltar" do navegador passa a sair da página.
+- Conferido no emulador do Pages: cinco cliques seguidos (desktop e celular),
+  zero navegação em laço, Voltar, `/#a-loja` direto, ida e volta da
+  privacidade e os links do 404.
+
+---
+
 ## 2026-10-09 · Build estático para o Cloudflare Pages
 
 - Novos scripts `build:pages:sjc` e `build:pages:caragua`: geram o site em
