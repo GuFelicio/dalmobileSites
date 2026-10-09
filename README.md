@@ -30,7 +30,7 @@ Em caso de conflito entre os documentos, **o `CLAUDE.md` vence**.
 
 ## Requisitos
 
-- Node.js `>= 22.13.0`
+- Node.js `>= 22.18.0`
 
 ## Como rodar
 
@@ -110,6 +110,19 @@ Cada projeto precisa do comando de build da sua unidade:
 > no padrão e publicaria São José dos Campos — inclusive no projeto de
 > Caraguatatuba, em silêncio. Por isso o build **recusa rodar em CI** sem ela,
 > com uma mensagem dizendo o que configurar.
+
+### Alternativa: Cloudflare Pages (HTML estático)
+
+Para apontar o domínio só por CNAME, sem levar o DNS para a Cloudflare:
+
+| Projeto Pages | Comando de build | Pasta de saída |
+|---|---|---|
+| SJC | `npm run build:pages:sjc` | `dist/client` |
+| Caraguá | `npm run build:pages:caragua` | `dist/client` |
+
+O Node precisa ser 22.18 ou mais novo (o `.node-version` já pede). No
+provedor de DNS, o `www` vira CNAME para `<projeto>.pages.dev`. Ver
+`docs/decisoes.md`, 09/10/2026.
 
 Para publicar da sua máquina, `npm run deploy:sjc` ou `npm run deploy:caragua`.
 Os dois rodam `npm run pendencias` antes e **recusam publicar** enquanto houver

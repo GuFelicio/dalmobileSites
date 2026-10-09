@@ -1218,3 +1218,28 @@ inalcançável por motivo de sistema operacional, não de código.
 **Descartado.** Instalar `coreutils` via Homebrew (empurra requisito de máquina
 para quem entrar depois) e apagar os scripts de CI (o builder remoto do Sites os
 usa).
+
+---
+
+## 09/10/2026 · Build estático para publicar no Cloudflare Pages
+
+**Decisão.** Além do build do Worker, o repositório gera o site em HTML
+estático (`npm run build:pages:sjc` / `build:pages:caragua`), para publicar no
+Cloudflare Pages.
+
+**Por quê.** O DNS dos domínios da loja está na Locaweb, com e-mail e outros
+registros pendurados nele. O Worker só aceita domínio próprio com o DNS na
+Cloudflare (ou via Cloudflare for SaaS, na zona da agência). O Pages aceita
+um CNAME simples para o subdomínio `www`, sem mexer no resto. Desde a v5 o
+site é uma página só, sem formulário nem rota dinâmica, então o export
+estático entrega o mesmo HTML.
+
+**O que isso obriga.** Os 301 das páginas antigas existem em dois lugares:
+`worker/index.ts` e o `_redirects` gravado por `build/exportar-estatico.mjs`.
+Mudou um, muda o outro. O domínio sem `www` não aceita CNAME e precisa de
+redirecionamento para o `www` no provedor de DNS.
+
+**Descartado.** Levar os nameservers para a Cloudflare (mexe em todos os
+registros da loja) e Cloudflare for SaaS (liga o site da loja à zona da
+agência).
+

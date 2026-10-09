@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=22.13.0"
+    "node": ">=22.18.0"
   },
   "scripts": {
     "dev": "npm run preparar && vite",
@@ -11,6 +11,8 @@
     "build": "npm run preparar && vinext build",
     "build:sjc": "npm run preparar && UNIDADE=sjc vinext build && node build/podar-fotos.mjs sjc",
     "build:caragua": "npm run preparar && UNIDADE=caragua vinext build && node build/podar-fotos.mjs caragua",
+    "build:pages:sjc": "npm run preparar && EXPORTAR=1 UNIDADE=sjc vinext build && node build/podar-fotos.mjs sjc && node build/exportar-estatico.mjs",
+    "build:pages:caragua": "npm run preparar && EXPORTAR=1 UNIDADE=caragua vinext build && node build/podar-fotos.mjs caragua && node build/exportar-estatico.mjs",
     "start": "vinext start",
     "deploy:sjc": "npm run pendencias && npm run build:sjc && wrangler deploy -c dist/server/wrangler.json --name dalmobile-sjc",
     "deploy:caragua": "npm run pendencias && npm run build:caragua && wrangler deploy -c dist/server/wrangler.json --name dalmobile-caragua",

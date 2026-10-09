@@ -288,6 +288,25 @@ Sem isso, daqui a seis meses alguém "melhora" o site desfazendo tudo — de boa
 
 Base: template `site-creator-vinext-starter` — **vinext + Vite + Cloudflare Workers**.
 
+### Publicação: Cloudflare Pages, em HTML estático (09/10/2026)
+
+O site vai ao ar pelo **Cloudflare Pages**, não pelo Worker. O motivo é o DNS: os domínios da loja ficam na Locaweb, e o Pages aceita apontar o `www` por um CNAME simples, sem mexer no e-mail e nos outros registros. Ver `docs/decisoes.md`, 09/10/2026.
+
+```
+Projeto Pages SJC      npm run build:pages:sjc       saída: dist/client
+Projeto Pages Caraguá  npm run build:pages:caragua   saída: dist/client
+```
+
+O build roda com `EXPORTAR=1` (`output: "export"` no `next.config.ts`) e o vinext pré-renderiza `/`, `/privacidade` e o 404 em HTML. Depois, `build/exportar-estatico.mjs` grava `robots.txt`, `sitemap.xml` e o `_redirects`.
+
+**Regras que isso impõe — o site precisa continuar exportável:**
+- **Nada que dependa de servidor em tempo de execução:** sem server action (`"use server"`), sem route handler (`route.ts`), sem `cookies()`/`headers()`, sem `dynamic = "force-dynamic"`, sem página com parâmetro que não esteja em `generateStaticParams`. Se uma tarefa pedir isso (um formulário que envia por conta própria, por exemplo), **pare e pergunte** antes: a resposta muda a hospedagem.
+- **Os 301 das páginas antigas existem em dois lugares:** `worker/index.ts` e `REDIRECIONAMENTOS` em `build/exportar-estatico.mjs`. Mudou um, muda o outro.
+- **O comando do projeto Pages define a unidade.** Nunca usar `npm run build` puro no Pages.
+- **Node 22.18 ou mais novo** (`.node-version`): `build/gerar-conteudo.mjs` importa `.ts` direto, e a 22.16 quebra.
+
+O build e o deploy do Worker (`build:sjc`, `deploy:sjc`, `npm run workerd`) continuam funcionando e não mudaram, mas não são mais o caminho de produção.
+
 Mantém: o runtime Cloudflare. O site é 90% imagem, e toda foto de conteúdo passa pelo componente **`components/midia/Foto.tsx`**, com `sizes` obrigatório e `prioridade` só na foto de abertura.
 
 > **`next/image` não é usado, e a verificação está feita.** O binding `env.IMAGES` não existe na conta e é pago; além disso, o shim de `next/image` do vinext **desliga o `srcSet` quando recebe um loader próprio**, servindo um arquivo só. As variações são geradas no build por `build/gerar-imagens.mjs` com `sharp`, e o `<Foto>` monta `srcSet` e `sizes` de verdade. Ver `docs/decisoes.md`.
@@ -319,6 +338,9 @@ Mantém: o runtime Cloudflare. O site é 90% imagem, e toda foto de conteúdo pa
 - [ ] `:focus-visible` visível em todo elemento focável
 - [ ] Menu mobile funcionando — nada de botão hambúrguer sem handler
 - [ ] `alt` descritivo em toda imagem
+- [ ] **`npm run build:pages:sjc` e `npm run build:pages:caragua` passam**, e
+      `dist/client/` tem `index.html`, `privacidade.html`, `404.html`,
+      `robots.txt`, `sitemap.xml` e `_redirects` — é o que vai ao ar
 - [ ] **Rodado em `workerd`, não só em Node:** `npm run workerd` e todas as rotas
       em 200. O runtime da Cloudflare não tem sistema de arquivos, e a suíte
       roda em Node, onde tem — dois deploys já caíram por essa diferença

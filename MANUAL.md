@@ -50,7 +50,7 @@ site existe para essas fotos aparecerem grandes e intactas.
 
 ## 2. Como rodar
 
-Node.js 22.13 ou mais novo.
+Node.js 22.18 ou mais novo.
 
 ```bash
 npm install

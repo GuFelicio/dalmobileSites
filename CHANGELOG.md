@@ -8,6 +8,22 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-09 · Build estático para o Cloudflare Pages
+
+- Novos scripts `build:pages:sjc` e `build:pages:caragua`: geram o site em
+  HTML estático em `dist/client/`, para publicar no **Cloudflare Pages**
+  apontando o domínio só por CNAME, sem levar o DNS para a Cloudflare.
+- `build/exportar-estatico.mjs` completa o export: grava `robots.txt` e
+  `sitemap.xml` (vindos de `app/robots.ts` e `app/sitemap.ts`) e o
+  `_redirects` com os mesmos 301 de `worker/index.ts`.
+- `next.config.ts` só liga `output: "export"` com `EXPORTAR=1`. O build e o
+  deploy do Worker (`build:sjc`, `deploy:sjc`) não mudam.
+- Node mínimo passou a **22.18** (`.node-version` e `engines`): o
+  `gerar-conteudo.mjs` importa `.ts` direto, e o Node só faz isso sozinho a
+  partir da 22.18. Na 22.16 (padrão do Pages) o build quebrava.
+- Pendente de propósito: os 301 agora vivem em dois lugares
+  (`worker/index.ts` e `exportar-estatico.mjs`) enquanto o Worker existir.
+
 ## 2026-10-09 · Seção de arquitetos: "Para parceiros" e itens novos
 
 - No menu, "Para arquitetos" virou **"Para parceiros"** nos dois sites. A
