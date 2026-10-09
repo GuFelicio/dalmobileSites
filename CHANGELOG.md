@@ -8,6 +8,18 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-09 · Seção de arquitetos: "Para parceiros" e itens novos
+
+- No menu, "Para arquitetos" virou **"Para parceiros"** nos dois sites. A
+  âncora continua `#arquitetos`, e o rótulo da seção continua "PARA
+  ARQUITETOS E DESIGNERS".
+- Os três itens da seção foram trocados pelos do cliente: **Autoria
+  Preservada**, **Precisão Personalizada** e **Projeto em evidência** (texto
+  literal do pedido). Saíram "Suporte à especificação" e "Orçamento de
+  escritório". Título e frase final sem mudança.
+
+---
+
 ## 2026-10-08 · Carrossel de Caraguatatuba sem título nas fotos
 
 - O carrossel de Caraguá passou a mostrar só "01 / AMBIENTE" e "Projeto /

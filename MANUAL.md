@@ -92,7 +92,7 @@ verdes. Ver [`tests/README-workerd.md`](tests/README-workerd.md).
 | `/a-dalmobile` · `/arquitetos` · `/a-loja` | **301** para `/#a-dalmobile` · `/#arquitetos` · `/#a-loja` |
 | qualquer outra | 404 com os caminhos úteis |
 
-O menu (Projetos · A Dalmóbile · Para arquitetos · A loja) **rola até as
+O menu (Projetos · A Dalmóbile · Para parceiros · A loja) **rola até as
 seções da home**: cada item é um link `"/#id"`. Os ids e a ordem estão no
 `CLAUDE.md`, "Mapa de rotas", e no `docs/copy-home-v5.md`. Os redirecionamentos
 ficam em `worker/index.ts`.

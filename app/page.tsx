@@ -178,26 +178,31 @@ export default function Home() {
             ) : null}
           </div>
           <div className="synthesis-architects-body">
+            {/* Os três itens do cliente (09/10/2026), no lugar de "Autoria
+                preservada", "Suporte à especificação" e "Orçamento de
+                escritório". Texto literal do pedido. */}
             <ul className="synthesis-architects-items">
               <li>
-                <h3>Autoria preservada</h3>
+                <h3>Autoria Preservada</h3>
                 <p>
-                  Você entrega o projeto e nós detalhamos a marcenaria: encaixes, ferragens,
-                  espessuras e folgas de obra. Nada entra na fábrica sem a sua aprovação.
+                  O seu projeto será apresentado sempre creditado em seu nome, em qualquer
+                  publicação ou apresentações.
                 </p>
               </li>
               <li>
-                <h3>Suporte à especificação</h3>
+                <h3>Precisão Personalizada</h3>
                 <p>
-                  Desde o início do projeto, você pode especificar laca, vidro e alumínio da
-                  própria fábrica, painéis ripados retos ou curvos, cantos curvos, portas que
-                  entram no móvel e tomadas embutidas. Se o padrão de MDF não estiver na
-                  cartela, a linha One produz no padrão de qualquer grande fornecedor.
+                  Nossa fábrica permite executar com rigor técnico cada medida, proporção e
+                  solução definida por você!
                 </p>
               </li>
               <li>
-                <h3>Orçamento de escritório</h3>
-                <p>O orçamento de escritório entra numa fila própria, separada do balcão.</p>
+                <h3>Projeto em evidência</h3>
+                <p>
+                  Ambientes selecionados recebem fotos e vídeos profissionais e podem integrar
+                  nossas redes sociais, apresentações e catálogos, ampliando a visibilidade do
+                  profissional!
+                </p>
               </li>
             </ul>
           </div>

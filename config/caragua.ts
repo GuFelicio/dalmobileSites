@@ -96,7 +96,8 @@ export const unidade: Unidade = {
   navegacao: [
     { rotulo: "Projetos", href: "/#projetos" },
     { rotulo: "A Dalmóbile", href: "/#a-dalmobile" },
-    { rotulo: "Para arquitetos", href: "/#arquitetos" },
+    // "Para parceiros" desde 09/10/2026 (pedido do cliente); a âncora segue #arquitetos.
+    { rotulo: "Para parceiros", href: "/#arquitetos" },
     { rotulo: "A loja", href: "/#a-loja" },
   ],
 

@@ -65,7 +65,7 @@ Seções da home e os ids que o menu usa:
               fica no rodapé)
 ```
 
-**Menu:** Projetos · A Dalmóbile · Para arquitetos · A loja, sempre como
+**Menu:** Projetos · A Dalmóbile · Para parceiros (leva a #arquitetos) · A loja, sempre como
 `"/#id"` (com a barra, para funcionar a partir de `/privacidade`), em `<a>` e não
 em `next/link` — o `<Link>` do vinext não rola até a âncora na própria página.
 A rolagem é o `scroll-behavior: smooth` do CSS, desligado com
