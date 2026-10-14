@@ -17,7 +17,7 @@ mais se repete: acrescentar fotos novas a um ambiente que já existe.
 
 As fotos de SJC **não** ficam em `conteudo/ambientes/`. Elas formam um
 acervo no config, sem título: cada foto do carrossel mostra só o rótulo do
-ambiente ("01 / COZINHA") e o crédito ("Projeto / Tati Otta").
+ambiente ("01 / COZINHA") e o crédito ("Projeto / Otta Albernaz Arquitetura").
 
 1. **Coloque o original** em `fotos-originais/sjc/`, com o nome no padrão
    `Ambiente-NomeDoArquiteto.jpg` (com número no fim se houver mais de uma do
@@ -41,7 +41,7 @@ ambiente ("01 / COZINHA") e o crédito ("Projeto / Tati Otta").
    em `acervo.home`, pelo `arquivo`. Uma foto que não deve entrar no carrossel
    vai em `acervo.avulsas`. O preview do link no WhatsApp é `compartilhamento`.
 5. **Confira:** `npm run fotos && npm test`. O alt sai sozinho no formato
-   "Cozinha planejada pela Dalmóbile, projeto de Tati Otta" (concordância em
+   "Cozinha planejada pela Dalmóbile, projeto de Otta Albernaz Arquitetura" (concordância em
    `lib/acervo.ts`). Nenhuma variação servida passa de 400 KB: o
    `build/gerar-imagens.mjs` baixa a qualidade até caber.
 

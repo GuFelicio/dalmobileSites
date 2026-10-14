@@ -8,6 +8,16 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-14 · Crédito "Otta Albernaz Arquitetura"
+
+- As três fotos que saíam com "Projeto / Tati Otta" (cozinha, banheiro e o
+  living do manifesto, em SJC) passam a creditar **Otta Albernaz
+  Arquitetura**, no crédito e no alt. Pedido do cliente; mudança em
+  `config/sjc.ts`. Os nomes de arquivo (`*-tati-otta.webp`) ficam como estão:
+  não aparecem no site.
+
+---
+
 ## 2026-10-10 · Menu travado no site estático (Pages)
 
 - **Corrigido:** no Pages, depois do primeiro clique no menu nenhum outro item

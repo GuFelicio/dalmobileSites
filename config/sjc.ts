@@ -102,7 +102,7 @@ export const unidade: Unidade = {
     // usada para gerá-la: ambientes alternando e nunca duas fotos seguidas do
     // mesmo arquiteto (um teste confere as duas coisas).
     carrossel: [
-      { arquivo: "cozinha-tati-otta", ambiente: "cozinha", arquiteto: "Tati Otta" },
+      { arquivo: "cozinha-tati-otta", ambiente: "cozinha", arquiteto: "Otta Albernaz Arquitetura" },
       { arquivo: "dormitorio-gustavo-dias", ambiente: "dormitorio", arquiteto: "Gustavo Dias" },
       { arquivo: "cozinha-juliana-guimaraes", ambiente: "cozinha", arquiteto: "Juliana Guimarães" },
       { arquivo: "living-gustavo-dias", ambiente: "living", arquiteto: "Gustavo Dias" },
@@ -133,13 +133,13 @@ export const unidade: Unidade = {
       { arquivo: "living-juliana-guimaraes-3", ambiente: "living", arquiteto: "Juliana Guimarães" },
       { arquivo: "home-office-carina-thiago-2", ambiente: "home-office", arquiteto: "Carina Thiago" },
       { arquivo: "sala-tv-brc", ambiente: "sala-tv", arquiteto: "BRC" },
-      { arquivo: "banheiro-tati-otta", ambiente: "banheiro", arquiteto: "Tati Otta" },
+      { arquivo: "banheiro-tati-otta", ambiente: "banheiro", arquiteto: "Otta Albernaz Arquitetura" },
       { arquivo: "closet-juliana-guimaraes", ambiente: "closet", arquiteto: "Juliana Guimarães" },
       { arquivo: "corporativo-gustavo-dias-3", ambiente: "corporativo", arquiteto: "Gustavo Dias" },
       { arquivo: "cozinha-debora-toledo", ambiente: "cozinha", arquiteto: "Débora Toledo" },
       { arquivo: "dormitorio-dany-resck", ambiente: "dormitorio", arquiteto: "Dany Resck" },
       { arquivo: "home-office-sertao-arquitetura", ambiente: "home-office", arquiteto: "Sertão Arquitetura" },
-      { arquivo: "living-tati-otta", ambiente: "living", arquiteto: "Tati Otta" },
+      { arquivo: "living-tati-otta", ambiente: "living", arquiteto: "Otta Albernaz Arquitetura" },
       { arquivo: "sala-tv-rafael-pires", ambiente: "sala-tv", arquiteto: "Rafael Pires" },
     ],
     // Fora do carrossel: a foto do arquivo "Manifesto-RafaelPires.jpg", que é
