@@ -176,7 +176,7 @@ A promessa é a mesma nos dois sites: o móvel é feito para você, seja onde fo
 | Vale do Paraíba | Vale da Paraíba |
 | litoral norte | Litoral Norte (no meio da frase) |
 | 09h00 às 19h00 | 9h às 19h, 9-19h |
-| SJC: (12) 99604-9888 · Caraguá: (12) 99602-1234 | 12 99604-9888, número de uma loja no site da outra |
+| SJC: (12) 99602-1234 · Caraguá: (12) 99671-5783 | 12 99602-1234, número de uma loja no site da outra |
 | home office | home-office, homeoffice |
 | espaço gourmet | área gourmet, gourmeteria |
 

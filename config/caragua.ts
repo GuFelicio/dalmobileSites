@@ -24,7 +24,9 @@ export const unidade: Unidade = {
   cidade: "Caraguatatuba",
   regiao: "litoral norte",
   estado: "SP",
-  dominio: "https://dalmobilecaraguatatuba.com.br",
+  // Com www (14/10/2026): o site está no www, apontado por CNAME no Pages;
+  // o domínio sem www só redireciona para cá.
+  dominio: "https://www.dalmobilecaraguatatuba.com.br",
   // Areia no lugar do cinza: o site do litoral. Ver app/tokens.css.
   paleta: "palha",
 
@@ -46,8 +48,8 @@ export const unidade: Unidade = {
   // O número DESTA loja (copy v3, 02/10/2026). Até então o site de Caraguá
   // mostrava o número da outra unidade em todo lugar — topo, menu, rodapé,
   // loja, privacidade e o link do WhatsApp. Telefone e WhatsApp são o mesmo.
-  telefone: "(12) 99602-1234",
-  whatsapp: "5512996021234",
+  telefone: "(12) 99671-5783",
+  whatsapp: "5512996715783",
 
   horarios: [
     { dias: "Segunda a sexta", abre: "09h00", fecha: "18h00", confirmado: true },
@@ -81,7 +83,7 @@ export const unidade: Unidade = {
     nome: "Ver a loja de São José dos Campos",
     cidade: "São José dos Campos",
     regiao: "Vale do Paraíba",
-    url: "https://dalmobilesjc.com.br",
+    url: "https://www.dalmobilesjc.com.br",
   },
 
   textos: {

@@ -8,6 +8,21 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-10-14 · Domínios com www e telefones novos
+
+- `dominio` e o link para a outra loja (`outraUnidade.url`) passam a usar
+  **www**: `https://www.dalmobilesjc.com.br` e
+  `https://www.dalmobilecaraguatatuba.com.br`. O site está no `www` (CNAME no
+  Pages), e o link sem www não levava ao outro site. O canônico, o sitemap, o
+  robots e o OpenGraph seguem o `dominio` sozinhos.
+- Telefones e WhatsApp novos, pedido do cliente:
+  - SJC: **(12) 99602-1234** (`5512996021234`) — era (12) 99604-9888;
+  - Caraguatatuba: **(12) 99671-5783** (`5512996715783`) — era (12) 99602-1234.
+  O número aparece no rodapé, no menu mobile, na privacidade e no schema
+  `LocalBusiness`; o link `wa.me` de todos os botões sai do mesmo campo.
+
+---
+
 ## 2026-10-14 · Crédito "Otta Albernaz Arquitetura"
 
 - As três fotos que saíam com "Projeto / Tati Otta" (cozinha, banheiro e o

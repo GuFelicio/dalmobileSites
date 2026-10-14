@@ -20,7 +20,9 @@ export const unidade: Unidade = {
   cidade: "São José dos Campos",
   regiao: "Vale do Paraíba",
   estado: "SP",
-  dominio: "https://dalmobilesjc.com.br",
+  // Com www (14/10/2026): o site está no www, apontado por CNAME no Pages;
+  // o domínio sem www só redireciona para cá.
+  dominio: "https://www.dalmobilesjc.com.br",
   paleta: "neutra",
 
   endereco: {
@@ -39,8 +41,8 @@ export const unidade: Unidade = {
   // Telefone e WhatsApp são o mesmo número, e é desta loja só: cada unidade
   // tem o seu desde a copy v3 (02/10/2026). O fixo (12) 3341-8777, antigo,
   // saiu do site em 14/09/2026.
-  telefone: "(12) 99604-9888",
-  whatsapp: "5512996049888",
+  telefone: "(12) 99602-1234",
+  whatsapp: "5512996021234",
 
   horarios: [
     { dias: "Segunda a sexta", abre: "09h00", fecha: "19h00", confirmado: true },
@@ -71,7 +73,7 @@ export const unidade: Unidade = {
     nome: "Ver a loja de Caraguatatuba",
     cidade: "Caraguatatuba",
     regiao: "litoral norte",
-    url: "https://dalmobilecaraguatatuba.com.br",
+    url: "https://www.dalmobilecaraguatatuba.com.br",
   },
 
   textos: {

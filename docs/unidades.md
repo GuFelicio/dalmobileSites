@@ -99,8 +99,8 @@ e WhatsApp são o mesmo:
 
 | Unidade | Telefone | `whatsapp` |
 |---|---|---|
-| São José dos Campos | (12) 99604-9888 | `5512996049888` |
-| Caraguatatuba | (12) 99602-1234 | `5512996021234` |
+| São José dos Campos | (12) 99602-1234 | `5512996021234` |
+| Caraguatatuba | (12) 99671-5783 | `5512996715783` |
 
 Até essa data as duas usavam o número de SJC, e o site de Caraguá mostrava o
 número da outra loja em todo lugar. **Nenhum número é escrito em componente:**
