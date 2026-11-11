@@ -201,4 +201,26 @@ export type Unidade = {
 
   /** O acervo de fotos próprio da unidade. Ver o tipo `Acervo`. */
   acervo?: Acervo;
+
+  /**
+   * Páginas que só existem no site desta unidade, fora do menu e da busca.
+   * Sem o campo, a rota responde 404 e o build não leva nada dela
+   * (build/podar-fotos.mjs e build/exportar-estatico.mjs).
+   */
+  paginasExtras?: {
+    /** /construvale2026: captação do QR code da feira e download do PDF (11/11/2026). */
+    construvale2026?: PaginaConstruvale;
+  };
+};
+
+/** Os dados da página /construvale2026. Ver app/construvale2026/page.tsx. */
+export type PaginaConstruvale = {
+  /** Endereço do Apps Script que grava os cadastros na planilha. */
+  appsScript: string;
+  /** O PDF da apresentação, em public/. */
+  pdf: string;
+  /** O texto de apoio, abaixo do título. Cita as duas cidades, por isso vem daqui. */
+  apoio: string;
+  /** As linhas do rodapé curto, uma por loja. */
+  lojas: string[];
 };

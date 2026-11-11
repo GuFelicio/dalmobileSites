@@ -83,6 +83,12 @@
      ou troca de superfície. Único desvio previsto: verde e vermelho de
      sistema em erro e sucesso de formulário.                           */
 
+  /* O vermelho de sistema do erro de formulário (11/11/2026, primeiro
+     formulário do site: /construvale2026). Só na mensagem de erro e na borda
+     do campo com erro, no menor tamanho possível. 6,7:1 sobre o papel. */
+  --c-erro: #a3261d;
+  --erro:   var(--c-erro);
+
   /* ------------------------------------------------------------------
      5. TIPOGRAFIA
      Krub e só Krub, self-hosted via @fontsource. Decisão travada:

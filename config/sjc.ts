@@ -93,6 +93,22 @@ export const unidade: Unidade = {
     { rotulo: "A loja", href: "/#a-loja" },
   ],
 
+  // Página do QR code do estande da Construvale 2026 (11/11/2026). Só existe
+  // neste site: fora do menu, do sitemap e da busca. Ver docs/decisoes.md.
+  paginasExtras: {
+    construvale2026: {
+      appsScript:
+        "https://script.google.com/macros/s/AKfycbxicoejxBud8wncfAuwJj64NgLGRwCL55DiLSJaS7ICDpl8Ot5_-uqzja-QMbdq0YPyFg/exec",
+      pdf: "/construvale2026/apresentacao-dalmobile-construvale-2026.pdf",
+      apoio:
+        "Deixe seu nome e telefone para baixar a apresentação em PDF: a fábrica, o Padrão Dalmóbile, projetos executados e as duas lojas, em São José dos Campos e Caraguatatuba.",
+      lojas: [
+        "São José dos Campos · Av. Barão do Rio Branco, 736, Jardim Esplanada",
+        "Caraguatatuba · Av. Espírito Santo, 58, Jardim Primavera",
+      ],
+    },
+  },
+
   // O preview do link no WhatsApp (og:image), da home e de /privacidade.
   compartilhamento: "/fotos/sjc/acervo/manifesto-rafael-pires.webp",
 

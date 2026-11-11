@@ -37,6 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function Privacidade() {
+  const temCadastro = Boolean(unidade.paginasExtras?.construvale2026);
   return (
     <>
       <Header />
@@ -46,7 +47,11 @@ export default function Privacidade() {
         {/* Data FIXA, da última alteração real do texto. Não usar a data de hoje:
             a página se atualizaria sozinha todo dia e perderia a função.
             Mudou o texto? mude esta data junto. */}
-        <p className={estilos.atualizado}>Atualizada em 6 de outubro de 2026.</p>
+        <p className={estilos.atualizado}>
+          {/* A unidade com a página de cadastro da Construvale mudou o texto em
+              11/11/2026; a outra continua com o de 06/10/2026. */}
+          Atualizada em {temCadastro ? "11 de novembro de 2026" : "6 de outubro de 2026"}.
+        </p>
 
         <div className={estilos.texto}>
           <h2>Quem somos</h2>
@@ -62,12 +67,27 @@ export default function Privacidade() {
               verdadeiro depois do go-live. Se GA4 ou pixel entrarem — e a
               direção prevê os dois —, esta página tem que ser reescrita
               ANTES, não depois. É contradição de LGPD, não de copy. */}
-          <p>
-            <strong>Nenhum.</strong> Este site não tem formulário, não pede cadastro e não usa
-            cookie de rastreamento. Se você falar com a gente pelo WhatsApp ou pelo telefone,
-            aí sim ficam registrados o seu contato e o que você contou sobre o projeto,
-            usados só para responder e tocar o seu projeto, e por mais ninguém.
-          </p>
+          {/* Na unidade com /construvale2026 o site passou a coletar nome e
+              telefone naquela página (11/11/2026). O texto vem da unidade: a
+              outra não tem a página, e a frase dela continua verdadeira. */}
+          {temCadastro ? (
+            <p>
+              <strong>Nenhum, com uma exceção.</strong> O site não tem cadastro e não usa cookie
+              de rastreamento. A página da apresentação da Construvale 2026, aberta pelo QR code
+              do estande, pede nome e telefone (e-mail é opcional) para liberar o download.
+              Esses dados ficam só com a Dalmóbile e são usados para enviar a apresentação e
+              falar sobre o seu projeto. Se você falar com a gente pelo WhatsApp ou pelo
+              telefone, ficam registrados o seu contato e o que você contou sobre o projeto,
+              usados só para responder e tocar o seu projeto, e por mais ninguém.
+            </p>
+          ) : (
+            <p>
+              <strong>Nenhum.</strong> Este site não tem formulário, não pede cadastro e não usa
+              cookie de rastreamento. Se você falar com a gente pelo WhatsApp ou pelo telefone,
+              aí sim ficam registrados o seu contato e o que você contou sobre o projeto,
+              usados só para responder e tocar o seu projeto, e por mais ninguém.
+            </p>
+          )}
 
           <h2>Com quem compartilhamos</h2>
           <p>

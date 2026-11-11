@@ -1275,3 +1275,49 @@ privacidade. O servidor simples do Python não serve: ele não entrega
 **Descartado.** Mexer no vinext em `node_modules` (some no próximo `npm ci`);
 voltar ao `next/link` (não rola na própria página); tirar o `#` do endereço de
 vez (os redirecionamentos das páginas antigas dependem dele).
+
+---
+
+## 11/11/2026 · /construvale2026: captação no navegador, só no site de SJC
+
+**O quê.** Uma página isolada, aberta pelo QR code do estande da Construvale
+2026: nome, telefone e e-mail opcional, autorização, e depois o download da
+apresentação em PDF. Os dados vão para uma planilha do Google por um Apps
+Script, num `fetch` feito pelo navegador. Só existe no site de SJC.
+
+**Por quê assim.**
+- **Envio pelo navegador, sem servidor:** o site é HTML estático no Pages
+  (09/10/2026). Server action ou route handler quebrariam o export. O Apps
+  Script não devolve CORS, então o envio é `no-cors` e a resposta é opaca: não
+  dá para saber se gravou. Por isso o PDF é liberado quando o envio termina **ou
+  depois de 4 segundos**, o que vier primeiro — no estande o 4G é ruim, e a
+  pessoa não pode ficar presa. `keepalive` deixa o envio terminar mesmo se ela
+  sair da página.
+- **Botão só ativo depois que o JavaScript carrega:** antes disso, num 4G
+  lento, o toque fazia o envio nativo do formulário — a página recarregava com
+  os dados no endereço e nada era gravado.
+- **Por unidade, pelo config** (`paginasExtras.construvale2026`), e não pelo
+  nome da cidade no componente. Os textos que citam as duas cidades ficam no
+  config de SJC, para não irem ao código de Caraguá.
+- **Fora da busca por três caminhos** (meta noindex, `X-Robots-Tag` no
+  `_headers`, fora do sitemap) e **sem Disallow** no robots.txt: com Disallow o
+  Google não lê o noindex e pode indexar o endereço sem conteúdo.
+- **Isolada:** sem cabeçalho, rodapé nem link para outra página — é uma
+  tarefa só, feita em pé, no celular.
+- **O HTML vai para `construvale2026/index.html`** (ao lado do PDF), por
+  `build/exportar-estatico.mjs`. O Pages leva `/construvale2026` para
+  `/construvale2026/` sozinho.
+- **Coluna de 560px centrada no computador:** é a página do celular aberta
+  numa tela grande. Exceção ao alinhamento à esquerda, registrada no CLAUDE.md.
+- **Vermelho de erro** (`--erro`), o desvio de cor que o CLAUDE.md já previa
+  para formulário.
+- **Campo armadilha** "empresa" fora da tela (não `display:none`): o Apps
+  Script descarta o cadastro que vier com ele preenchido.
+
+**Descartado.** Server action e route handler (quebram o export); esperar a
+resposta do Apps Script para liberar o PDF (opaca, e prende a pessoa sem
+sinal); `Disallow` no robots.txt; reaproveitar o cabeçalho do site.
+
+**Para conferir:** `tests/construvale.test.mjs` e, no emulador do Pages, o
+roteiro do CHANGELOG de 11/11/2026.
+

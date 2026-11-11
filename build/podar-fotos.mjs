@@ -62,6 +62,15 @@ export async function podar(unidade) {
       removidos++;
     }
   }
+  // Páginas extras de uma unidade só (config `paginasExtras`): a unidade que
+  // não tem a página também não leva os arquivos dela em public/ — hoje, o
+  // PDF da /construvale2026 (11/11/2026). Na unidade que tem, nada é tocado.
+  if (!config.paginasExtras?.construvale2026) {
+    const pasta = path.join(raiz, "dist/client/construvale2026");
+    removidos += (await listar(pasta)).length;
+    await rm(pasta, { recursive: true, force: true });
+  }
+
   console.log(`  Fotos: ${removidos} arquivo(s) de fora da unidade "${unidade}" tirado(s) do build.`);
 }
 

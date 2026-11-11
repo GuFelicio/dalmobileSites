@@ -1,0 +1,105 @@
+/* /construvale2026. Ver app/construvale2026/page.tsx.
+   Pensada para o celular em pé, no estande. Tokens do site; nenhuma cor ou
+   fonte nova. */
+
+.pagina {
+  min-height: 100svh;
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+/* Desktop e tablet: uma coluna de no máximo 560px, centrada na tela. É o
+   "celular" da página aberto no computador; dentro dela tudo continua
+   alinhado à esquerda. Exceção registrada em docs/decisoes.md (11/11/2026). */
+.coluna {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* A foto de abertura sangra (sem margem lateral) e fica com ~45svh, para o
+   título e o primeiro campo aparecerem na primeira tela do celular. */
+.foto,
+.foto img {
+  display: block;
+  width: 100%;
+}
+
+.foto img {
+  height: 45svh;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* O logo pequeno, sobre a faixa de papel logo abaixo da foto. 120px: menor
+   que no cabeçalho do site (144–170), ainda com a linha da cidade legível. */
+.marca {
+  padding: var(--e-3) var(--e-margem) 0;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+}
+
+.conteudo {
+  padding: var(--e-4) var(--e-margem) var(--respiro);
+}
+
+/* Cabeçalho de seção do site: rótulo → 12px → título → 16px → apoio. */
+.rotulo {
+  margin: 0;
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  text-transform: uppercase;
+}
+
+.titulo {
+  margin: var(--cab-rotulo-titulo) 0 var(--cab-titulo-apoio);
+  font-size: var(--fs-display-l);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-display-l);
+  line-height: var(--lh-display-l);
+}
+
+.apoio {
+  margin: 0 0 var(--e-4);
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  color: var(--apoio);
+}
+
+/* Rodapé curto, no cinza do rodapé do site, texto em tinta (5,9:1). */
+.rodape {
+  padding: var(--respiro-curto) var(--e-margem);
+  background: var(--cinza);
+  color: var(--tinta);
+  display: grid;
+  gap: var(--e-1);
+}
+
+.assinatura {
+  margin: 0 0 var(--e-1);
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  text-transform: uppercase;
+}
+
+.loja {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Na coluna de 560px do desktop a margem cresce um pouco: o texto não encosta
+   na borda da foto. */
+@media (min-width: 601px) {
+  .marca,
+  .conteudo,
+  .rodape {
+    padding-left: var(--e-4);
+    padding-right: var(--e-4);
+  }
+}

@@ -44,8 +44,19 @@ o código delas está na tag `v4-multipagina`.
 ```
 /                          A home — o site inteiro, em seis blocos (abaixo)
 /privacidade               Única página interna; link só no rodapé
+/construvale2026/          SÓ no site de SJC: página do QR code da feira (abaixo)
 /404
 ```
+
+**`/construvale2026/` (11/11/2026)** — página isolada, aberta pelo QR code do estande
+da Construvale 2026: nome, telefone e e-mail opcional, e depois o download do PDF
+(`public/construvale2026/`). Existe só na unidade com `paginasExtras.construvale2026`
+no config; nas outras a rota dá 404 e o build não leva nada dela. Sem cabeçalho, sem
+rodapé do site e sem nenhum link para outra página. Fora da busca: `noindex` no HTML,
+`X-Robots-Tag` no `_headers`, fora do sitemap — e **sem** `Disallow` no robots.txt
+(o robô precisa ler o noindex). O formulário envia do navegador para um Apps Script
+(planilha do Google), sem server action: o site continua exportável. Ver
+`docs/decisoes.md`, 11/11/2026.
 
 As rotas antigas respondem **301** para a seção equivalente da home
 (`worker/index.ts`): `/ambientes` e `/ambientes/*` → `/#projetos` ·
@@ -117,7 +128,7 @@ Caraguatatuba usa a paleta **"palha"**: o apoio `#5F5847` e o fio `#E7D8C9`.
 O rodapé é o **mesmo cinza `#9E9C94`** nos dois sites (desde a v5; era
 `#FFF4EB` em Caraguá). Nada mais muda entre as unidades.
 
-**Não existe cor de acento.** Se faltar destaque, a resposta é escala ou troca de superfície — nunca cor nova. Único desvio: verde e vermelho de sistema em erro e sucesso de formulário, no menor tamanho possível.
+**Não existe cor de acento.** Se faltar destaque, a resposta é escala ou troca de superfície — nunca cor nova. Único desvio: verde e vermelho de sistema em erro e sucesso de formulário, no menor tamanho possível. O vermelho existe desde 11/11/2026 (`--erro`, `#A3261D`, 6,7:1 sobre o papel), só nas mensagens de erro da `/construvale2026`.
 
 Todo valor de cor vem de token. **Zero hex literal em componente.**
 
@@ -164,7 +175,7 @@ Medida de leitura **62 a 66 caracteres**. Nunca texto corrido em largura total.
 ### Forma
 - **`border-radius: 0` em tudo.** Foto, card, botão, campo, chip. Junta precisa, como a marcenaria.
 - Separação por fio de 1px e por espaço. **Zero sombra.**
-- Alinhamento **à esquerda** em tudo. Nada centralizado. Duas exceções, ambas pedidas pelo cliente e registradas em `docs/decisoes.md`: endereço e links do rodapé, alinhados à direita do tablet para cima (05/10/2026); e a frase final da seção "Para arquitetos", centralizada na largura da seção (06/10/2026). Nenhuma outra.
+- Alinhamento **à esquerda** em tudo. Nada centralizado. Duas exceções, ambas pedidas pelo cliente e registradas em `docs/decisoes.md`: endereço e links do rodapé, alinhados à direita do tablet para cima (05/10/2026); a frase final da seção "Para arquitetos", centralizada na largura da seção (06/10/2026); e a coluna de 560px da `/construvale2026`, centrada na tela do computador, com tudo alinhado à esquerda dentro dela (11/11/2026). Nenhuma outra.
 - Escala de espaço base 8: 8 · 16 · 24 · 40 · 64 · 96 · 128.
 - Ritmo vertical (v4), e só ele: `--respiro` 72→48px (padding-top e -bottom de toda seção) · `--respiro-curto` 40→24px (cabeçalho da seção ao conteúdo; padding do rodapé) · `--entre-itens` 32→24px (itens irmãos). No cabeçalho de seção: rótulo → 12px → título → 16px → apoio; parágrafo → link, 24px. **Nenhum vão vertical maior que 160px** entre dois conteúdos, em nenhuma página.
 

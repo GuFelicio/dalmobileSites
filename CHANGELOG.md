@@ -8,6 +8,45 @@ que ficou pendente de propósito — pendência sem registro vira dívida silenc
 
 ---
 
+## 2026-11-11 · /construvale2026: página de captação e download da apresentação
+
+Só no site de São José dos Campos. Caraguatatuba não ganha a página e não muda.
+
+- **Página nova `/construvale2026/`**, aberta pelo QR code do estande:
+  - foto da abertura da home e logo sem link;
+  - rótulo, título e apoio;
+  - formulário: nome, telefone (WhatsApp) com máscara, e-mail opcional e
+    autorização;
+  - rodapé curto com as duas lojas.
+  Sem cabeçalho, rodapé do site ou qualquer link para outra página.
+- **Envio** do navegador para o Apps Script da planilha (`no-cors`,
+  `keepalive`). O PDF é liberado quando o envio termina ou em 4 segundos, o que
+  vier primeiro. Quem já se cadastrou no aparelho volta direto para a tela
+  "Pronto" (localStorage). Campo armadilha contra robôs.
+- **Fora da busca:** `noindex, nofollow` no HTML, `X-Robots-Tag` no `_headers`,
+  fora do sitemap, sem `Disallow` no robots.txt.
+- **PDF** em `public/construvale2026/apresentacao-dalmobile-construvale-2026.pdf`
+  (era `apresentacaoDalmobile_Feiras(Vertical).pdf`, na raiz).
+- **Config:** `paginasExtras.construvale2026` (só SJC). `build/podar-fotos.mjs`
+  e `build/exportar-estatico.mjs` (que agora recebe a unidade) tiram tudo da
+  página do build de Caraguá e, no de SJC, põem o HTML em
+  `construvale2026/index.html` e o cabeçalho no `_headers`.
+- **`/privacidade` de SJC:** "Que dados este site coleta" passa a contar a
+  exceção da página, com data de 11/11/2026. A de Caraguá não muda.
+- **Token novo:** `--erro` (`#A3261D`, 6,7:1 sobre o papel), o vermelho de
+  sistema previsto no CLAUDE.md, só nas mensagens de erro.
+- **Testes:** `tests/construvale.test.mjs`.
+- **Conferido no emulador do Pages, em 390 e 1440px:**
+  - envio vazio mostra os erros de nome, telefone e autorização (o e-mail é
+    opcional, então vazio não é erro);
+  - telefone com 9 dígitos e e-mail incompleto são recusados;
+  - envio válido manda o POST com todos os campos e mostra "Pronto, Maria.";
+  - o botão abre o PDF;
+  - recarregar mostra direto a tela "Pronto";
+  - com o Apps Script sem responder, o PDF é liberado em 4,1s.
+
+---
+
 ## 2026-10-14 · Domínios com www e telefones novos
 
 - `dominio` e o link para a outra loja (`outraUnidade.url`) passam a usar

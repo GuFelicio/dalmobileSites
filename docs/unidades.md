@@ -83,6 +83,7 @@ config é compilado**, e o teste de cidade cruzada pode ser absoluto.
 | `textos.descricaoHome` | `meta description` da home | home (e o OpenGraph dela) |
 | `navegacao` | os itens do menu, na ordem, como `"/#id"` (âncoras da home desde a v5) | cabeçalho e menu mobile |
 | `compartilhamento` | a foto do preview do link (og:image), por caminho em `public/fotos/` | `<head>` da home e de `/privacidade` |
+| `paginasExtras` (opcional) | páginas que só existem neste site, fora do menu e da busca. Hoje: `construvale2026` (SJC), com `appsScript` (endereço que grava na planilha), `pdf`, `apoio` (texto que cita as duas cidades, por isso no config) e `lojas` (o rodapé curto). Sem o campo, a rota dá 404 e o build não leva nada dela | `/construvale2026/`, o texto de `/privacidade` |
 | `acervo` (opcional) | o acervo de fotos próprio da unidade (v6; hoje só SJC): `carrossel` na ordem em que aparece, `avulsas` fora do carrossel, e `home` com as quatro fotos avulsas da home. Sem ele, as fotos vêm de `conteudo/ambientes/` | carrossel de projetos, manifesto, fábrica, arquitetos, showroom, sitemap |
 
 ### `marca` — o lockup já contém a cidade

@@ -1,0 +1,214 @@
+/* Formulário da /construvale2026. Ver FormularioConstruvale.tsx.
+   Superfície papel. Tokens do site, nenhuma cor nova além do vermelho de
+   sistema do erro (--erro, previsto no CLAUDE.md). border-radius 0, sem
+   sombra, alinhado à esquerda. */
+
+.formulario {
+  display: grid;
+  gap: var(--e-3);
+}
+
+.campo {
+  display: grid;
+  gap: var(--e-1);
+}
+
+/* Label sempre visível, acima do campo: rótulo do site (caixa alta, 600). */
+.label {
+  font-size: var(--fs-rotulo);
+  font-weight: var(--peso-forte);
+  letter-spacing: var(--tr-rotulo);
+  line-height: var(--lh-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta);
+}
+
+/* 52px de altura (mínimo pedido: 48) e fonte de 16px: abaixo de 16px o
+   Safari do iPhone dá zoom no campo ao focar. A borda é o apoio, não o fio
+   claro do site: campo precisa de 3:1 contra o fundo para ser visto (o fio
+   #D3D0C9 dá 1,4:1; o apoio, 6:1). */
+.input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 var(--e-2);
+  font: inherit;
+  font-size: 16px;
+  color: var(--tinta);
+  background: var(--branco);
+  border: var(--fio) solid var(--apoio);
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--erro);
+}
+
+.erro {
+  margin: 0;
+  font-size: 14px; /* o menor tamanho legível: o vermelho entra pequeno */
+  line-height: 1.4;
+  color: var(--erro);
+}
+
+/* A caixa de autorização: quadrado de 24px, alvo de toque de 44px com o
+   texto ao lado (o label inteiro é clicável). */
+.aceite {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--e-2);
+  align-items: start;
+}
+
+.caixa {
+  width: 24px;
+  height: 24px;
+  margin: 2px 0 0; /* alinha com a primeira linha do texto (lh 1.5 de 15px) */
+  border: var(--fio) solid var(--apoio);
+  border-radius: 0;
+  background: var(--branco);
+  -webkit-appearance: none;
+  appearance: none;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+/* O "visto": um L girado, na cor da tinta. */
+.caixa::after {
+  content: "";
+  width: 6px;
+  height: 12px;
+  margin-top: -3px;
+  border: solid var(--papel);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+}
+
+.caixa:checked {
+  background: var(--tinta);
+  border-color: var(--tinta);
+}
+
+.caixa:checked::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.caixa:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.caixa[aria-invalid="true"] {
+  border-color: var(--erro);
+}
+
+.aceiteTexto {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tinta);
+  cursor: pointer;
+  min-height: var(--toque);
+}
+
+/* Botão principal: grafite cheio, largura toda da coluna (é o único gesto da
+   página). 56px de altura: alvo grande para quem está em pé no estande. */
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--e-3);
+  font: inherit;
+  font-size: 16px;
+  color: var(--sobre-grafite);
+  background: var(--grafite);
+  border: var(--fio) solid var(--grafite);
+  border-radius: 0;
+  cursor: pointer;
+  text-align: center;
+}
+
+.botao:hover {
+  background: var(--tinta);
+  border-color: var(--tinta);
+}
+
+.botao:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 3px;
+}
+
+/* Enviando: sem opacidade (o texto não pode perder contraste), só o cursor. */
+.botao:disabled {
+  cursor: progress;
+}
+
+.botaoSecundario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--e-3);
+  font-size: 16px;
+  color: var(--tinta);
+  border: var(--fio) solid var(--tinta);
+}
+
+.botaoSecundario:hover {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.aviso {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--apoio);
+}
+
+/* Fora da tela, e não display:none: robô que só preenche campo visível pela
+   regra de CSS cai do mesmo jeito. */
+.armadilha {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---- Tela "Pronto" --------------------------------------------------- */
+
+.pronto {
+  display: grid;
+  gap: var(--e-2);
+}
+
+.prontoTitulo {
+  margin: 0;
+  font-size: var(--fs-secao);
+  font-weight: var(--peso-leve);
+  letter-spacing: var(--tr-secao);
+  line-height: var(--lh-secao);
+  outline: none;
+}
+
+.prontoTexto {
+  margin: 0 0 var(--e-2);
+  font-size: var(--fs-texto);
+  line-height: var(--lh-texto);
+  color: var(--apoio);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caixa::after { transition: none; }
+}
